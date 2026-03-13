@@ -53,6 +53,16 @@ jobs:
           go-version-file: 'go.mod'
           cache: true
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.2.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'site/package-lock.json'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install Go build tools
         run: |
           go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
@@ -63,16 +73,16 @@ jobs:
         run: |
           make gen/mark-fresh
 
-      - name: Build Coder binary (amd64)
+      - name: Build Coder binary with frontend (amd64)
         run: |
           version="${CODER_FORCE_VERSION}"
-          mkdir -p build
-          # CGO_ENABLED=0 is required for static linking to work in Alpine-based images
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o "build/coder-slim_${version}_linux_amd64" -ldflags="-s -w" ./cmd/coder
-          chmod +x "build/coder-slim_${version}_linux_amd64"
-          # Create a copy named 'coder' at repository root for the Dockerfile
-          cp "build/coder-slim_${version}_linux_amd64" coder
-          ls -lh build/ coder
+          # Build full binary with embedded frontend
+          # This uses make build which embeds the frontend
+          CODER_FORCE_VERSION="$version" CGO_ENABLED=0 make build/coder_"$version"_linux_amd64
+          # Copy to expected location for Dockerfile
+          cp "build/coder_${version}_linux_amd64" coder
+          chmod +x coder
+          ls -lh coder build/coder_"$version"_linux_amd64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.8.0
