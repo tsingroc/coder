@@ -259,6 +259,7 @@ const OwnerBreadcrumb: FC<OwnerBreadcrumbProps> = ({
 	ownerName,
 	ownerAvatarUrl,
 }) => {
+	const lang = useWorkspaceDetailLanguage();
 	return (
 		<HelpTooltip>
 			<HelpTooltipTrigger asChild>
