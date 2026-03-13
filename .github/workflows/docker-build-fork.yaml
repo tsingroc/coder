@@ -52,6 +52,16 @@ jobs:
           go-version-file: 'go.mod'
           cache: true
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.2.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
       - name: Install dependencies
         run: |
           go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
