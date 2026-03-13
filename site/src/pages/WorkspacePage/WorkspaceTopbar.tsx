@@ -286,64 +286,6 @@ const OrganizationBreadcrumb: FC<OrganizationBreadcrumbProps> = ({
 	orgPageUrl,
 	orgIconUrl,
 }) => {
-	return (
-		<HelpTooltip>
-			<HelpTooltipTrigger asChild>
-				<span css={styles.breadcrumbSegment}>
-					<Avatar
-						size="sm"
-						variant="icon"
-						src={orgIconUrl}
-						fallback={orgName}
-					/>
-					<span css={styles.breadcrumbText}>{orgName}</span>
-				</span>
-			</HelpTooltipTrigger>
-
-			<HelpTooltipContent align="center">
-				<AvatarData
-					title={
-						orgPageUrl ? (
-							<Link
-								component={RouterLink}
-								to={orgPageUrl}
-								css={{ color: "inherit" }}
-							>
-								{orgName}
-							</Link>
-						) : (
-							orgName
-						)
-					}
-					subtitle="Organization"
-					avatar={
-						orgIconUrl && (
-							<Avatar
-								variant="icon"
-								src={orgIconUrl}
-								fallback={orgName}
-								size="md"
-							/>
-						)
-					}
-					imgFallbackText={orgName}
-				/>
-			</HelpTooltipContent>
-		</HelpTooltip>
-	);
-};
-
-type OrganizationBreadcrumbProps = Readonly<{
-	orgName: string;
-	orgPageUrl?: string;
-	orgIconUrl?: string;
-}>;
-
-const OrganizationBreadcrumb: FC<OrganizationBreadcrumbProps> = ({
-	orgName,
-	orgPageUrl,
-	orgIconUrl,
-}) => {
 	const lang = useWorkspaceDetailLanguage();
 	return (
 		<HelpTooltip>
