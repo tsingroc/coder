@@ -69,9 +69,9 @@ jobs:
           mkdir -p build
           GOOS=linux GOARCH=amd64 go build -o "build/coder-slim_${version}_linux_amd64" -ldflags="-s -w" ./cmd/coder
           chmod +x "build/coder-slim_${version}_linux_amd64"
-          # Create a copy named 'coder' for the Dockerfile
-          cp "build/coder-slim_${version}_linux_amd64" build/coder
-          ls -lh build/
+          # Create a copy named 'coder' at repository root for the Dockerfile
+          cp "build/coder-slim_${version}_linux_amd64" coder
+          ls -lh build/ coder
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.8.0
