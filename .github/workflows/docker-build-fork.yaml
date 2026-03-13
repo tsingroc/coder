@@ -31,6 +31,7 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  CODER_FORCE_VERSION: "2.0.0-custom"
 
 jobs:
   build:
@@ -52,27 +53,22 @@ jobs:
           go-version-file: 'go.mod'
           cache: true
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4.2.0
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
-
-      - name: Install dependencies
+      - name: Install Go build tools
         run: |
           go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
           go install github.com/golang/mock/mockgen@latest
           go install storj.io/drpc/cmd/protoc-gen-go-drpc@latest
 
-      - name: Build slim binaries
+      - name: Generate code
         run: |
-          make gen/mark-fresh
-          make build-slim
-          ls -lh build/
+          make gen
+
+      - name: Build Coder binary (amd64)
+        run: |
+          version="${CODER_FORCE_VERSION}"
+          mkdir -p build
+          GOOS=linux GOARCH=amd64 go build -o "build/coder-slim_${version}_linux_amd64" -ldflags="-s -w" ./cmd/coder
+          chmod +x "build/coder-slim_${version}_linux_amd64"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.8.0
@@ -92,14 +88,10 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=sha,prefix=
             type=raw,value=latest,enable={{is_default_branch}}
-            type=sha,prefix={{branch}}-,format=short
 
-      - name: Build and push Docker image (amd64)
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6.8.0
         with:
           context: .
@@ -110,55 +102,19 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             BASE_IMAGE=ghcr.io/coder/coder-base:latest
-            CODER_VERSION=${{ github.ref_name }}
+            CODER_VERSION=${{ env.CODER_FORCE_VERSION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: false
 
-      - name: Build and push Docker image (arm64)
+      - name: Image info
         if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@v6.8.0
-        with:
-          context: .
-          file: ./scripts/Dockerfile
-          platforms: linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            BASE_IMAGE=ghcr.io/coder/coder-base:latest
-            CODER_VERSION=${{ github.ref_name }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          provenance: false
-
-      - name: Build and push Docker image (armv7)
-        if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@v6.8.0
-        with:
-          context: .
-          file: ./scripts/Dockerfile
-          platforms: linux/arm/v7
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            BASE_IMAGE=ghcr.io/coder/coder-base:latest
-            CODER_VERSION=${{ github.ref_name }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          provenance: false
-
-      - name: Image digests
         run: |
           echo "✅ Image built successfully!"
-          echo "📦 Tags: ${{ steps.meta.outputs.tags }}"
-          if [ "${{ github.event_name }}" != "pull_request" ]; then
-            echo "🚀 Images pushed to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
-            echo ""
-            echo "To pull the image:"
-            echo "  docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-            echo ""
-            echo "To run the image:"
-            echo "  docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --help"
-          fi
+          echo "📦 Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+          echo ""
+          echo "To pull the image:"
+          echo "  docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+          echo ""
+          echo "To run the image:"
+          echo "  docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --help"
