@@ -44,6 +44,9 @@ void i18n
 	.init({
 		resources,
 
+		// Default namespace
+		defaultNS: "common",
+
 		// Default language
 		lng: "zh-CN", // Default to Chinese
 		fallbackLng: "en", // Fall back to English if translation missing
