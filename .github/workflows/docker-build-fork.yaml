@@ -1,0 +1,137 @@
+# Docker Image Build for Fork Repository
+# This workflow builds and pushes Docker images for tsingroc/coder fork
+name: Docker Build (Fork)
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      push_image:
+        description: 'Push Docker image to registry'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@f111f3307d8850f501ac00898875e9891b5a89ae # v5.3.0
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Install dependencies
+        run: |
+          go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+          go install github.com/golang/mock/mockgen@v1.7.0-rc-1
+          go install storj.io/drpc/cmd/protoc-gen-go-drpc@latest
+
+      - name: Build slim binaries
+        run: |
+          make gen/mark-fresh
+          make build-slim
+          ls -lh build/
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@d70bba72b1bc3c3ff491da11972a30f0dc5ceb4 # v3.8.0
+
+      - name: Login to GitHub Container Registry
+        if: github.event_name != 'pull_request' && inputs.push_image != false
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@f3891308a6245b89b328700e7dbdfae15c4591ce # v5.7.0
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,prefix={{branch}}-,format=short
+
+      - name: Build and push Docker image (amd64)
+        uses: docker/build-push-action@471d1dc4e07e5cdedd5c4cda95a0f071b9a3755a # v6.8.0
+        with:
+          context: .
+          file: ./scripts/Dockerfile
+          platforms: linux/amd64
+          push: ${{ github.event_name != 'pull_request' && inputs.push_image != false }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BASE_IMAGE=ghcr.io/coder/coder-base:latest
+            CODER_VERSION=${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+
+      - name: Build and push Docker image (arm64)
+        if: github.event_name != 'pull_request' && inputs.push_image != false
+        uses: docker/build-push-action@471d1dc4e07e5cdedd5c4cda95a0f071b9a3755a # v6.8.0
+        with:
+          context: .
+          file: ./scripts/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BASE_IMAGE=ghcr.io/coder/coder-base:latest
+            CODER_VERSION=${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+
+      - name: Image digests
+        run: |
+          echo "✅ Image built successfully!"
+          echo "📦 Tags: ${{ steps.meta.outputs.tags }}"
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "🚀 Images pushed to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+            echo ""
+            echo "To pull the image:"
+            echo "  docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+            echo ""
+            echo "To run the image:"
+            echo "  docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest --help"
+          fi

@@ -1,0 +1,226 @@
+# Simplified Release Workflow for Fork Repository
+name: Release (Fork)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 2.0.0)'
+        required: true
+        type: string
+      create_tag:
+        description: 'Create and push git tag'
+        required: false
+        type: boolean
+        default: false
+      push_docker:
+        description: 'Push Docker images to registry'
+        required: false
+        type: boolean
+        default: true
+      release_notes:
+        description: 'Release notes'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  packages: write
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  CODER_RELEASE: "true"
+  CODER_DRY_RUN: "false"
+
+jobs:
+  check-perms:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Allow only repo owner and collaborators
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const {data} = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.actor,
+            });
+
+            const role = data.role_name || data.user?.role_name || data.permission;
+            const perms = data.user?.permissions || {};
+            core.info(`Actor ${context.actor} permission=${data.permission}, role_name=${role}`);
+
+            const allowed =
+              role === 'admin' ||
+              role === 'maintain' ||
+              role === 'write' ||
+              perms.admin === true ||
+              perms.maintain === true ||
+              perms.write === true;
+
+            if (!allowed) core.setFailed('Denied: requires write or higher permissions');
+
+  release:
+    name: Build and publish
+    needs: [check-perms]
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Fetch git tags
+        run: git fetch --tags --force
+
+      - name: Set version
+        id: version
+        run: |
+          set -euo pipefail
+          version="${{ inputs.version }}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "CODER_FORCE_VERSION=$version" >> "$GITHUB_ENV"
+          echo "Building Coder version: $version"
+
+      - name: Create and push tag
+        if: inputs.create_tag == true
+        run: |
+          set -euo pipefail
+          version="${{ inputs.version }}"
+          tag_name="v${version}"
+
+          if git rev-parse "$tag_name" >/dev/null 2>&1; then
+            echo "Tag $tag_name already exists, skipping..."
+          else
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git tag -a "$tag_name" -m "Release $version"
+            git push origin "$tag_name"
+            echo "Created and pushed tag: $tag_name"
+          fi
+
+      - name: Setup Go
+        uses: actions/setup-go@f111f3307d8850f501ac00898875e9891b5a89ae # v5.3.0
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Install build dependencies
+        run: |
+          go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+          go install github.com/golang/mock/mockgen@v1.7.0-rc-1
+          go install storj.io/drpc/cmd/protoc-gen-go-drpc@latest
+
+      - name: Build binaries
+        run: |
+          set -euo pipefail
+          version="${{ steps.version.outputs.version }}"
+          make gen/mark-fresh
+          make -j \
+            build/coder_"$version"_linux_{amd64,armv7,arm64}.{tar.gz,apk,deb,rpm} \
+            build/coder_"$version"_{darwin,windows}_{amd64,arm64}.zip \
+            build/coder_"$version"_windows_amd64_installer.exe \
+            build/coder_helm_"$version".tgz \
+            build/provisioner_helm_"$version".tgz
+
+      - name: Build Linux Docker images
+        if: inputs.push_docker == true
+        run: |
+          set -euxo pipefail
+          version="${{ steps.version.outputs.version }}"
+
+          ./scripts/build_docker.sh \
+            --arch amd64 \
+            --version "$version" \
+            --target "ghcr.io/${{ github.repository }}:$version-amd64" \
+            "build/coder-slim_${version}_linux_amd64"
+
+          ./scripts/build_docker.sh \
+            --arch arm64 \
+            --version "$version" \
+            --target "ghcr.io/${{ github.repository }}:$version-arm64" \
+            "build/coder-slim_${version}_linux_arm64"
+
+          ./scripts/build_docker.sh \
+            --arch armv7 \
+            --version "$version" \
+            --target "ghcr.io/${{ github.repository }}:$version-armv7" \
+            "build/coder-slim_${version}_linux_armv7"
+
+          ./scripts/build_docker_multiarch.sh \
+            --push \
+            --target "ghcr.io/${{ github.repository }}:$version" \
+            "ghcr.io/${{ github.repository }}:$version-amd64" \
+            "ghcr.io/${{ github.repository }}:$version-arm64" \
+            "ghcr.io/${{ github.repository }}:$version-armv7"
+
+          ./scripts/build_docker_multiarch.sh \
+            --push \
+            --target "ghcr.io/${{ github.repository }}:latest" \
+            "ghcr.io/${{ github.repository }}:$version-amd64" \
+            "ghcr.io/${{ github repository }}:$version-arm64" \
+            "ghcr.io/${{ github.repository }}:$version-armv7"
+
+      - name: List build artifacts
+        run: |
+          echo "=== Built Binaries ==="
+          ls -lh build/ | grep -E "\.(tar\.gz|zip|exe|apk|deb|rpm|tgz)$"
+          echo ""
+          echo "=== Docker Images ==="
+          docker images | grep "${{ github.repository }}" || echo "Images built and pushed to registry"
+
+      - name: Create GitHub Release
+        if: inputs.create_tag == true
+        uses: softprops/action-gh-release@c96007ba2575df7e42e71ac39027ae9e44f6b37e # v2.2.0
+        with:
+          tag_name: v${{ inputs.version }}
+          name: Coder v${{ inputs.version }}
+          body: ${{ inputs.release_notes }}
+          draft: false
+          prerelease: false
+          files: |
+            ./build/*_installer.exe
+            ./build/*.zip
+            ./build/*.tar.gz
+            ./build/*.tgz
+            ./build/*.apk
+            ./build/*.deb
+            ./build/*.rpm
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          cat << 'EOF' >> $GITHUB_STEP_SUMMARY
+          # Release Summary
+
+          ## Version
+          - **Version**: ${{ steps.version.outputs.version }}
+          - **Repository**: ${{ github.repository }}
+
+          ## Built Artifacts
+          - Linux binaries (amd64, arm64, armv7)
+          - Windows binaries (amd64, arm64)
+          - macOS binaries (amd64, arm64)
+          - Helm charts
+          - Docker images (multi-arch)
+
+          ## Docker Images
+          - ghcr.io/${{ github.repository }}:${{ steps.version.outputs.version }}
+          - ghcr.io/${{ github.repository }}:latest
+
+          ## Pull Command
+          ```bash
+          docker pull ghcr.io/${{ github.repository }}:${{ steps.version.outputs.version }}
+          ```
+          EOF
