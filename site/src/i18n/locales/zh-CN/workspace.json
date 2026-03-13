@@ -1,0 +1,22 @@
+{
+  "title": "工作区",
+  "pageTitle": "工作区",
+  "yourWorkspacesButton": "我的工作区",
+  "allWorkspacesButton": "所有工作区",
+  "runningWorkspacesButton": "运行中的工作区",
+  "seeAllTemplates": "查看所有模板",
+  "template": "模板",
+  "newWorkspace": "新建工作区",
+  "selectedWorkspaces": "已选择 {{count}}/{{total}} 个工作区",
+  "selectedWorkspace": "已选择 {{count}}/{{total}} 个工作区",
+  "bulkActions": "批量操作",
+  "start": "启动",
+  "stop": "停止",
+  "update": "更新",
+  "delete": "删除",
+  "pageNotFound": "页面未找到",
+  "pageNotFoundDescription": "您尝试访问的页面不存在。",
+  "backToFirstPage": "返回第一页",
+  "workspaces": "个工作区",
+  "workspace": "个工作区"
+}

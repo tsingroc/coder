@@ -1,0 +1,22 @@
+{
+  "title": "Workspaces",
+  "pageTitle": "Workspaces",
+  "yourWorkspacesButton": "Your workspaces",
+  "allWorkspacesButton": "All workspaces",
+  "runningWorkspacesButton": "Running workspaces",
+  "seeAllTemplates": "See all templates",
+  "template": "Template",
+  "newWorkspace": "New workspace",
+  "selectedWorkspaces": "Selected {{count}} of {{total}} workspaces",
+  "selectedWorkspace": "Selected {{count}} of {{total}} workspace",
+  "bulkActions": "Bulk actions",
+  "start": "Start",
+  "stop": "Stop",
+  "update": "Update",
+  "delete": "Delete",
+  "pageNotFound": "Page not found",
+  "pageNotFoundDescription": "The page you are trying to access does not exist.",
+  "backToFirstPage": "Back to the first page",
+  "workspaces": "workspaces",
+  "workspace": "workspace"
+}

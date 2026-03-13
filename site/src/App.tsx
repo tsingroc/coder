@@ -10,11 +10,14 @@ import {
 } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router";
+import { I18nextProvider } from "react-i18next";
 import { Toaster } from "./components/Toaster/Toaster";
 import { AuthProvider } from "./contexts/auth/AuthProvider";
 import { DiffsWorkerPoolProvider } from "./contexts/DiffsWorkerPoolProvider";
 import { ThemeProvider } from "./contexts/ThemeProvider";
 import { router } from "./router";
+import "./i18n/config"; // Initialize i18n
+import i18n from "./i18n/config";
 
 const defaultQueryClient = new QueryClient({
 	defaultOptions: {
@@ -52,19 +55,21 @@ export const AppProviders: FC<AppProvidersProps> = ({
 	}, []);
 
 	return (
-		<QueryClientProvider client={queryClient}>
-			<DiffsWorkerPoolProvider>
-				<AuthProvider>
-					<ThemeProvider>
-						<TooltipProvider delayDuration={100}>
-							{children}
-							<Toaster />
-						</TooltipProvider>
-					</ThemeProvider>
-				</AuthProvider>
-			</DiffsWorkerPoolProvider>
-			{showDevtools && <ReactQueryDevtools initialIsOpen={showDevtools} />}
-		</QueryClientProvider>
+		<I18nextProvider i18n={i18n}>
+			<QueryClientProvider client={queryClient}>
+				<DiffsWorkerPoolProvider>
+					<AuthProvider>
+						<ThemeProvider>
+							<TooltipProvider delayDuration={100}>
+								{children}
+								<Toaster />
+							</TooltipProvider>
+						</ThemeProvider>
+					</AuthProvider>
+				</DiffsWorkerPoolProvider>
+				{showDevtools && <ReactQueryDevtools initialIsOpen={showDevtools} />}
+			</QueryClientProvider>
+		</I18nextProvider>
 	);
 };
 

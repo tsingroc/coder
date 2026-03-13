@@ -33,6 +33,7 @@ import { Link as RouterLink } from "react-router";
 import { displayDormantDeletion } from "utils/dormant";
 import { formatDate } from "utils/time";
 import type { WorkspacePermissions } from "../../modules/workspaces/permissions";
+import { useWorkspaceDetailLanguage } from "./Language";
 import { WorkspaceActions } from "./WorkspaceActions/WorkspaceActions";
 import { WorkspaceNotifications } from "./WorkspaceNotifications/WorkspaceNotifications";
 import { WorkspaceScheduleControls } from "./WorkspaceScheduleControls";
@@ -72,6 +73,7 @@ export const WorkspaceTopbar: FC<WorkspaceProps> = ({
 	handleRetry,
 	handleDebug,
 }) => {
+	const lang = useWorkspaceDetailLanguage();
 	const { entitlements, organizations, showOrganizations } = useDashboard();
 	const getLink = useLinks();
 	const theme = useTheme();
@@ -119,7 +121,7 @@ export const WorkspaceTopbar: FC<WorkspaceProps> = ({
 						<ChevronLeftIcon className="size-icon-sm" />
 					</TopbarIconButton>
 				</TooltipTrigger>
-				<TooltipContent side="bottom">Back to workspaces</TooltipContent>
+				<TooltipContent side="bottom">{lang.backToWorkspaces}</TooltipContent>
 			</Tooltip>
 
 			<div className="flex items-center gap-y-6 gap-x-2 flex-wrap px-3 py-2 mr-auto">
@@ -167,24 +169,20 @@ export const WorkspaceTopbar: FC<WorkspaceProps> = ({
 						}
 						title={
 							showOrganizations
-								? `See affected workspaces for ${orgDisplayName}`
-								: "See affected workspaces"
+								? lang.seeAffectedWorkspacesFor(orgDisplayName)
+								: lang.seeAffectedWorkspaces
 						}
 					>
 						<TopbarData>
 							<TopbarIcon>
 								<CircleDollarSign
 									className="size-icon-sm"
-									aria-label="Daily usage"
+									aria-label={lang.dailyUsage}
 								/>
 							</TopbarIcon>
 
 							<span>
-								{workspace.latest_build.daily_cost}{" "}
-								<span css={{ color: theme.palette.text.secondary }}>
-									credits of
-								</span>{" "}
-								{quota.budget}
+								{workspace.latest_build.daily_cost} {lang.creditsOf} {quota.budget}
 							</span>
 						</TopbarData>
 					</Link>
@@ -198,13 +196,13 @@ export const WorkspaceTopbar: FC<WorkspaceProps> = ({
 						<Link
 							component={RouterLink}
 							to={`${templateLink}/settings/schedule`}
-							title="Schedule settings"
+							title={lang.scheduleSettings}
 							css={{ color: "inherit" }}
 						>
 							{workspace.deleting_at ? (
-								<>Deletion on {formatDate(new Date(workspace.deleting_at))}</>
+								<>{lang.deletionOn(formatDate(new Date(workspace.deleting_at)))}</>
 							) : (
-								"Deletion soon"
+								lang.deletionSoon
 							)}
 						</Link>
 					</TopbarData>
@@ -271,7 +269,7 @@ const OwnerBreadcrumb: FC<OwnerBreadcrumbProps> = ({
 			</HelpTooltipTrigger>
 
 			<HelpTooltipContent align="center">
-				<AvatarData title={ownerName} subtitle="Owner" src={ownerAvatarUrl} />
+				<AvatarData title={ownerName} subtitle={lang.owner} src={ownerAvatarUrl} />
 			</HelpTooltipContent>
 		</HelpTooltip>
 	);
@@ -335,6 +333,65 @@ const OrganizationBreadcrumb: FC<OrganizationBreadcrumbProps> = ({
 	);
 };
 
+type OrganizationBreadcrumbProps = Readonly<{
+	orgName: string;
+	orgPageUrl?: string;
+	orgIconUrl?: string;
+}>;
+
+const OrganizationBreadcrumb: FC<OrganizationBreadcrumbProps> = ({
+	orgName,
+	orgPageUrl,
+	orgIconUrl,
+}) => {
+	const lang = useWorkspaceDetailLanguage();
+	return (
+		<HelpTooltip>
+			<HelpTooltipTrigger asChild>
+				<span css={styles.breadcrumbSegment}>
+					<Avatar
+						size="sm"
+						variant="icon"
+						src={orgIconUrl}
+						fallback={orgName}
+					/>
+					<span css={styles.breadcrumbText}>{orgName}</span>
+				</span>
+			</HelpTooltipTrigger>
+
+			<HelpTooltipContent align="center">
+				<AvatarData
+					title={
+						orgPageUrl ? (
+							<Link
+								component={RouterLink}
+								to={orgPageUrl}
+								css={{ color: "inherit" }}
+							>
+								{orgName}
+							</Link>
+						) : (
+							orgName
+						)
+					}
+					subtitle={lang.organization}
+					avatar={
+						orgIconUrl && (
+							<Avatar
+								variant="icon"
+								src={orgIconUrl}
+								fallback={orgName}
+								size="md"
+							/>
+						)
+					}
+					imgFallbackText={orgName}
+				/>
+			</HelpTooltipContent>
+		</HelpTooltip>
+	);
+};
+
 type WorkspaceBreadcrumbProps = Readonly<{
 	workspaceName: string;
 	templateIconUrl: string;
@@ -352,6 +409,7 @@ const WorkspaceBreadcrumb: FC<WorkspaceBreadcrumbProps> = ({
 	latestBuildVersionName,
 	templateDisplayName,
 }) => {
+	const lang = useWorkspaceDetailLanguage();
 	return (
 		<div className="flex items-center">
 			<HelpTooltip>
@@ -385,7 +443,7 @@ const WorkspaceBreadcrumb: FC<WorkspaceBreadcrumbProps> = ({
 								to={`${rootTemplateUrl}/versions/${encodeURIComponent(templateVersionName)}`}
 								css={{ color: "inherit" }}
 							>
-								Version: {latestBuildVersionName}
+								{lang.version} {latestBuildVersionName}
 							</Link>
 						}
 						avatar={
@@ -400,7 +458,7 @@ const WorkspaceBreadcrumb: FC<WorkspaceBreadcrumbProps> = ({
 					/>
 				</HelpTooltipContent>
 			</HelpTooltip>
-			<CopyButton text={workspaceName} label="Copy workspace name" />
+			<CopyButton text={workspaceName} label={lang.copyWorkspaceName} />
 		</div>
 	);
 };

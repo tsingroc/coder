@@ -1,0 +1,23 @@
+{
+	"title": "用户设置",
+	"account": "账号",
+	"accountDescription": "更新您的账号信息",
+	"appearance": "外观",
+	"externalAuth": "外部认证",
+	"oauth2Apps": "OAuth2 应用",
+	"schedule": "计划",
+	"security": "安全",
+	"securityDescription": "更新您的账号密码",
+	"sshKeys": "SSH 密钥",
+	"tokens": "令牌",
+	"notifications": "通知",
+	"email": "邮箱",
+	"username": "用户名",
+	"fullName": "姓名",
+	"updateProfile": "更新资料",
+	"changePassword": "修改密码",
+	"oldPassword": "当前密码",
+	"newPassword": "新密码",
+	"confirmPassword": "确认密码",
+	"passwordUpdated": "密码已更新。"
+}

@@ -14,9 +14,11 @@ import { type FC, useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router";
 import { toast } from "sonner";
+import { useWorkspaceDetailLanguage } from "./Language";
 import { WorkspaceReadyPage } from "./WorkspaceReadyPage";
 
 const WorkspacePage: FC = () => {
+	const lang = useWorkspaceDetailLanguage();
 	const queryClient = useQueryClient();
 	const params = useParams() as {
 		username: string;
@@ -80,9 +82,9 @@ const WorkspacePage: FC = () => {
 		socket.addEventListener("message", (event) => {
 			if (event.parseError) {
 				toast.error(
-					`Unable to process latest data for workspace "${workspaceName}".`,
+					lang.unableToProcessData(workspaceName),
 					{
-						description: "Please try refreshing the page.",
+						description: lang.pleaseTryRefreshing,
 					},
 				);
 				return;
@@ -93,8 +95,8 @@ const WorkspacePage: FC = () => {
 			}
 		});
 		socket.addEventListener("error", () => {
-			toast.error(`Unable to get changes for workspace "${workspaceName}".`, {
-				description: "Connection has been closed.",
+			toast.error(lang.unableToGetChanges(workspaceName), {
+				description: lang.connectionClosed,
 			});
 		});
 

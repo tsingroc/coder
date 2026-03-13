@@ -51,6 +51,7 @@ import * as Yup from "yup";
 import type { CreateWorkspaceMode } from "./CreateWorkspacePage";
 import { ExternalAuthButton } from "./ExternalAuthButton";
 import type { CreateWorkspacePermissions } from "./permissions";
+import { useCreateWorkspaceLanguage } from "./Language";
 
 interface CreateWorkspacePageViewProps {
 	autofillParameters: AutofillBuildParameter[];
@@ -110,6 +111,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 	owner,
 	setOwner,
 }) => {
+	const lang = useCreateWorkspaceLanguage();
 	const [suggestedName, setSuggestedName] = useState(generateWorkspaceName);
 	const [showPresetParameters, setShowPresetParameters] = useState(false);
 	const id = useId();
@@ -367,7 +369,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 					className="flex items-center gap-2 bg-transparent border-none text-content-secondary hover:text-content-primary translate-y-12"
 				>
 					<ArrowLeft size={20} />
-					Go back
+					{lang.back}
 				</button>
 			</div>
 			<div className="flex flex-col gap-6 max-w-screen-md mx-auto">
@@ -397,29 +399,27 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 									to={`/templates/${template.organization_name}/${template.name}/versions/${versionName}/edit`}
 								>
 									<ExternalLinkIcon />
-									View source
+									{lang.viewSource}
 								</RouterLink>
 							</Button>
 						)}
 					</div>
 					<span className="flex flex-row items-center gap-2">
-						<h1 className="text-3xl font-semibold m-0">New workspace</h1>
+						<h1 className="text-3xl font-semibold m-0">{lang.newWorkspace}</h1>
 
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<CircleHelp className="size-icon-xs text-content-secondary" />
 							</TooltipTrigger>
 							<TooltipContent className="max-w-xs text-sm">
-								Dynamic Parameters enhances Coder's existing parameter system
-								with real-time validation, conditional parameter behavior, and
-								richer input types.
+								{lang.dynamicParametersTooltip}
 								<br />
 								<Link
 									href={docs(
 										"/admin/templates/extending-templates/dynamic-parameters",
 									)}
 								>
-									View docs
+									{lang.viewDocs}
 								</Link>
 							</TooltipContent>
 						</Tooltip>
@@ -428,7 +428,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 
 				<form
 					onSubmit={form.handleSubmit}
-					aria-label="Create workspace form"
+					aria-label={lang.createWorkspaceForm}
 					className="flex flex-col gap-10 w-full border border-border-default border-solid rounded-lg p-6"
 				>
 					{Boolean(error) && <ErrorAlert error={error} />}
@@ -439,36 +439,35 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 							dismissible
 							data-testid="duplication-warning"
 						>
-							Duplicating a workspace only copies its parameters. No state from
-							the old workspace is copied over.
+							{lang.duplicateWarning}
 						</Alert>
 					)}
 
 					<section className="flex flex-col gap-4">
 						<hgroup>
-							<h2 className="text-xl font-semibold m-0">General</h2>
+							<h2 className="text-xl font-semibold m-0">{lang.general}</h2>
 							<p className="text-sm text-content-secondary mt-0">
 								{permissions.createWorkspaceForAny
-									? "Only admins can create workspaces for other users."
-									: "The name of your new workspace."}
+									? lang.adminOnlyMessage
+									: lang.userMessage}
 							</p>
 						</hgroup>
 						<div>
 							{versionId && versionId !== template.active_version_id && (
 								<div className="flex flex-col gap-2 pb-4">
 									<Label className="text-sm" htmlFor={`${id}-version-id`}>
-										Version ID
+										{lang.versionId}
 									</Label>
 									<Input id={`${id}-version-id`} value={versionId} disabled />
 									<span className="text-xs text-content-secondary">
-										This parameter has been preset, and cannot be modified.
+										{lang.versionPreset}
 									</span>
 								</div>
 							)}
 							<div className="flex gap-4 flex-wrap">
 								<div className="flex flex-col gap-2 flex-1">
 									<Label className="text-sm" htmlFor={`${id}-workspace-name`}>
-										Workspace name
+										{lang.workspaceName}
 									</Label>
 									<div className="flex flex-col">
 										<Input
@@ -487,7 +486,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 											</div>
 										)}
 										<div className="flex gap-2 text-xs text-content-secondary items-center">
-											Need a suggestion?
+											{lang.needSuggestion}
 											<Button
 												variant="subtle"
 												size="sm"
@@ -504,7 +503,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 								{permissions.createWorkspaceForAny && (
 									<div className="flex flex-col gap-2 flex-1">
 										<Label className="text-sm" htmlFor={`${id}-workspace-name`}>
-											Owner
+											{lang.owner}
 										</Label>
 										<WorkspaceUserAutocomplete
 											organizationId={template.organization_id}
@@ -523,17 +522,16 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 						<section>
 							<hgroup>
 								<h2 className="text-xl font-semibold m-0">
-									External Authentication
+									{lang.externalAuth}
 								</h2>
 								<p className="text-sm text-content-secondary mt-0">
-									This template uses external services for authentication.
+									{lang.externalAuthDescription}
 								</p>
 							</hgroup>
 							<div className="flex flex-col gap-4">
 								{Boolean(error) && !hasAllRequiredExternalAuth && (
 									<Alert severity="error" prominent>
-										To create a workspace using this template, please connect to
-										all required external authentication providers listed below.
+										{lang.externalAuthError}
 									</Alert>
 								)}
 								{externalAuth.map((auth) => (
@@ -609,7 +607,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 															value:
 																presetOptions[selectedPresetIndex]?.value || "",
 														}}
-														placeholder="Select a preset"
+														placeholder={lang.selectPreset}
 													/>
 												</ComboboxTrigger>
 												<ComboboxContent align="start">
@@ -707,7 +705,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 					<div className="flex flex-row justify-end">
 						<Button type="submit" disabled={disabled}>
 							<Spinner loading={creatingWorkspace} />
-							Create workspace
+							{lang.create}
 						</Button>
 					</div>
 				</form>
