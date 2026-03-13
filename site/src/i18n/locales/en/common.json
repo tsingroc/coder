@@ -12,5 +12,16 @@
 	"back": "Back",
 	"next": "Next",
 	"submit": "Submit",
-	"required": "Required"
+	"required": "Required",
+	"or": "or",
+	"errorPage": {
+		"title": "Something went wrong",
+		"description": "Please try reloading the page. If reloading does not work, you can ask for help in the Coder Discord community or open an issue on GitHub.",
+		"discordCommunity": "Coder Discord community",
+		"openIssue": "open an issue on GitHub",
+		"linkOpensNewTab": "(link opens in a new tab)",
+		"reloadPage": "Reload page",
+		"showError": "Show error",
+		"hideError": "Hide error"
+	}
 }

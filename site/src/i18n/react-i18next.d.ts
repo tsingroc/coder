@@ -18,6 +18,23 @@ declare module "i18next" {
 				loading: string;
 				error: string;
 				success: string;
+				confirm: string;
+				close: string;
+				back: string;
+				next: string;
+				submit: string;
+				required: string;
+				or: string;
+				errorPage: {
+					title: string;
+					description: string;
+					discordCommunity: string;
+					openIssue: string;
+					linkOpensNewTab: string;
+					reloadPage: string;
+					showError: string;
+					hideError: string;
+				};
 			};
 			login: {
 				// Login page translations

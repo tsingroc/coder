@@ -12,5 +12,16 @@
 	"back": "返回",
 	"next": "下一步",
 	"submit": "提交",
-	"required": "必填"
+	"required": "必填",
+	"or": "或",
+	"errorPage": {
+		"title": "出错了",
+		"description": "请尝试重新加载页面。如果重新加载无效，您可以在 Coder Discord 社区寻求帮助或在 GitHub 上提交问题。",
+		"discordCommunity": "Coder Discord 社区",
+		"openIssue": "在 GitHub 上提交问题",
+		"linkOpensNewTab": "（在新标签页中打开链接）",
+		"reloadPage": "重新加载页面",
+		"showError": "显示错误",
+		"hideError": "隐藏错误"
+	}
 }

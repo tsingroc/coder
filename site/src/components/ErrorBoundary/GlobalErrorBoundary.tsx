@@ -2,6 +2,7 @@ import { Button } from "components/Button/Button";
 import { CoderIcon } from "components/Icons/CoderIcon";
 import { Link } from "components/Link/Link";
 import { useEmbeddedMetadata } from "hooks/useEmbeddedMetadata";
+import { useTranslation } from "react-i18next";
 import { type FC, useState } from "react";
 import {
 	type ErrorResponse,
@@ -9,8 +10,6 @@ import {
 	useLocation,
 	useRouteError,
 } from "react-router";
-
-const errorPageTitle = "Something went wrong";
 
 // Mocking React Router's error-handling logic is a pain; the next best thing is
 // to split it off from the rest of the code, and pass the value via props
@@ -23,6 +22,7 @@ type GlobalErrorBoundaryInnerProps = Readonly<{ error: unknown }>;
 export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 	error,
 }) => {
+	const { t } = useTranslation();
 	const [showErrorMessage, setShowErrorMessage] = useState(false);
 	const { metadata } = useEmbeddedMetadata();
 	const location = useLocation();
@@ -33,26 +33,25 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 
 	return (
 		<div className="bg-surface-primary text-center w-full h-full flex justify-center items-center">
-			<title>{errorPageTitle}</title>
+			<title>{t("errorPage.title")}</title>
 
 			<main className="flex gap-6 w-full max-w-prose p-4 flex-col flex-nowrap">
 				<div className="flex gap-2 flex-col items-center">
 					<CoderIcon className="w-11 h-11" />
 
 					<div className="text-content-primary flex flex-col gap-1">
-						<h1 className="text-2xl font-semibold m-0">{errorPageTitle}</h1>
+						<h1 className="text-2xl font-semibold m-0">{t("errorPage.title")}</h1>
 						<p className="leading-6 m-0 text-content-secondary text-sm">
-							Please try reloading the page. If reloading does not work, you can
-							ask for help in the{" "}
+							{t("errorPage.description")}
 							<Link
 								href="https://discord.gg/coder"
 								target="_blank"
 								rel="noreferrer"
 							>
-								Coder Discord community
-								<span className="sr-only"> (link opens in a new tab)</span>
+								{t("errorPage.discordCommunity")}
+								<span className="sr-only"> {t("errorPage.linkOpensNewTab")}</span>
 							</Link>{" "}
-							or{" "}
+							{t("or")}{" "}
 							<Link
 								target="_blank"
 								rel="noreferrer"
@@ -62,8 +61,8 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 									error,
 								)}
 							>
-								open an issue on GitHub
-								<span className="sr-only"> (link opens in a new tab)</span>
+								{t("errorPage.openIssue")}
+								<span className="sr-only"> {t("errorPage.linkOpensNewTab")}</span>
 							</Link>
 							.
 						</p>
@@ -72,7 +71,7 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 
 				<div className="flex flex-row flex-nowrap justify-center gap-2">
 					<Button asChild className="min-w-32 ">
-						<a href={location.pathname}>Reload page</a>
+						<a href={location.pathname}>{t("errorPage.reloadPage")}</a>
 					</Button>
 
 					{isRenderableError && (
@@ -81,7 +80,7 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 							className="min-w-32"
 							onClick={() => setShowErrorMessage(!showErrorMessage)}
 						>
-							{showErrorMessage ? "Hide error" : "Show error"}
+							{showErrorMessage ? t("errorPage.hideError") : t("errorPage.showError")}
 						</Button>
 					)}
 				</div>
