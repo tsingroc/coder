@@ -61,7 +61,7 @@ jobs:
 
       - name: Generate code
         run: |
-          make gen
+          make gen/mark-fresh
 
       - name: Build Coder binary (amd64)
         run: |
