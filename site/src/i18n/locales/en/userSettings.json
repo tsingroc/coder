@@ -1,0 +1,23 @@
+{
+	"title": "User Settings",
+	"account": "Account",
+	"accountDescription": "Update your account info",
+	"appearance": "Appearance",
+	"externalAuth": "External Authentication",
+	"oauth2Apps": "OAuth2 Applications",
+	"schedule": "Schedule",
+	"security": "Security",
+	"securityDescription": "Update your account password",
+	"sshKeys": "SSH Keys",
+	"tokens": "Tokens",
+	"notifications": "Notifications",
+	"email": "Email",
+	"username": "Username",
+	"fullName": "Full Name",
+	"updateProfile": "Update Profile",
+	"changePassword": "Change Password",
+	"oldPassword": "Current Password",
+	"newPassword": "New Password",
+	"confirmPassword": "Confirm Password",
+	"passwordUpdated": "Updated password."
+}

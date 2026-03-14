@@ -33,6 +33,7 @@ import { type FC, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
 import { pageTitle } from "utils/page";
+import { useWorkspaceDetailLanguage } from "./Language";
 import { Workspace } from "./Workspace";
 
 interface WorkspaceReadyPageProps {
@@ -46,6 +47,7 @@ export const WorkspaceReadyPage: FC<WorkspaceReadyPageProps> = ({
 	template,
 	permissions,
 }) => {
+	const lang = useWorkspaceDetailLanguage();
 	const queryClient = useQueryClient();
 
 	// Build logs
@@ -76,7 +78,7 @@ export const WorkspaceReadyPage: FC<WorkspaceReadyPageProps> = ({
 			toast.error(
 				getErrorMessage(
 					error,
-					`Failed to build workspace "${workspace.name}".`,
+					lang.failedToBuild(workspace.name),
 				),
 				{
 					description: getErrorDetail(error),
@@ -338,7 +340,7 @@ export const WorkspaceReadyPage: FC<WorkspaceReadyPageProps> = ({
 						toast.error(
 							getErrorMessage(
 								e,
-								`Error activating workspace "${workspace.name}".`,
+								lang.errorActivating(workspace.name),
 							),
 							{
 								description: getErrorDetail(e),
@@ -361,12 +363,11 @@ export const WorkspaceReadyPage: FC<WorkspaceReadyPageProps> = ({
 					setConfirmingRestart({ open: false });
 				}}
 				onClose={() => setConfirmingRestart({ open: false })}
-				title="Restart your workspace?"
-				confirmText="Restart"
+				title={lang.restartWorkspace}
+				confirmText={lang.restartConfirm}
 				description={
 					<>
-						Restarting your workspace will stop all running processes and{" "}
-						<strong>delete non-persistent data</strong>.
+						{lang.restartDescription}
 					</>
 				}
 			/>
