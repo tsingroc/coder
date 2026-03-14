@@ -20,5 +20,62 @@
   "unableToProcessData": "Unable to process latest data for workspace \"{{name}}\".",
   "unableToGetChanges": "Unable to get changes for workspace \"{{name}}\".",
   "connectionClosed": "Connection has been closed.",
-  "errorActivating": "Error activating workspace \"{{name}}\"."
+  "errorActivating": "Error activating workspace \"{{name}}\".",
+  "status": {
+    "title": "Status",
+    "starting": "Starting",
+    "running": "Running",
+    "stopping": "Stopping",
+    "stopped": "Stopped",
+    "error": "Error",
+    "pending": "Pending",
+    "canceling": "Canceling",
+    "canceled": "Canceled",
+    "deleting": "Deleting",
+    "deleting_date": "Deleting on {{date}}"
+  },
+  "resources": {
+    "title": "Resources",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "disk": "Disk",
+    "network": "Network",
+    "uptime": "Uptime",
+    "lastUsed": "Last Used"
+  },
+  "actions": {
+    "start": "Start",
+    "stop": "Stop",
+    "restart": "Restart",
+    "update": "Update",
+    "delete": "Delete",
+    "openSSH": "Open SSH",
+    "openVSCode": "Open VS Code",
+    "openBrowser": "Open in Browser",
+    "viewLogs": "View Logs",
+    "viewHistory": "View History",
+    "viewTemplates": "View Template",
+    "settings": "Settings"
+  },
+  "applications": {
+    "title": "Applications",
+    "noApplications": "No applications available",
+    "loading": "Loading applications...",
+    "port": "Port",
+    "access": "Access",
+    "health": "Health",
+    "healthy": "Healthy",
+    "unhealthy": "Unhealthy",
+    "starting": "Starting",
+    "openApp": "Open {{name}}"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "created": "Created",
+    "started": "Started",
+    "stopped": "Stopped",
+    "deleted": "Deleted",
+    "updated": "Updated",
+    "noEvents": "No events yet"
+  }
 }

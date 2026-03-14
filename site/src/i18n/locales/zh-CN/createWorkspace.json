@@ -1,5 +1,5 @@
 {
-  "title": "Create Workspace",
+  "title": "创建工作区",
   "newWorkspace": "新建工作区",
   "general": "通用",
   "adminOnlyMessage": "只有管理员可以为其他用户创建工作区。",
@@ -20,5 +20,45 @@
   "selectPreset": "选择预设",
   "duplicateWarning": "复制工作区只会复制其参数。不会复制旧工作区的任何状态。",
   "dynamicParametersTooltip": "动态参数增强了 Coder 现有的参数系统，具有实时验证、条件参数行为和更丰富的输入类型。",
-  "createWorkspaceForm": "创建工作区表单"
+  "createWorkspaceForm": "创建工作区表单",
+  "template": {
+    "title": "模板",
+    "description": "选择一个模板用于您的工作区",
+    "selectTemplate": "选择模板",
+    "noTemplates": "没有可用模板",
+    "templateDetails": "模板详细信息",
+    "version": "版本",
+    "activeDevelopers": "活跃开发者",
+    "buildTime": "构建时间"
+  },
+  "parameters": {
+    "title": "参数",
+    "description": "配置工作区参数",
+    "required": "必填",
+    "optional": "可选",
+    "defaultValue": "默认值",
+    "noParameters": "此模板没有可用参数"
+  },
+  "validation": {
+    "nameRequired": "工作区名称为必填项",
+    "nameInvalid": "工作区名称必须为 1-64 个字符，仅限小写字母、数字和连字符",
+    "nameExists": "已存在同名工作区",
+    "templateRequired": "请选择一个模板",
+    "parameterRequired": "{{name}} 为必填项",
+    "parameterInvalid": "{{name}} 无效"
+  },
+  "actions": {
+    "creating": "正在创建工作区...",
+    "created": "工作区创建成功",
+    "createFailed": "工作区创建失败",
+    "checkingName": "正在检查名称可用性..."
+  },
+  "options": {
+    "autoStart": "自动启动工作区",
+    "autoStartDescription": "登录时自动启动工作区",
+    "ttl": "生存时间 (TTL)",
+    "ttlDescription": "在不活动一段时间后自动停止工作区",
+    "ttlDisabled": "已禁用",
+    "ttlHours": "小时"
+  }
 }

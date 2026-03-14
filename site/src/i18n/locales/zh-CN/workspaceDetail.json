@@ -20,5 +20,62 @@
   "unableToProcessData": "无法处理工作区 \"{{name}}\" 的最新数据。",
   "unableToGetChanges": "无法获取工作区 \"{{name}}\" 的更改。",
   "connectionClosed": "连接已关闭。",
-  "errorActivating": "激活工作区 \"{{name}}\" 时出错。"
+  "errorActivating": "激活工作区 \"{{name}}\" 时出错。",
+  "status": {
+    "title": "状态",
+    "starting": "启动中",
+    "running": "运行中",
+    "stopping": "停止中",
+    "stopped": "已停止",
+    "error": "错误",
+    "pending": "等待中",
+    "canceling": "取消中",
+    "canceled": "已取消",
+    "deleting": "删除中",
+    "deleting_date": "{{date}} 删除"
+  },
+  "resources": {
+    "title": "资源",
+    "cpu": "CPU",
+    "memory": "内存",
+    "disk": "磁盘",
+    "network": "网络",
+    "uptime": "运行时间",
+    "lastUsed": "最后使用"
+  },
+  "actions": {
+    "start": "启动",
+    "stop": "停止",
+    "restart": "重启",
+    "update": "更新",
+    "delete": "删除",
+    "openSSH": "打开 SSH",
+    "openVSCode": "打开 VS Code",
+    "openBrowser": "在浏览器中打开",
+    "viewLogs": "查看日志",
+    "viewHistory": "查看历史",
+    "viewTemplates": "查看模板",
+    "settings": "设置"
+  },
+  "applications": {
+    "title": "应用程序",
+    "noApplications": "没有可用应用程序",
+    "loading": "正在加载应用程序...",
+    "port": "端口",
+    "access": "访问",
+    "health": "健康状态",
+    "healthy": "健康",
+    "unhealthy": "不健康",
+    "starting": "启动中",
+    "openApp": "打开 {{name}}"
+  },
+  "timeline": {
+    "title": "时间线",
+    "created": "已创建",
+    "started": "已启动",
+    "stopped": "已停止",
+    "deleted": "已删除",
+    "updated": "已更新",
+    "noEvents": "暂无事件"
+  }
 }

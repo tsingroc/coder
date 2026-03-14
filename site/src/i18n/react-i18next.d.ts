@@ -149,6 +149,46 @@ declare module "i18next" {
 				duplicateWarning: string;
 				dynamicParametersTooltip: string;
 				createWorkspaceForm: string;
+				template: {
+					title: string;
+					description: string;
+					selectTemplate: string;
+					noTemplates: string;
+					templateDetails: string;
+					version: string;
+					activeDevelopers: string;
+					buildTime: string;
+				};
+				parameters: {
+					title: string;
+					description: string;
+					required: string;
+					optional: string;
+					defaultValue: string;
+					noParameters: string;
+				};
+				validation: {
+					nameRequired: string;
+					nameInvalid: string;
+					nameExists: string;
+					templateRequired: string;
+					parameterRequired: string;
+					parameterInvalid: string;
+				};
+				actions: {
+					creating: string;
+					created: string;
+					createFailed: string;
+					checkingName: string;
+				};
+				options: {
+					autoStart: string;
+					autoStartDescription: string;
+					ttl: string;
+					ttlDescription: string;
+					ttlDisabled: string;
+					ttlHours: string;
+				};
 			};
 			workspaceDetail: {
 				// Workspace detail page translations
@@ -174,6 +214,63 @@ declare module "i18next" {
 				unableToGetChanges: string;
 				connectionClosed: string;
 				errorActivating: string;
+				status: {
+					title: string;
+					starting: string;
+					running: string;
+					stopping: string;
+					stopped: string;
+					error: string;
+					pending: string;
+					canceling: string;
+					canceled: string;
+					deleting: string;
+					deleting_date: string;
+				};
+				resources: {
+					title: string;
+					cpu: string;
+					memory: string;
+					disk: string;
+					network: string;
+					uptime: string;
+					lastUsed: string;
+				};
+				actions: {
+					start: string;
+					stop: string;
+					restart: string;
+					update: string;
+					delete: string;
+					openSSH: string;
+					openVSCode: string;
+					openBrowser: string;
+					viewLogs: string;
+					viewHistory: string;
+					viewTemplates: string;
+					settings: string;
+				};
+				applications: {
+					title: string;
+					noApplications: string;
+					loading: string;
+					port: string;
+					access: string;
+					health: string;
+					healthy: string;
+					unhealthy: string;
+					starting: string;
+					openApp: string;
+				};
+				timeline: {
+					title: string;
+					created: string;
+					started: string;
+					stopped: string;
+					deleted: string;
+					updated: string;
+					noEvents: string;
+				};
 			};
 			userSettings: {
 				// User settings page translations

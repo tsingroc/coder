@@ -20,5 +20,45 @@
   "selectPreset": "Select a preset",
   "duplicateWarning": "Duplicating a workspace only copies its parameters. No state from the old workspace is copied over.",
   "dynamicParametersTooltip": "Dynamic Parameters enhances Coder's existing parameter system with real-time validation, conditional parameter behavior, and richer input types.",
-  "createWorkspaceForm": "Create workspace form"
+  "createWorkspaceForm": "Create workspace form",
+  "template": {
+    "title": "Template",
+    "description": "Select a template to use for your workspace",
+    "selectTemplate": "Select a template",
+    "noTemplates": "No templates available",
+    "templateDetails": "Template details",
+    "version": "Version",
+    "activeDevelopers": "Active developers",
+    "buildTime": "Build time"
+  },
+  "parameters": {
+    "title": "Parameters",
+    "description": "Configure workspace parameters",
+    "required": "Required",
+    "optional": "Optional",
+    "defaultValue": "Default value",
+    "noParameters": "No parameters available for this template"
+  },
+  "validation": {
+    "nameRequired": "Workspace name is required",
+    "nameInvalid": "Workspace name must be 1-64 characters, lowercase letters, numbers, and hyphens only",
+    "nameExists": "A workspace with this name already exists",
+    "templateRequired": "Please select a template",
+    "parameterRequired": "{{name}} is required",
+    "parameterInvalid": "{{name}} is invalid"
+  },
+  "actions": {
+    "creating": "Creating workspace...",
+    "created": "Workspace created successfully",
+    "createFailed": "Failed to create workspace",
+    "checkingName": "Checking name availability..."
+  },
+  "options": {
+    "autoStart": "Auto-start workspace",
+    "autoStartDescription": "Automatically start the workspace when you log in",
+    "ttl": "Time to live (TTL)",
+    "ttlDescription": "Automatically stop the workspace after a period of inactivity",
+    "ttlDisabled": "Disabled",
+    "ttlHours": "hours"
+  }
 }
