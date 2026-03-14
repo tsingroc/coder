@@ -620,23 +620,73 @@ declare module "i18next" {
 					install: {
 						title: string;
 						description: string;
+						alternativeMethod: string;
+						manualDownload: string;
+						packageManager: string;
+						verifyChecksum: string;
+						troubleshooting: string;
 					};
 					authenticate: {
 						title: string;
 						description: string;
 						sessionToken: string;
 						sessionTokenDescription: string;
+						createToken: string;
+						tokenExpiry: string;
+						authSuccess: string;
+						authFailed: string;
 					};
 					verify: {
 						title: string;
 						description: string;
 						successMessage: string;
+						testCommand: string;
+						listWorkspaces: string;
+						versionMismatch: string;
 					};
 				};
 				osTabs: {
 					linux: string;
 					macOS: string;
 					windows: string;
+				};
+				requirements: {
+					title: string;
+					os: string;
+					architecture: string;
+					dependencies: string;
+					network: string;
+				};
+				commands: {
+					login: string;
+					logout: string;
+					list: string;
+					create: string;
+					start: string;
+					stop: string;
+					delete: string;
+					ssh: string;
+					portForward: string;
+					sync: string;
+					help: string;
+					version: string;
+				};
+				errors: {
+					notFound: string;
+					permissionDenied: string;
+					connectionFailed: string;
+					unauthorized: string;
+					workspaceNotFound: string;
+					alreadyRunning: string;
+					alreadyStopped: string;
+				};
+				examples: {
+					quickStart: string;
+					createWorkspace: string;
+					startWorkspace: string;
+					sshWorkspace: string;
+					listAllWorkspaces: string;
+					portForwardExample: string;
 				};
 			};
 			orgSettings: {

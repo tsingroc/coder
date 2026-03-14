@@ -4,23 +4,73 @@
 	"sections": {
 		"install": {
 			"title": "安装",
-			"description": "在终端中运行以下命令："
+			"description": "在终端中运行以下命令：",
+			"alternativeMethod": "其他安装方法：",
+			"manualDownload": "从 GitHub 发布版本手动下载",
+			"packageManager": "通过包管理器安装",
+			"verifyChecksum": "验证校验和",
+			"troubleshooting": "安装问题故障排除"
 		},
 		"authenticate": {
 			"title": "身份验证",
 			"description": "登录到您的 Coder 部署：",
 			"sessionToken": "会话令牌",
-			"sessionTokenDescription": "或使用会话令牌："
+			"sessionTokenDescription": "或使用会话令牌：",
+			"createToken": "创建会话令牌",
+			"tokenExpiry": "令牌在 {{hours}} 小时后过期",
+			"authSuccess": "成功以 {{username}} 身份验证",
+			"authFailed": "身份验证失败。请检查您的凭据。"
 		},
 		"verify": {
 			"title": "验证安装",
 			"description": "验证 CLI 是否正确安装：",
-			"successMessage": "CLI 版本："
+			"successMessage": "CLI 版本：",
+			"testCommand": "测试您的连接：",
+			"listWorkspaces": "列出您的工作区：",
+			"versionMismatch": "检测到版本不匹配。请更新到最新版本。"
 		}
 	},
 	"osTabs": {
 		"linux": "Linux",
 		"macOS": "macOS",
 		"windows": "Windows"
+	},
+	"requirements": {
+		"title": "系统要求",
+		"os": "操作系统：Linux、macOS 或 Windows",
+		"architecture": "架构：amd64、arm64",
+		"dependencies": "依赖项：无",
+		"network": "网络：访问 Coder 部署 URL"
+	},
+	"commands": {
+		"login": "登录到 Coder",
+		"logout": "从 Coder 登出",
+		"list": "列出工作区",
+		"create": "创建工作区",
+		"start": "启动工作区",
+		"stop": "停止工作区",
+		"delete": "删除工作区",
+		"ssh": "SSH 进入工作区",
+		"portForward": "从工作区转发端口",
+		"sync": "与工作区同步目录",
+		"help": "显示帮助信息",
+		"version": "显示 CLI 版本"
+	},
+	"errors": {
+		"notFound": "未找到命令。请确保 CLI 在您的 PATH 中。",
+		"permissionDenied": "权限被拒绝。使文件可执行：chmod +x coder",
+		"connectionFailed": "无法连接到 {{url}}。检查您的网络连接。",
+		"unauthorized": "未授权。请重新登录。",
+		"workspaceNotFound": "未找到工作区 '{{name}}'。",
+		"alreadyRunning": "工作区已在运行中。",
+		"alreadyStopped": "工作区已停止。"
+	},
+	"examples": {
+		"quickStart": "快速入门指南",
+		"createWorkspace": "创建新工作区：",
+		"startWorkspace": "启动工作区：",
+		"sshWorkspace": "SSH 进入工作区：",
+		"listAllWorkspaces": "列出所有工作区及其详细信息：",
+		"portForwardExample": "从工作区转发端口 8080："
 	}
 }

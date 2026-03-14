@@ -4,23 +4,73 @@
 	"sections": {
 		"install": {
 			"title": "Install",
-			"description": "Run the following command in your terminal:"
+			"description": "Run the following command in your terminal:",
+			"alternativeMethod": "Alternative installation methods:",
+			"manualDownload": "Manual download from GitHub releases",
+			"packageManager": "Install via package manager",
+			"verifyChecksum": "Verify the checksum",
+			"troubleshooting": "Troubleshooting installation issues"
 		},
 		"authenticate": {
 			"title": "Authenticate",
 			"description": "Log in to your Coder deployment:",
 			"sessionToken": "Session token",
-			"sessionTokenDescription": "Or use a session token:"
+			"sessionTokenDescription": "Or use a session token:",
+			"createToken": "Create a session token",
+			"tokenExpiry": "Tokens expire after {{hours}} hours",
+			"authSuccess": "Successfully authenticated as {{username}}",
+			"authFailed": "Authentication failed. Please check your credentials."
 		},
 		"verify": {
 			"title": "Verify installation",
 			"description": "Verify that the CLI is installed correctly:",
-			"successMessage": "CLI version:"
+			"successMessage": "CLI version:",
+			"testCommand": "Test your connection:",
+			"listWorkspaces": "List your workspaces:",
+			"versionMismatch": "Version mismatch detected. Please update to the latest version."
 		}
 	},
 	"osTabs": {
 		"linux": "Linux",
 		"macOS": "macOS",
 		"windows": "Windows"
+	},
+	"requirements": {
+		"title": "System requirements",
+		"os": "Operating System: Linux, macOS, or Windows",
+		"architecture": "Architecture: amd64, arm64",
+		"dependencies": "Dependencies: None required",
+		"network": "Network: Access to Coder deployment URL"
+	},
+	"commands": {
+		"login": "Login to Coder",
+		"logout": "Logout from Coder",
+		"list": "List workspaces",
+		"create": "Create workspace",
+		"start": "Start workspace",
+		"stop": "Stop workspace",
+		"delete": "Delete workspace",
+		"ssh": "SSH into workspace",
+		"portForward": "Forward port from workspace",
+		"sync": "Sync directory with workspace",
+		"help": "Show help information",
+		"version": "Show CLI version"
+	},
+	"errors": {
+		"notFound": "Command not found. Please ensure CLI is in your PATH.",
+		"permissionDenied": "Permission denied. Make the file executable: chmod +x coder",
+		"connectionFailed": "Failed to connect to {{url}}. Check your network connection.",
+		"unauthorized": "Unauthorized. Please login again.",
+		"workspaceNotFound": "Workspace '{{name}}' not found.",
+		"alreadyRunning": "Workspace is already running.",
+		"alreadyStopped": "Workspace is already stopped."
+	},
+	"examples": {
+		"quickStart": "Quick start guide",
+		"createWorkspace": "Create a new workspace:",
+		"startWorkspace": "Start a workspace:",
+		"sshWorkspace": "SSH into a workspace:",
+		"listAllWorkspaces": "List all workspaces with details:",
+		"portForwardExample": "Forward port 8080 from workspace:"
 	}
 }
