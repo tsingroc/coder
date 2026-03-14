@@ -1493,6 +1493,398 @@ declare module "i18next" {
 					irreversible: string;
 				};
 			};
+			connectionLogs: {
+				// Connection logs page translations
+				title: string;
+				subtitle: string;
+				table: {
+					timestamp: string;
+					user: string;
+					workspace: string;
+					action: string;
+					status: string;
+					duration: string;
+					ipAddress: string;
+					userAgent: string;
+				};
+				actions: {
+					connecting: string;
+					connected: string;
+					disconnected: string;
+					rejected: string;
+					failed: string;
+				};
+				status: {
+					success: string;
+					failed: string;
+					timeout: string;
+					rejected: string;
+				};
+				filters: {
+					title: string;
+					user: string;
+					workspace: string;
+					status: string;
+					dateRange: string;
+					action: string;
+					clearAll: string;
+					applyFilters: string;
+				};
+				actions: {
+					viewDetails: string;
+					export: string;
+					refresh: string;
+				};
+				details: {
+					title: string;
+					connectionId: string;
+					timestamp: string;
+					user: string;
+					workspace: string;
+					workspaceID: string;
+					action: string;
+					status: string;
+					duration: string;
+					ipAddress: string;
+					userAgent: string;
+					error: string;
+					metadata: string;
+				};
+				empty: {
+					title: string;
+					description: string;
+				};
+				export: {
+					title: string;
+					format: string;
+					csv: string;
+					json: string;
+					dateRange: string;
+					includeFilters: string;
+					export: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					documentation: string;
+					troubleshooting: string;
+				};
+			};
+			templateGallery: {
+				// Template gallery page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					featured: string;
+					all: string;
+					categories: string;
+					recent: string;
+					popular: string;
+				};
+				categories: {
+					all: string;
+					development: string;
+					dataScience: string;
+					devops: string;
+					design: string;
+					education: string;
+					custom: string;
+				};
+				template: {
+					title: string;
+					description: string;
+					icon: string;
+					version: string;
+					activeDevelopers: string;
+					usedBy: string;
+					lastUpdated: string;
+					tags: string;
+					owner: string;
+					organization: string;
+				};
+				actions: {
+					useTemplate: string;
+					viewDetails: string;
+					preview: string;
+					documentation: string;
+					clone: string;
+					share: string;
+					favorite: string;
+					unfavorite: string;
+				};
+				filters: {
+					title: string;
+					category: string;
+					organization: string;
+					owner: string;
+					tags: string;
+					search: string;
+					sortBy: string;
+					sortOptions: {
+						name: string;
+						updated: string;
+						popularity: string;
+						developers: string;
+					};
+				};
+				empty: {
+					title: string;
+					description: string;
+					createTemplate: string;
+					browseAll: string;
+				};
+				createTemplate: {
+					title: string;
+					fromScratch: string;
+					fromGallery: string;
+					import: string;
+					description: string;
+				};
+				modal: {
+					title: string;
+					tabs: {
+						overview: string;
+						documentation: string;
+						versions: string;
+						resources: string;
+						permissions: string;
+					};
+					overview: {
+						description: string;
+						tags: string;
+						owner: string;
+						createdAt: string;
+						updatedAt: string;
+						activeDevelopers: string;
+						buildTime: string;
+					};
+					actions: {
+						useTemplate: string;
+						close: string;
+					};
+				};
+				help: {
+					title: string;
+					description: string;
+					documentation: string;
+					createGuide: string;
+				};
+			};
+			createTemplate: {
+				// Create template page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					source: string;
+					configuration: string;
+					resources: string;
+					permissions: string;
+					variables: string;
+					documentation: string;
+					versions: string;
+				};
+				source: {
+					title: string;
+					description: string;
+					options: {
+						scratch: string;
+						example: string;
+						import: string;
+						clone: string;
+					};
+					scratch: {
+						title: string;
+						description: string;
+					};
+					example: {
+						title: string;
+						description: string;
+						selectExample: string;
+					};
+					import: {
+						title: string;
+						description: string;
+						repositoryURL: string;
+						branch: string;
+						path: string;
+						auth: string;
+					};
+					clone: {
+						title: string;
+						description: string;
+						selectTemplate: string;
+					};
+				};
+				configuration: {
+					title: string;
+					name: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					display: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					description: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					icon: {
+						label: string;
+						description: string;
+					};
+					tags: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					organization: {
+						label: string;
+						description: string;
+					};
+					defaultTTL: {
+						label: string;
+						description: string;
+						infinite: string;
+						hours: string;
+					};
+					maxTTL: {
+						label: string;
+						description: string;
+						unlimited: string;
+					};
+					autoStart: {
+						label: string;
+						description: string;
+					};
+					requireActiveVersion: {
+						label: string;
+						description: string;
+					};
+					canAlwaysEdit: {
+						label: string;
+						description: string;
+					};
+				};
+				resources: {
+					title: string;
+					description: string;
+					addResource: string;
+					noResources: string;
+					resource: {
+						name: string;
+						type: string;
+						count: string;
+						description: string;
+					};
+					types: {
+						agent: string;
+						container: string;
+						kubernetes_pod: string;
+						vm: string;
+						database: string;
+						storage: string;
+					};
+				};
+				permissions: {
+					title: string;
+					description: string;
+					addPermission: string;
+					noPermissions: string;
+					permission: {
+						user: string;
+						group: string;
+						role: string;
+						actions: string;
+					};
+					actions: {
+						use: string;
+						read: string;
+						update: string;
+						delete: string;
+					};
+					allUsers: string;
+					allMembers: string;
+				};
+				variables: {
+					title: string;
+					description: string;
+					addVariable: string;
+					noVariables: string;
+					variable: {
+						name: string;
+						type: string;
+						defaultValue: string;
+						required: string;
+						description: string;
+						options: string;
+					};
+					types: {
+						string: string;
+						number: string;
+						boolean: string;
+						list: string;
+					};
+				};
+				documentation: {
+					title: string;
+					description: string;
+					readme: {
+						title: string;
+						description: string;
+						placeholder: string;
+					};
+					exampleUsage: {
+						title: string;
+						description: string;
+					};
+					troubleshooting: {
+						title: string;
+						description: string;
+					};
+				};
+				validation: {
+					nameRequired: string;
+					nameInvalid: string;
+					displayRequired: string;
+					invalidURL: string;
+					connectionFailed: string;
+					noResources: string;
+					variableInvalid: string;
+					permissionInvalid: string;
+				};
+				actions: {
+					create: string;
+					creating: string;
+					saveDraft: string;
+					preview: string;
+					test: string;
+					cancel: string;
+					back: string;
+					next: string;
+				};
+				messages: {
+					creating: string;
+					created: string;
+					createFailed: string;
+					importing: string;
+					imported: string;
+					importFailed: string;
+					testing: string;
+					testSuccess: string;
+					testFailed: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					docs: string;
+					examples: string;
+					bestPractices: string;
+				};
+			};
 			health: {
 				// Health page translations
 				title: string;

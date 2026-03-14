@@ -1,0 +1,214 @@
+{
+	"title": "创建模板",
+	"subtitle": "从头开始或基于现有模板创建新模板。",
+	"sections": {
+		"source": "源",
+		"configuration": "配置",
+		"resources": "资源",
+		"permissions": "权限",
+		"variables": "变量",
+		"documentation": "文档",
+		"versions": "版本"
+	},
+	"source": {
+		"title": "模板来源",
+		"description": "选择您想如何创建此模板。",
+		"options": {
+			"scratch": "从头创建",
+			"example": "使用示例模板",
+			"import": "从 Git 导入",
+			"clone": "克隆现有模板"
+		},
+		"scratch": {
+			"title": "从头创建",
+			"description": "使用空白模板，自己定义所有内容。"
+		},
+		"example": {
+			"title": "使用示例模板",
+			"description": "使用预配置的示例模板开始。",
+			"selectExample": "选择示例模板"
+		},
+		"import": {
+			"title": "从 Git 导入",
+			"description": "从 Git 仓库导入模板。",
+			"repositoryURL": "仓库 URL",
+			"branch": "分支",
+			"path": "路径",
+			"auth": "身份验证（如需要）"
+		},
+		"clone": {
+			"title": "克隆现有模板",
+			"description": "创建现有模板的副本。",
+			"selectTemplate": "选择要克隆的模板"
+		}
+	},
+	"configuration": {
+		"title": "模板配置",
+		"name": {
+			"label": "模板名称",
+			"description": "此模板的唯一名称",
+			"placeholder": "my-template"
+		},
+		"display": {
+			"label": "显示名称",
+			"description": "在 UI 中显示的友好名称",
+			"placeholder": "我的模板"
+		},
+		"description": {
+			"label": "描述",
+			"description": "描述此模板的用途",
+			"placeholder": "一个用于...的模板"
+		},
+		"icon": {
+			"label": "图标",
+			"description": "为此模板选择图标"
+		},
+		"tags": {
+			"label": "标签",
+			"description": "添加标签以帮助用户找到此模板",
+			"placeholder": "添加标签..."
+		},
+		"organization": {
+			"label": "组织",
+			"description": "选择此模板属于哪个组织"
+		},
+		"defaultTTL": {
+			"label": "默认 TTL",
+			"description": "由此模板创建的工作区的默认生存时间",
+			"infinite": "无限",
+			"hours": "小时"
+		},
+		"maxTTL": {
+			"label": "最大 TTL",
+			"description": "工作区的最大生存时间",
+			"unlimited": "无限制"
+		},
+		"autoStart": {
+			"label": "允许用户自动启动工作区",
+			"description": "用户可以按计划配置工作区启动"
+		},
+		"requireActiveVersion": {
+			"label": "需要活动版本",
+			"description": "工作区必须使用活动的模板版本"
+		},
+		"canAlwaysEdit": {
+			"label": "允许用户始终编辑",
+			"description": "工作区启动后用户仍可编辑"
+		}
+	},
+	"resources": {
+		"title": "模板资源",
+		"description": "定义此模板的基础设施资源。",
+		"addResource": "添加资源",
+		"noResources": "尚未定义资源",
+		"resource": {
+			"name": "资源名称",
+			"type": "类型",
+			"count": "数量",
+			"description": "描述"
+		},
+		"types": {
+			"agent": "代理",
+			"container": "容器",
+			"kubernetes_pod": "Kubernetes Pod",
+			"vm": "虚拟机",
+			"database": "数据库",
+			"storage": "存储"
+		}
+	},
+	"permissions": {
+		"title": "模板权限",
+		"description": "控制谁可以使用和管理此模板。",
+		"addPermission": "添加权限",
+		"noPermissions": "未设置自定义权限",
+		"permission": {
+			"user": "用户",
+			"group": "组",
+			"role": "角色",
+			"actions": "操作"
+		},
+		"actions": {
+			"use": "使用模板",
+			"read": "查看模板",
+			"update": "编辑模板",
+			"delete": "删除模板"
+		},
+		"allUsers": "所有经过身份验证的用户",
+		"allMembers": "所有组织成员"
+	},
+	"variables": {
+		"title": "模板变量",
+		"description": "定义用户在创建工作区时可以配置的变量。",
+		"addVariable": "添加变量",
+		"noVariables": "未定义变量",
+		"variable": {
+			"name": "变量名称",
+			"type": "类型",
+			"defaultValue": "默认值",
+			"required": "必需",
+			"description": "描述",
+			"options": "选项"
+		},
+		"types": {
+			"string": "字符串",
+			"number": "数字",
+			"boolean": "布尔值",
+			"list": "字符串列表"
+		}
+	},
+	"documentation": {
+		"title": "模板文档",
+		"description": "添加文档以帮助用户理解和使用此模板。",
+		"readme": {
+			"title": "README",
+			"description": "主要文档文件",
+			"placeholder": "在此处描述您的模板..."
+		},
+		"exampleUsage": {
+			"title": "使用示例",
+			"description": "向用户展示如何使用此模板"
+		},
+		"troubleshooting": {
+			"title": "故障排除",
+			"description": "常见问题和解决方案"
+		}
+	},
+	"validation": {
+		"nameRequired": "模板名称为必填项",
+		"nameInvalid": "模板名称必须为 1-64 个字符，仅限小写字母、数字和连字符",
+		"displayRequired": "显示名称为必填项",
+		"invalidURL": "无效的 Git 仓库 URL",
+		"connectionFailed": "无法连接到 Git 仓库",
+		"noResources": "模板必须至少有一个资源",
+		"variableInvalid": "变量配置无效",
+		"permissionInvalid": "权限配置无效"
+	},
+	"actions": {
+		"create": "创建模板",
+		"creating": "创建模板中...",
+		"saveDraft": "保存草稿",
+		"preview": "预览",
+		"test": "测试模板",
+		"cancel": "取消",
+		"back": "返回",
+		"next": "下一步"
+	},
+	"messages": {
+		"creating": "创建模板中...",
+		"created": "模板创建成功",
+		"createFailed": "模板创建失败",
+		"importing": "导入模板中...",
+		"imported": "模板导入成功",
+		"importFailed": "模板导入失败",
+		"testing": "测试模板中...",
+		"testSuccess": "模板测试通过",
+		"testFailed": "模板测试失败"
+	},
+	"help": {
+		"title": "模板创建指南",
+		"description": "了解如何为您的团队创建有效的模板。",
+		"docs": "模板文档",
+		"examples": "示例模板",
+		"bestPractices": "最佳实践"
+	}
+}

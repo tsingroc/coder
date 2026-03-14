@@ -1,0 +1,99 @@
+{
+	"title": "模板库",
+	"subtitle": "浏览和使用预配置的模板来创建工作区。",
+	"sections": {
+		"featured": "精选模板",
+		"all": "所有模板",
+		"categories": "分类",
+		"recent": "最近添加",
+		"popular": "热门"
+	},
+	"categories": {
+		"all": "全部",
+		"development": "开发",
+		"dataScience": "数据科学",
+		"devops": "DevOps",
+		"design": "设计",
+		"education": "教育",
+		"custom": "自定义"
+	},
+	"template": {
+		"title": "模板名称",
+		"description": "模板描述",
+		"icon": "模板图标",
+		"version": "版本",
+		"activeDevelopers": "活跃开发者",
+		"usedBy": "使用者",
+		"lastUpdated": "最后更新",
+		"tags": "标签",
+		"owner": "所有者",
+		"organization": "组织"
+	},
+	"actions": {
+		"useTemplate": "使用模板",
+		"viewDetails": "查看详情",
+		"preview": "预览",
+		"documentation": "文档",
+		"clone": "克隆",
+		"share": "分享",
+		"favorite": "添加到收藏",
+		"unfavorite": "从收藏移除"
+	},
+	"filters": {
+		"title": "筛选器",
+		"category": "分类",
+		"organization": "组织",
+		"owner": "所有者",
+		"tags": "标签",
+		"search": "搜索模板...",
+		"sortBy": "排序方式",
+		"sortOptions": {
+			"name": "名称",
+			"updated": "最后更新",
+			"popularity": "热度",
+			"developers": "活跃开发者"
+		}
+	},
+	"empty": {
+		"title": "未找到模板",
+		"description": "没有符合条件的模板。",
+		"createTemplate": "创建模板",
+		"browseAll": "浏览所有模板"
+	},
+	"createTemplate": {
+		"title": "创建模板",
+		"fromScratch": "从头开始",
+		"fromGallery": "从模板库",
+		"import": "导入现有",
+		"description": "创建自定义模板或从模板库中的现有模板开始。"
+	},
+	"modal": {
+		"title": "模板详情",
+		"tabs": {
+			"overview": "概述",
+			"documentation": "文档",
+			"versions": "版本",
+			"resources": "资源",
+			"permissions": "权限"
+		},
+		"overview": {
+			"description": "描述",
+			"tags": "标签",
+			"owner": "所有者",
+			"createdAt": "创建于",
+			"updatedAt": "更新于",
+			"activeDevelopers": "活跃开发者",
+			"buildTime": "平均构建时间"
+		},
+		"actions": {
+			"useTemplate": "使用模板",
+			"close": "关闭"
+		}
+	},
+	"help": {
+		"title": "关于模板库",
+		"description": "模板库提供了一组预配置的模板，您可以使用它们快速创建工作区。模板包含所有必要的配置和工具。",
+		"documentation": "模板文档",
+		"createGuide": "如何创建模板"
+	}
+}

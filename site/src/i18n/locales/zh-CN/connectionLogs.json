@@ -1,0 +1,76 @@
+{
+	"title": "连接日志",
+	"subtitle": "监控工作区连接历史和诊断信息。",
+	"table": {
+		"timestamp": "时间戳",
+		"user": "用户",
+		"workspace": "工作区",
+		"action": "操作",
+		"status": "状态",
+		"duration": "持续时间",
+		"ipAddress": "IP 地址",
+		"userAgent": "用户代理"
+	},
+	"actions": {
+		"connecting": "连接中",
+		"connected": "已连接",
+		"disconnected": "已断开",
+		"rejected": "已拒绝",
+		"failed": "失败"
+	},
+	"status": {
+		"success": "成功",
+		"failed": "失败",
+		"timeout": "超时",
+		"rejected": "已拒绝"
+	},
+	"filters": {
+		"title": "筛选器",
+		"user": "用户",
+		"workspace": "工作区",
+		"status": "状态",
+		"dateRange": "日期范围",
+		"action": "操作",
+		"clearAll": "清除全部",
+		"applyFilters": "应用筛选器"
+	},
+	"actions": {
+		"viewDetails": "查看详情",
+		"export": "导出日志",
+		"refresh": "刷新"
+	},
+	"details": {
+		"title": "连接详情",
+		"connectionId": "连接 ID",
+		"timestamp": "时间戳",
+		"user": "用户",
+		"workspace": "工作区",
+		"workspaceID": "工作区 ID",
+		"action": "操作",
+		"status": "状态",
+		"duration": "持续时间",
+		"ipAddress": "IP 地址",
+		"userAgent": "用户代理",
+		"error": "错误消息",
+		"metadata": "元数据"
+	},
+	"empty": {
+		"title": "未找到连接日志",
+		"description": "没有符合筛选条件的连接日志。"
+	},
+	"export": {
+		"title": "导出连接日志",
+		"format": "格式",
+		"csv": "CSV",
+		"json": "JSON",
+		"dateRange": "日期范围",
+		"includeFilters": "包含当前筛选器",
+		"export": "导出"
+	},
+	"help": {
+		"title": "关于连接日志",
+		"description": "连接日志跟踪所有工作区连接尝试、断开连接和错误。使用这些日志来排除连接故障并监控使用模式。",
+		"documentation": "文档",
+		"troubleshooting": "故障排除指南"
+	}
+}

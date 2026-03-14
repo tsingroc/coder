@@ -1,0 +1,76 @@
+{
+	"title": "Connection Logs",
+	"subtitle": "Monitor workspace connection history and diagnostics.",
+	"table": {
+		"timestamp": "Timestamp",
+		"user": "User",
+		"workspace": "Workspace",
+		"action": "Action",
+		"status": "Status",
+		"duration": "Duration",
+		"ipAddress": "IP Address",
+		"userAgent": "User Agent"
+	},
+	"actions": {
+		"connecting": "Connecting",
+		"connected": "Connected",
+		"disconnected": "Disconnected",
+		"rejected": "Rejected",
+		"failed": "Failed"
+	},
+	"status": {
+		"success": "Success",
+		"failed": "Failed",
+		"timeout": "Timeout",
+		"rejected": "Rejected"
+	},
+	"filters": {
+		"title": "Filters",
+		"user": "User",
+		"workspace": "Workspace",
+		"status": "Status",
+		"dateRange": "Date Range",
+		"action": "Action",
+		"clearAll": "Clear All",
+		"applyFilters": "Apply Filters"
+	},
+	"actions": {
+		"viewDetails": "View Details",
+		"export": "Export Logs",
+		"refresh": "Refresh"
+	},
+	"details": {
+		"title": "Connection Details",
+		"connectionId": "Connection ID",
+		"timestamp": "Timestamp",
+		"user": "User",
+		"workspace": "Workspace",
+		"workspaceID": "Workspace ID",
+		"action": "Action",
+		"status": "Status",
+		"duration": "Duration",
+		"ipAddress": "IP Address",
+		"userAgent": "User Agent",
+		"error": "Error Message",
+		"metadata": "Metadata"
+	},
+	"empty": {
+		"title": "No connection logs found",
+		"description": "There are no connection logs matching your filters."
+	},
+	"export": {
+		"title": "Export Connection Logs",
+		"format": "Format",
+		"csv": "CSV",
+		"json": "JSON",
+		"dateRange": "Date Range",
+		"includeFilters": "Include Current Filters",
+		"export": "Export"
+	},
+	"help": {
+		"title": "About Connection Logs",
+		"description": "Connection logs track all workspace connection attempts, disconnections, and errors. Use these logs to troubleshoot connectivity issues and monitor usage patterns.",
+		"documentation": "Documentation",
+		"troubleshooting": "Troubleshooting Guide"
+	}
+}

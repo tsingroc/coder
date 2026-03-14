@@ -1,0 +1,99 @@
+{
+	"title": "Template Gallery",
+	"subtitle": "Browse and use pre-configured templates for your workspaces.",
+	"sections": {
+		"featured": "Featured Templates",
+		"all": "All Templates",
+		"categories": "Categories",
+		"recent": "Recently Added",
+		"popular": "Popular"
+	},
+	"categories": {
+		"all": "All",
+		"development": "Development",
+		"dataScience": "Data Science",
+		"devops": "DevOps",
+		"design": "Design",
+		"education": "Education",
+		"custom": "Custom"
+	},
+	"template": {
+		"title": "Template Name",
+		"description": "Template Description",
+		"icon": "Template Icon",
+		"version": "Version",
+		"activeDevelopers": "Active Developers",
+		"usedBy": "Used By",
+		"lastUpdated": "Last Updated",
+		"tags": "Tags",
+		"owner": "Owner",
+		"organization": "Organization"
+	},
+	"actions": {
+		"useTemplate": "Use Template",
+		"viewDetails": "View Details",
+		"preview": "Preview",
+		"documentation": "Documentation",
+		"clone": "Clone",
+		"share": "Share",
+		"favorite": "Add to Favorites",
+		"unfavorite": "Remove from Favorites"
+	},
+	"filters": {
+		"title": "Filters",
+		"category": "Category",
+		"organization": "Organization",
+		"owner": "Owner",
+		"tags": "Tags",
+		"search": "Search templates...",
+		"sortBy": "Sort By",
+		"sortOptions": {
+			"name": "Name",
+			"updated": "Last Updated",
+			"popularity": "Popularity",
+			"developers": "Active Developers"
+		}
+	},
+	"empty": {
+		"title": "No templates found",
+		"description": "There are no templates matching your criteria.",
+		"createTemplate": "Create Template",
+		"browseAll": "Browse All Templates"
+	},
+	"createTemplate": {
+		"title": "Create Template",
+		"fromScratch": "From Scratch",
+		"fromGallery": "From Gallery",
+		"import": "Import Existing",
+		"description": "Create a custom template or start from an existing template in the gallery."
+	},
+	"modal": {
+		"title": "Template Details",
+		"tabs": {
+			"overview": "Overview",
+			"documentation": "Documentation",
+			"versions": "Versions",
+			"resources": "Resources",
+			"permissions": "Permissions"
+		},
+		"overview": {
+			"description": "Description",
+			"tags": "Tags",
+			"owner": "Owner",
+			"createdAt": "Created At",
+			"updatedAt": "Updated At",
+			"activeDevelopers": "Active Developers",
+			"buildTime": "Average Build Time"
+		},
+		"actions": {
+			"useTemplate": "Use Template",
+			"close": "Close"
+		}
+	},
+	"help": {
+		"title": "About Template Gallery",
+		"description": "The template gallery provides a collection of pre-configured templates that you can use to quickly create workspaces. Templates include all necessary configuration and tools.",
+		"documentation": "Template Documentation",
+		"createGuide": "How to Create Templates"
+	}
+}

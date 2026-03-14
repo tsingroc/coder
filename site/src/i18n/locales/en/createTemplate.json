@@ -1,0 +1,214 @@
+{
+	"title": "Create Template",
+	"subtitle": "Create a new template from scratch or based on an existing template.",
+	"sections": {
+		"source": "Source",
+		"configuration": "Configuration",
+		"resources": "Resources",
+		"permissions": "Permissions",
+		"variables": "Variables",
+		"documentation": "Documentation",
+		"versions": "Versions"
+	},
+	"source": {
+		"title": "Template Source",
+		"description": "Choose how you want to create this template.",
+		"options": {
+			"scratch": "Create from Scratch",
+			"example": "Use Example Template",
+			"import": "Import from Git",
+			"clone": "Clone Existing Template"
+		},
+		"scratch": {
+			"title": "Create from Scratch",
+			"description": "Start with a blank template and define everything yourself."
+		},
+		"example": {
+			"title": "Use Example Template",
+			"description": "Start with a pre-configured example template.",
+			"selectExample": "Select an example template"
+		},
+		"import": {
+			"title": "Import from Git",
+			"description": "Import a template from a Git repository.",
+			"repositoryURL": "Repository URL",
+			"branch": "Branch",
+			"path": "Path",
+			"auth": "Authentication (if required)"
+		},
+		"clone": {
+			"title": "Clone Existing Template",
+			"description": "Create a copy of an existing template.",
+			"selectTemplate": "Select template to clone"
+		}
+	},
+	"configuration": {
+		"title": "Template Configuration",
+		"name": {
+			"label": "Template Name",
+			"description": "A unique name for this template",
+			"placeholder": "my-template"
+		},
+		"display": {
+			"label": "Display Name",
+			"description": "A friendly name shown in the UI",
+			"placeholder": "My Template"
+		},
+		"description": {
+			"label": "Description",
+			"description": "Describe what this template does",
+			"placeholder": "A template for..."
+		},
+		"icon": {
+			"label": "Icon",
+			"description": "Choose an icon for this template"
+		},
+		"tags": {
+			"label": "Tags",
+			"description": "Add tags to help users find this template",
+			"placeholder": "Add tags..."
+		},
+		"organization": {
+			"label": "Organization",
+			"description": "Select which organization this template belongs to"
+		},
+		"defaultTTL": {
+			"label": "Default TTL",
+			"description": "Default time-to-live for workspaces created from this template",
+			"infinite": "Infinite",
+			"hours": "hours"
+		},
+		"maxTTL": {
+			"label": "Maximum TTL",
+			"description": "Maximum time-to-live for workspaces",
+			"unlimited": "Unlimited"
+		},
+		"autoStart": {
+			"label": "Allow users to auto-start workspaces",
+			"description": "Users can configure workspaces to start on a schedule"
+		},
+		"requireActiveVersion": {
+			"label": "Require active version",
+			"description": "Workspaces must use an active template version"
+		},
+		"canAlwaysEdit": {
+			"label": "Allow users to always edit",
+			"description": "Users can edit workspaces even after they've started"
+		}
+	},
+	"resources": {
+		"title": "Template Resources",
+		"description": "Define the infrastructure resources for this template.",
+		"addResource": "Add Resource",
+		"noResources": "No resources defined yet",
+		"resource": {
+			"name": "Resource Name",
+			"type": "Type",
+			"count": "Count",
+			"description": "Description"
+		},
+		"types": {
+			"agent": "Agent",
+			"container": "Container",
+			"kubernetes_pod": "Kubernetes Pod",
+			"vm": "Virtual Machine",
+			"database": "Database",
+			"storage": "Storage"
+		}
+	},
+	"permissions": {
+		"title": "Template Permissions",
+		"description": "Control who can use and manage this template.",
+		"addPermission": "Add Permission",
+		"noPermissions": "No custom permissions set",
+		"permission": {
+			"user": "User",
+			"group": "Group",
+			"role": "Role",
+			"actions": "Actions"
+		},
+		"actions": {
+			"use": "Use Template",
+			"read": "View Template",
+			"update": "Edit Template",
+			"delete": "Delete Template"
+		},
+		"allUsers": "All authenticated users",
+		"allMembers": "All organization members"
+	},
+	"variables": {
+		"title": "Template Variables",
+		"description": "Define variables that users can configure when creating workspaces.",
+		"addVariable": "Add Variable",
+		"noVariables": "No variables defined",
+		"variable": {
+			"name": "Variable Name",
+			"type": "Type",
+			"defaultValue": "Default Value",
+			"required": "Required",
+			"description": "Description",
+			"options": "Options"
+		},
+		"types": {
+			"string": "String",
+			"number": "Number",
+			"boolean": "Boolean",
+			"list": "List of Strings"
+		}
+	},
+	"documentation": {
+		"title": "Template Documentation",
+		"description": "Add documentation to help users understand and use this template.",
+		"readme": {
+			"title": "README",
+			"description": "Main documentation file",
+			"placeholder": "Describe your template here..."
+		},
+		"exampleUsage": {
+			"title": "Example Usage",
+			"description": "Show users how to use this template"
+		},
+		"troubleshooting": {
+			"title": "Troubleshooting",
+			"description": "Common issues and solutions"
+		}
+	},
+	"validation": {
+		"nameRequired": "Template name is required",
+		"nameInvalid": "Template name must be 1-64 characters, lowercase letters, numbers, and hyphens only",
+		"displayRequired": "Display name is required",
+		"invalidURL": "Invalid Git repository URL",
+		"connectionFailed": "Failed to connect to Git repository",
+		"noResources": "Template must have at least one resource",
+		"variableInvalid": "Variable configuration is invalid",
+		"permissionInvalid": "Permission configuration is invalid"
+	},
+	"actions": {
+		"create": "Create Template",
+		"creating": "Creating template...",
+		"saveDraft": "Save Draft",
+		"preview": "Preview",
+		"test": "Test Template",
+		"cancel": "Cancel",
+		"back": "Back",
+		"next": "Next"
+	},
+	"messages": {
+		"creating": "Creating template...",
+		"created": "Template created successfully",
+		"createFailed": "Failed to create template",
+		"importing": "Importing template...",
+		"imported": "Template imported successfully",
+		"importFailed": "Failed to import template",
+		"testing": "Testing template...",
+		"testSuccess": "Template test passed",
+		"testFailed": "Template test failed"
+	},
+	"help": {
+		"title": "Template Creation Guide",
+		"description": "Learn how to create effective templates for your team.",
+		"docs": "Template Documentation",
+		"examples": "Example Templates",
+		"bestPractices": "Best Practices"
+	}
+}
