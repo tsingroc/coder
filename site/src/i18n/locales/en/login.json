@@ -1,4 +1,7 @@
 {
+	"welcome": "Welcome to Coder",
+	"welcomeBack": "Welcome back",
+	"signInTitle": "Sign in to your account",
 	"emailLabel": "Email",
 	"passwordLabel": "Password",
 	"emailInvalid": "Please enter a valid email address.",
@@ -6,5 +9,16 @@
 	"passwordRequired": "Please enter a password.",
 	"passwordSignIn": "Sign In",
 	"githubSignIn": "GitHub",
-	"oidcSignIn": "OpenID Connect"
+	"oidcSignIn": "OpenID Connect",
+	"forgotPassword": "Forgot password?",
+	"resetPassword": "Reset password",
+	"rememberMe": "Remember me",
+	"noAccount": "Don't have an account?",
+	"signUp": "Sign up",
+	"loginError": "Login failed. Please check your credentials.",
+	"loginSuccess": "Login successful.",
+	"logout": "Logout",
+	"logoutConfirm": "Are you sure you want to logout?",
+	"loading": "Signing in...",
+	"backToHome": "Back to Home"
 }

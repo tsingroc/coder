@@ -19,5 +19,60 @@
 	"oldPassword": "Current Password",
 	"newPassword": "New Password",
 	"confirmPassword": "Confirm Password",
-	"passwordUpdated": "Updated password."
+	"passwordUpdated": "Updated password.",
+	"sshKeys": {
+		"title": "SSH Keys",
+		"description": "Add SSH keys for git access",
+		"addKey": "Add SSH Key",
+		"noKeys": "No SSH keys found",
+		"keyName": "Key Name",
+		"publicKey": "Public Key",
+		"addedAt": "Added At",
+		"actions": "Actions",
+		"delete": "Delete",
+		"copyKey": "Copy Key"
+	},
+	"tokens": {
+		"title": "Tokens",
+		"description": "Manage your API tokens",
+		"addToken": "Add Token",
+		"noTokens": "No tokens found",
+		"tokenName": "Token Name",
+		"lastUsed": "Last Used",
+		"expiresAt": "Expires At",
+		"actions": "Actions",
+		"delete": "Delete",
+		"never": "Never"
+	},
+	"appearance": {
+		"title": "Appearance",
+		"description": "Customize your Coder experience",
+		"theme": "Theme",
+		"themeDark": "Dark",
+		"themeLight": "Light",
+		"themeSystem": "System",
+		"language": "Language",
+		"fontFamily": "Font Family",
+		"homePage": "Home Page"
+	},
+	"notifications": {
+		"title": "Notifications",
+		"description": "Manage your notification preferences",
+		"emailNotifications": "Email Notifications",
+		"desktopNotifications": "Desktop Notifications",
+		"workspaceNotifications": "Workspace Notifications",
+		"mentions": "Mentions",
+		"replies": "Replies",
+		"systemUpdates": "System Updates"
+	},
+	"security": {
+		"title": "Security",
+		"description": "Manage your security settings",
+		"twoFactor": "Two-Factor Authentication",
+		"enableTwoFactor": "Enable 2FA",
+		"disableTwoFactor": "Disable 2FA",
+		"sessions": "Active Sessions",
+		"revokeSession": "Revoke",
+		"loginHistory": "Login History"
+	}
 }

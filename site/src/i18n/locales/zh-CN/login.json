@@ -1,4 +1,7 @@
 {
+	"welcome": "欢迎使用 Coder",
+	"welcomeBack": "欢迎回来",
+	"signInTitle": "登录您的账户",
 	"emailLabel": "邮箱",
 	"passwordLabel": "密码",
 	"emailInvalid": "请输入有效的邮箱地址。",
@@ -6,5 +9,16 @@
 	"passwordRequired": "请输入密码。",
 	"passwordSignIn": "登录",
 	"githubSignIn": "GitHub",
-	"oidcSignIn": "OpenID Connect"
+	"oidcSignIn": "OpenID Connect",
+	"forgotPassword": "忘记密码？",
+	"resetPassword": "重置密码",
+	"rememberMe": "记住我",
+	"noAccount": "没有账户？",
+	"signUp": "注册",
+	"loginError": "登录失败。请检查您的凭据。",
+	"loginSuccess": "登录成功。",
+	"logout": "退出登录",
+	"logoutConfirm": "确定要退出登录吗？",
+	"loading": "正在登录...",
+	"backToHome": "返回首页"
 }

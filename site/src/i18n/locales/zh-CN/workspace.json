@@ -18,5 +18,56 @@
   "pageNotFoundDescription": "您尝试访问的页面不存在。",
   "backToFirstPage": "返回第一页",
   "workspaces": "个工作区",
-  "workspace": "个工作区"
+  "workspace": "个工作区",
+  "status": {
+    "starting": "启动中",
+    "running": "运行中",
+    "stopping": "停止中",
+    "stopped": "已停止",
+    "deleting": "删除中",
+    "deleted": "已删除",
+    "updating": "更新中",
+    "updated": "已更新",
+    "error": "错误",
+    "pending": "等待中",
+    "canceling": "取消中",
+    "canceled": "已取消",
+    "failed": "失败"
+  },
+  "table": {
+    "name": "名称",
+    "template": "模板",
+    "owner": "所有者",
+    "status": "状态",
+    "lastUsed": "最后使用",
+    "builtAt": "构建时间",
+    "outdated": "过时",
+    "actions": "操作"
+  },
+  "emptyState": {
+    "title": "未找到工作区",
+    "description": "创建工作区以开始使用 Coder。"
+  },
+  "actions": {
+    "start": "启动",
+    "stop": "停止",
+    "restart": "重启",
+    "update": "更新",
+    "delete": "删除",
+    "open": "打开",
+    "settings": "设置",
+    "viewLogs": "查看日志",
+    "viewHistory": "查看历史"
+  },
+  "messages": {
+    "starting": "正在启动工作区...",
+    "stopping": "正在停止工作区...",
+    "updating": "正在更新工作区...",
+    "deleting": "正在删除工作区...",
+    "started": "工作区启动成功。",
+    "stopped": "工作区停止成功。",
+    "updated": "工作区更新成功。",
+    "deleted": "工作区删除成功。",
+    "error": "发生错误，请重试。"
+  }
 }

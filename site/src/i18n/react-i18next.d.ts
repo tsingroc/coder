@@ -25,6 +25,50 @@ declare module "i18next" {
 				submit: string;
 				required: string;
 				or: string;
+				yes: string;
+				no: string;
+				search: string;
+				filter: string;
+				sort: string;
+				refresh: string;
+				download: string;
+				upload: string;
+				copy: string;
+				paste: string;
+				clear: string;
+				reset: string;
+				apply: string;
+				view: string;
+				hide: string;
+				show: string;
+				enable: string;
+				disable: string;
+				active: string;
+				inactive: string;
+				enabled: string;
+				disabled: string;
+				open: string;
+				closed: string;
+				public: string;
+				private: string;
+				name: string;
+				description: string;
+				status: string;
+				actions: string;
+				details: string;
+				settings: string;
+				help: string;
+				about: string;
+				documentation: string;
+				support: string;
+				version: string;
+				build: string;
+				updated: string;
+				created: string;
+				never: string;
+				all: string;
+				none: string;
+				other: string;
 				errorPage: {
 					title: string;
 					description: string;
@@ -38,6 +82,9 @@ declare module "i18next" {
 			};
 			login: {
 				// Login page translations
+				welcome: string;
+				welcomeBack: string;
+				signInTitle: string;
 				emailLabel: string;
 				passwordLabel: string;
 				emailInvalid: string;
@@ -46,6 +93,17 @@ declare module "i18next" {
 				passwordSignIn: string;
 				githubSignIn: string;
 				oidcSignIn: string;
+				forgotPassword: string;
+				resetPassword: string;
+				rememberMe: string;
+				noAccount: string;
+				signUp: string;
+				loginError: string;
+				loginSuccess: string;
+				logout: string;
+				logoutConfirm: string;
+				loading: string;
+				backToHome: string;
 			};
 			workspace: {
 				// Workspace page translations
@@ -140,6 +198,61 @@ declare module "i18next" {
 				newPassword: string;
 				confirmPassword: string;
 				passwordUpdated: string;
+				sshKeys: {
+					title: string;
+					description: string;
+					addKey: string;
+					noKeys: string;
+					keyName: string;
+					publicKey: string;
+					addedAt: string;
+					actions: string;
+					delete: string;
+					copyKey: string;
+				};
+				tokens: {
+					title: string;
+					description: string;
+					addToken: string;
+					noTokens: string;
+					tokenName: string;
+					lastUsed: string;
+					expiresAt: string;
+					actions: string;
+					delete: string;
+					never: string;
+				};
+				appearance: {
+					title: string;
+					description: string;
+					theme: string;
+					themeDark: string;
+					themeLight: string;
+					themeSystem: string;
+					language: string;
+					fontFamily: string;
+					homePage: string;
+				};
+				notifications: {
+					title: string;
+					description: string;
+					emailNotifications: string;
+					desktopNotifications: string;
+					workspaceNotifications: string;
+					mentions: string;
+					replies: string;
+					systemUpdates: string;
+				};
+				security: {
+					title: string;
+					description: string;
+					twoFactor: string;
+					enableTwoFactor: string;
+					disableTwoFactor: string;
+					sessions: string;
+					revokeSession: string;
+					loginHistory: string;
+				};
 			};
 			templates: {
 				// Templates page translations

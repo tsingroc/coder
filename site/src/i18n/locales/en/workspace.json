@@ -18,5 +18,56 @@
   "pageNotFoundDescription": "The page you are trying to access does not exist.",
   "backToFirstPage": "Back to the first page",
   "workspaces": "workspaces",
-  "workspace": "workspace"
+  "workspace": "workspace",
+  "status": {
+    "starting": "Starting",
+    "running": "Running",
+    "stopping": "Stopping",
+    "stopped": "Stopped",
+    "deleting": "Deleting",
+    "deleted": "Deleted",
+    "updating": "Updating",
+    "updated": "Updated",
+    "error": "Error",
+    "pending": "Pending",
+    "canceling": "Canceling",
+    "canceled": "Canceled",
+    "failed": "Failed"
+  },
+  "table": {
+    "name": "Name",
+    "template": "Template",
+    "owner": "Owner",
+    "status": "Status",
+    "lastUsed": "Last Used",
+    "builtAt": "Built At",
+    "outdated": "Outdated",
+    "actions": "Actions"
+  },
+  "emptyState": {
+    "title": "No workspaces found",
+    "description": "Create a workspace to get started with Coder."
+  },
+  "actions": {
+    "start": "Start",
+    "stop": "Stop",
+    "restart": "Restart",
+    "update": "Update",
+    "delete": "Delete",
+    "open": "Open",
+    "settings": "Settings",
+    "viewLogs": "View Logs",
+    "viewHistory": "View History"
+  },
+  "messages": {
+    "starting": "Starting workspace...",
+    "stopping": "Stopping workspace...",
+    "updating": "Updating workspace...",
+    "deleting": "Deleting workspace...",
+    "started": "Workspace started successfully.",
+    "stopped": "Workspace stopped successfully.",
+    "updated": "Workspace updated successfully.",
+    "deleted": "Workspace deleted successfully.",
+    "error": "An error occurred. Please try again."
+  }
 }
