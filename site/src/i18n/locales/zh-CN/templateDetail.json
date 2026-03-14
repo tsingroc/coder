@@ -16,17 +16,83 @@
 		"useTemplate": "使用模板",
 		"delete": "删除",
 		"updateVersion": "更新版本",
-		"buildLogs": "构建日志"
+		"buildLogs": "构建日志",
+		"clone": "克隆",
+		"export": "导出",
+		"share": "分享"
 	},
 	"info": {
 		"name": "名称",
 		"version": "版本",
 		"lastUsed": "最后使用",
 		"activeDevelopers": "活跃开发者",
-		"buildTime": "平均构建时间"
+		"buildTime": "平均构建时间",
+		"createdBy": "创建者",
+		"createdAt": "创建时间",
+		"updatedBy": "更新者",
+		"updatedAt": "更新时间",
+		"description": "描述",
+		"icon": "图标"
 	},
 	"emptyStates": {
 		"noVersions": "暂无版本",
+		"noPrebuilds": "未配置预构建",
+		"noFiles": "未找到文件",
+		"noResources": "未定义资源",
+		"noPermissions": "未配置权限"
+	},
+	"versions": {
+		"title": "模板版本",
+		"createVersion": "创建版本",
+		"currentVersion": "当前",
+		"stable": "稳定",
+		"deprecated": "已弃用",
+		"createdAt": "创建时间",
+		"createdBy": "创建者",
+		"message": "消息",
+		"noVersions": "没有可用版本"
+	},
+	"resources": {
+		"title": "资源",
+		"type": "类型",
+		"name": "名称",
+		"count": "数量",
+		"addResource": "添加资源",
+		"noResources": "未配置资源"
+	},
+	"permissions": {
+		"title": "权限",
+		"user": "用户",
+		"group": "组",
+		"role": "角色",
+		"actions": "操作",
+		"addPermission": "添加权限",
+		"allUsers": "所有用户",
+		"noPermissions": "未配置权限"
+	},
+	"prebuilds": {
+		"title": "预构建",
+		"description": "预构建缓存工作区镜像以加快启动速度",
+		"enabled": "已启用",
+		"disabled": "已禁用",
+		"lastBuild": "上次构建",
+		"status": "状态",
+		"success": "成功",
+		"failed": "失败",
+		"pending": "等待中",
+		"running": "运行中",
+		"createPrebuild": "创建预构建",
 		"noPrebuilds": "未配置预构建"
+	},
+	"variables": {
+		"title": "变量",
+		"description": "用于参数化的模板变量",
+		"name": "名称",
+		"type": "类型",
+		"value": "值",
+		"required": "必填",
+		"description": "描述",
+		"addVariable": "添加变量",
+		"noVariables": "未定义变量"
 	}
 }

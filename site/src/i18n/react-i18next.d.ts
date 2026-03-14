@@ -397,6 +397,9 @@ declare module "i18next" {
 					delete: string;
 					updateVersion: string;
 					buildLogs: string;
+					clone: string;
+					export: string;
+					share: string;
 				};
 				info: {
 					name: string;
@@ -404,10 +407,72 @@ declare module "i18next" {
 					lastUsed: string;
 					activeDevelopers: string;
 					buildTime: string;
+					createdBy: string;
+					createdAt: string;
+					updatedBy: string;
+					updatedAt: string;
+					description: string;
+					icon: string;
 				};
 				emptyStates: {
 					noVersions: string;
 					noPrebuilds: string;
+					noFiles: string;
+					noResources: string;
+					noPermissions: string;
+				};
+				versions: {
+					title: string;
+					createVersion: string;
+					currentVersion: string;
+					stable: string;
+					deprecated: string;
+					createdAt: string;
+					createdBy: string;
+					message: string;
+					noVersions: string;
+				};
+				resources: {
+					title: string;
+					type: string;
+					name: string;
+					count: string;
+					addResource: string;
+					noResources: string;
+				};
+				permissions: {
+					title: string;
+					user: string;
+					group: string;
+					role: string;
+					actions: string;
+					addPermission: string;
+					allUsers: string;
+					noPermissions: string;
+				};
+				prebuilds: {
+					title: string;
+					description: string;
+					enabled: string;
+					disabled: string;
+					lastBuild: string;
+					status: string;
+					success: string;
+					failed: string;
+					pending: string;
+					running: string;
+					createPrebuild: string;
+					noPrebuilds: string;
+				};
+				variables: {
+					title: string;
+					description: string;
+					name: string;
+					type: string;
+					value: string;
+					required: string;
+					addVariable: string;
+					noVariables: string;
 				};
 			};
 			users: {

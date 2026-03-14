@@ -16,17 +16,83 @@
 		"useTemplate": "Use template",
 		"delete": "Delete",
 		"updateVersion": "Update version",
-		"buildLogs": "Build logs"
+		"buildLogs": "Build logs",
+		"clone": "Clone",
+		"export": "Export",
+		"share": "Share"
 	},
 	"info": {
 		"name": "Name",
 		"version": "Version",
 		"lastUsed": "Last used",
 		"activeDevelopers": "Active developers",
-		"buildTime": "Average build time"
+		"buildTime": "Average build time",
+		"createdBy": "Created by",
+		"createdAt": "Created at",
+		"updatedBy": "Updated by",
+		"updatedAt": "Updated at",
+		"description": "Description",
+		"icon": "Icon"
 	},
 	"emptyStates": {
 		"noVersions": "No versions yet",
+		"noPrebuilds": "No prebuilds configured",
+		"noFiles": "No files found",
+		"noResources": "No resources defined",
+		"noPermissions": "No permissions configured"
+	},
+	"versions": {
+		"title": "Template Versions",
+		"createVersion": "Create Version",
+		"currentVersion": "Current",
+		"stable": "Stable",
+		"deprecated": "Deprecated",
+		"createdAt": "Created",
+		"createdBy": "Created By",
+		"message": "Message",
+		"noVersions": "No versions available"
+	},
+	"resources": {
+		"title": "Resources",
+		"type": "Type",
+		"name": "Name",
+		"count": "Count",
+		"addResource": "Add Resource",
+		"noResources": "No resources configured"
+	},
+	"permissions": {
+		"title": "Permissions",
+		"user": "User",
+		"group": "Group",
+		"role": "Role",
+		"actions": "Actions",
+		"addPermission": "Add Permission",
+		"allUsers": "All users",
+		"noPermissions": "No permissions configured"
+	},
+	"prebuilds": {
+		"title": "Prebuilds",
+		"description": "Prebuilds cache workspace images for faster startup",
+		"enabled": "Enabled",
+		"disabled": "Disabled",
+		"lastBuild": "Last Build",
+		"status": "Status",
+		"success": "Success",
+		"failed": "Failed",
+		"pending": "Pending",
+		"running": "Running",
+		"createPrebuild": "Create Prebuild",
 		"noPrebuilds": "No prebuilds configured"
+	},
+	"variables": {
+		"title": "Variables",
+		"description": "Template variables for parameterization",
+		"name": "Name",
+		"type": "Type",
+		"value": "Value",
+		"required": "Required",
+		"description": "Description",
+		"addVariable": "Add Variable",
+		"noVariables": "No variables defined"
 	}
 }
