@@ -1,0 +1,18 @@
+{
+	"title": "终端",
+	"connecting": "正在连接终端...",
+	"connected": "已连接",
+	"disconnected": "已断开",
+	"reconnect": "重新连接",
+	"resize": "调整终端大小",
+	"download": "下载日志",
+	"alerts": {
+		"connectionFailed": "连接终端失败",
+		"disconnectedTitle": "终端已断开",
+		"disconnectedMessage": "终端连接已丢失。这通常发生在工作区代理重新启动时。"
+	},
+	"buttons": {
+		"reconnect": "重新连接",
+		"close": "关闭终端"
+	}
+}

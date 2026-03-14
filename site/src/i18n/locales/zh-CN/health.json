@@ -1,0 +1,18 @@
+{
+	"title": "健康检查",
+	"sections": {
+		"overview": "概览",
+		"derp": "DERP",
+		"database": "数据库",
+		"provisionerDaemons": "预配守护进程",
+		"workspaceProxy": "工作区代理",
+		"accessURL": "访问 URL",
+		"websocket": "WebSocket"
+	},
+	"status": {
+		"healthy": "健康",
+		"unhealthy": "不健康",
+		"disabled": "已禁用",
+		"initializing": "初始化中"
+	}
+}

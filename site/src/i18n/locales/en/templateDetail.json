@@ -1,0 +1,32 @@
+{
+	"title": "Template",
+	"sections": {
+		"docs": "Documentation",
+		"files": "Files",
+		"resources": "Resources",
+		"versions": "Versions",
+		"prebuilds": "Prebuilds",
+		"insights": "Insights",
+		"permissions": "Permissions",
+		"schedule": "Schedule",
+		"variables": "Variables"
+	},
+	"actions": {
+		"edit": "Edit template",
+		"useTemplate": "Use template",
+		"delete": "Delete",
+		"updateVersion": "Update version",
+		"buildLogs": "Build logs"
+	},
+	"info": {
+		"name": "Name",
+		"version": "Version",
+		"lastUsed": "Last used",
+		"activeDevelopers": "Active developers",
+		"buildTime": "Average build time"
+	},
+	"emptyStates": {
+		"noVersions": "No versions yet",
+		"noPrebuilds": "No prebuilds configured"
+	}
+}

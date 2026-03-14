@@ -1,0 +1,32 @@
+{
+	"title": "Users",
+	"titlePlural": "Users",
+	"table": {
+		"username": "Username",
+		"email": "Email",
+		"status": "Status",
+		"roles": "Roles",
+		"actions": "Actions"
+	},
+	"status": {
+		"active": "Active",
+		"suspended": "Suspended"
+	},
+	"buttons": {
+		"addUser": "Add user",
+		"resetPassword": "Reset password",
+		"suspend": "Suspend",
+		"activate": "Activate",
+		"editRoles": "Edit roles"
+	},
+	"emptyState": {
+		"title": "No users found",
+		"createFirst": "Create your first user"
+	},
+	"roles": {
+		"owner": "Owner",
+		"admin": "Admin",
+		"user": "User",
+		"member": "Member"
+	}
+}

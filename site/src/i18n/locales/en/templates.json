@@ -1,0 +1,26 @@
+{
+	"title": "Templates",
+	"emptyState": {
+		"title": "No templates found",
+		"description": "Templates allow you to create workspaces with pre-configured resources."
+	},
+	"table": {
+		"name": "Name",
+		"buildTime": "Build time",
+		"usedBy": "Used by",
+		"lastUpdated": "Last updated",
+		"actions": "Actions"
+	},
+	"tooltip": {
+		"title": "What is a template?",
+		"text": "With templates you can create a common configuration for your workspaces using Terraform.",
+		"link": "Manage templates"
+	},
+	"buttons": {
+		"createTemplate": "Create template",
+		"useTemplate": "Use template",
+		"viewDocs": "View docs"
+	},
+	"developerCount": "{{count}} developer",
+	"developerCount_plural": "{{count}} developers"
+}

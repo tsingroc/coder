@@ -1,0 +1,21 @@
+{
+	"title": "Organization Settings",
+	"sections": {
+		"general": "General",
+		"members": "Members",
+		"provisioners": "Provisioners",
+		"provisionerJobs": "Provisioner Jobs",
+		"provisionerKeys": "Provisioner Keys",
+		"roles": "Roles",
+		"idpSync": "IDP Sync"
+	},
+	"actions": {
+		"addMember": "Add member",
+		"createRole": "Create role",
+		"viewAuditLog": "View audit log"
+	},
+	"emptyStates": {
+		"noMembers": "No members yet",
+		"noRoles": "No custom roles yet"
+	}
+}

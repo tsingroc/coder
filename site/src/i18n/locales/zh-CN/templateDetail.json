@@ -1,0 +1,32 @@
+{
+	"title": "模板",
+	"sections": {
+		"docs": "文档",
+		"files": "文件",
+		"resources": "资源",
+		"versions": "版本",
+		"prebuilds": "预构建",
+		"insights": "洞察",
+		"permissions": "权限",
+		"schedule": "计划",
+		"variables": "变量"
+	},
+	"actions": {
+		"edit": "编辑模板",
+		"useTemplate": "使用模板",
+		"delete": "删除",
+		"updateVersion": "更新版本",
+		"buildLogs": "构建日志"
+	},
+	"info": {
+		"name": "名称",
+		"version": "版本",
+		"lastUsed": "最后使用",
+		"activeDevelopers": "活跃开发者",
+		"buildTime": "平均构建时间"
+	},
+	"emptyStates": {
+		"noVersions": "暂无版本",
+		"noPrebuilds": "未配置预构建"
+	}
+}

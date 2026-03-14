@@ -1,0 +1,28 @@
+{
+	"title": "任务",
+	"titlePlural": "任务",
+	"table": {
+		"name": "名称",
+		"status": "状态",
+		"createdBy": "创建者",
+		"createdAt": "创建时间",
+		"actions": "操作"
+	},
+	"status": {
+		"pending": "待处理",
+		"running": "运行中",
+		"succeeded": "已完成",
+		"failed": "失败",
+		"cancelled": "已取消"
+	},
+	"buttons": {
+		"createTask": "创建任务",
+		"viewDetails": "查看详情",
+		"cancel": "取消任务",
+		"retry": "重试"
+	},
+	"emptyState": {
+		"title": "未找到任务",
+		"description": "任务是由用户或系统创建的自动化作业。"
+	}
+}

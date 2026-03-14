@@ -1,0 +1,28 @@
+{
+	"title": "Tasks",
+	"titlePlural": "Tasks",
+	"table": {
+		"name": "Name",
+		"status": "Status",
+		"createdBy": "Created by",
+		"createdAt": "Created at",
+		"actions": "Actions"
+	},
+	"status": {
+		"pending": "Pending",
+		"running": "Running",
+		"succeeded": "Succeeded",
+		"failed": "Failed",
+		"cancelled": "Cancelled"
+	},
+	"buttons": {
+		"createTask": "Create task",
+		"viewDetails": "View details",
+		"cancel": "Cancel task",
+		"retry": "Retry"
+	},
+	"emptyState": {
+		"title": "No tasks found",
+		"description": "Tasks are automated jobs created by users or the system."
+	}
+}

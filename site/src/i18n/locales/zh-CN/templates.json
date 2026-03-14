@@ -1,0 +1,26 @@
+{
+	"title": "模板",
+	"emptyState": {
+		"title": "未找到模板",
+		"description": "模板允许您使用预配置的资源创建工作区。"
+	},
+	"table": {
+		"name": "名称",
+		"buildTime": "构建时间",
+		"usedBy": "使用者",
+		"lastUpdated": "最后更新",
+		"actions": "操作"
+	},
+	"tooltip": {
+		"title": "什么是模板？",
+		"text": "使用模板，您可以使用 Terraform 为工作区创建通用配置。",
+		"link": "管理模板"
+	},
+	"buttons": {
+		"createTemplate": "创建模板",
+		"useTemplate": "使用模板",
+		"viewDocs": "查看文档"
+	},
+	"developerCount": "{{count}} 位开发者",
+	"developerCount_plural": "{{count}} 位开发者"
+}

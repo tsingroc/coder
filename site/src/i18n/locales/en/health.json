@@ -1,0 +1,18 @@
+{
+	"title": "Health",
+	"sections": {
+		"overview": "Overview",
+		"derp": "DERP",
+		"database": "Database",
+		"provisionerDaemons": "Provisioner Daemons",
+		"workspaceProxy": "Workspace Proxy",
+		"accessURL": "Access URL",
+		"websocket": "WebSocket"
+	},
+	"status": {
+		"healthy": "Healthy",
+		"unhealthy": "Unhealthy",
+		"disabled": "Disabled",
+		"initializing": "Initializing"
+	}
+}

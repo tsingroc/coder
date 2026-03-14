@@ -1,0 +1,21 @@
+{
+	"title": "组织设置",
+	"sections": {
+		"general": "常规",
+		"members": "成员",
+		"provisioners": "预配器",
+		"provisionerJobs": "预配作业",
+		"provisionerKeys": "预配密钥",
+		"roles": "角色",
+		"idpSync": "IDP 同步"
+	},
+	"actions": {
+		"addMember": "添加成员",
+		"createRole": "创建角色",
+		"viewAuditLog": "查看审计日志"
+	},
+	"emptyStates": {
+		"noMembers": "暂无成员",
+		"noRoles": "暂无自定义角色"
+	}
+}

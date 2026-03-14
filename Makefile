@@ -697,7 +697,7 @@ lint/migrations:
 	./scripts/check_pg_schema.sh "Fixtures" $(FIXTURE_FILES)
 .PHONY: lint/migrations
 
-TYPOS_VERSION := $(shell grep -oP 'crate-ci/typos@\S+\s+\#\s+v\K[0-9.]+' .github/workflows/ci.yaml)
+TYPOS_VERSION := 1.23.7
 
 # Map uname values to typos release asset names.
 TYPOS_ARCH := $(shell uname -m)

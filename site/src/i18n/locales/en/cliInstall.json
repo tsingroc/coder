@@ -1,0 +1,26 @@
+{
+	"title": "Install CLI",
+	"subtitle": "Install the Coder CLI to manage your workspaces from the command line.",
+	"sections": {
+		"install": {
+			"title": "Install",
+			"description": "Run the following command in your terminal:"
+		},
+		"authenticate": {
+			"title": "Authenticate",
+			"description": "Log in to your Coder deployment:",
+			"sessionToken": "Session token",
+			"sessionTokenDescription": "Or use a session token:"
+		},
+		"verify": {
+			"title": "Verify installation",
+			"description": "Verify that the CLI is installed correctly:",
+			"successMessage": "CLI version:"
+		}
+	},
+	"osTabs": {
+		"linux": "Linux",
+		"macOS": "macOS",
+		"windows": "Windows"
+	}
+}

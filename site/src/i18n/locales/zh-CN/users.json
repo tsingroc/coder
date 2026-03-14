@@ -1,0 +1,32 @@
+{
+	"title": "用户",
+	"titlePlural": "用户",
+	"table": {
+		"username": "用户名",
+		"email": "邮箱",
+		"status": "状态",
+		"roles": "角色",
+		"actions": "操作"
+	},
+	"status": {
+		"active": "活动",
+		"suspended": "已暂停"
+	},
+	"buttons": {
+		"addUser": "添加用户",
+		"resetPassword": "重置密码",
+		"suspend": "暂停",
+		"activate": "激活",
+		"editRoles": "编辑角色"
+	},
+	"emptyState": {
+		"title": "未找到用户",
+		"createFirst": "创建您的第一个用户"
+	},
+	"roles": {
+		"owner": "所有者",
+		"admin": "管理员",
+		"user": "用户",
+		"member": "成员"
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"title": "安装 CLI",
+	"subtitle": "安装 Coder CLI 以便从命令行管理您的工作区。",
+	"sections": {
+		"install": {
+			"title": "安装",
+			"description": "在终端中运行以下命令："
+		},
+		"authenticate": {
+			"title": "身份验证",
+			"description": "登录到您的 Coder 部署：",
+			"sessionToken": "会话令牌",
+			"sessionTokenDescription": "或使用会话令牌："
+		},
+		"verify": {
+			"title": "验证安装",
+			"description": "验证 CLI 是否正确安装：",
+			"successMessage": "CLI 版本："
+		}
+	},
+	"osTabs": {
+		"linux": "Linux",
+		"macOS": "macOS",
+		"windows": "Windows"
+	}
+}

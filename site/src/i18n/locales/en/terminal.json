@@ -1,0 +1,18 @@
+{
+	"title": "Terminal",
+	"connecting": "Connecting to terminal...",
+	"connected": "Connected",
+	"disconnected": "Disconnected",
+	"reconnect": "Reconnect",
+	"resize": "Resize terminal",
+	"download": "Download logs",
+	"alerts": {
+		"connectionFailed": "Failed to connect to terminal",
+		"disconnectedTitle": "Terminal disconnected",
+		"disconnectedMessage": "The connection to the terminal was lost. This usually happens when the workspace agent restarts."
+	},
+	"buttons": {
+		"reconnect": "Reconnect",
+		"close": "Close terminal"
+	}
+}
