@@ -6,6 +6,9 @@
 		"status": "状态",
 		"createdBy": "创建者",
 		"createdAt": "创建时间",
+		"startedAt": "开始时间",
+		"completedAt": "完成时间",
+		"duration": "持续时间",
 		"actions": "操作"
 	},
 	"status": {
@@ -13,16 +16,57 @@
 		"running": "运行中",
 		"succeeded": "已完成",
 		"failed": "失败",
-		"cancelled": "已取消"
+		"cancelled": "已取消",
+		"canceling": "取消中",
+		"timeout": "超时"
 	},
 	"buttons": {
 		"createTask": "创建任务",
 		"viewDetails": "查看详情",
 		"cancel": "取消任务",
-		"retry": "重试"
+		"retry": "重试",
+		"delete": "删除",
+		"downloadLogs": "下载日志",
+		"viewOutput": "查看输出"
 	},
 	"emptyState": {
 		"title": "未找到任务",
 		"description": "任务是由用户或系统创建的自动化作业。"
+	},
+	"details": {
+		"title": "任务详情",
+		"taskId": "任务 ID",
+		"organization": "组织",
+		"workspace": "工作区",
+		"template": "模板",
+		"version": "版本",
+		"initiator": "发起者",
+		"createdAt": "创建时间",
+		"startedAt": "开始时间",
+		"completedAt": "完成时间",
+		"status": "状态",
+		"error": "错误",
+		"output": "输出",
+		"logs": "日志"
+	},
+	"messages": {
+		"pending": "任务等待执行...",
+		"running": "任务正在运行...",
+		"succeeded": "任务成功完成。",
+		"failed": "任务失败。",
+		"cancelled": "任务已取消。",
+		"canceling": "正在取消任务...",
+		"timeout": "任务超时。"
+	},
+	"filters": {
+		"title": "筛选任务",
+		"status": "状态",
+		"allStatuses": "所有状态",
+		"createdAfter": "创建于...之后",
+		"createdBefore": "创建于...之前",
+		"createdBy": "创建者",
+		"apply": "应用筛选",
+		"clear": "清除筛选",
+		"noResults": "没有任务符合您的筛选条件"
 	}
 }

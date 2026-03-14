@@ -6,6 +6,9 @@
 		"status": "Status",
 		"createdBy": "Created by",
 		"createdAt": "Created at",
+		"startedAt": "Started at",
+		"completedAt": "Completed at",
+		"duration": "Duration",
 		"actions": "Actions"
 	},
 	"status": {
@@ -13,16 +16,57 @@
 		"running": "Running",
 		"succeeded": "Succeeded",
 		"failed": "Failed",
-		"cancelled": "Cancelled"
+		"cancelled": "Cancelled",
+		"canceling": "Canceling",
+		"timeout": "Timeout"
 	},
 	"buttons": {
 		"createTask": "Create task",
 		"viewDetails": "View details",
 		"cancel": "Cancel task",
-		"retry": "Retry"
+		"retry": "Retry",
+		"delete": "Delete",
+		"downloadLogs": "Download logs",
+		"viewOutput": "View output"
 	},
 	"emptyState": {
 		"title": "No tasks found",
 		"description": "Tasks are automated jobs created by users or the system."
+	},
+	"details": {
+		"title": "Task Details",
+		"taskId": "Task ID",
+		"organization": "Organization",
+		"workspace": "Workspace",
+		"template": "Template",
+		"version": "Version",
+		"initiator": "Initiator",
+		"createdAt": "Created at",
+		"startedAt": "Started at",
+		"completedAt": "Completed at",
+		"status": "Status",
+		"error": "Error",
+		"output": "Output",
+		"logs": "Logs"
+	},
+	"messages": {
+		"pending": "Task is pending execution...",
+		"running": "Task is running...",
+		"succeeded": "Task completed successfully.",
+		"failed": "Task failed.",
+		"cancelled": "Task was cancelled.",
+		"canceling": "Cancelling task...",
+		"timeout": "Task timed out."
+	},
+	"filters": {
+		"title": "Filter tasks",
+		"status": "Status",
+		"allStatuses": "All statuses",
+		"createdAfter": "Created after",
+		"createdBefore": "Created before",
+		"createdBy": "Created by",
+		"apply": "Apply filters",
+		"clear": "Clear filters",
+		"noResults": "No tasks match your filters"
 	}
 }

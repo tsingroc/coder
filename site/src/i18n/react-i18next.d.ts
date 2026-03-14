@@ -548,6 +548,9 @@ declare module "i18next" {
 					status: string;
 					createdBy: string;
 					createdAt: string;
+					startedAt: string;
+					completedAt: string;
+					duration: string;
 					actions: string;
 				};
 				status: {
@@ -556,16 +559,57 @@ declare module "i18next" {
 					succeeded: string;
 					failed: string;
 					cancelled: string;
+					canceling: string;
+					timeout: string;
 				};
 				buttons: {
 					createTask: string;
 					viewDetails: string;
 					cancel: string;
 					retry: string;
+					delete: string;
+					downloadLogs: string;
+					viewOutput: string;
 				};
 				emptyState: {
 					title: string;
 					description: string;
+				};
+				details: {
+					title: string;
+					taskId: string;
+					organization: string;
+					workspace: string;
+					template: string;
+					version: string;
+					initiator: string;
+					createdAt: string;
+					startedAt: string;
+					completedAt: string;
+					status: string;
+					error: string;
+					output: string;
+					logs: string;
+				};
+				messages: {
+					pending: string;
+					running: string;
+					succeeded: string;
+					failed: string;
+					cancelled: string;
+					canceling: string;
+					timeout: string;
+				};
+				filters: {
+					title: string;
+					status: string;
+					allStatuses: string;
+					createdAfter: string;
+					createdBefore: string;
+					createdBy: string;
+					apply: string;
+					clear: string;
+					noResults: string;
 				};
 			};
 			cliInstall: {
