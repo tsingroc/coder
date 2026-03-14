@@ -7,15 +7,85 @@
 		"provisionerJobs": "Provisioner Jobs",
 		"provisionerKeys": "Provisioner Keys",
 		"roles": "Roles",
-		"idpSync": "IDP Sync"
+		"idpSync": "IDP Sync",
+		"groups": "Groups",
+		"permissions": "Permissions",
+		"auditLog": "Audit Log",
+		"licenses": "Licenses",
+		"network": "Network",
+		"proxies": "Workspace Proxies"
 	},
 	"actions": {
 		"addMember": "Add member",
 		"createRole": "Create role",
-		"viewAuditLog": "View audit log"
+		"viewAuditLog": "View audit log",
+		"exportData": "Export organization data",
+		"deleteOrg": "Delete organization",
+		"leaveOrg": "Leave organization",
+		"settings": "Settings",
+		"save": "Save changes"
 	},
 	"emptyStates": {
 		"noMembers": "No members yet",
-		"noRoles": "No custom roles yet"
+		"noRoles": "No custom roles yet",
+		"noGroups": "No groups yet",
+		"noProvisioners": "No provisioners configured",
+		"noAuditLogs": "No audit log entries found"
+	},
+	"members": {
+		"title": "Organization Members",
+		"name": "Name",
+		"email": "Email",
+		"roles": "Roles",
+		"status": "Status",
+		"addedAt": "Added At",
+		"actions": "Actions",
+		"active": "Active",
+		"suspended": "Suspended",
+		"removeMember": "Remove member",
+		"updateRoles": "Update roles",
+		"assignRole": "Assign role"
+	},
+	"roles": {
+		"title": "Custom Roles",
+		"name": "Role name",
+		"displayName": "Display name",
+		"permissions": "Permissions",
+		"organization": "Organization",
+		"users": "Users",
+		"builtIn": "Built-in",
+		"custom": "Custom",
+		"createRole": "Create role",
+		"editRole": "Edit role",
+		"deleteRole": "Delete role",
+		"assignPermissions": "Assign permissions",
+		"noRoles": "No custom roles configured"
+	},
+	"groups": {
+		"title": "Groups",
+		"name": "Group name",
+		"displayName": "Display name",
+		"members": "Members",
+		"quotas": "Quotas",
+		"createGroup": "Create group",
+		"editGroup": "Edit group",
+		"deleteGroup": "Delete group",
+		"addMembers": "Add members",
+		"removeMembers": "Remove members"
+	},
+	"auditLog": {
+		"title": "Audit Log",
+		"timestamp": "Timestamp",
+		"user": "User",
+		"action": "Action",
+		"resource": "Resource",
+		"details": "Details",
+		"ipAddress": "IP Address",
+		"userAgent": "User Agent",
+		"filterByDate": "Filter by date",
+		"filterByUser": "Filter by user",
+		"filterByAction": "Filter by action",
+		"exportLog": "Export log",
+		"noLogs": "No audit logs found for the specified filters"
 	}
 }

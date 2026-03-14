@@ -1,5 +1,6 @@
 {
 	"title": "Health",
+	"subtitle": "Monitor the health and status of your Coder deployment",
 	"sections": {
 		"overview": "Overview",
 		"derp": "DERP",
@@ -7,12 +8,115 @@
 		"provisionerDaemons": "Provisioner Daemons",
 		"workspaceProxy": "Workspace Proxy",
 		"accessURL": "Access URL",
-		"websocket": "WebSocket"
+		"websocket": "WebSocket",
+		"services": "Services",
+		"metrics": "Metrics"
 	},
 	"status": {
 		"healthy": "Healthy",
 		"unhealthy": "Unhealthy",
 		"disabled": "Disabled",
-		"initializing": "Initializing"
+		"initializing": "Initializing",
+		"warning": "Warning",
+		"degraded": "Degraded",
+		"unknown": "Unknown"
+	},
+	"overview": {
+		"title": "System Health",
+		"uptime": "Uptime",
+		"version": "Version",
+		"deployedAt": "Deployed at",
+		"restartCount": "Restart count",
+		"lastHealthCheck": "Last health check",
+		"overallHealth": "Overall health"
+	},
+	"derp": {
+		"title": "DERP Relay",
+		"description": "Network relay for peer-to-peer connections",
+		"regionCount": "Regions",
+		"nodeCount": "Nodes",
+		"activeConnections": "Active connections",
+		"relayRegion": "Relay region",
+		"regionName": "Region name",
+		"regionEnabled": "Enabled",
+		"regionLatency": "Latency"
+	},
+	"database": {
+		"title": "Database",
+		"description": "Database connection and performance metrics",
+		"connected": "Connected",
+		"disconnected": "Disconnected",
+		"responseTime": "Response time",
+		"queryCount": "Query count",
+		"connectionPool": "Connection pool",
+		"activeConnections": "Active connections",
+		"idleConnections": "Idle connections",
+		"maxConnections": "Max connections",
+		"databaseSize": "Database size",
+		"replicationLag": "Replication lag"
+	},
+	"provisionerDaemons": {
+		"title": "Provisioner Daemons",
+		"description": "Infrastructure provisioning services",
+		"daemonCount": "Daemons",
+		"activeDaemons": "Active",
+		"idleDaemons": "Idle",
+		"organization": "Organization",
+		"tags": "Tags",
+		"version": "Version",
+		"jobsCompleted": "Jobs completed",
+		"jobsFailed": "Jobs failed",
+		"jobsRunning": "Jobs running",
+		"lastJob": "Last job",
+		"status": "Status"
+	},
+	"workspaceProxy": {
+		"title": "Workspace Proxies",
+		"description": "Regional workspace proxy servers",
+		"proxyCount": "Proxies",
+		"healthyProxies": "Healthy",
+		"unhealthyProxies": "Unhealthy",
+		"proxyName": "Proxy name",
+		"proxyURL": "Proxy URL",
+		"version": "Version",
+		"region": "Region",
+		"workspaceCount": "Workspaces",
+		"status": "Status",
+		"lastSeen": "Last seen"
+	},
+	"accessURL": {
+		"title": "Access URL",
+		"description": "External access configuration",
+		"url": "URL",
+		"hostname": "Hostname",
+		"port": "Port",
+		"tls": "TLS enabled",
+		"reachable": "Reachable",
+		"unreachable": "Unreachable",
+		"certificate": "Certificate",
+		"certificateExpiry": "Certificate expiry"
+	},
+	"websocket": {
+		"title": "WebSocket",
+		"description": "Real-time connection status",
+		"connections": "Connections",
+		"messagesPerSecond": "Messages/sec",
+		"activeConnections": "Active",
+		"rejectedConnections": "Rejected",
+		"averageLatency": "Average latency"
+	},
+	"actions": {
+		"refresh": "Refresh health",
+		"exportReport": "Export health report",
+		"viewLogs": "View logs",
+		"troubleshoot": "Troubleshoot issues",
+		"configureAlerts": "Configure alerts"
+	},
+	"errors": {
+		"connectionFailed": "Failed to connect to health check endpoint",
+		"timeout": "Health check timed out",
+		"serviceUnavailable": "Service is unavailable",
+		"databaseError": "Database error",
+		"invalidResponse": "Invalid health check response"
 	}
 }

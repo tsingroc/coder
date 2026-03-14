@@ -700,20 +700,91 @@ declare module "i18next" {
 					provisionerKeys: string;
 					roles: string;
 					idpSync: string;
+					groups: string;
+					permissions: string;
+					auditLog: string;
+					licenses: string;
+					network: string;
+					proxies: string;
 				};
 				actions: {
 					addMember: string;
 					createRole: string;
 					viewAuditLog: string;
+					exportData: string;
+					deleteOrg: string;
+					leaveOrg: string;
+					settings: string;
+					save: string;
 				};
 				emptyStates: {
 					noMembers: string;
 					noRoles: string;
+					noGroups: string;
+					noProvisioners: string;
+					noAuditLogs: string;
+				};
+				members: {
+					title: string;
+					name: string;
+					email: string;
+					roles: string;
+					status: string;
+					addedAt: string;
+					actions: string;
+					active: string;
+					suspended: string;
+					removeMember: string;
+					updateRoles: string;
+					assignRole: string;
+				};
+				roles: {
+					title: string;
+					name: string;
+					displayName: string;
+					permissions: string;
+					organization: string;
+					users: string;
+					builtIn: string;
+					custom: string;
+					createRole: string;
+					editRole: string;
+					deleteRole: string;
+					assignPermissions: string;
+					noRoles: string;
+				};
+				groups: {
+					title: string;
+					name: string;
+					displayName: string;
+					members: string;
+					quotas: string;
+					createGroup: string;
+					editGroup: string;
+					deleteGroup: string;
+					addMembers: string;
+					removeMembers: string;
+				};
+				auditLog: {
+					title: string;
+					timestamp: string;
+					user: string;
+					action: string;
+					resource: string;
+					details: string;
+					ipAddress: string;
+					userAgent: string;
+					filterByDate: string;
+					filterByUser: string;
+					filterByAction: string;
+					exportLog: string;
+					noLogs: string;
 				};
 			};
 			health: {
 				// Health page translations
 				title: string;
+				subtitle: string;
 				sections: {
 					overview: string;
 					derp: string;
@@ -722,12 +793,115 @@ declare module "i18next" {
 					workspaceProxy: string;
 					accessURL: string;
 					websocket: string;
+					services: string;
+					metrics: string;
 				};
 				status: {
 					healthy: string;
 					unhealthy: string;
 					disabled: string;
 					initializing: string;
+					warning: string;
+					degraded: string;
+					unknown: string;
+				};
+				overview: {
+					title: string;
+					uptime: string;
+					version: string;
+					deployedAt: string;
+					restartCount: string;
+					lastHealthCheck: string;
+					overallHealth: string;
+				};
+				derp: {
+					title: string;
+					description: string;
+					regionCount: string;
+					nodeCount: string;
+					activeConnections: string;
+					relayRegion: string;
+					regionName: string;
+					regionEnabled: string;
+					regionLatency: string;
+				};
+				database: {
+					title: string;
+					description: string;
+					connected: string;
+					disconnected: string;
+					responseTime: string;
+					queryCount: string;
+					connectionPool: string;
+					activeConnections: string;
+					idleConnections: string;
+					maxConnections: string;
+					databaseSize: string;
+					replicationLag: string;
+				};
+				provisionerDaemons: {
+					title: string;
+					description: string;
+					daemonCount: string;
+					activeDaemons: string;
+					idleDaemons: string;
+					organization: string;
+					tags: string;
+					version: string;
+					jobsCompleted: string;
+					jobsFailed: string;
+					jobsRunning: string;
+					lastJob: string;
+					status: string;
+				};
+				workspaceProxy: {
+					title: string;
+					description: string;
+					proxyCount: string;
+					healthyProxies: string;
+					unhealthyProxies: string;
+					proxyName: string;
+					proxyURL: string;
+					version: string;
+					region: string;
+					workspaceCount: string;
+					status: string;
+					lastSeen: string;
+				};
+				accessURL: {
+					title: string;
+					description: string;
+					url: string;
+					hostname: string;
+					port: string;
+					tls: string;
+					reachable: string;
+					unreachable: string;
+					certificate: string;
+					certificateExpiry: string;
+				};
+				websocket: {
+					title: string;
+					description: string;
+					connections: string;
+					messagesPerSecond: string;
+					activeConnections: string;
+					rejectedConnections: string;
+					averageLatency: string;
+				};
+				actions: {
+					refresh: string;
+					exportReport: string;
+					viewLogs: string;
+					troubleshoot: string;
+					configureAlerts: string;
+				};
+				errors: {
+					connectionFailed: string;
+					timeout: string;
+					serviceUnavailable: string;
+					databaseError: string;
+					invalidResponse: string;
 				};
 			};
 		};

@@ -1,5 +1,6 @@
 {
 	"title": "健康检查",
+	"subtitle": "监控 Coder 部署的健康状态和状态",
 	"sections": {
 		"overview": "概览",
 		"derp": "DERP",
@@ -7,12 +8,115 @@
 		"provisionerDaemons": "预配守护进程",
 		"workspaceProxy": "工作区代理",
 		"accessURL": "访问 URL",
-		"websocket": "WebSocket"
+		"websocket": "WebSocket",
+		"services": "服务",
+		"metrics": "指标"
 	},
 	"status": {
 		"healthy": "健康",
 		"unhealthy": "不健康",
 		"disabled": "已禁用",
-		"initializing": "初始化中"
+		"initializing": "初始化中",
+		"warning": "警告",
+		"degraded": "降级",
+		"unknown": "未知"
+	},
+	"overview": {
+		"title": "系统健康",
+		"uptime": "运行时间",
+		"version": "版本",
+		"deployedAt": "部署时间",
+		"restartCount": "重启次数",
+		"lastHealthCheck": "上次健康检查",
+		"overallHealth": "总体健康状况"
+	},
+	"derp": {
+		"title": "DERP 中继",
+		"description": "用于点对点连接的网络中继",
+		"regionCount": "区域",
+		"nodeCount": "节点",
+		"activeConnections": "活动连接",
+		"relayRegion": "中继区域",
+		"regionName": "区域名称",
+		"regionEnabled": "已启用",
+		"regionLatency": "延迟"
+	},
+	"database": {
+		"title": "数据库",
+		"description": "数据库连接和性能指标",
+		"connected": "已连接",
+		"disconnected": "已断开",
+		"responseTime": "响应时间",
+		"queryCount": "查询计数",
+		"connectionPool": "连接池",
+		"activeConnections": "活动连接",
+		"idleConnections": "空闲连接",
+		"maxConnections": "最大连接",
+		"databaseSize": "数据库大小",
+		"replicationLag": "复制延迟"
+	},
+	"provisionerDaemons": {
+		"title": "预配守护进程",
+		"description": "基础设施预配服务",
+		"daemonCount": "守护进程",
+		"activeDaemons": "活动",
+		"idleDaemons": "空闲",
+		"organization": "组织",
+		"tags": "标签",
+		"version": "版本",
+		"jobsCompleted": "已完成作业",
+		"jobsFailed": "失败作业",
+		"jobsRunning": "运行中作业",
+		"lastJob": "上次作业",
+		"status": "状态"
+	},
+	"workspaceProxy": {
+		"title": "工作区代理",
+		"description": "区域工作区代理服务器",
+		"proxyCount": "代理",
+		"healthyProxies": "健康",
+		"unhealthyProxies": "不健康",
+		"proxyName": "代理名称",
+		"proxyURL": "代理 URL",
+		"version": "版本",
+		"region": "区域",
+		"workspaceCount": "工作区",
+		"status": "状态",
+		"lastSeen": "最后可见"
+	},
+	"accessURL": {
+		"title": "访问 URL",
+		"description": "外部访问配置",
+		"url": "URL",
+		"hostname": "主机名",
+		"port": "端口",
+		"tls": "TLS 已启用",
+		"reachable": "可访问",
+		"unreachable": "无法访问",
+		"certificate": "证书",
+		"certificateExpiry": "证书到期"
+	},
+	"websocket": {
+		"title": "WebSocket",
+		"description": "实时连接状态",
+		"connections": "连接",
+		"messagesPerSecond": "消息/秒",
+		"activeConnections": "活动",
+		"rejectedConnections": "已拒绝",
+		"averageLatency": "平均延迟"
+	},
+	"actions": {
+		"refresh": "刷新健康状态",
+		"exportReport": "导出健康报告",
+		"viewLogs": "查看日志",
+		"troubleshoot": "问题排查",
+		"configureAlerts": "配置警报"
+	},
+	"errors": {
+		"connectionFailed": "无法连接到健康检查端点",
+		"timeout": "健康检查超时",
+		"serviceUnavailable": "服务不可用",
+		"databaseError": "数据库错误",
+		"invalidResponse": "无效的健康检查响应"
 	}
 }
