@@ -141,6 +141,226 @@ declare module "i18next" {
 				confirmPassword: string;
 				passwordUpdated: string;
 			};
+			templates: {
+				// Templates page translations
+				title: string;
+				emptyState: {
+					title: string;
+					description: string;
+				};
+				table: {
+					name: string;
+					buildTime: string;
+					usedBy: string;
+					lastUpdated: string;
+					actions: string;
+				};
+				tooltip: {
+					title: string;
+					text: string;
+					link: string;
+				};
+				buttons: {
+					createTemplate: string;
+					useTemplate: string;
+					viewDocs: string;
+				};
+				developerCount: string;
+			};
+			templateDetail: {
+				// Template detail page translations
+				title: string;
+				sections: {
+					docs: string;
+					files: string;
+					resources: string;
+					versions: string;
+					prebuilds: string;
+					insights: string;
+					permissions: string;
+					schedule: string;
+					variables: string;
+				};
+				actions: {
+					edit: string;
+					useTemplate: string;
+					delete: string;
+					updateVersion: string;
+					buildLogs: string;
+				};
+				info: {
+					name: string;
+					version: string;
+					lastUsed: string;
+					activeDevelopers: string;
+					buildTime: string;
+				};
+				emptyStates: {
+					noVersions: string;
+					noPrebuilds: string;
+				};
+			};
+			users: {
+				// Users page translations
+				title: string;
+				titlePlural: string;
+				table: {
+					username: string;
+					email: string;
+					status: string;
+					roles: string;
+					actions: string;
+				};
+				status: {
+					active: string;
+					suspended: string;
+				};
+				buttons: {
+					addUser: string;
+					resetPassword: string;
+					suspend: string;
+					activate: string;
+					editRoles: string;
+				};
+				emptyState: {
+					title: string;
+					createFirst: string;
+				};
+				roles: {
+					owner: string;
+					admin: string;
+					user: string;
+					member: string;
+				};
+				resetPassword: {
+					title: string;
+					message: string;
+					confirmText: string;
+				};
+			};
+			notFound: {
+				// 404 page translations
+				title: string;
+				message: string;
+				goBack: string;
+				goHome: string;
+			};
+			terminal: {
+				// Terminal page translations
+				title: string;
+				connecting: string;
+				connected: string;
+				disconnected: string;
+				reconnect: string;
+				resize: string;
+				download: string;
+				alerts: {
+					connectionFailed: string;
+					disconnectedTitle: string;
+					disconnectedMessage: string;
+				};
+				buttons: {
+					reconnect: string;
+					close: string;
+				};
+			};
+			tasks: {
+				// Tasks page translations
+				title: string;
+				titlePlural: string;
+				table: {
+					name: string;
+					status: string;
+					createdBy: string;
+					createdAt: string;
+					actions: string;
+				};
+				status: {
+					pending: string;
+					running: string;
+					succeeded: string;
+					failed: string;
+					cancelled: string;
+				};
+				buttons: {
+					createTask: string;
+					viewDetails: string;
+					cancel: string;
+					retry: string;
+				};
+				emptyState: {
+					title: string;
+					description: string;
+				};
+			};
+			cliInstall: {
+				// CLI install page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					install: {
+						title: string;
+						description: string;
+					};
+					authenticate: {
+						title: string;
+						description: string;
+						sessionToken: string;
+						sessionTokenDescription: string;
+					};
+					verify: {
+						title: string;
+						description: string;
+						successMessage: string;
+					};
+				};
+				osTabs: {
+					linux: string;
+					macOS: string;
+					windows: string;
+				};
+			};
+			orgSettings: {
+				// Organization settings page translations
+				title: string;
+				sections: {
+					general: string;
+					members: string;
+					provisioners: string;
+					provisionerJobs: string;
+					provisionerKeys: string;
+					roles: string;
+					idpSync: string;
+				};
+				actions: {
+					addMember: string;
+					createRole: string;
+					viewAuditLog: string;
+				};
+				emptyStates: {
+					noMembers: string;
+					noRoles: string;
+				};
+			};
+			health: {
+				// Health page translations
+				title: string;
+				sections: {
+					overview: string;
+					derp: string;
+					database: string;
+					provisionerDaemons: string;
+					workspaceProxy: string;
+					accessURL: string;
+					websocket: string;
+				};
+				status: {
+					healthy: string;
+					unhealthy: string;
+					disabled: string;
+					initializing: string;
+				};
+			};
 		};
 	}
 }

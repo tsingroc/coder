@@ -1,7 +1,7 @@
 import type * as TypesGen from "api/typesGenerated";
 import { CodeExample } from "components/CodeExample/CodeExample";
 import { ConfirmDialog } from "components/Dialogs/ConfirmDialog/ConfirmDialog";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import type { FC, JSX } from "react";
 
 interface ResetPasswordDialogProps {
@@ -21,11 +21,13 @@ export const ResetPasswordDialog: FC<ResetPasswordDialogProps> = ({
 	newPassword,
 	loading,
 }) => {
+	const { t } = useTranslation("users");
+
 	const description = (
 		<>
-			<Trans i18nKey="resetPassword.message" ns="users" values={{ username: user?.username || "" }}>
-				You will need to send <strong>{{username: user?.username || ""}}</strong> the following password:
-			</Trans>
+			<p>
+				You will need to send <strong>{user?.username || ""}</strong> the following password:
+			</p>
 			<CodeExample
 				secret={false}
 				code={newPassword ?? ""}
@@ -46,9 +48,9 @@ export const ResetPasswordDialog: FC<ResetPasswordDialogProps> = ({
 			open={open}
 			onConfirm={onConfirm}
 			onClose={onClose}
-			title="Reset password"
+			title={t("resetPassword.title")}
 			confirmLoading={loading}
-			confirmText="Reset password"
+			confirmText={t("resetPassword.confirmText")}
 			description={description}
 		/>
 	);
