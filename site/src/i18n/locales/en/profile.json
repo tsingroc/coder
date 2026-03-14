@@ -1,0 +1,274 @@
+{
+	"title": "Profile",
+	"subtitle": "Manage your personal information and preferences.",
+	"sections": {
+		"info": "Personal Information",
+		"preferences": "Preferences",
+		"security": "Security",
+		"activity": "Activity",
+		"sessions": "Active Sessions",
+		"apiKeys": "API Keys"
+	},
+	"info": {
+		"title": "Personal Information",
+		"description": "Update your personal information visible to other users.",
+		"fields": {
+			"username": {
+				"label": "Username",
+				"description": "Your unique username (cannot be changed)",
+				"placeholder": "username"
+			},
+			"email": {
+				"label": "Email Address",
+				"description": "Your primary email address",
+				"placeholder": "you@example.com",
+				"verified": "Verified",
+				"unverified": "Not verified",
+				"verify": "Verify Email"
+			},
+			"displayName": {
+				"label": "Display Name",
+				"description": "Your display name shown to other users",
+				"placeholder": "John Doe"
+			},
+			"bio": {
+				"label": "Bio",
+				"description": "A brief description about yourself",
+				"placeholder": "Software engineer at Acme Corp..."
+			},
+			"location": {
+				"label": "Location",
+				"description": "Your city or location",
+				"placeholder": "San Francisco, CA"
+			},
+			"company": {
+				"label": "Company",
+				"description": "Your company or organization",
+				"placeholder": "Acme Corp"
+			},
+			"website": {
+				"label": "Website",
+				"description": "Your personal website or portfolio",
+				"placeholder": "https://example.com"
+			},
+			"jobTitle": {
+				"label": "Job Title",
+				"description": "Your current role or position",
+				"placeholder": "Software Engineer"
+			},
+			"phone": {
+				"label": "Phone Number",
+				"description": "Your contact phone number",
+				"placeholder": "+1 (555) 123-4567"
+			}
+		},
+		"avatar": {
+			"label": "Profile Picture",
+			"upload": "Upload New Picture",
+			"remove": "Remove Picture",
+			"dragDrop": "Drag and drop an image here, or click to browse",
+			"formats": "Supported formats: JPG, PNG, GIF (max 5MB)",
+			"success": "Profile picture updated successfully",
+			"failed": "Failed to update profile picture"
+		},
+		"actions": {
+			"save": "Save Changes",
+			"saving": "Saving...",
+			"cancel": "Cancel"
+		},
+		"messages": {
+			"success": "Profile updated successfully!",
+			"failed": "Failed to update profile. Please try again.",
+			"emailUpdateSent": "Confirmation email sent to {{email}}. Please click the link to confirm your new email address."
+		}
+	},
+	"preferences": {
+		"title": "Preferences",
+		"description": "Customize your Coder experience.",
+		"appearance": {
+			"title": "Appearance",
+			"theme": {
+				"label": "Theme",
+				"description": "Choose your preferred color scheme",
+				"dark": "Dark",
+				"light": "Light",
+				"system": "System Default"
+			},
+			"language": {
+				"label": "Language",
+				"description": "Select your preferred language",
+				"en": "English",
+				"zhCN": "简体中文"
+			},
+			"homePage": {
+				"label": "Home Page",
+				"description": "Choose what page you see when you first sign in",
+				"workspaces": "Workspaces",
+				"templates": "Templates",
+				"agents": "Agents"
+			}
+		},
+		"notifications": {
+			"title": "Notifications",
+			"description": "Manage how you receive notifications.",
+			"email": {
+				"label": "Email Notifications",
+				"description": "Receive notifications via email",
+				"workspaceUpdates": "Workspace updates",
+				"templateChanges": "Template changes",
+				"securityAlerts": "Security alerts",
+				"weeklyDigest": "Weekly digest"
+			},
+			"desktop": {
+				"label": "Desktop Notifications",
+				"description": "Show desktop notifications",
+				"enabled": "Enable desktop notifications",
+				"permission": "Grant permission to show notifications"
+			}
+		},
+		"accessibility": {
+			"title": "Accessibility",
+			"description": "Customize accessibility options.",
+			"reducedMotion": {
+				"label": "Reduced Motion",
+				"description": "Reduce animations and motion effects"
+			},
+			"highContrast": {
+				"label": "High Contrast Mode",
+				"description": "Increase contrast for better visibility"
+			},
+			"fontSize": {
+				"label": "Font Size",
+				"description": "Adjust the base font size",
+				"small": "Small",
+				"medium": "Medium",
+				"large": "Large",
+				"extraLarge": "Extra Large"
+			}
+		}
+	},
+	"security": {
+		"title": "Security",
+		"description": "Manage your account security settings.",
+		"password": {
+			"title": "Change Password",
+			"description": "Update your password regularly to keep your account secure.",
+			"currentPassword": {
+				"label": "Current Password",
+				"placeholder": "Enter your current password",
+				"required": "Current password is required"
+			},
+			"newPassword": {
+				"label": "New Password",
+				"placeholder": "Enter a new password",
+				"required": "New password is required",
+				"strength": "Password strength"
+			},
+			"confirmPassword": {
+				"label": "Confirm New Password",
+				"placeholder": "Confirm your new password",
+				"required": "Please confirm your new password",
+				"mismatch": "Passwords do not match"
+			},
+			"actions": {
+				"submit": "Change Password",
+				"submitting": "Changing..."
+			},
+			"messages": {
+				"success": "Password changed successfully!",
+				"failed": "Failed to change password. Please check your current password and try again.",
+				"weak": "New password is too weak. Please choose a stronger password."
+			}
+		},
+		"twoFactor": {
+			"title": "Two-Factor Authentication",
+			"description": "Add an extra layer of security to your account.",
+			"enabled": "Enabled",
+			"disabled": "Not Enabled",
+			"enable": {
+				"title": "Enable Two-Factor Authentication",
+				"description": "Follow these steps to set up 2FA:",
+				"step1": "Download an authenticator app (Google Authenticator, Authy, etc.)",
+				"step2": "Scan the QR code below with your app",
+				"step3": "Enter the 6-digit code from your app",
+				"verify": "Verify and Enable",
+				"code": {
+					"label": "Authentication Code",
+					"placeholder": "123456",
+					"required": "Authentication code is required",
+					"invalid": "Invalid authentication code"
+				},
+				"backupCodes": {
+					"title": "Backup Codes",
+					"description": "Save these backup codes in a safe place. You can use them to access your account if you lose your authenticator device.",
+					"download": "Download Codes",
+					"copy": "Copy Codes"
+				}
+			},
+			"disable": {
+				"title": "Disable Two-Factor Authentication",
+				"description": "Are you sure you want to disable 2FA? Your account will be less secure.",
+				"confirm": "Confirm Disable",
+				"requirePassword": "Enter your password to confirm",
+				"messages": {
+					"success": "Two-factor authentication disabled",
+					"failed": "Failed to disable two-factor authentication"
+				}
+			}
+		},
+		"sessions": {
+			"title": "Active Sessions",
+			"description": "Manage all devices currently signed in to your account.",
+			"current": {
+				"label": "Current Session",
+				"device": "This device",
+				"location": "Current location",
+				"lastActive": "Active now"
+			},
+			"session": {
+				"device": "Device",
+				"browser": "Browser",
+				"location": "Location",
+				"lastActive": "Last Active",
+				"ipAddress": "IP Address",
+				"actions": "Actions",
+				"revoke": "Revoke"
+			},
+			"actions": {
+				"revokeAll": "Revoke All Other Sessions",
+				"confirmRevokeAll": "Are you sure you want to revoke all other sessions? You will be signed out everywhere except this device."
+			}
+		}
+	},
+	"activity": {
+		"title": "Activity",
+		"description": "View your recent account activity.",
+		"tabs": {
+			"overview": "Overview",
+			"workspaces": "Workspaces",
+			"templates": "Templates",
+			"auditLog": "Audit Log"
+		},
+		"overview": {
+			"title": "Activity Overview",
+			"stats": {
+				"workspacesCreated": "Workspaces Created",
+				"templatesUsed": "Templates Used",
+				"totalBuildTime": "Total Build Time",
+				"activeDays": "Active Days"
+			},
+			"recentActivity": {
+				"title": "Recent Activity",
+				"viewAll": "View All Activity"
+			}
+		}
+	},
+	"errors": {
+		"updateFailed": "Failed to update profile. Please try again.",
+		"uploadFailed": "Failed to upload image. Please try again.",
+		"invalidFileType": "Invalid file type. Please upload JPG, PNG, or GIF.",
+		"fileTooLarge": "File is too large. Maximum size is 5MB.",
+		"usernameExists": "Username already exists",
+		"emailExists": "Email already registered"
+	}
+}

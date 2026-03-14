@@ -1885,6 +1885,485 @@ declare module "i18next" {
 					bestPractices: string;
 				};
 			};
+			account: {
+				// Account creation and management translations
+				title: string;
+				subtitle: string;
+				createAccount: {
+					title: string;
+					welcome: string;
+					description: string;
+					email: {
+						label: string;
+						placeholder: string;
+						required: string;
+						invalid: string;
+					};
+					username: {
+						label: string;
+						placeholder: string;
+						required: string;
+						invalid: string;
+						exists: string;
+					};
+					password: {
+						label: string;
+						placeholder: string;
+						required: string;
+						weak: string;
+						mismatch: string;
+					};
+					confirmPassword: {
+						label: string;
+						placeholder: string;
+						required: string;
+					};
+					name: {
+						label: string;
+						placeholder: string;
+						required: string;
+					};
+					terms: {
+						agree: string;
+						termsOfService: string;
+						privacyPolicy: string;
+						required: string;
+					};
+					actions: {
+						submit: string;
+						submitting: string;
+						signIn: string;
+					};
+					messages: {
+						success: string;
+						failed: string;
+						emailSent: string;
+						emailError: string;
+					};
+				};
+				verifyEmail: {
+					title: string;
+					description: string;
+					resend: {
+						title: string;
+						action: string;
+						success: string;
+						failed: string;
+						wait: string;
+					};
+					actions: {
+						verified: string;
+						continue: string;
+						back: string;
+					};
+					messages: {
+						success: string;
+						invalid: string;
+						error: string;
+					};
+				};
+				resetPassword: {
+					title: string;
+					request: {
+						title: string;
+						description: string;
+						email: {
+							label: string;
+							placeholder: string;
+							required: string;
+						};
+						actions: {
+							submit: string;
+							submitting: string;
+							back: string;
+						};
+						messages: {
+							success: string;
+							failed: string;
+							throttled: string;
+						};
+					};
+					confirm: {
+						title: string;
+						description: string;
+						password: {
+							label: string;
+							placeholder: string;
+							required: string;
+						};
+						confirmPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+							mismatch: string;
+						};
+						strength: {
+							label: string;
+							weak: string;
+							fair: string;
+							good: string;
+							strong: string;
+						};
+						actions: {
+							submit: string;
+							submitting: string;
+							back: string;
+						};
+						messages: {
+							success: string;
+							failed: string;
+							invalid: string;
+						};
+					};
+				};
+				accountSetup: {
+					title: string;
+					description: string;
+					fields: {
+						displayName: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						username: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						bio: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						location: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						company: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+					};
+					actions: {
+						submit: string;
+						submitting: string;
+						skip: string;
+					};
+					messages: {
+						success: string;
+						failed: string;
+						canCompleteLater: string;
+					};
+				};
+				errors: {
+					auth: {
+						invalidCredentials: string;
+						userNotFound: string;
+						emailNotVerified: string;
+						accountDisabled: string;
+						sessionExpired: string;
+						tooManyAttempts: string;
+						serverError: string;
+					};
+					validation: {
+						emailInvalid: string;
+						emailTaken: string;
+						usernameInvalid: string;
+						usernameTaken: string;
+						passwordTooShort: string;
+						passwordTooWeak: string;
+						passwordRequired: string;
+						termsRequired: string;
+					};
+					network: {
+						connectionFailed: string;
+						timeout: string;
+					};
+				};
+				help: {
+					troubleSigningIn: string;
+					forgotPassword: string;
+					contactSupport: string;
+					needHelp: string;
+				};
+			};
+			profile: {
+				// User profile page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					info: string;
+					preferences: string;
+					security: string;
+					activity: string;
+					sessions: string;
+					apiKeys: string;
+				};
+				info: {
+					title: string;
+					description: string;
+					fields: {
+						username: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						email: {
+							label: string;
+							description: string;
+							placeholder: string;
+							verified: string;
+							unverified: string;
+							verify: string;
+						};
+						displayName: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						bio: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						location: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						company: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						website: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						jobTitle: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						phone: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+					};
+					avatar: {
+						label: string;
+						upload: string;
+						remove: string;
+						dragDrop: string;
+						formats: string;
+						success: string;
+						failed: string;
+					};
+					actions: {
+						save: string;
+						saving: string;
+						cancel: string;
+					};
+					messages: {
+						success: string;
+						failed: string;
+						emailUpdateSent: string;
+					};
+				};
+				preferences: {
+					title: string;
+					description: string;
+					appearance: {
+						title: string;
+						theme: {
+							label: string;
+							description: string;
+							dark: string;
+							light: string;
+							system: string;
+						};
+						language: {
+							label: string;
+							description: string;
+							en: string;
+							zhCN: string;
+						};
+						homePage: {
+							label: string;
+							description: string;
+							workspaces: string;
+							templates: string;
+							agents: string;
+						};
+					};
+					notifications: {
+						title: string;
+						description: string;
+						email: {
+							label: string;
+							description: string;
+							workspaceUpdates: string;
+							templateChanges: string;
+							securityAlerts: string;
+							weeklyDigest: string;
+						};
+						desktop: {
+							label: string;
+							description: string;
+							enabled: string;
+							permission: string;
+						};
+					};
+					accessibility: {
+						title: string;
+						description: string;
+						reducedMotion: {
+							label: string;
+							description: string;
+						};
+						highContrast: {
+							label: string;
+							description: string;
+						};
+						fontSize: {
+							label: string;
+							description: string;
+							small: string;
+							medium: string;
+							large: string;
+							extraLarge: string;
+						};
+					};
+				};
+				security: {
+					title: string;
+					description: string;
+					password: {
+						title: string;
+						description: string;
+						currentPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+						};
+						newPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+							strength: string;
+						};
+						confirmPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+							mismatch: string;
+						};
+						actions: {
+							submit: string;
+							submitting: string;
+						};
+						messages: {
+							success: string;
+							failed: string;
+							weak: string;
+						};
+					};
+					twoFactor: {
+						title: string;
+						description: string;
+						enabled: string;
+						disabled: string;
+						enable: {
+							title: string;
+							description: string;
+							step1: string;
+							step2: string;
+							step3: string;
+							verify: string;
+							code: {
+								label: string;
+								placeholder: string;
+								required: string;
+								invalid: string;
+							};
+							backupCodes: {
+								title: string;
+								description: string;
+								download: string;
+								copy: string;
+							};
+						};
+						disable: {
+							title: string;
+							description: string;
+							confirm: string;
+							requirePassword: string;
+							messages: {
+								success: string;
+								failed: string;
+							};
+						};
+					};
+					sessions: {
+						title: string;
+						description: string;
+						current: {
+							label: string;
+							device: string;
+							location: string;
+							lastActive: string;
+						};
+						session: {
+							device: string;
+							browser: string;
+							location: string;
+							lastActive: string;
+							ipAddress: string;
+							actions: string;
+							revoke: string;
+						};
+						actions: {
+							revokeAll: string;
+							confirmRevokeAll: string;
+						};
+					};
+				};
+				activity: {
+					title: string;
+					description: string;
+					tabs: {
+						overview: string;
+						workspaces: string;
+						templates: string;
+						auditLog: string;
+					};
+					overview: {
+						title: string;
+						stats: {
+							workspacesCreated: string;
+							templatesUsed: string;
+							totalBuildTime: string;
+							activeDays: string;
+						};
+						recentActivity: {
+							title: string;
+							viewAll: string;
+						};
+					};
+				};
+				errors: {
+					updateFailed: string;
+					uploadFailed: string;
+					invalidFileType: string;
+					fileTooLarge: string;
+					usernameExists: string;
+					emailExists: string;
+				};
+			};
 			health: {
 				// Health page translations
 				title: string;

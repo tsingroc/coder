@@ -1,0 +1,203 @@
+{
+	"title": "创建账户",
+	"subtitle": "创建新账户以开始使用 Coder。",
+	"createAccount": {
+		"title": "创建账户",
+		"welcome": "创建您的账户",
+		"description": "加入您的 Coder 组织以开始构建工作区。",
+		"email": {
+			"label": "电子邮件地址",
+			"placeholder": "you@example.com",
+			"required": "电子邮件为必填项",
+			"invalid": "请输入有效的电子邮件地址"
+		},
+		"username": {
+			"label": "用户名",
+			"placeholder": "username",
+			"required": "用户名为必填项",
+			"invalid": "用户名必须为 1-64 个字符，仅限小写字母、数字和连字符",
+			"exists": "用户名已存在"
+		},
+		"password": {
+			"label": "密码",
+			"placeholder": "输入密码",
+			"required": "密码为必填项",
+			"weak": "密码太弱",
+			"mismatch": "密码不匹配"
+		},
+		"confirmPassword": {
+			"label": "确认密码",
+			"placeholder": "确认您的密码",
+			"required": "请确认您的密码"
+		},
+		"name": {
+			"label": "全名",
+			"placeholder": "张三",
+			"required": "全名为必填项"
+		},
+		"terms": {
+			"agree": "我同意",
+			"termsOfService": "服务条款",
+			"privacyPolicy": "隐私政策",
+			"required": "您必须同意条款才能继续"
+		},
+		"actions": {
+			"submit": "创建账户",
+			"submitting": "创建账户中...",
+			"signIn": "已有账户？登录"
+		},
+		"messages": {
+			"success": "账户创建成功！请检查您的电子邮件以验证账户。",
+			"failed": "创建账户失败。请重试。",
+			"emailSent": "验证邮件已发送至 {{email}}",
+			"emailError": "发送验证邮件失败"
+		}
+	},
+	"verifyEmail": {
+		"title": "验证您的电子邮件",
+		"description": "我们已向 {{email}} 发送了验证邮件。请检查您的收件箱并点击验证链接。",
+		"resend": {
+			"title": "未收到电子邮件？",
+			"action": "重新发送验证邮件",
+			"success": "验证邮件已重新发送！",
+			"failed": "重新发送验证邮件失败",
+			"wait": "请在请求另一封邮件之前等待 {{seconds}} 秒。"
+		},
+		"actions": {
+			"verified": "电子邮件已验证",
+			"continue": "继续使用 Coder",
+			"back": "返回登录"
+		},
+		"messages": {
+			"success": "电子邮件验证成功！您现在可以登录了。",
+			"invalid": "验证链接无效或已过期。",
+			"error": "验证电子邮件时发生错误。"
+		}
+	},
+	"resetPassword": {
+		"title": "重置密码",
+		"request": {
+			"title": "重置您的密码",
+			"description": "输入您的电子邮件地址，我们将向您发送重置密码的链接。",
+			"email": {
+				"label": "电子邮件地址",
+				"placeholder": "you@example.com",
+				"required": "电子邮件为必填项"
+			},
+			"actions": {
+				"submit": "发送重置链接",
+				"submitting": "发送中...",
+				"back": "返回登录"
+			},
+			"messages": {
+				"success": "密码重置邮件已发送！请检查您的收件箱。",
+				"failed": "发送重置邮件失败。请重试。",
+				"throttled": "请求过多。请稍后再试。"
+			}
+		},
+		"confirm": {
+			"title": "设置新密码",
+			"description": "在下面输入您的新密码。",
+			"password": {
+				"label": "新密码",
+				"placeholder": "输入新密码",
+				"required": "密码为必填项"
+			},
+			"confirmPassword": {
+				"label": "确认新密码",
+				"placeholder": "确认新密码",
+				"required": "请确认您的密码",
+				"mismatch": "密码不匹配"
+			},
+			"strength": {
+				"label": "密码强度",
+				"weak": "弱",
+				"fair": "一般",
+				"good": "良好",
+				"strong": "强"
+			},
+			"actions": {
+				"submit": "重置密码",
+				"submitting": "重置中...",
+				"back": "返回登录"
+			},
+			"messages": {
+				"success": "密码重置成功！您现在可以使用新密码登录了。",
+				"failed": "重置密码失败。链接可能已过期。",
+				"invalid": "重置链接无效或已过期。"
+			}
+		}
+	},
+	"accountSetup": {
+		"title": "完善您的个人资料",
+		"description": "告诉我们更多关于您的信息。",
+		"fields": {
+			"displayName": {
+				"label": "显示名称",
+				"placeholder": "张三",
+				"description": "这是其他用户看到您的名称"
+			},
+			"username": {
+				"label": "用户名",
+				"placeholder": "zhangsan",
+				"description": "您用于 @提及 的唯一用户名"
+			},
+			"bio": {
+				"label": "个人简介",
+				"placeholder": "介绍一下您自己...",
+				"description": "关于您的角色或兴趣的简要描述"
+			},
+			"location": {
+				"label": "位置",
+				"placeholder": "北京，中国",
+				"description": "您的位置（可选）"
+			},
+			"company": {
+				"label": "公司",
+				"placeholder": "示例公司",
+				"description": "您的公司或组织"
+			}
+		},
+		"actions": {
+			"submit": "完成设置",
+			"submitting": "完成设置中...",
+			"skip": "跳过"
+		},
+		"messages": {
+			"success": "个人资料填写完成！",
+			"failed": "完成个人资料失败。请重试。",
+			"canCompleteLater": "您可以稍后在设置中完成个人资料。"
+		}
+	},
+	"errors": {
+		"auth": {
+			"invalidCredentials": "无效的电子邮件或密码",
+			"userNotFound": "未找到用户",
+			"emailNotVerified": "请先验证您的电子邮件地址",
+			"accountDisabled": "此账户已被禁用",
+			"sessionExpired": "您的会话已过期。请重新登录。",
+			"tooManyAttempts": "登录尝试过多。请稍后再试。",
+			"serverError": "发生服务器错误。请稍后重试。"
+		},
+		"validation": {
+			"emailInvalid": "无效的电子邮件地址",
+			"emailTaken": "此电子邮件已被注册",
+			"usernameInvalid": "无效的用户名格式",
+			"usernameTaken": "此用户名已被占用",
+			"passwordTooShort": "密码必须至少 {{minLength}} 个字符",
+			"passwordTooWeak": "密码太弱。请包含大写字母、小写字母、数字和特殊字符。",
+			"passwordRequired": "密码为必填项",
+			"termsRequired": "您必须同意条款才能继续"
+		},
+		"network": {
+			"connectionFailed": "无法连接到服务器。请检查您的网络连接。",
+			"timeout": "请求超时。请重试。"
+		}
+	},
+	"help": {
+		"troubleSigningIn": "登录遇到问题？",
+		"forgotPassword": "忘记密码？",
+		"contactSupport": "联系支持",
+		"needHelp": "需要帮助？查看我们的文档或联系支持。"
+	}
+}

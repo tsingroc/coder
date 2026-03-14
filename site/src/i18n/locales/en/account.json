@@ -1,0 +1,203 @@
+{
+	"title": "Create Account",
+	"subtitle": "Create a new account to get started with Coder.",
+	"createAccount": {
+		"title": "Create Account",
+		"welcome": "Create your account",
+		"description": "Join your organization on Coder to start building workspaces.",
+		"email": {
+			"label": "Email Address",
+			"placeholder": "you@example.com",
+			"required": "Email is required",
+			"invalid": "Please enter a valid email address"
+		},
+		"username": {
+			"label": "Username",
+			"placeholder": "username",
+			"required": "Username is required",
+			"invalid": "Username must be 1-64 characters, lowercase letters, numbers, and hyphens only",
+			"exists": "Username already exists"
+		},
+		"password": {
+			"label": "Password",
+			"placeholder": "Enter a password",
+			"required": "Password is required",
+			"weak": "Password is too weak",
+			"mismatch": "Passwords do not match"
+		},
+		"confirmPassword": {
+			"label": "Confirm Password",
+			"placeholder": "Confirm your password",
+			"required": "Please confirm your password"
+		},
+		"name": {
+			"label": "Full Name",
+			"placeholder": "John Doe",
+			"required": "Full name is required"
+		},
+		"terms": {
+			"agree": "I agree to the",
+			"termsOfService": "Terms of Service",
+			"privacyPolicy": "Privacy Policy",
+			"required": "You must agree to the terms to continue"
+		},
+		"actions": {
+			"submit": "Create Account",
+			"submitting": "Creating account...",
+			"signIn": "Already have an account? Sign in"
+		},
+		"messages": {
+			"success": "Account created successfully! Please check your email to verify your account.",
+			"failed": "Failed to create account. Please try again.",
+			"emailSent": "Verification email sent to {{email}}",
+			"emailError": "Failed to send verification email"
+		}
+	},
+	"verifyEmail": {
+		"title": "Verify Your Email",
+		"description": "We've sent a verification email to {{email}}. Please check your inbox and click the verification link.",
+		"resend": {
+			"title": "Didn't receive the email?",
+			"action": "Resend verification email",
+			"success": "Verification email sent again!",
+			"failed": "Failed to resend verification email",
+			"wait": "Please wait {{seconds}} seconds before requesting another email."
+		},
+		"actions": {
+			"verified": "Email Verified",
+			"continue": "Continue to Coder",
+			"back": "Back to sign in"
+		},
+		"messages": {
+			"success": "Email verified successfully! You can now sign in.",
+			"invalid": "Invalid or expired verification link.",
+			"error": "An error occurred while verifying your email."
+		}
+	},
+	"resetPassword": {
+		"title": "Reset Password",
+		"request": {
+			"title": "Reset Your Password",
+			"description": "Enter your email address and we'll send you a link to reset your password.",
+			"email": {
+				"label": "Email Address",
+				"placeholder": "you@example.com",
+				"required": "Email is required"
+			},
+			"actions": {
+				"submit": "Send Reset Link",
+				"submitting": "Sending...",
+				"back": "Back to sign in"
+			},
+			"messages": {
+				"success": "Password reset email sent! Please check your inbox.",
+				"failed": "Failed to send reset email. Please try again.",
+				"throttled": "Too many requests. Please wait before trying again."
+			}
+		},
+		"confirm": {
+			"title": "Set New Password",
+			"description": "Enter your new password below.",
+			"password": {
+				"label": "New Password",
+				"placeholder": "Enter new password",
+				"required": "Password is required"
+			},
+			"confirmPassword": {
+				"label": "Confirm New Password",
+				"placeholder": "Confirm new password",
+				"required": "Please confirm your password",
+				"mismatch": "Passwords do not match"
+			},
+			"strength": {
+				"label": "Password Strength",
+				"weak": "Weak",
+				"fair": "Fair",
+				"good": "Good",
+				"strong": "Strong"
+			},
+			"actions": {
+				"submit": "Reset Password",
+				"submitting": "Resetting...",
+				"back": "Back to sign in"
+			},
+			"messages": {
+				"success": "Password reset successfully! You can now sign in with your new password.",
+				"failed": "Failed to reset password. The link may be expired.",
+				"invalid": "Invalid or expired reset link."
+			}
+		}
+	},
+	"accountSetup": {
+		"title": "Complete Your Profile",
+		"description": "Tell us a bit more about yourself.",
+		"fields": {
+			"displayName": {
+				"label": "Display Name",
+				"placeholder": "John Doe",
+				"description": "This is how other users will see you"
+			},
+			"username": {
+				"label": "Username",
+				"placeholder": "johndoe",
+				"description": "Your unique username for @mentions"
+			},
+			"bio": {
+				"label": "Bio",
+				"placeholder": "Tell us about yourself...",
+				"description": "A brief description of your role or interests"
+			},
+			"location": {
+				"label": "Location",
+				"placeholder": "San Francisco, CA",
+				"description": "Your location (optional)"
+			},
+			"company": {
+				"label": "Company",
+				"placeholder": "Acme Corp",
+				"description": "Your company or organization"
+			}
+		},
+		"actions": {
+			"submit": "Complete Setup",
+			"submitting": "Completing setup...",
+			"skip": "Skip for now"
+		},
+		"messages": {
+			"success": "Profile completed successfully!",
+			"failed": "Failed to complete profile. Please try again.",
+			"canCompleteLater": "You can complete your profile later in settings."
+		}
+	},
+	"errors": {
+		"auth": {
+			"invalidCredentials": "Invalid email or password",
+			"userNotFound": "User not found",
+			"emailNotVerified": "Please verify your email address first",
+			"accountDisabled": "This account has been disabled",
+			"sessionExpired": "Your session has expired. Please sign in again.",
+			"tooManyAttempts": "Too many login attempts. Please try again later.",
+			"serverError": "A server error occurred. Please try again later."
+		},
+		"validation": {
+			"emailInvalid": "Invalid email address",
+			"emailTaken": "This email is already registered",
+			"usernameInvalid": "Invalid username format",
+			"usernameTaken": "This username is already taken",
+			"passwordTooShort": "Password must be at least {{minLength}} characters",
+			"passwordTooWeak": "Password is too weak. Please include uppercase, lowercase, numbers, and special characters.",
+			"passwordRequired": "Password is required",
+			"termsRequired": "You must agree to the terms to continue"
+		},
+		"network": {
+			"connectionFailed": "Failed to connect to the server. Please check your internet connection.",
+			"timeout": "Request timed out. Please try again."
+		}
+	},
+	"help": {
+		"troubleSigningIn": "Trouble signing in?",
+		"forgotPassword": "Forgot your password?",
+		"contactSupport": "Contact Support",
+		"needHelp": "Need help? Check our documentation or contact support."
+	}
+}
