@@ -1,6 +1,34 @@
 {
 	"title": "404",
 	"message": "This page could not be found.",
+	"description": "The page you are looking for doesn't exist or has been moved.",
 	"goBack": "Go back",
-	"goHome": "Go to home"
+	"goHome": "Go to home",
+	"contactSupport": "Contact support",
+	"search": "Search",
+	"commonIssues": {
+		"title": "Common issues",
+		"wrongUrl": "Incorrect URL",
+		"wrongUrlDescription": "Check if you typed the URL correctly.",
+		"movedPage": "Page moved",
+		"movedPageDescription": "The page may have been moved to a new location.",
+		"deletedPage": "Page deleted",
+		"deletedPageDescription": "The page may have been removed.",
+		"noPermission": "No permission",
+		"noPermissionDescription": "You may not have permission to view this page."
+	},
+	"suggestions": {
+		"title": "Suggestions",
+		"checkUrl": "Check the URL for typos",
+		"useSearch": "Use the search function",
+		"visitHome": "Visit the home page",
+		"viewDocs": "View documentation",
+		"contactAdmin": "Contact your administrator"
+	},
+	"help": {
+		"title": "Need help?",
+		"documentation": "Documentation",
+		"community": "Community forum",
+		"support": "Support portal"
+	}
 }

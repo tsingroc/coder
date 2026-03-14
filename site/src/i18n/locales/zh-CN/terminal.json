@@ -9,10 +9,77 @@
 	"alerts": {
 		"connectionFailed": "连接终端失败",
 		"disconnectedTitle": "终端已断开",
-		"disconnectedMessage": "终端连接已丢失。这通常发生在工作区代理重新启动时。"
+		"disconnectedMessage": "终端连接已丢失。这通常发生在工作区代理重新启动时。",
+		"workspaceStarting": "工作区正在启动。终端将很快可用。",
+		"workspaceStopped": "工作区已停止。",
+		"connectionTimeout": "连接超时。请重试。",
+		"accessDenied": "访问被拒绝。您没有访问此终端的权限。",
+		"agentUnavailable": "工作区代理不可用。请确保工作区正在运行。"
 	},
 	"buttons": {
 		"reconnect": "重新连接",
-		"close": "关闭终端"
+		"close": "关闭终端",
+		"clear": "清空屏幕",
+		"copy": "复制选择",
+		"paste": "粘贴",
+		"selectAll": "全选",
+		"downloadLogs": "下载日志",
+		"uploadFile": "上传文件",
+		"settings": "终端设置"
+	},
+	"settings": {
+		"title": "终端设置",
+		"fontSize": "字体大小",
+		"fontFamily": "字体",
+		"theme": "主题",
+		"themeDark": "深色",
+		"themeLight": "浅色",
+		"themeAuto": "自动",
+		"scrollback": "滚动缓冲区大小",
+		"cursorBlink": "光标闪烁",
+		"bell": "终端响铃",
+		"confirmActions": "破坏性操作前确认"
+	},
+	"status": {
+		"title": "连接状态",
+		"connecting": "连接中...",
+		"connected": "已连接",
+		"disconnected": "已断开",
+		"failed": "连接失败",
+		"timeout": "连接超时",
+		"ready": "就绪"
+	},
+	"actions": {
+		"restartShell": "重启 shell",
+		"killProcess": "终止进程",
+		"runCommand": "运行命令",
+		"sendSignal": "发送信号"
+	},
+	"messages": {
+		"welcome": "Coder 终端 - 直接访问您的工作区",
+		"sessionStarted": "会话已开始",
+		"sessionEnded": "会话已结束",
+		"commandExecuting": "正在执行命令...",
+		"commandCompleted": "命令已完成",
+		"commandFailed": "命令失败，退出码 {{code}}"
+	},
+	"shortcuts": {
+		"title": "键盘快捷键",
+		"copy": "复制：Ctrl+Shift+C",
+		"paste": "粘贴：Ctrl+Shift+V",
+		"clear": "清空：Ctrl+L",
+		"find": "查找：Ctrl+Shift+F",
+		"zoomIn": "放大：Ctrl++",
+		"zoomOut": "缩小：Ctrl+-",
+		"resetZoom": "重置缩放：Ctrl+0"
+	},
+	"toolbar": {
+		"title": "终端工具栏",
+		"tabs": "标签页",
+		"newTab": "新建终端",
+		"splitHorizontal": "水平分割",
+		"splitVertical": "垂直分割",
+		"closeTab": "关闭标签页",
+		"switchTab": "切换标签页"
 	}
 }

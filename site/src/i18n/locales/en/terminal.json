@@ -9,10 +9,77 @@
 	"alerts": {
 		"connectionFailed": "Failed to connect to terminal",
 		"disconnectedTitle": "Terminal disconnected",
-		"disconnectedMessage": "The connection to the terminal was lost. This usually happens when the workspace agent restarts."
+		"disconnectedMessage": "The connection to the terminal was lost. This usually happens when the workspace agent restarts.",
+		"workspaceStarting": "Workspace is starting. Terminal will be available shortly.",
+		"workspaceStopped": "Workspace has been stopped.",
+		"connectionTimeout": "Connection timeout. Please try again.",
+		"accessDenied": "Access denied. You don't have permission to access this terminal.",
+		"agentUnavailable": "Workspace agent is unavailable. Please ensure the workspace is running."
 	},
 	"buttons": {
 		"reconnect": "Reconnect",
-		"close": "Close terminal"
+		"close": "Close terminal",
+		"clear": "Clear screen",
+		"copy": "Copy selection",
+		"paste": "Paste",
+		"selectAll": "Select all",
+		"downloadLogs": "Download logs",
+		"uploadFile": "Upload file",
+		"settings": "Terminal settings"
+	},
+	"settings": {
+		"title": "Terminal Settings",
+		"fontSize": "Font size",
+		"fontFamily": "Font family",
+		"theme": "Theme",
+		"themeDark": "Dark",
+		"themeLight": "Light",
+		"themeAuto": "Auto",
+		"scrollback": "Scrollback size",
+		"cursorBlink": "Cursor blink",
+		"bell": "Terminal bell",
+		"confirmActions": "Confirm before destructive actions"
+	},
+	"status": {
+		"title": "Connection Status",
+		"connecting": "Connecting...",
+		"connected": "Connected",
+		"disconnected": "Disconnected",
+		"failed": "Connection failed",
+		"timeout": "Connection timeout",
+		"ready": "Ready"
+	},
+	"actions": {
+		"restartShell": "Restart shell",
+		"killProcess": "Kill process",
+		"runCommand": "Run command",
+		"sendSignal": "Send signal"
+	},
+	"messages": {
+		"welcome": "Coder Terminal - Access your workspace directly",
+		"sessionStarted": "Session started",
+		"sessionEnded": "Session ended",
+		"commandExecuting": "Executing command...",
+		"commandCompleted": "Command completed",
+		"commandFailed": "Command failed with exit code {{code}}"
+	},
+	"shortcuts": {
+		"title": "Keyboard Shortcuts",
+		"copy": "Copy: Ctrl+Shift+C",
+		"paste": "Paste: Ctrl+Shift+V",
+		"clear": "Clear: Ctrl+L",
+		"find": "Find: Ctrl+Shift+F",
+		"zoomIn": "Zoom in: Ctrl++",
+		"zoomOut": "Zoom out: Ctrl+-",
+		"resetZoom": "Reset zoom: Ctrl+0"
+	},
+	"toolbar": {
+		"title": "Terminal Toolbar",
+		"tabs": "Tabs",
+		"newTab": "New terminal",
+		"splitHorizontal": "Split horizontal",
+		"splitVertical": "Split vertical",
+		"closeTab": "Close tab",
+		"switchTab": "Switch tab"
 	}
 }

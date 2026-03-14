@@ -517,8 +517,36 @@ declare module "i18next" {
 				// 404 page translations
 				title: string;
 				message: string;
+				description: string;
 				goBack: string;
 				goHome: string;
+				contactSupport: string;
+				search: string;
+				commonIssues: {
+					title: string;
+					wrongUrl: string;
+					wrongUrlDescription: string;
+					movedPage: string;
+					movedPageDescription: string;
+					deletedPage: string;
+					deletedPageDescription: string;
+					noPermission: string;
+					noPermissionDescription: string;
+				};
+				suggestions: {
+					title: string;
+					checkUrl: string;
+					useSearch: string;
+					visitHome: string;
+					viewDocs: string;
+					contactAdmin: string;
+				};
+				help: {
+					title: string;
+					documentation: string;
+					community: string;
+					support: string;
+				};
 			};
 			terminal: {
 				// Terminal page translations
@@ -533,10 +561,77 @@ declare module "i18next" {
 					connectionFailed: string;
 					disconnectedTitle: string;
 					disconnectedMessage: string;
+					workspaceStarting: string;
+					workspaceStopped: string;
+					connectionTimeout: string;
+					accessDenied: string;
+					agentUnavailable: string;
 				};
 				buttons: {
 					reconnect: string;
 					close: string;
+					clear: string;
+					copy: string;
+					paste: string;
+					selectAll: string;
+					downloadLogs: string;
+					uploadFile: string;
+					settings: string;
+				};
+				settings: {
+					title: string;
+					fontSize: string;
+					fontFamily: string;
+					theme: string;
+					themeDark: string;
+					themeLight: string;
+					themeAuto: string;
+					scrollback: string;
+					cursorBlink: string;
+					bell: string;
+					confirmActions: string;
+				};
+				status: {
+					title: string;
+					connecting: string;
+					connected: string;
+					disconnected: string;
+					failed: string;
+					timeout: string;
+					ready: string;
+				};
+				actions: {
+					restartShell: string;
+					killProcess: string;
+					runCommand: string;
+					sendSignal: string;
+				};
+				messages: {
+					welcome: string;
+					sessionStarted: string;
+					sessionEnded: string;
+					commandExecuting: string;
+					commandCompleted: string;
+					commandFailed: string;
+				};
+				shortcuts: {
+					title: string;
+					copy: string;
+					paste: string;
+					clear: string;
+					find: string;
+					zoomIn: string;
+					zoomOut: string;
+					resetZoom: string;
+				};
+				toolbar: {
+					title: string;
+					tabs: string;
+					newTab: string;
+					splitHorizontal: string;
+					splitVertical: string;
+					closeTab: string;
+					switchTab: string;
 				};
 			};
 			tasks: {

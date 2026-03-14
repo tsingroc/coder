@@ -1,6 +1,34 @@
 {
 	"title": "404",
 	"message": "未找到该页面。",
+	"description": "您查找的页面不存在或已被移动。",
 	"goBack": "返回",
-	"goHome": "返回首页"
+	"goHome": "返回首页",
+	"contactSupport": "联系支持",
+	"search": "搜索",
+	"commonIssues": {
+		"title": "常见问题",
+		"wrongUrl": "URL 错误",
+		"wrongUrlDescription": "检查您输入的 URL 是否正确。",
+		"movedPage": "页面已移动",
+		"movedPageDescription": "页面可能已移动到新位置。",
+		"deletedPage": "页面已删除",
+		"deletedPageDescription": "页面可能已被移除。",
+		"noPermission": "没有权限",
+		"noPermissionDescription": "您可能没有查看此页面的权限。"
+	},
+	"suggestions": {
+		"title": "建议",
+		"checkUrl": "检查 URL 是否有拼写错误",
+		"useSearch": "使用搜索功能",
+		"visitHome": "访问主页",
+		"viewDocs": "查看文档",
+		"contactAdmin": "联系您的管理员"
+	},
+	"help": {
+		"title": "需要帮助？",
+		"documentation": "文档",
+		"community": "社区论坛",
+		"support": "支持门户"
+	}
 }
