@@ -1,0 +1,208 @@
+{
+	"title": "Agents",
+	"subtitle": "AI-powered coding assistant for your development workflows.",
+	"sidebar": {
+		"title": "Conversations",
+		"newAgent": "New conversation",
+		"active": "Active",
+		"archived": "Archived",
+		"search": "Search conversations...",
+		"noAgents": "No conversations found",
+		"noActiveAgents": "No active conversations",
+		"noArchivedAgents": "No archived conversations",
+		"collapse": "Collapse sidebar",
+		"expand": "Expand sidebar"
+	},
+	"create": {
+		"title": "New conversation",
+		"placeholder": "Ask me anything about your codebase...",
+		"attachFiles": "Attach files",
+		"selectWorkspace": "Select workspace",
+		"selectModel": "Select model",
+		"create": "Create conversation",
+		"creating": "Creating...",
+		"noWorkspace": "No workspace selected",
+		"noModel": "Using default model",
+		"workspaceLabel": "Workspace",
+		"modelLabel": "AI Model"
+	},
+	"chat": {
+		"start": "Start a conversation",
+		"emptyState": {
+			"title": "Start a new conversation",
+			"description": "Ask questions about your code, get help with debugging, or brainstorm new features.",
+			"examples": {
+				"help": "How can I improve error handling in my application?",
+				"debug": "Help me debug this function",
+				"explain": "Explain how this component works",
+				"refactor": "Suggest refactoring opportunities"
+			}
+		},
+		"input": {
+			"placeholder": "Type your message...",
+			"send": "Send",
+			"attach": "Attach files",
+			"stop": "Stop generating"
+		},
+		"actions": {
+			"copy": "Copy",
+			"regenerate": "Regenerate",
+			"edit": "Edit",
+			"delete": "Delete",
+			"archive": "Archive",
+			"unarchive": "Unarchive",
+			"createWorkspace": "Create workspace",
+			"viewDiff": "View diff",
+			"applyChanges": "Apply changes"
+		},
+		"status": {
+			"pending": "Pending",
+			"processing": "Processing",
+			"completed": "Completed",
+			"failed": "Failed",
+			"cancelled": "Cancelled"
+		}
+	},
+	"model": {
+		"selector": {
+			"title": "Select AI Model",
+			"default": "Default",
+			"custom": "Custom"
+		},
+		"admin": {
+			"title": "AI Model Configuration",
+			"description": "Manage AI providers and models for your organization.",
+			"providers": {
+				"title": "Providers",
+				"addProvider": "Add Provider",
+				"editProvider": "Edit Provider",
+				"deleteProvider": "Delete Provider",
+				"providerName": "Provider Name",
+				"apiKey": "API Key",
+				"baseURL": "Base URL",
+				"enabled": "Enabled",
+				"noProviders": "No providers configured"
+			},
+			"models": {
+				"title": "Models",
+				"addModel": "Add Model",
+				"editModel": "Edit Model",
+				"deleteModel": "Delete Model",
+				"modelName": "Model Name",
+				"provider": "Provider",
+				"default": "Default Model",
+				"noModels": "No models configured"
+			},
+			"test": {
+				"title": "Test Configuration",
+				"testConnection": "Test Connection",
+				"testPrompt": "Test Prompt",
+				"testResult": "Test Result",
+				"success": "Connection successful",
+				"failed": "Connection failed"
+			}
+		}
+	},
+	"workspace": {
+		"creation": {
+			"title": "Create Workspace",
+			"description": "Create a workspace from agent-generated code",
+			"naming": "Naming your workspace",
+			"name": "Workspace name",
+			"template": "Template",
+			"creating": "Creating workspace...",
+			"success": "Workspace created successfully",
+			"failed": "Failed to create workspace"
+		},
+		"watcher": {
+			"title": "Workspace Status",
+			"building": "Building workspace...",
+			"starting": "Starting workspace...",
+			"ready": "Workspace ready",
+			"failed": "Workspace build failed"
+		},
+		"changes": {
+			"title": "Proposed Changes",
+			"filesChanged": "files changed",
+			"additions": "additions",
+			"deletions": "deletions",
+			"viewDiff": "View diff",
+			"apply": "Apply changes",
+			"discard": "Discard changes"
+		}
+	},
+	"files": {
+		"attach": {
+			"title": "Attach Files",
+			"select": "Select files",
+			"dragDrop": "Drag and drop files here",
+			"maxSize": "Maximum file size: 10MB",
+			"maxFiles": "Maximum {{count}} files",
+			"remove": "Remove",
+			"clear": "Clear all"
+		},
+		"preview": {
+			"title": "File Preview",
+			"image": "Image",
+			"code": "Code",
+			"document": "Document",
+			"unknown": "Unknown file type"
+		}
+	},
+	"archive": {
+		"title": "Archive conversation",
+		"message": "Are you sure you want to archive this conversation? You can find it in the Archived tab.",
+		"confirm": "Archive",
+	"cancel": "Cancel",
+		"archiving": "Archiving...",
+		"success": "Conversation archived",
+		"failed": "Failed to archive conversation"
+	},
+	"delete": {
+		"title": "Delete conversation",
+		"message": "Are you sure you want to delete this conversation? This action cannot be undone.",
+		"confirm": "Delete",
+		"cancel": "Cancel",
+		"deleting": "Deleting...",
+		"success": "Conversation deleted",
+		"failed": "Failed to delete conversation"
+	},
+	"errors": {
+		"loadFailed": "Failed to load conversations",
+		"createFailed": "Failed to create conversation",
+		"sendFailed": "Failed to send message",
+		"archiveFailed": "Failed to archive conversation",
+		"deleteFailed": "Failed to delete conversation",
+		"workspaceFailed": "Failed to create workspace",
+		"modelFailed": "Failed to load model",
+		"uploadFailed": "Failed to upload file",
+		"networkError": "Network error. Please check your connection.",
+		"serverError": "Server error. Please try again later.",
+		"unknownError": "An unknown error occurred."
+	},
+	"notifications": {
+		"messageReceived": "New message from {{name}}",
+		"workspaceReady": "Your workspace is ready",
+		"workspaceFailed": "Workspace creation failed",
+		"agentDeleted": "Conversation deleted"
+	},
+	"keyboard": {
+		"shortcuts": {
+			"title": "Keyboard Shortcuts",
+			"newChat": "New conversation: Ctrl/Cmd + K",
+			"sendMessage": "Send message: Enter",
+			"newLine": "New line: Shift + Enter",
+			"focusInput": "Focus input: /",
+			"toggleSidebar": "Toggle sidebar: Ctrl/Cmd + B",
+			"search": "Search: Ctrl/Cmd + F"
+		}
+	},
+	"help": {
+		"title": "Agent Help",
+		"description": "Learn how to use AI agents to accelerate your development workflow.",
+		"gettingStarted": "Getting Started",
+		"bestPractices": "Best Practices",
+		"documentation": "Documentation",
+		"support": "Support"
+	}
+}

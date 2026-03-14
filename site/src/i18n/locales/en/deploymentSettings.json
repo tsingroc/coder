@@ -1,0 +1,179 @@
+{
+	"title": "Deployment Settings",
+	"subtitle": "Configure your Coder deployment settings.",
+	"tabs": {
+		"general": "General",
+		"security": "Security",
+		"network": "Network",
+		"storage": "Storage",
+		"logging": "Logging",
+		"advanced": "Advanced"
+	},
+	"general": {
+		"title": "General Settings",
+		"description": "Basic deployment configuration.",
+		"instanceName": {
+			"label": "Instance Name",
+			"description": "The name of your Coder deployment",
+			"placeholder": "My Coder Instance"
+		},
+		"logo": {
+			"label": "Logo URL",
+			"description": "Custom logo for your deployment",
+			"upload": "Upload Logo",
+			"remove": "Remove Logo"
+		},
+		"serviceBanner": {
+			"label": "Service Banner",
+			"description": "Display a banner to all users",
+			"enabled": "Enable Banner",
+			"backgroundColor": "Background Color",
+			"textColor": "Text Color",
+			"message": "Banner Message"
+		},
+		"notifications": {
+			"title": "Notifications",
+			"email": "Email Notifications",
+			"smtp": "SMTP Configuration",
+			"server": "SMTP Server",
+			"port": "SMTP Port",
+			"username": "SMTP Username",
+			"password": "SMTP Password",
+			"from": "From Email Address",
+			"testEmail": "Send Test Email"
+		}
+	},
+	"network": {
+		"title": "Network Settings",
+		"description": "Configure networking and access.",
+		"accessURL": {
+			"label": "Access URL",
+			"description": "The primary URL users use to access this deployment",
+			"placeholder": "https://coder.example.com"
+		},
+		"wildcard": {
+			"label": "Wildcard Access URL",
+			"description": "Used for workspace applications",
+			"placeholder": "*.coder.example.com"
+		},
+		"derp": {
+			"title": "DERP Relay Configuration",
+			"description": "Configure network relay for workspace connections",
+			"enabled": "Enable DERP",
+			"server": "DERP Server URL",
+			"region": "Region Code",
+			"regionName": "Region Name",
+			"stun": "STUN Servers",
+			"relay": "Enable Relay"
+		},
+		"portForwarding": {
+			"title": "Port Forwarding",
+			"description": "Configure port forwarding settings",
+			"enabled": "Enable Port Forwarding",
+			"range": "Port Range",
+			"tcp": "TCP Forwarding",
+			"udp": "UDP Forwarding"
+		}
+	},
+	"storage": {
+		"title": "Storage Settings",
+		"description": "Configure storage paths and quotas.",
+		"paths": {
+			"title": "Storage Paths",
+			"home": "Home Directory",
+			"cache": "Cache Directory",
+			"logs": "Logs Directory",
+			"temp": "Temp Directory"
+		},
+		"quotas": {
+			"title": "Storage Quotas",
+			"description": "Set storage limits for users and workspaces",
+			"userQuota": "User Storage Quota",
+			"workspaceQuota": "Workspace Storage Quota",
+			"enforced": "Enforce Quotas"
+		},
+		"backup": {
+			"title": "Backup Settings",
+			"description": "Configure automatic backups",
+			"enabled": "Enable Backups",
+			"schedule": "Backup Schedule",
+			"retention": "Retention Policy (Days)",
+			"location": "Backup Location",
+			"backupNow": "Backup Now"
+		}
+	},
+	"logging": {
+		"title": "Logging Configuration",
+		"description": "Configure logging for your deployment.",
+		"level": {
+			"label": "Log Level",
+			"description": "Minimum log verbosity",
+			"debug": "Debug",
+			"info": "Info",
+			"warn": "Warning",
+			"error": "Error"
+		},
+		"humanize": {
+			"label": "Humanize Logs",
+			"description": "Make logs more readable"
+		},
+		"stacktraces": {
+			"label": "Log Stacktraces",
+			"description": "Include stacktraces in logs"
+		},
+		"output": {
+			"title": "Log Output",
+			"stdout": "Output to stdout",
+			"file": "Output to file",
+			"rotation": "Log Rotation",
+			"maxSize": "Max File Size (MB)",
+			"maxAge": "Max Age (Days)",
+			"maxBackups": "Max Backups"
+		}
+	},
+	"advanced": {
+		"title": "Advanced Settings",
+		"description": "Advanced deployment configuration.",
+		"experimental": {
+			"title": "Experimental Features",
+			"description": "Enable experimental features",
+			"warning": "These features may change or be removed in future releases."
+		},
+		"telemetry": {
+			"title": "Telemetry",
+			"description": "Help improve Coder by sharing usage data",
+			"enabled": "Enable Telemetry",
+			"url": "Telemetry URL"
+		},
+		"metrics": {
+			"title": "Metrics",
+			"description": "Configure metrics collection",
+			"enabled": "Enable Metrics",
+			"prometheus": "Prometheus Address"
+		},
+		"debug": {
+			"title": "Debug Settings",
+			"enable": "Enable Debug Mode",
+			"pprof": "Enable pprof",
+			"verbose": "Verbose Logging"
+		}
+	},
+	"actions": {
+		"save": "Save Settings",
+		"saving": "Saving...",
+		"reload": "Reload from Disk",
+		"reset": "Reset to Defaults"
+	},
+	"messages": {
+		"saved": "Settings saved successfully.",
+		"reloadRequired": "Some changes require a deployment reload.",
+		"restartRequired": "Some changes require a deployment restart.",
+		"reloadSuccess": "Deployment reloaded successfully.",
+		"restartSuccess": "Deployment restarted successfully."
+	},
+	"warnings": {
+		"experimental": "Experimental features are unstable and may cause issues.",
+		"restartRequired": "You must restart the deployment for these changes to take effect.",
+		"irreversible": "This action cannot be undone."
+	}
+}

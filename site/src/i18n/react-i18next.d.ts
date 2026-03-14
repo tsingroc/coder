@@ -876,6 +876,623 @@ declare module "i18next" {
 					noLogs: string;
 				};
 			};
+			aiBridge: {
+				// AI Bridge page translations
+				title: string;
+				subtitle: string;
+				tabs: {
+					requestLogs: string;
+					settings: string;
+				};
+				requestLogs: {
+					title: string;
+					description: string;
+					filters: {
+						title: string;
+						provider: string;
+						model: string;
+						status: string;
+						user: string;
+						dateRange: string;
+						clearAll: string;
+						applyFilters: string;
+					};
+					table: {
+						timestamp: string;
+						provider: string;
+						model: string;
+						user: string;
+						status: string;
+						duration: string;
+						tokens: string;
+						actions: string;
+					};
+					status: {
+						success: string;
+						error: string;
+						pending: string;
+						cancelled: string;
+					};
+					actions: {
+						viewDetails: string;
+						export: string;
+						replay: string;
+					};
+					details: {
+						title: string;
+						requestId: string;
+						timestamp: string;
+						provider: string;
+						model: string;
+						user: string;
+						status: string;
+						request: string;
+						response: string;
+						metadata: string;
+						tokensUsed: string;
+						duration: string;
+						cost: string;
+					};
+					empty: {
+						title: string;
+						description: string;
+					};
+					export: {
+						title: string;
+						format: string;
+						csv: string;
+						json: string;
+						dateRange: string;
+						includeFilters: string;
+						export: string;
+					};
+				};
+				settings: {
+					title: string;
+					description: string;
+					providers: {
+						title: string;
+						addProvider: string;
+						noProviders: string;
+						enabled: string;
+						disabled: string;
+					};
+					models: {
+						title: string;
+						addModel: string;
+						noModels: string;
+						default: string;
+					};
+					quotas: {
+						title: string;
+						description: string;
+						dailyLimit: string;
+						monthlyLimit: string;
+						tokenLimit: string;
+						resetQuota: string;
+					};
+					audit: {
+						title: string;
+						logLevel: string;
+						logAllRequests: string;
+						logSuccessfulRequests: string;
+						logFailedRequests: string;
+						retention: string;
+						retentionDays: string;
+					};
+				};
+				providers: {
+					openai: string;
+					anthropic: string;
+					google: string;
+					azure: string;
+					custom: string;
+				};
+				models: {
+					gpt4: string;
+					gpt35: string;
+					claude: string;
+					gemini: string;
+					llama: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					docs: string;
+					support: string;
+				};
+			};
+			agents: {
+				// Agents page translations
+				title: string;
+				subtitle: string;
+				sidebar: {
+					title: string;
+					newAgent: string;
+					active: string;
+					archived: string;
+					search: string;
+					noAgents: string;
+					noActiveAgents: string;
+					noArchivedAgents: string;
+					collapse: string;
+					expand: string;
+				};
+				create: {
+					title: string;
+					placeholder: string;
+					attachFiles: string;
+					selectWorkspace: string;
+					selectModel: string;
+					create: string;
+					creating: string;
+					noWorkspace: string;
+					noModel: string;
+					workspaceLabel: string;
+					modelLabel: string;
+				};
+				chat: {
+					start: string;
+					emptyState: {
+						title: string;
+						description: string;
+						examples: {
+							help: string;
+							debug: string;
+							explain: string;
+							refactor: string;
+						};
+					};
+					input: {
+						placeholder: string;
+						send: string;
+						attach: string;
+						stop: string;
+					};
+					actions: {
+						copy: string;
+						regenerate: string;
+						edit: string;
+						delete: string;
+						archive: string;
+						unarchive: string;
+						createWorkspace: string;
+						viewDiff: string;
+						applyChanges: string;
+					};
+					status: {
+						pending: string;
+						processing: string;
+						completed: string;
+						failed: string;
+						cancelled: string;
+					};
+				};
+				model: {
+					selector: {
+						title: string;
+						default: string;
+						custom: string;
+					};
+					admin: {
+						title: string;
+						description: string;
+						providers: {
+							title: string;
+							addProvider: string;
+							editProvider: string;
+							deleteProvider: string;
+							providerName: string;
+							apiKey: string;
+							baseURL: string;
+							enabled: string;
+							noProviders: string;
+						};
+						models: {
+							title: string;
+							addModel: string;
+							editModel: string;
+							deleteModel: string;
+							modelName: string;
+							provider: string;
+							default: string;
+							noModels: string;
+						};
+						test: {
+							title: string;
+							testConnection: string;
+							testPrompt: string;
+							testResult: string;
+							success: string;
+							failed: string;
+						};
+					};
+				};
+				workspace: {
+					creation: {
+						title: string;
+						description: string;
+						naming: string;
+						name: string;
+						template: string;
+						creating: string;
+						success: string;
+						failed: string;
+					};
+					watcher: {
+						title: string;
+						building: string;
+						starting: string;
+						ready: string;
+						failed: string;
+					};
+					changes: {
+						title: string;
+						filesChanged: string;
+						additions: string;
+						deletions: string;
+						viewDiff: string;
+						apply: string;
+						discard: string;
+					};
+				};
+				files: {
+					attach: {
+						title: string;
+						select: string;
+						dragDrop: string;
+						maxSize: string;
+						maxFiles: string;
+						remove: string;
+						clear: string;
+					};
+					preview: {
+						title: string;
+						image: string;
+						code: string;
+						document: string;
+						unknown: string;
+					};
+				};
+				archive: {
+					title: string;
+					message: string;
+					confirm: string;
+					cancel: string;
+					archiving: string;
+					success: string;
+					failed: string;
+				};
+				delete: {
+					title: string;
+					message: string;
+					confirm: string;
+					cancel: string;
+					deleting: string;
+					success: string;
+					failed: string;
+				};
+				errors: {
+					loadFailed: string;
+					createFailed: string;
+					sendFailed: string;
+					archiveFailed: string;
+					deleteFailed: string;
+					workspaceFailed: string;
+					modelFailed: string;
+					uploadFailed: string;
+					networkError: string;
+					serverError: string;
+					unknownError: string;
+				};
+				notifications: {
+					messageReceived: string;
+					workspaceReady: string;
+					workspaceFailed: string;
+					agentDeleted: string;
+				};
+				keyboard: {
+					shortcuts: {
+						title: string;
+						newChat: string;
+						sendMessage: string;
+						newLine: string;
+						focusInput: string;
+						toggleSidebar: string;
+						search: string;
+					};
+				};
+				help: {
+					title: string;
+					description: string;
+					gettingStarted: string;
+					bestPractices: string;
+					documentation: string;
+					support: string;
+				};
+			};
+			deploymentSecurity: {
+				// Deployment security settings translations
+				title: string;
+				subtitle: string;
+				sections: {
+					auth: {
+						title: string;
+						description: string;
+						password: {
+							title: string;
+							minLength: string;
+							complexity: string;
+							requireLowercase: string;
+							requireUppercase: string;
+							requireNumbers: string;
+							requireSpecial: string;
+							expiryDays: string;
+							history: string;
+						};
+						mfa: {
+							title: string;
+							description: string;
+							requireMFA: string;
+							allowedMethods: string;
+							totp: string;
+							sms: string;
+							email: string;
+							webauthn: string;
+						};
+					};
+					session: {
+						title: string;
+						description: string;
+						duration: string;
+						renew: string;
+						maxConcurrent: string;
+						idleTimeout: string;
+						rememberMe: string;
+					};
+					oauth2: {
+						title: string;
+						description: string;
+						enabled: string;
+						providers: string;
+						addProvider: string;
+						noProviders: string;
+						gitHub: string;
+						gitLab: string;
+						google: string;
+						oidc: string;
+						azure: string;
+						clientID: string;
+						clientSecret: string;
+						redirectURL: string;
+						displayName: string;
+						iconURL: string;
+					};
+					bruteForce: {
+						title: string;
+						description: string;
+						enabled: string;
+						maxAttempts: string;
+						lockoutDuration: string;
+						window: string;
+					};
+					captcha: {
+						title: string;
+						description: string;
+						enabled: string;
+						provider: string;
+						siteKey: string;
+						secretKey: string;
+						threshold: string;
+					};
+					rateLimit: {
+						title: string;
+						description: string;
+						enabled: string;
+						requestsPerMinute: string;
+						burstSize: string;
+						whitelist: string;
+						blacklist: string;
+					};
+				};
+				actions: {
+					save: string;
+					saving: string;
+					reset: string;
+					test: string;
+				};
+				messages: {
+					saved: string;
+					testFailed: string;
+					testSuccess: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					docs: string;
+					support: string;
+				};
+			};
+			deploymentSettings: {
+				// Deployment settings translations
+				title: string;
+				subtitle: string;
+				tabs: {
+					general: string;
+					security: string;
+					network: string;
+					storage: string;
+					logging: string;
+					advanced: string;
+				};
+				general: {
+					title: string;
+					description: string;
+					instanceName: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					logo: {
+						label: string;
+						description: string;
+						upload: string;
+						remove: string;
+					};
+					serviceBanner: {
+						label: string;
+						description: string;
+						enabled: string;
+						backgroundColor: string;
+						textColor: string;
+						message: string;
+					};
+					notifications: {
+						title: string;
+						email: string;
+						smtp: string;
+						server: string;
+						port: string;
+						username: string;
+						password: string;
+						from: string;
+						testEmail: string;
+					};
+				};
+				network: {
+					title: string;
+					description: string;
+					accessURL: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					wildcard: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					derp: {
+						title: string;
+						description: string;
+						enabled: string;
+						server: string;
+						region: string;
+						regionName: string;
+						stun: string;
+						relay: string;
+					};
+					portForwarding: {
+						title: string;
+						description: string;
+						enabled: string;
+						range: string;
+						tcp: string;
+						udp: string;
+					};
+				};
+				storage: {
+					title: string;
+					description: string;
+					paths: {
+						title: string;
+						home: string;
+						cache: string;
+						logs: string;
+						temp: string;
+					};
+					quotas: {
+						title: string;
+						description: string;
+						userQuota: string;
+						workspaceQuota: string;
+						enforced: string;
+					};
+					backup: {
+						title: string;
+						description: string;
+						enabled: string;
+						schedule: string;
+						retention: string;
+						location: string;
+						backupNow: string;
+					};
+				};
+				logging: {
+					title: string;
+					description: string;
+					level: {
+						label: string;
+						description: string;
+						debug: string;
+						info: string;
+						warn: string;
+						error: string;
+					};
+					humanize: {
+						label: string;
+						description: string;
+					};
+					stacktraces: {
+						label: string;
+						description: string;
+					};
+					output: {
+						title: string;
+						stdout: string;
+						file: string;
+						rotation: string;
+						maxSize: string;
+						maxAge: string;
+						maxBackups: string;
+					};
+				};
+				advanced: {
+					title: string;
+					description: string;
+					experimental: {
+						title: string;
+						description: string;
+						warning: string;
+					};
+					telemetry: {
+						title: string;
+						description: string;
+						enabled: string;
+						url: string;
+					};
+					metrics: {
+						title: string;
+						description: string;
+						enabled: string;
+						prometheus: string;
+					};
+					debug: {
+						title: string;
+						enable: string;
+						pprof: string;
+						verbose: string;
+					};
+				};
+				actions: {
+					save: string;
+					saving: string;
+					reload: string;
+					reset: string;
+				};
+				messages: {
+					saved: string;
+					reloadRequired: string;
+					restartRequired: string;
+					reloadSuccess: string;
+					restartSuccess: string;
+				};
+				warnings: {
+					experimental: string;
+					restartRequired: string;
+					irreversible: string;
+				};
+			};
 			health: {
 				// Health page translations
 				title: string;

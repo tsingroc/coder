@@ -1,0 +1,208 @@
+{
+	"title": "智能助手",
+	"subtitle": "面向开发工作流程的 AI 驱动编码助手。",
+	"sidebar": {
+		"title": "对话",
+		"newAgent": "新对话",
+		"active": "活跃",
+		"archived": "已归档",
+		"search": "搜索对话...",
+		"noAgents": "未找到对话",
+		"noActiveAgents": "没有活跃对话",
+		"noArchivedAgents": "没有已归档对话",
+		"collapse": "折叠侧边栏",
+		"expand": "展开侧边栏"
+	},
+	"create": {
+		"title": "新对话",
+		"placeholder": "向我询问任何关于代码库的问题...",
+		"attachFiles": "附加文件",
+		"selectWorkspace": "选择工作区",
+		"selectModel": "选择模型",
+		"create": "创建对话",
+		"creating": "创建中...",
+		"noWorkspace": "未选择工作区",
+		"noModel": "使用默认模型",
+		"workspaceLabel": "工作区",
+		"modelLabel": "AI 模型"
+	},
+	"chat": {
+		"start": "开始对话",
+		"emptyState": {
+			"title": "开始新对话",
+			"description": "询问代码问题、获取调试帮助或头脑风暴新功能。",
+			"examples": {
+				"help": "如何改进我的应用程序中的错误处理？",
+				"debug": "帮助我调试此函数",
+				"explain": "解释此组件的工作原理",
+				"refactor": "建议重构机会"
+			}
+		},
+		"input": {
+			"placeholder": "输入您的消息...",
+			"send": "发送",
+			"attach": "附加文件",
+			"stop": "停止生成"
+		},
+		"actions": {
+			"copy": "复制",
+			"regenerate": "重新生成",
+			"edit": "编辑",
+			"delete": "删除",
+			"archive": "归档",
+			"unarchive": "取消归档",
+			"createWorkspace": "创建工作区",
+			"viewDiff": "查看差异",
+			"applyChanges": "应用更改"
+		},
+		"status": {
+			"pending": "等待中",
+			"processing": "处理中",
+			"completed": "已完成",
+			"failed": "失败",
+			"cancelled": "已取消"
+		}
+	},
+	"model": {
+		"selector": {
+			"title": "选择 AI 模型",
+			"default": "默认",
+			"custom": "自定义"
+		},
+		"admin": {
+			"title": "AI 模型配置",
+			"description": "为您的组织管理 AI 提供商和模型。",
+			"providers": {
+				"title": "提供商",
+				"addProvider": "添加提供商",
+				"editProvider": "编辑提供商",
+				"deleteProvider": "删除提供商",
+				"providerName": "提供商名称",
+				"apiKey": "API 密钥",
+				"baseURL": "基础 URL",
+				"enabled": "已启用",
+				"noProviders": "未配置提供商"
+			},
+			"models": {
+				"title": "模型",
+				"addModel": "添加模型",
+				"editModel": "编辑模型",
+				"deleteModel": "删除模型",
+				"modelName": "模型名称",
+				"provider": "提供商",
+				"default": "默认模型",
+				"noModels": "未配置模型"
+			},
+			"test": {
+				"title": "测试配置",
+				"testConnection": "测试连接",
+				"testPrompt": "测试提示",
+				"testResult": "测试结果",
+				"success": "连接成功",
+				"failed": "连接失败"
+			}
+		}
+	},
+	"workspace": {
+		"creation": {
+			"title": "创建工作区",
+			"description": "根据智能助手生成的代码创建工作区",
+			"naming": "命名工作区",
+			"name": "工作区名称",
+			"template": "模板",
+			"creating": "创建工作区中...",
+			"success": "工作区创建成功",
+			"failed": "工作区创建失败"
+		},
+		"watcher": {
+			"title": "工作区状态",
+			"building": "构建工作区中...",
+			"starting": "启动工作区中...",
+			"ready": "工作区就绪",
+			"failed": "工作区构建失败"
+		},
+		"changes": {
+			"title": "提议的更改",
+			"filesChanged": "文件已更改",
+			"additions": "添加",
+			"deletions": "删除",
+			"viewDiff": "查看差异",
+			"apply": "应用更改",
+			"discard": "放弃更改"
+		}
+	},
+	"files": {
+		"attach": {
+			"title": "附加文件",
+			"select": "选择文件",
+			"dragDrop": "拖放文件到此处",
+			"maxSize": "最大文件大小：10MB",
+			"maxFiles": "最多 {{count}} 个文件",
+			"remove": "移除",
+			"clear": "清除全部"
+		},
+		"preview": {
+			"title": "文件预览",
+			"image": "图像",
+			"code": "代码",
+			"document": "文档",
+			"unknown": "未知文件类型"
+		}
+	},
+	"archive": {
+		"title": "归档对话",
+		"message": "确定要归档此对话吗？您可以在已归档选项卡中找到它。",
+		"confirm": "归档",
+		"cancel": "取消",
+		"archiving": "归档中...",
+		"success": "对话已归档",
+		"failed": "归档对话失败"
+	},
+	"delete": {
+		"title": "删除对话",
+		"message": "确定要删除此对话吗？此操作无法撤销。",
+		"confirm": "删除",
+		"cancel": "取消",
+		"deleting": "删除中...",
+		"success": "对话已删除",
+		"failed": "删除对话失败"
+	},
+	"errors": {
+		"loadFailed": "加载对话失败",
+		"createFailed": "创建对话失败",
+		"sendFailed": "发送消息失败",
+		"archiveFailed": "归档对话失败",
+		"deleteFailed": "删除对话失败",
+		"workspaceFailed": "创建工作区失败",
+		"modelFailed": "加载模型失败",
+		"uploadFailed": "上传文件失败",
+		"networkError": "网络错误。请检查您的连接。",
+		"serverError": "服务器错误。请稍后重试。",
+		"unknownError": "发生未知错误。"
+	},
+	"notifications": {
+		"messageReceived": "来自 {{name}} 的新消息",
+		"workspaceReady": "您的工作区已就绪",
+		"workspaceFailed": "工作区创建失败",
+		"agentDeleted": "对话已删除"
+	},
+	"keyboard": {
+		"shortcuts": {
+			"title": "键盘快捷键",
+			"newChat": "新对话：Ctrl/Cmd + K",
+			"sendMessage": "发送消息：Enter",
+			"newLine": "新行：Shift + Enter",
+			"focusInput": "聚焦输入：/",
+			"toggleSidebar": "切换侧边栏：Ctrl/Cmd + B",
+			"search": "搜索：Ctrl/Cmd + F"
+		}
+	},
+	"help": {
+		"title": "智能助手帮助",
+		"description": "了解如何使用 AI 智能助手加速开发工作流程。",
+		"gettingStarted": "入门指南",
+		"bestPractices": "最佳实践",
+		"documentation": "文档",
+		"support": "支持"
+	}
+}

@@ -1,0 +1,101 @@
+{
+	"title": "Security",
+	"subtitle": "Configure security settings for your Coder deployment.",
+	"sections": {
+		"auth": {
+			"title": "Authentication",
+			"description": "Manage authentication methods and policies.",
+			"password": {
+				"title": "Password Policy",
+				"minLength": "Minimum Password Length",
+				"complexity": "Password Complexity",
+				"requireLowercase": "Require Lowercase Letters",
+				"requireUppercase": "Require Uppercase Letters",
+				"requireNumbers": "Require Numbers",
+				"requireSpecial": "Require Special Characters",
+				"expiryDays": "Password Expiry (Days)",
+				"history": "Password History Count"
+			},
+			"mfa": {
+				"title": "Multi-Factor Authentication",
+				"description": "Require MFA for all users",
+				"requireMFA": "Require MFA",
+				"allowedMethods": "Allowed Methods",
+				"totp": "TOTP App (Time-based One-Time Password)",
+				"sms": "SMS Verification",
+				"email": "Email Verification",
+				"webauthn": "Security Key / WebAuthn"
+			}
+		},
+		"session": {
+			"title": "Session Management",
+			"description": "Configure user session settings.",
+			"duration": "Session Duration",
+			"renew": "Auto-Renew Session",
+			"maxConcurrent": "Max Concurrent Sessions",
+			"idleTimeout": "Idle Timeout (Minutes)",
+			"rememberMe": "Remember Me Duration (Days)"
+		},
+		"oauth2": {
+			"title": "OAuth2 Configuration",
+			"description": "Configure OAuth2 providers for external authentication.",
+			"enabled": "OAuth2 Enabled",
+			"providers": "Providers",
+			"addProvider": "Add Provider",
+			"noProviders": "No OAuth2 providers configured",
+			"gitHub": "GitHub",
+			"gitLab": "GitLab",
+			"google": "Google",
+			"oidc": "OpenID Connect",
+			"azure": "Azure AD",
+			"clientID": "Client ID",
+			"clientSecret": "Client Secret",
+			"redirectURL": "Redirect URL",
+			"displayName": "Display Name",
+			"iconURL": "Icon URL"
+		},
+		"bruteForce": {
+			"title": "Brute Force Protection",
+			"description": "Protect against automated attacks.",
+			"enabled": "Enable Protection",
+			"maxAttempts": "Max Login Attempts",
+			"lockoutDuration": "Lockout Duration (Minutes)",
+			"window": "Time Window (Minutes)"
+		},
+		"captcha": {
+			"title": "CAPTCHA",
+			"description": "Require CAPTCHA for login and signup.",
+			"enabled": "Enable CAPTCHA",
+			"provider": "Provider",
+			"siteKey": "Site Key",
+			"secretKey": "Secret Key",
+			"threshold": "Score Threshold"
+		},
+		"rateLimit": {
+			"title": "Rate Limiting",
+			"description": "Limit API request rates to prevent abuse.",
+			"enabled": "Enable Rate Limiting",
+			"requestsPerMinute": "Requests per Minute",
+			"burstSize": "Burst Size",
+			"whitelist": "IP Whitelist",
+			"blacklist": "IP Blacklist"
+		}
+	},
+	"actions": {
+		"save": "Save Changes",
+		"saving": "Saving...",
+		"reset": "Reset to Defaults",
+		"test": "Test Configuration"
+	},
+	"messages": {
+		"saved": "Security settings saved successfully.",
+		"testFailed": "Configuration test failed.",
+		"testSuccess": "Configuration test successful."
+	},
+	"help": {
+		"title": "Security Help",
+		"description": "Learn about security best practices for Coder deployments.",
+		"docs": "Documentation",
+		"support": "Contact Support"
+	}
+}

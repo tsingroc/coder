@@ -1,0 +1,179 @@
+{
+	"title": "部署设置",
+	"subtitle": "配置您的 Coder 部署设置。",
+	"tabs": {
+		"general": "常规",
+		"security": "安全",
+		"network": "网络",
+		"storage": "存储",
+		"logging": "日志",
+		"advanced": "高级"
+	},
+	"general": {
+		"title": "常规设置",
+		"description": "基本部署配置。",
+		"instanceName": {
+			"label": "实例名称",
+			"description": "您的 Coder 部署的名称",
+			"placeholder": "我的 Coder 实例"
+		},
+		"logo": {
+			"label": "Logo URL",
+			"description": "为您的部署设置自定义 Logo",
+			"upload": "上传 Logo",
+			"remove": "移除 Logo"
+		},
+		"serviceBanner": {
+			"label": "服务横幅",
+			"description": "向所有用户显示横幅",
+			"enabled": "启用横幅",
+			"backgroundColor": "背景颜色",
+			"textColor": "文本颜色",
+			"message": "横幅消息"
+		},
+		"notifications": {
+			"title": "通知",
+			"email": "电子邮件通知",
+			"smtp": "SMTP 配置",
+			"server": "SMTP 服务器",
+			"port": "SMTP 端口",
+			"username": "SMTP 用户名",
+			"password": "SMTP 密码",
+			"from": "发件人电子邮件地址",
+			"testEmail": "发送测试电子邮件"
+		}
+	},
+	"network": {
+		"title": "网络设置",
+		"description": "配置网络和访问。",
+		"accessURL": {
+			"label": "访问 URL",
+			"description": "用户用于访问此部署的主要 URL",
+			"placeholder": "https://coder.example.com"
+		},
+		"wildcard": {
+			"label": "通配符访问 URL",
+			"description": "用于工作区应用程序",
+			"placeholder": "*.coder.example.com"
+		},
+		"derp": {
+			"title": "DERP 中继配置",
+			"description": "为工作区连接配置网络中继",
+			"enabled": "启用 DERP",
+			"server": "DERP 服务器 URL",
+			"region": "区域代码",
+			"regionName": "区域名称",
+			"stun": "STUN 服务器",
+			"relay": "启用中继"
+		},
+		"portForwarding": {
+			"title": "端口转发",
+			"description": "配置端口转发设置",
+			"enabled": "启用端口转发",
+			"range": "端口范围",
+			"tcp": "TCP 转发",
+			"udp": "UDP 转发"
+		}
+	},
+	"storage": {
+		"title": "存储设置",
+		"description": "配置存储路径和配额。",
+		"paths": {
+			"title": "存储路径",
+			"home": "主目录",
+			"cache": "缓存目录",
+			"logs": "日志目录",
+			"temp": "临时目录"
+		},
+		"quotas": {
+			"title": "存储配额",
+			"description": "为用户和工作区设置存储限制",
+			"userQuota": "用户存储配额",
+			"workspaceQuota": "工作区存储配额",
+			"enforced": "强制执行配额"
+		},
+		"backup": {
+			"title": "备份设置",
+			"description": "配置自动备份",
+			"enabled": "启用备份",
+			"schedule": "备份计划",
+			"retention": "保留策略（天）",
+			"location": "备份位置",
+			"backupNow": "立即备份"
+		}
+	},
+	"logging": {
+		"title": "日志配置",
+		"description": "为您的部署配置日志。",
+		"level": {
+			"label": "日志级别",
+			"description": "最小日志详细程度",
+			"debug": "调试",
+			"info": "信息",
+			"warn": "警告",
+			"error": "错误"
+		},
+		"humanize": {
+			"label": "人性化日志",
+			"description": "使日志更易读"
+		},
+		"stacktraces": {
+			"label": "日志堆栈跟踪",
+			"description": "在日志中包含堆栈跟踪"
+		},
+		"output": {
+			"title": "日志输出",
+			"stdout": "输出到 stdout",
+			"file": "输出到文件",
+			"rotation": "日志轮换",
+			"maxSize": "最大文件大小（MB）",
+			"maxAge": "最长保留时间（天）",
+			"maxBackups": "最大备份数"
+		}
+	},
+	"advanced": {
+		"title": "高级设置",
+		"description": "高级部署配置。",
+		"experimental": {
+			"title": "实验性功能",
+			"description": "启用实验性功能",
+			"warning": "这些功能可能会在未来版本中更改或被移除。"
+		},
+		"telemetry": {
+			"title": "遥测",
+			"description": "通过共享使用数据帮助改进 Coder",
+			"enabled": "启用遥测",
+			"url": "遥测 URL"
+		},
+		"metrics": {
+			"title": "指标",
+			"description": "配置指标收集",
+			"enabled": "启用指标",
+			"prometheus": "Prometheus 地址"
+		},
+		"debug": {
+			"title": "调试设置",
+			"enable": "启用调试模式",
+			"pprof": "启用 pprof",
+			"verbose": "详细日志"
+		}
+	},
+	"actions": {
+		"save": "保存设置",
+		"saving": "保存中...",
+		"reload": "从磁盘重新加载",
+		"reset": "重置为默认值"
+	},
+	"messages": {
+		"saved": "设置已成功保存。",
+		"reloadRequired": "某些更改需要重新加载部署。",
+		"restartRequired": "某些更改需要重新启动部署。",
+		"reloadSuccess": "部署已成功重新加载。",
+		"restartSuccess": "部署已成功重新启动。"
+	},
+	"warnings": {
+		"experimental": "实验性功能不稳定，可能会导致问题。",
+		"restartRequired": "您必须重新启动部署才能使这些更改生效。",
+		"irreversible": "此操作无法撤销。"
+	}
+}
