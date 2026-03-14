@@ -28,5 +28,10 @@
 		"admin": "Admin",
 		"user": "User",
 		"member": "Member"
+	},
+	"resetPassword": {
+		"title": "Reset password",
+		"message": "You will need to send <strong>{{username}}</strong> the following password:",
+		"confirmText": "Reset password"
 	}
 }

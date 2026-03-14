@@ -28,5 +28,10 @@
 		"admin": "管理员",
 		"user": "用户",
 		"member": "成员"
+	},
+	"resetPassword": {
+		"title": "重置密码",
+		"message": "您需要将以下密码发送给 <strong>{{username}}</strong>：",
+		"confirmText": "重置密码"
 	}
 }
