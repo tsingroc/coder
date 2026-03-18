@@ -5,11 +5,13 @@ import { useAuthenticated } from "hooks";
 import { useDashboard } from "modules/dashboard/useDashboard";
 import type { FC } from "react";
 import { useQuery } from "react-query";
+import { useUserSettingsLanguage } from "../Language";
 import { Section } from "../Section";
 import { AccountForm } from "./AccountForm";
 import { AccountUserGroups } from "./AccountUserGroups";
 
 const AccountPage: FC = () => {
+	const lang = useUserSettingsLanguage();
 	const { permissions, user: me } = useAuthenticated();
 	const { updateProfile, updateProfileError, isUpdatingProfile } =
 		useAuthContext();
@@ -23,7 +25,7 @@ const AccountPage: FC = () => {
 
 	return (
 		<Stack spacing={6}>
-			<Section title="Account" description="Update your account info">
+			<Section title={lang.account} description={lang.accountDescription}>
 				<AccountForm
 					editable={permissions?.updateUsers ?? false}
 					email={me.email}

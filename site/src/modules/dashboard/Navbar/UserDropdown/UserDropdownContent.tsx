@@ -18,14 +18,9 @@ import {
 	SquareArrowOutUpRightIcon,
 } from "lucide-react";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { SupportIcon } from "../SupportIcon";
-
-export const Language = {
-	accountLabel: "Account",
-	signOutLabel: "Sign Out",
-	copyrightText: `\u00a9 ${new Date().getFullYear()} Coder Technologies, Inc.`,
-};
 
 interface UserDropdownContentProps {
 	user: TypesGen.User;
@@ -40,6 +35,7 @@ export const UserDropdownContent: FC<UserDropdownContentProps> = ({
 	supportLinks,
 	onSignOut,
 }) => {
+	const { t } = useTranslation();
 	const { showCopiedSuccess, copyToClipboard } = useClipboard();
 
 	return (
@@ -59,18 +55,18 @@ export const UserDropdownContent: FC<UserDropdownContentProps> = ({
 			<DropdownMenuItem asChild>
 				<Link to="/install">
 					<MonitorDownIcon />
-					<span>Install CLI</span>
+					<span>{t("userDropdown.installCLI")}</span>
 				</Link>
 			</DropdownMenuItem>
 			<DropdownMenuItem asChild>
 				<Link to="/settings/account">
 					<CircleUserIcon />
-					<span>Account</span>
+					<span>{t("userDropdown.account")}</span>
 				</Link>
 			</DropdownMenuItem>
 			<DropdownMenuItem onClick={onSignOut}>
 				<LogOutIcon />
-				<span>Sign Out</span>
+				<span>{t("userDropdown.signOut")}</span>
 			</DropdownMenuItem>
 			{supportLinks && supportLinks.length > 0 && (
 				<>
@@ -100,7 +96,9 @@ export const UserDropdownContent: FC<UserDropdownContentProps> = ({
 						</a>
 					</DropdownMenuItem>
 				</TooltipTrigger>
-				<TooltipContent side="bottom">Browse the source code</TooltipContent>
+				<TooltipContent side="bottom">
+					{t("userDropdown.browseSourceCode")}
+				</TooltipContent>
 			</Tooltip>
 			{buildInfo?.deployment_id && (
 				<Tooltip disableHoverableContent>
@@ -121,12 +119,16 @@ export const UserDropdownContent: FC<UserDropdownContentProps> = ({
 						</DropdownMenuItem>
 					</TooltipTrigger>
 					<TooltipContent side="bottom">
-						{showCopiedSuccess ? "Copied!" : "Copy deployment ID"}
+						{showCopiedSuccess
+							? t("userDropdown.copied")
+							: t("userDropdown.copyDeploymentId")}
 					</TooltipContent>
 				</Tooltip>
 			)}
 			<DropdownMenuItem className="text-xs" disabled>
-				<span>{Language.copyrightText}</span>
+				<span>
+					{t("userDropdown.copyright", { year: new Date().getFullYear() })}
+				</span>
 			</DropdownMenuItem>
 		</>
 	);

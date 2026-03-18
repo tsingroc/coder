@@ -38,6 +38,7 @@ import {
 } from "modules/notifications/utils";
 import { TaskPrompt } from "modules/tasks/TaskPrompt/TaskPrompt";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQueries, useQuery, useQueryClient } from "react-query";
 import { cn } from "utils/cn";
 import { pageTitle } from "utils/page";
@@ -47,6 +48,8 @@ import { TasksTable } from "./TasksTable";
 import { UsersCombobox } from "./UsersCombobox";
 
 const TasksPage: FC = () => {
+	const { t } = useTranslation("tasks");
+
 	const aiTemplatesQuery = useQuery(
 		templates({
 			q: "has-ai-task:true",
@@ -138,7 +141,7 @@ const TasksPage: FC = () => {
 
 	return (
 		<>
-			<title>{pageTitle("AI Tasks")}</title>
+			<title>{pageTitle(t("aiTitle"))}</title>
 			<Margins>
 				{allTaskNotificationsDisabled && !taskNotificationAlertDismissed && (
 					<div className="mt-6">
@@ -151,15 +154,17 @@ const TasksPage: FC = () => {
 								});
 							}}
 						>
-							Your notifications for tasks status changes are disabled. Go to{" "}
-							<Link href="/settings/notifications">Account Settings</Link> to
-							change it.
+							{t("notificationAlert.title")}{" "}
+							<Link href="/settings/notifications">
+								{t("notificationAlert.goToSettings")} {t("notificationAlert.accountSettings")}
+							</Link>{" "}
+							{t("notificationAlert.toChange")}
 						</Alert>
 					</div>
 				)}
 				<PageHeader>
-					<PageHeaderTitle>Tasks</PageHeaderTitle>
-					<PageHeaderSubtitle>Automate tasks with AI</PageHeaderSubtitle>
+					<PageHeaderTitle>{t("title")}</PageHeaderTitle>
+					<PageHeaderSubtitle>{t("subtitle")}</PageHeaderSubtitle>
 				</PageHeader>
 
 				<div className="pb-8">
@@ -185,7 +190,7 @@ const TasksPage: FC = () => {
 													setCheckedTaskIds(new Set());
 												}}
 											>
-												My tasks
+												{t("page.myTasks")}
 											</PillButton>
 											<PillButton
 												active={ownerFilter.value === ""}
@@ -194,7 +199,7 @@ const TasksPage: FC = () => {
 													setCheckedTaskIds(new Set());
 												}}
 											>
-												All tasks
+												{t("page.allTasks")}
 											</PillButton>
 										</div>
 										<div className="flex items-center gap-2">
@@ -211,7 +216,7 @@ const TasksPage: FC = () => {
 												htmlFor="waiting-for-input"
 												className="flex items-center gap-2 text-sm text-content-primary select-none cursor-pointer"
 											>
-												Waiting for input
+												{t("page.waitingForInput")}
 												{idleTasks && idleTasks.length > 0 && (
 													<Badge className="-mr-0.5" size="xs" variant="info">
 														{idleTasks.length}
@@ -239,9 +244,9 @@ const TasksPage: FC = () => {
 										{checkedTasks.length > 0 ? (
 											<>
 												<div>
-													Selected <strong>{checkedTasks.length}</strong> of{" "}
+													{t("toolbar.selected")} <strong>{checkedTasks.length}</strong> {t("toolbar.of")}{" "}
 													<strong>{displayedTasks?.length}</strong>{" "}
-													{displayedTasks?.length === 1 ? "task" : "tasks"}
+													{displayedTasks?.length === 1 ? t("toolbar.task_one") : t("toolbar.task_other")}
 												</div>
 
 												<DropdownMenu>
@@ -252,7 +257,7 @@ const TasksPage: FC = () => {
 															size="sm"
 															className="ml-auto"
 														>
-															Bulk actions
+															{t("page.bulkActions")}
 															<Spinner loading={batchActions.isProcessing}>
 																<ChevronDownIcon />
 															</Spinner>
@@ -263,24 +268,24 @@ const TasksPage: FC = () => {
 															className="text-content-destructive focus:text-content-destructive"
 															onClick={handleBatchDelete}
 														>
-															<TrashIcon /> Delete&hellip;
+															<TrashIcon /> {t("page.delete")}
 														</DropdownMenuItem>
 													</DropdownMenuContent>
 												</DropdownMenu>
 											</>
 										) : (
 											<div>
-												Showing{" "}
+												{t("toolbar.showing")}{" "}
 												{displayedTasks && displayedTasks.length > 0 ? (
 													<>
-														<strong>1</strong> to{" "}
-														<strong>{displayedTasks.length}</strong> of{" "}
+														<strong>1</strong> {t("toolbar.to")}{" "}
+														<strong>{displayedTasks.length}</strong> {t("toolbar.of")}{" "}
 														<strong>{displayedTasks.length}</strong>
 													</>
 												) : (
 													<strong>0</strong>
 												)}{" "}
-												{displayedTasks?.length === 1 ? "task" : "tasks"}
+												{displayedTasks?.length === 1 ? t("toolbar.task_one") : t("toolbar.task_other")}
 											</div>
 										)}
 									</TableToolbar>

@@ -15,6 +15,7 @@ import {
 	type StatusIndicatorDotProps,
 } from "components/StatusIndicator/StatusIndicator";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { getDisplayWorkspaceStatus } from "utils/workspace";
 
 export const useTemplateFilterMenu = ({
@@ -74,19 +75,21 @@ type TemplateMenuProps = Readonly<{
 }>;
 
 export const TemplateMenu: FC<TemplateMenuProps> = ({ width, menu }) => {
+	const { t } = useTranslation();
+
 	return (
 		<SelectFilter
 			width={width}
-			label="Select a template"
-			emptyText="No templates found"
-			placeholder="All templates"
+			label={t("selectTemplate")}
+			emptyText={t("noTemplatesFound")}
+			placeholder={t("allTemplates")}
 			options={menu.searchOptions}
 			onSelect={menu.selectOption}
 			selectedOption={menu.selectedOption ?? undefined}
 			selectFilterSearch={
 				<ComboboxInput
-					aria-label="Search template"
-					placeholder="Search template..."
+					aria-label={t("searchTemplate")}
+					placeholder={t("searchTemplatePlaceholder")}
 					value={menu.query}
 					onValueChange={menu.setQuery}
 				/>
@@ -135,11 +138,13 @@ type StatusMenuProps = Readonly<{
 }>;
 
 export const StatusMenu: FC<StatusMenuProps> = ({ width, menu }) => {
+	const { t } = useTranslation();
+
 	return (
 		<SelectFilter
 			width={width}
-			placeholder="All statuses"
-			label="Select a status"
+			placeholder={t("allStatuses")}
+			label={t("selectStatus")}
 			options={menu.searchOptions}
 			selectedOption={menu.selectedOption ?? undefined}
 			onSelect={menu.selectOption}

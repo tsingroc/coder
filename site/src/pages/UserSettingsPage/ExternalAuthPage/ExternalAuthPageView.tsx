@@ -34,6 +34,7 @@ import {
 import type { ExternalAuthPollingState } from "hooks/useExternalAuth";
 import { EllipsisVertical, RefreshCcwIcon } from "lucide-react";
 import { type FC, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 
 type ExternalAuthPageViewProps = {
@@ -53,6 +54,8 @@ export const ExternalAuthPageView: FC<ExternalAuthPageViewProps> = ({
 	onUnlinkExternalAuth,
 	onValidateExternalAuth,
 }) => {
+	const { t } = useTranslation("userSettings");
+
 	if (getAuthsError) {
 		// Nothing to show if there is an error
 		return <ErrorAlert error={getAuthsError} />;
@@ -66,10 +69,10 @@ export const ExternalAuthPageView: FC<ExternalAuthPageViewProps> = ({
 		<Table>
 			<TableHeader>
 				<TableRow>
-					<TableHead>Application</TableHead>
+					<TableHead>{t("externalAuthApplication")}</TableHead>
 					<TableHead>
 						<span aria-hidden className="sr-only">
-							Link to connect
+							{t("externalAuthLinkToConnect")}
 						</span>
 					</TableHead>
 					<TableHead className="w-[1%]" />
@@ -77,7 +80,7 @@ export const ExternalAuthPageView: FC<ExternalAuthPageViewProps> = ({
 			</TableHeader>
 			<TableBody>
 				{auths.providers === null || auths.providers?.length === 0 ? (
-					<TableEmpty message="No providers have been configured" />
+					<TableEmpty message={t("externalAuthNoProviders")} />
 				) : (
 					auths.providers?.map((app) => (
 						<ExternalAuthRow
@@ -114,6 +117,7 @@ const ExternalAuthRow: FC<ExternalAuthRowProps> = ({
 	onUnlinkExternalAuth,
 	onValidateExternalAuth,
 }) => {
+	const { t } = useTranslation("userSettings");
 	const theme = useTheme();
 	const name = app.display_name || app.id || app.type;
 	const authURL = `/external-auth/${app.id}`;
@@ -145,7 +149,7 @@ const ExternalAuthRow: FC<ExternalAuthRowProps> = ({
 								<RefreshCcwIcon className="size-3" />
 							</TooltipTrigger>
 							<TooltipContent side="right" className="max-w-xs">
-								Authentication token will automatically refresh when expired.
+								{t("externalAuthTokenRefresh")}
 							</TooltipContent>
 						</Tooltip>
 					)}
@@ -155,7 +159,7 @@ const ExternalAuthRow: FC<ExternalAuthRowProps> = ({
 							<span
 								css={{ paddingLeft: "1em", color: theme.palette.error.light }}
 							>
-								Error:{" "}
+								{t("externalAuthError")}{" "}
 							</span>
 							{link?.validate_error}
 						</span>
@@ -171,15 +175,15 @@ const ExternalAuthRow: FC<ExternalAuthRowProps> = ({
 					}}
 				>
 					<Spinner loading={externalAuthPollingState === "polling"} />
-					{authenticated ? "Authenticated" : "Click to Login"}
+					{authenticated ? t("externalAuthAuthenticated") : t("externalAuthClickToLogin")}
 				</Button>
 			</TableCell>
 			<TableCell>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button size="icon-lg" variant="subtle" aria-label="Open menu">
+						<Button size="icon-lg" variant="subtle" aria-label={t("externalAuthOpenMenu")}>
 							<EllipsisVertical aria-hidden="true" />
-							<span className="sr-only">Open menu</span>
+							<span className="sr-only">{t("externalAuthOpenMenu")}</span>
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
@@ -193,7 +197,7 @@ const ExternalAuthRow: FC<ExternalAuthRowProps> = ({
 								await refetch();
 							}}
 						>
-							Test Validate&hellip;
+							{t("externalAuthTestValidate")}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							className="text-content-destructive focus:text-content-destructive"
@@ -202,7 +206,7 @@ const ExternalAuthRow: FC<ExternalAuthRowProps> = ({
 								await refetch();
 							}}
 						>
-							Unlink&hellip;
+							{t("externalAuthUnlink")}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

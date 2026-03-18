@@ -12,6 +12,7 @@ import {
 import { useEffectEvent } from "hooks/hookPolyfills";
 import { SearchIcon, XIcon } from "lucide-react";
 import { type Ref, useLayoutEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export type SearchFieldProps = {
 	value: string;
@@ -37,6 +38,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
 	ref,
 	...ariaProps
 }) => {
+	const { t } = useTranslation();
 	const internalRef = useRef<HTMLInputElement | null>(null);
 	const focusOnMount = useEffectEvent((): void => {
 		if (autoFocus) {
@@ -84,11 +86,11 @@ export const SearchField: React.FC<SearchFieldProps> = ({
 						<TooltipTrigger asChild>
 							<InputGroupButton onClick={handleClear} size="icon">
 								<XIcon />
-								<span className="sr-only">Clear search</span>
+								<span className="sr-only">{t("clearSearch")}</span>
 							</InputGroupButton>
 						</TooltipTrigger>
 						<TooltipContent align="end" sideOffset={8} alignOffset={-8}>
-							Clear search
+							{t("clearSearch")}
 						</TooltipContent>
 					</Tooltip>
 				</InputGroupAddon>

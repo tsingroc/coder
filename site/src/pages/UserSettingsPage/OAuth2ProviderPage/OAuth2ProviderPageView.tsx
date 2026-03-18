@@ -13,6 +13,7 @@ import {
 } from "components/Table/Table";
 import { TableLoader } from "components/TableLoader/TableLoader";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 type OAuth2ProviderPageViewProps = {
 	isLoading: boolean;
@@ -27,6 +28,8 @@ const OAuth2ProviderPageView: FC<OAuth2ProviderPageViewProps> = ({
 	apps,
 	revoke,
 }) => {
+	const { t } = useTranslation("userSettings");
+
 	return (
 		<>
 			{error && <ErrorAlert error={error} />}
@@ -34,7 +37,7 @@ const OAuth2ProviderPageView: FC<OAuth2ProviderPageViewProps> = ({
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead>Name</TableHead>
+						<TableHead>{t("oauth2Name")}</TableHead>
 						<TableHead className="w-[1%]" />
 					</TableRow>
 				</TableHeader>
@@ -47,7 +50,7 @@ const OAuth2ProviderPageView: FC<OAuth2ProviderPageViewProps> = ({
 						<TableRow>
 							<TableCell colSpan={999}>
 								<div css={{ textAlign: "center" }}>
-									No OAuth2 applications have been authorized.
+									{t("oauth2NoApps")}
 								</div>
 							</TableCell>
 						</TableRow>
@@ -64,6 +67,8 @@ type OAuth2AppRowProps = {
 };
 
 const OAuth2AppRow: FC<OAuth2AppRowProps> = ({ app, revoke }) => {
+	const { t } = useTranslation("userSettings");
+
 	return (
 		<TableRow key={app.id} data-testid={`app-${app.id}`}>
 			<TableCell>
@@ -75,7 +80,7 @@ const OAuth2AppRow: FC<OAuth2AppRowProps> = ({ app, revoke }) => {
 
 			<TableCell>
 				<Button size="sm" variant="destructive" onClick={() => revoke(app)}>
-					Revoke&hellip;
+					{t("oauth2Revoke")}
 				</Button>
 			</TableCell>
 		</TableRow>

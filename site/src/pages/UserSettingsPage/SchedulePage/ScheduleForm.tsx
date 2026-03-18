@@ -12,6 +12,7 @@ import { Spinner } from "components/Spinner/Spinner";
 import { Stack } from "components/Stack/Stack";
 import { type FormikContextType, useFormik } from "formik";
 import { type FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { getFormHelpers } from "utils/formUtils";
 import { quietHoursDisplay, timeToCron, validTime } from "utils/schedule";
 import { getPreferredTimezone, timeZones } from "utils/timeZones";
@@ -22,20 +23,21 @@ interface ScheduleFormValues {
 	timezone: string;
 }
 
-const validationSchema = Yup.object({
-	time: Yup.string()
-		.ensure()
-		.test("is-time-string", "Time must be in HH:mm format.", (value) => {
-			if (!validTime(value)) {
-				return false;
-			}
-			const parts = value.split(":");
-			const HH = Number(parts[0]);
-			const mm = Number(parts[1]);
-			return HH >= 0 && HH <= 23 && mm >= 0 && mm <= 59;
-		}),
-	timezone: Yup.string().required(),
-});
+const getValidationSchema = (t: any) =>
+	Yup.object({
+		time: Yup.string()
+			.ensure()
+			.test("is-time-string", t("scheduleTimeFormat"), (value) => {
+				if (!validTime(value)) {
+					return false;
+				}
+				const parts = value.split(":");
+				const HH = Number(parts[0]);
+				const mm = Number(parts[1]);
+				return HH >= 0 && HH <= 23 && mm >= 0 && mm <= 59;
+			}),
+		timezone: Yup.string().required(),
+	});
 
 interface ScheduleFormProps {
 	isLoading: boolean;
@@ -53,6 +55,9 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({
 	onSubmit,
 	now,
 }) => {
+	const { t } = useTranslation("userSettings");
+	const validationSchema = getValidationSchema(t);
+
 	// Update every 15 seconds to update the "Next occurrence" field.
 	const [, setTime] = useState<number>(Date.now());
 	useEffect(() => {
@@ -89,16 +94,16 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({
 
 				{!initialValues.user_set && (
 					<Alert severity="info">
-						You are currently using the default quiet hours schedule, which
-						starts every day at <code>{initialValues.time}</code> in{" "}
-						<code>{initialValues.timezone}</code>.
+						{t("scheduleDefaultInfo", {
+							time: initialValues.time,
+							timezone: initialValues.timezone,
+						})}
 					</Alert>
 				)}
 
 				{!initialValues.user_can_set && (
 					<Alert severity="error">
-						Your administrator has disabled the ability to set a custom quiet
-						hours schedule.
+						{t("scheduleDisabledError")}
 					</Alert>
 				)}
 
@@ -106,14 +111,14 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({
 					<TextField
 						{...getFieldHelpers("time")}
 						disabled={isLoading || !initialValues.user_can_set}
-						label="Start time"
+						label={t("scheduleStartTime")}
 						type="time"
 						fullWidth
 					/>
 					<TextField
 						{...getFieldHelpers("timezone")}
 						disabled={isLoading || !initialValues.user_can_set}
-						label="Timezone"
+						label={t("scheduleTimezone")}
 						select
 						fullWidth
 					>
@@ -128,7 +133,7 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({
 				<TextField
 					disabled
 					fullWidth
-					label="Next occurrence"
+					label={t("scheduleNextOccurrence")}
 					value={quietHoursDisplay(
 						browserLocale,
 						form.values.time,
@@ -143,7 +148,7 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({
 						type="submit"
 					>
 						<Spinner loading={isLoading} />
-						Update schedule
+						{t("scheduleUpdate")}
 					</Button>
 				</div>
 			</FormFields>

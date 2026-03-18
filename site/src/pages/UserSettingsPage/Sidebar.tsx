@@ -19,12 +19,14 @@ import {
 import { useDashboard } from "modules/dashboard/useDashboard";
 import type { FC } from "react";
 import { isDevBuild } from "utils/buildInfo";
+import { useUserSettingsLanguage } from "./Language";
 
 interface SidebarProps {
 	user: User;
 }
 
 export const Sidebar: FC<SidebarProps> = ({ user }) => {
+	const lang = useUserSettingsLanguage();
 	const { entitlements, experiments, buildInfo } = useDashboard();
 	const showSchedulePage =
 		entitlements.features.advanced_template_scheduling.enabled;
@@ -37,35 +39,35 @@ export const Sidebar: FC<SidebarProps> = ({ user }) => {
 				subtitle={user.email}
 			/>
 			<SidebarNavItem href="account" icon={UserIcon}>
-				Account
+				{lang.account}
 			</SidebarNavItem>
 			<SidebarNavItem href="appearance" icon={BrushIcon}>
-				Appearance
+				{lang.appearance}
 			</SidebarNavItem>
 			<SidebarNavItem href="external-auth" icon={GitIcon}>
-				External Authentication
+				{lang.externalAuth}
 			</SidebarNavItem>
 			{(experiments.includes("oauth2") || isDevBuild(buildInfo)) && (
 				<SidebarNavItem href="oauth2-provider" icon={ShieldIcon}>
-					OAuth2 Applications
+					{lang.oauth2Apps}
 				</SidebarNavItem>
 			)}
 			{showSchedulePage && (
 				<SidebarNavItem href="schedule" icon={CalendarCogIcon}>
-					Schedule
+					{lang.schedule}
 				</SidebarNavItem>
 			)}
 			<SidebarNavItem href="security" icon={LockIcon}>
-				Security
+				{lang.security}
 			</SidebarNavItem>
 			<SidebarNavItem href="ssh-keys" icon={FingerprintIcon}>
-				SSH Keys
+				{lang.sshKeys}
 			</SidebarNavItem>
 			<SidebarNavItem href="tokens" icon={KeyIcon}>
-				Tokens
+				{lang.tokens}
 			</SidebarNavItem>
 			<SidebarNavItem href="notifications" icon={BellIcon}>
-				Notifications
+				{lang.notifications}
 			</SidebarNavItem>
 		</BaseSidebar>
 	);

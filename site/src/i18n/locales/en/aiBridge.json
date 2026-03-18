@@ -1,0 +1,125 @@
+{
+	"title": "AI Bridge Logs",
+	"subtitle": "Centralized auditing for LLM usage across your organization.",
+	"tabs": {
+		"requestLogs": "Request Logs",
+		"settings": "Settings"
+	},
+	"requestLogs": {
+		"title": "Request Logs",
+		"description": "View and filter all AI bridge requests across your organization.",
+		"filters": {
+			"title": "Filters",
+			"provider": "Provider",
+			"model": "Model",
+			"status": "Status",
+			"user": "User",
+			"dateRange": "Date Range",
+			"clearAll": "Clear All",
+			"applyFilters": "Apply Filters"
+		},
+		"table": {
+			"timestamp": "Timestamp",
+			"provider": "Provider",
+			"model": "Model",
+			"user": "User",
+			"status": "Status",
+			"duration": "Duration",
+			"tokens": "Tokens",
+			"actions": "Actions"
+		},
+		"status": {
+			"success": "Success",
+			"error": "Error",
+			"pending": "Pending",
+			"cancelled": "Cancelled"
+		},
+		"actions": {
+			"viewDetails": "View Details",
+			"export": "Export",
+			"replay": "Replay"
+		},
+		"details": {
+			"title": "Request Details",
+			"requestId": "Request ID",
+			"timestamp": "Timestamp",
+			"provider": "Provider",
+			"model": "Model",
+			"user": "User",
+			"status": "Status",
+			"request": "Request",
+			"response": "Response",
+			"metadata": "Metadata",
+			"tokensUsed": "Tokens Used",
+			"duration": "Duration",
+			"cost": "Cost"
+		},
+		"empty": {
+			"title": "No request logs found",
+			"description": "There are no AI bridge request logs matching your filters."
+		},
+		"export": {
+			"title": "Export Logs",
+			"format": "Format",
+			"csv": "CSV",
+			"json": "JSON",
+			"dateRange": "Date Range",
+			"includeFilters": "Include Current Filters",
+			"export": "Export"
+		}
+	},
+	"settings": {
+		"title": "AI Bridge Settings",
+		"description": "Configure AI bridge providers and models for your organization.",
+		"providers": {
+			"title": "Providers",
+			"addProvider": "Add Provider",
+			"noProviders": "No providers configured",
+			"enabled": "Enabled",
+			"disabled": "Disabled"
+		},
+		"models": {
+			"title": "Models",
+			"addModel": "Add Model",
+			"noModels": "No models configured",
+			"default": "Default"
+		},
+		"quotas": {
+			"title": "Quotas",
+			"description": "Set usage limits for AI bridge requests.",
+			"dailyLimit": "Daily Request Limit",
+			"monthlyLimit": "Monthly Request Limit",
+			"tokenLimit": "Token Limit",
+			"resetQuota": "Reset Quota"
+		},
+		"audit": {
+			"title": "Audit Settings",
+			"logLevel": "Log Level",
+			"logAllRequests": "Log All Requests",
+			"logSuccessfulRequests": "Log Successful Requests",
+			"logFailedRequests": "Log Failed Requests",
+			"retention": "Log Retention",
+			"retentionDays": "Retention Period (Days)"
+		}
+	},
+	"providers": {
+		"openai": "OpenAI",
+		"anthropic": "Anthropic",
+		"google": "Google",
+		"azure": "Azure OpenAI",
+		"custom": "Custom"
+	},
+	"models": {
+		"gpt4": "GPT-4",
+		"gpt35": "GPT-3.5",
+		"claude": "Claude",
+		"gemini": "Gemini",
+		"llama": "LLaMA"
+	},
+	"help": {
+		"title": "About AI Bridge",
+		"description": "AI Bridge provides centralized auditing and management for LLM API usage across your organization. Track requests, monitor costs, and enforce quotas.",
+		"docs": "Documentation",
+		"support": "Support"
+	}
+}

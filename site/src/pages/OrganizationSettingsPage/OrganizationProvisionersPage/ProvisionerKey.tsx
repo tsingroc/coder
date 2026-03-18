@@ -10,6 +10,7 @@ import {
 } from "components/Tooltip/Tooltip";
 import { InfoIcon } from "lucide-react";
 import type { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 type KeyType = "builtin" | "userAuth" | "psk" | "key";
 
@@ -57,6 +58,7 @@ type ProvisionerKeyProps = {
 export const ProvisionerKey: FC<ProvisionerKeyProps> = ({ name }) => {
 	const type = getKeyType(name);
 	const info = infoByType[type];
+	const { t } = useTranslation();
 
 	return (
 		<span className="flex items-center gap-1 whitespace-nowrap text-xs font-medium text-content-secondary">
@@ -65,7 +67,7 @@ export const ProvisionerKey: FC<ProvisionerKeyProps> = ({ name }) => {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<span className="flex items-center">
-							<span className="sr-only">More info</span>
+							<span className="sr-only">{t("moreInfo")}</span>
 							<InfoIcon
 								tabIndex={0}
 								className="cursor-pointer size-icon-xs p-0.5"

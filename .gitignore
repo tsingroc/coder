@@ -102,3 +102,9 @@ PLAN.md
 
 # Ignore any dev licenses
 license.txt
+
+# Local environment configuration
+.env.local
+
+# Local development guide
+LOCAL_DEV_GUIDE.md

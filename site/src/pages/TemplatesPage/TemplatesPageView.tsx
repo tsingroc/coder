@@ -42,42 +42,26 @@ import { linkToTemplate, useLinks } from "modules/navigation";
 import type { WorkspacePermissions } from "modules/permissions/workspaces";
 import type { FC } from "react";
 import { Link as RouterLink, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import { createDayString } from "utils/createDayString";
 import { docs } from "utils/docs";
-import {
-	formatTemplateActiveDevelopers,
-	formatTemplateBuildTime,
-} from "utils/templates";
+import { formatTemplateBuildTime } from "utils/templates";
 import { EmptyTemplates } from "./EmptyTemplates";
 import { TemplatesFilter } from "./TemplatesFilter";
 import type { TemplateFilterState } from "./TemplatesPage";
-
-const Language = {
-	developerCount: (activeCount: number): string => {
-		return `${formatTemplateActiveDevelopers(activeCount)} developer${
-			activeCount !== 1 ? "s" : ""
-		}`;
-	},
-	nameLabel: "Name",
-	buildTimeLabel: "Build time",
-	usedByLabel: "Used by",
-	lastUpdatedLabel: "Last updated",
-	templateTooltipTitle: "What is template?",
-	templateTooltipText:
-		"With templates you can create a common configuration for your workspaces using Terraform.",
-	templateTooltipLink: "Manage templates",
-};
+import { useLanguage } from "./Language";
 
 const TemplateHelpTooltip: FC = () => {
+	const language = useLanguage();
 	return (
 		<HelpTooltip>
 			<HelpTooltipIconTrigger />
 			<HelpTooltipContent>
-				<HelpTooltipTitle>{Language.templateTooltipTitle}</HelpTooltipTitle>
-				<HelpTooltipText>{Language.templateTooltipText}</HelpTooltipText>
+				<HelpTooltipTitle>{language.templateTooltipTitle}</HelpTooltipTitle>
+				<HelpTooltipText>{language.templateTooltipText}</HelpTooltipText>
 				<HelpTooltipLinksGroup>
 					<HelpTooltipLink href={docs("/admin/templates")}>
-						{Language.templateTooltipLink}
+						{language.templateTooltipLink}
 					</HelpTooltipLink>
 				</HelpTooltipLinksGroup>
 			</HelpTooltipContent>
@@ -96,6 +80,8 @@ const TemplateActions: FC<TemplateActionsProps> = ({
 	workspacePermissions,
 	templatePageLink,
 }) => {
+	const language = useLanguage();
+
 	if (template.deleted) {
 		return null;
 	}
@@ -122,7 +108,7 @@ const TemplateActions: FC<TemplateActionsProps> = ({
 		>
 			<RouterLink to={`${templatePageLink}/workspace`}>
 				<ArrowRightIcon />
-				Create Workspace
+				{language.createWorkspace}
 			</RouterLink>
 		</Button>
 	);
@@ -140,6 +126,7 @@ const TemplateRow: FC<TemplateRowProps> = ({
 	workspacePermissions,
 }) => {
 	const getLink = useLinks();
+	const language = useLanguage();
 	const templatePageLink = getLink(
 		linkToTemplate(template.organization_name, template.name),
 	);
@@ -175,11 +162,11 @@ const TemplateRow: FC<TemplateRowProps> = ({
 				{showOrganizations ? (
 					<AvatarData
 						title={template.organization_display_name}
-						subtitle={`Used by ${Language.developerCount(template.active_user_count)}`}
+						subtitle={`Used by ${language.developerCount(template.active_user_count)}`}
 						avatar={<Avatar variant="icon" src={template.organization_icon} />}
 					/>
 				) : (
-					Language.developerCount(template.active_user_count)
+					language.developerCount(template.active_user_count)
 				)}
 			</TableCell>
 
@@ -223,6 +210,8 @@ export const TemplatesPageView: FC<TemplatesPageViewProps> = ({
 }) => {
 	const isLoading = !templates;
 	const isEmpty = templates && templates.length === 0;
+	const language = useLanguage();
+	const { t } = useTranslation();
 
 	return (
 		<Margins className="pb-12">
@@ -232,7 +221,7 @@ export const TemplatesPageView: FC<TemplatesPageViewProps> = ({
 						<Button asChild size="lg">
 							<RouterLink to="/starter-templates">
 								<PlusIcon />
-								New template
+								{language.newTemplate}
 							</RouterLink>
 						</Button>
 					)
@@ -240,13 +229,11 @@ export const TemplatesPageView: FC<TemplatesPageViewProps> = ({
 			>
 				<PageHeaderTitle>
 					<Stack spacing={1} direction="row" alignItems="center">
-						Templates
+						{language.title}
 						<TemplateHelpTooltip />
 					</Stack>
 				</PageHeaderTitle>
-				<PageHeaderSubtitle>
-					Select a template to create a workspace.
-				</PageHeaderSubtitle>
+				<PageHeaderSubtitle>{language.subtitle}</PageHeaderSubtitle>
 			</PageHeader>
 
 			<TemplatesFilter
@@ -262,13 +249,13 @@ export const TemplatesPageView: FC<TemplatesPageViewProps> = ({
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className="w-[35%]">{Language.nameLabel}</TableHead>
+						<TableHead className="w-[35%]">{language.nameLabel}</TableHead>
 						<TableHead className="w-[15%]">
-							{showOrganizations ? "Organization" : Language.usedByLabel}
+							{showOrganizations ? t("organization") : language.usedByLabel}
 						</TableHead>
-						<TableHead className="w-[10%]">{Language.buildTimeLabel}</TableHead>
+						<TableHead className="w-[10%]">{language.buildTimeLabel}</TableHead>
 						<TableHead className="w-[15%]">
-							{Language.lastUpdatedLabel}
+							{language.lastUpdatedLabel}
 						</TableHead>
 						<TableHead className="w-[1%]" />
 					</TableRow>

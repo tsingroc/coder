@@ -8,7 +8,7 @@ import type { FC } from "react";
 import { Link as RouterLink } from "react-router";
 import { getFormHelpers, onChangeTrimmed } from "utils/formUtils";
 import * as Yup from "yup";
-import { Language } from "./Language";
+import { useLoginLanguage } from "./Language";
 
 type PasswordSignInFormProps = {
 	onSubmit: (credentials: { email: string; password: string }) => void;
@@ -21,11 +21,13 @@ export const PasswordSignInForm: FC<PasswordSignInFormProps> = ({
 	isSigningIn,
 	autoFocus,
 }) => {
+	const lang = useLoginLanguage();
+
 	const validationSchema = Yup.object({
 		email: Yup.string()
 			.trim()
-			.email(Language.emailInvalid)
-			.required(Language.emailRequired),
+			.email(lang.emailInvalid)
+			.required(lang.emailRequired),
 		password: Yup.string(),
 	});
 
@@ -48,7 +50,7 @@ export const PasswordSignInForm: FC<PasswordSignInFormProps> = ({
 		<form onSubmit={form.handleSubmit} className="flex flex-col gap-5">
 			<div className="flex flex-col items-start gap-2">
 				<Label htmlFor={emailField.id}>
-					{Language.emailLabel}{" "}
+					{lang.emailLabel}{" "}
 					<span className="text-xs text-content-destructive font-bold">*</span>
 				</Label>
 				<Input
@@ -75,7 +77,7 @@ export const PasswordSignInForm: FC<PasswordSignInFormProps> = ({
 
 			<div className="flex flex-col items-start gap-2">
 				<Label htmlFor={passwordField.id}>
-					{Language.passwordLabel}{" "}
+					{lang.passwordLabel}{" "}
 					<span className="text-xs text-content-destructive font-bold">*</span>
 				</Label>
 				<Input
@@ -101,7 +103,7 @@ export const PasswordSignInForm: FC<PasswordSignInFormProps> = ({
 
 			<Button size="lg" disabled={isSigningIn} className="w-full" type="submit">
 				<Spinner loading={isSigningIn} />
-				{Language.passwordSignIn}
+				{lang.passwordSignIn}
 			</Button>
 
 			<Link

@@ -18,13 +18,14 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { TrashIcon } from "lucide-react";
 import type { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 dayjs.extend(relativeTime);
 
-const lastUsedOrNever = (lastUsed: string) => {
-	const t = dayjs(lastUsed);
+const lastUsedOrNever = (lastUsed: string, t: any) => {
+	const day = dayjs(lastUsed);
 	const now = dayjs();
-	return now.isBefore(t.add(100, "year")) ? t.fromNow() : "Never";
+	return now.isBefore(day.add(100, "year")) ? day.fromNow() : t("tokensNever");
 };
 
 interface TokensPageViewProps {
@@ -45,6 +46,7 @@ export const TokensPageView: FC<TokensPageViewProps> = ({
 	onDelete,
 	deleteTokenError,
 }) => {
+	const { t } = useTranslation("userSettings");
 	const theme = useTheme();
 
 	return (
@@ -55,11 +57,11 @@ export const TokensPageView: FC<TokensPageViewProps> = ({
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className="w-1/5">ID</TableHead>
-						<TableHead className="w-1/5">Name</TableHead>
-						<TableHead className="w-1/5">Last Used</TableHead>
-						<TableHead className="w-1/5">Expires At</TableHead>
-						<TableHead className="w-1/5">Created At</TableHead>
+						<TableHead className="w-1/5">{t("tokensId")}</TableHead>
+						<TableHead className="w-1/5">{t("tokensName")}</TableHead>
+						<TableHead className="w-1/5">{t("tokensLastUsed")}</TableHead>
+						<TableHead className="w-1/5">{t("tokensExpiresAt")}</TableHead>
+						<TableHead className="w-1/5">{t("tokensCreatedAt")}</TableHead>
 						<TableHead className="w-[1%]" />
 					</TableRow>
 				</TableHeader>
@@ -69,7 +71,7 @@ export const TokensPageView: FC<TokensPageViewProps> = ({
 							<TableLoader />
 						</Cond>
 						<Cond condition={hasLoaded && (!tokens || tokens.length === 0)}>
-							<TableEmpty message="No tokens found" />
+							<TableEmpty message={t("tokensNoTokensFound")} />
 						</Cond>
 						<Cond>
 							{tokens?.map((token) => {
@@ -91,7 +93,7 @@ export const TokensPageView: FC<TokensPageViewProps> = ({
 											</span>
 										</TableCell>
 
-										<TableCell>{lastUsedOrNever(token.last_used)}</TableCell>
+										<TableCell>{lastUsedOrNever(token.last_used, t)}</TableCell>
 
 										<TableCell>
 											<span
@@ -115,7 +117,7 @@ export const TokensPageView: FC<TokensPageViewProps> = ({
 														onDelete(token);
 													}}
 													size="medium"
-													aria-label="Delete token"
+													aria-label={t("tokensDelete")}
 												>
 													<TrashIcon className="size-icon-sm" />
 												</IconButton>

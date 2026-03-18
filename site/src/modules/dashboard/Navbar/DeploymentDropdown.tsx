@@ -8,6 +8,7 @@ import {
 } from "components/DropdownMenu/DropdownMenu";
 import { linkToAuditing } from "modules/navigation";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 interface DeploymentDropdownProps {
@@ -27,6 +28,7 @@ export const DeploymentDropdown: FC<DeploymentDropdownProps> = ({
 	canViewHealth,
 	canViewAIBridge,
 }) => {
+	const { t } = useTranslation();
 	if (
 		!canViewAuditLog &&
 		!canViewConnectionLog &&
@@ -42,7 +44,7 @@ export const DeploymentDropdown: FC<DeploymentDropdownProps> = ({
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline" size="lg">
-					Admin settings
+					{t("adminSettings")}
 					<ChevronDownIcon className="text-content-primary" />
 				</Button>
 			</DropdownMenuTrigger>
@@ -69,36 +71,38 @@ const DeploymentDropdownContent: FC<DeploymentDropdownProps> = ({
 	canViewConnectionLog,
 	canViewAIBridge,
 }) => {
+	const { t } = useTranslation();
+
 	return (
 		<nav>
 			{canViewDeployment && (
 				<DropdownMenuItem asChild>
-					<Link to="/deployment">Deployment</Link>
+					<Link to="/deployment">{t("deployment")}</Link>
 				</DropdownMenuItem>
 			)}
 			{canViewOrganizations && (
 				<DropdownMenuItem asChild>
-					<Link to="/organizations">Organizations</Link>
+					<Link to="/organizations">{t("organizations")}</Link>
 				</DropdownMenuItem>
 			)}
 			{canViewAuditLog && (
 				<DropdownMenuItem asChild>
-					<Link to={linkToAuditing}>Audit Logs</Link>
+					<Link to={linkToAuditing}>{t("auditLogs")}</Link>
 				</DropdownMenuItem>
 			)}
 			{canViewConnectionLog && (
 				<DropdownMenuItem asChild>
-					<Link to="/connectionlog">Connection Logs</Link>
+					<Link to="/connectionlog">{t("connectionLogs")}</Link>
 				</DropdownMenuItem>
 			)}
 			{canViewAIBridge && (
 				<DropdownMenuItem asChild>
-					<Link to="/aibridge">AI Bridge Logs</Link>
+					<Link to="/aibridge">{t("aiBridgeLogs")}</Link>
 				</DropdownMenuItem>
 			)}
 			{canViewHealth && (
 				<DropdownMenuItem asChild>
-					<Link to="/health">Healthcheck</Link>
+					<Link to="/health">{t("healthcheck")}</Link>
 				</DropdownMenuItem>
 			)}
 		</nav>

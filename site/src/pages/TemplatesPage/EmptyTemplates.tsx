@@ -6,6 +6,7 @@ import { Stack } from "components/Stack/Stack";
 import { TableEmpty } from "components/TableEmpty/TableEmpty";
 import { TemplateExampleCard } from "modules/templates/TemplateExampleCard/TemplateExampleCard";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
 import { docs } from "utils/docs";
 
@@ -46,8 +47,10 @@ export const EmptyTemplates: FC<EmptyTemplatesProps> = ({
 	examples,
 	isUsingFilter,
 }) => {
+	const { t } = useTranslation("templates");
+
 	if (isUsingFilter) {
-		return <TableEmpty message="No results matched your search" />;
+		return <TableEmpty message={t("empty.noResults")} />;
 	}
 
 	const featuredExamples = findFeaturedExamples(examples);
@@ -55,19 +58,18 @@ export const EmptyTemplates: FC<EmptyTemplatesProps> = ({
 	if (canCreateTemplates) {
 		return (
 			<TableEmpty
-				message="Create your first template"
+				message={t("starterTemplates.title")}
 				description={
 					<>
-						Templates are written in Terraform and describe the infrastructure
-						for workspaces. You can start using a starter template below or{" "}
+						{t("starterTemplates.description")}
 						<Link
 							href={docs("/admin/templates/creating-templates")}
 							target="_blank"
 							rel="noreferrer"
 						>
-							create your own
+							{t("starterTemplates.createYourOwn")}
 						</Link>
-						.
+						。
 					</>
 				}
 				cta={
@@ -80,7 +82,7 @@ export const EmptyTemplates: FC<EmptyTemplatesProps> = ({
 
 						<Button size="sm" asChild css={{ borderRadius: 9999 }}>
 							<RouterLink to="/starter-templates">
-								View all starter templates
+								{t("starterTemplates.viewAllStarterTemplates")}
 							</RouterLink>
 						</Button>
 					</Stack>
@@ -91,8 +93,8 @@ export const EmptyTemplates: FC<EmptyTemplatesProps> = ({
 
 	return (
 		<TableEmpty
-			message="Create a Template"
-			description="Contact your Coder administrator to create a template. You can share the code below."
+			message={t("empty.contactAdmin")}
+			description={t("empty.contactAdminDescription")}
 			cta={<CodeExample secret={false} code="coder templates init" />}
 		/>
 	);

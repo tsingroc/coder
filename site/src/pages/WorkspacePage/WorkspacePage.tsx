@@ -14,9 +14,11 @@ import { type FC, useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router";
 import { toast } from "sonner";
+import { useWorkspaceDetailLanguage } from "./Language";
 import { WorkspaceReadyPage } from "./WorkspaceReadyPage";
 
 const WorkspacePage: FC = () => {
+	const lang = useWorkspaceDetailLanguage();
 	const queryClient = useQueryClient();
 	const params = useParams() as {
 		username: string;
@@ -70,6 +72,19 @@ const WorkspacePage: FC = () => {
 			}
 		},
 	);
+
+	// Stable event handlers for socket events that use lang
+	const handleParseError = useEffectEvent(() => {
+		toast.error(lang.unableToProcessData(workspaceName), {
+			description: lang.pleaseTryRefreshing,
+		});
+	});
+	const handleSocketError = useEffectEvent(() => {
+		toast.error(lang.unableToGetChanges(workspaceName), {
+			description: lang.connectionClosed,
+		});
+	});
+
 	const workspaceId = workspace?.id;
 	useEffect(() => {
 		if (!workspaceId) {
@@ -79,12 +94,7 @@ const WorkspacePage: FC = () => {
 		const socket = watchWorkspace(workspaceId);
 		socket.addEventListener("message", (event) => {
 			if (event.parseError) {
-				toast.error(
-					`Unable to process latest data for workspace "${workspaceName}".`,
-					{
-						description: "Please try refreshing the page.",
-					},
-				);
+				handleParseError();
 				return;
 			}
 
@@ -93,13 +103,11 @@ const WorkspacePage: FC = () => {
 			}
 		});
 		socket.addEventListener("error", () => {
-			toast.error(`Unable to get changes for workspace "${workspaceName}".`, {
-				description: "Connection has been closed.",
-			});
+			handleSocketError();
 		});
 
 		return () => socket.close();
-	}, [updateWorkspaceData, workspaceId, workspaceName]);
+	}, [updateWorkspaceData, workspaceId, handleParseError, handleSocketError]);
 
 	// Page statuses
 	const pageError =

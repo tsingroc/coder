@@ -16,6 +16,7 @@ import {
 	terminalFonts,
 } from "theme/constants";
 import { cn } from "utils/cn";
+import { useTranslation } from "react-i18next";
 import { Section } from "../Section";
 
 // Display Geist Mono (the default monospace font) first, then the rest
@@ -39,6 +40,7 @@ export const AppearanceForm: FC<AppearanceFormProps> = ({
 	onSubmit,
 	initialValues,
 }) => {
+	const { t } = useTranslation("userSettings");
 	const currentTheme = initialValues.theme_preference || DEFAULT_THEME;
 	const currentTerminalFont =
 		initialValues.terminal_font || DEFAULT_TERMINAL_FONT;
@@ -70,7 +72,7 @@ export const AppearanceForm: FC<AppearanceFormProps> = ({
 			<Section
 				title={
 					<div className="flex flex-row items-center gap-2">
-						<span>Theme</span>
+						<span>{t("theme")}</span>
 						<Spinner loading={isUpdating} size="sm" />
 					</div>
 				}
@@ -79,19 +81,19 @@ export const AppearanceForm: FC<AppearanceFormProps> = ({
 			>
 				<div className="flex flex-row flex-wrap gap-4">
 					<AutoThemePreviewButton
-						displayName="Auto"
+						displayName={t("themeAuto")}
 						active={currentTheme === "auto"}
 						themes={["dark", "light"]}
 						onSelect={() => onChangeTheme("auto")}
 					/>
 					<ThemePreviewButton
-						displayName="Dark"
+						displayName={t("themeDark")}
 						active={currentTheme === "dark"}
 						theme="dark"
 						onSelect={() => onChangeTheme("dark")}
 					/>
 					<ThemePreviewButton
-						displayName="Light"
+						displayName={t("themeLight")}
 						active={currentTheme === "light"}
 						theme="light"
 						onSelect={() => onChangeTheme("light")}
@@ -101,7 +103,7 @@ export const AppearanceForm: FC<AppearanceFormProps> = ({
 			<Section
 				title={
 					<div className="flex flex-row items-center gap-2">
-						<span id="fonts-radio-buttons-group-label">Terminal Font</span>
+						<span id="fonts-radio-buttons-group-label">{t("terminalFont")}</span>
 						<Spinner loading={isUpdating} size="sm" />
 					</div>
 				}

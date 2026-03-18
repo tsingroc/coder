@@ -7,6 +7,7 @@ import {
 } from "components/Tooltip/Tooltip";
 import { CircleHelpIcon, ExternalLinkIcon } from "lucide-react";
 import type { FC, HTMLAttributes, PropsWithChildren, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "utils/cn";
 
 type Icon = typeof CircleHelpIcon;
@@ -51,11 +52,13 @@ export const HelpTooltipIconTrigger: React.FC<HelpTooltipIconTriggerProps> = ({
 	className,
 	...buttonProps
 }) => {
+	const { t } = useTranslation();
+
 	return (
 		<HelpTooltipTrigger asChild>
 			<button
 				{...buttonProps}
-				aria-label="More info"
+				aria-label={t("moreInfo")}
 				className={cn(
 					"flex items-center justify-center px-0 py-1",
 					"border-0 border-none bg-transparent cursor-pointer text-inherit",

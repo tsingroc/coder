@@ -6,6 +6,7 @@ import { Form, FormFields } from "components/Form/Form";
 import { Spinner } from "components/Spinner/Spinner";
 import { type FormikTouched, useFormik } from "formik";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	getFormHelpers,
 	nameValidator,
@@ -13,15 +14,8 @@ import {
 } from "utils/formUtils";
 import * as Yup from "yup";
 
-export const Language = {
-	usernameLabel: "Username",
-	emailLabel: "Email",
-	nameLabel: "Name",
-	updateSettings: "Update account",
-};
-
 const validationSchema = Yup.object({
-	username: nameValidator(Language.usernameLabel),
+	username: nameValidator("Username"),
 	name: Yup.string(),
 });
 
@@ -45,6 +39,7 @@ export const AccountForm: FC<AccountFormProps> = ({
 	updateProfileError,
 	initialTouched,
 }) => {
+	const { t } = useTranslation("userSettings");
 	const form = useFormik({
 		initialValues,
 		validationSchema,
@@ -60,12 +55,7 @@ export const AccountForm: FC<AccountFormProps> = ({
 					<ErrorAlert error={updateProfileError} />
 				)}
 
-				<TextField
-					disabled
-					fullWidth
-					label={Language.emailLabel}
-					value={email}
-				/>
+				<TextField disabled fullWidth label={t("email")} value={email} />
 				<TextField
 					{...getFieldHelpers("username")}
 					onChange={onChangeTrimmed(form)}
@@ -73,7 +63,7 @@ export const AccountForm: FC<AccountFormProps> = ({
 					autoComplete="username"
 					disabled={!editable}
 					fullWidth
-					label={Language.usernameLabel}
+					label={t("username")}
 				/>
 				<TextField
 					{...getFieldHelpers("name")}
@@ -83,14 +73,14 @@ export const AccountForm: FC<AccountFormProps> = ({
 						e.target.value = e.target.value.trim();
 						form.handleChange(e);
 					}}
-					label={Language.nameLabel}
-					helperText='The human-readable name is optional and can be accessed in a template via the "data.coder_workspace_owner.me.full_name" property.'
+					label={t("fullName")}
+					helperText={t("nameHelperText")}
 				/>
 
 				<div>
 					<Button disabled={isLoading} type="submit">
 						<Spinner loading={isLoading} />
-						{Language.updateSettings}
+						{t("updateProfile")}
 					</Button>
 				</div>
 			</FormFields>

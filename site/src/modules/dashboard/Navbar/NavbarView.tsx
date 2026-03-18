@@ -13,6 +13,8 @@ import type { ProxyContextValue } from "contexts/ProxyContext";
 import { useEmbeddedMetadata } from "hooks/useEmbeddedMetadata";
 import { NotificationsInbox } from "modules/notifications/NotificationsInbox/NotificationsInbox";
 import type { FC } from "react";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { NavLink, useLocation } from "react-router";
 import { cn } from "utils/cn";
@@ -140,6 +142,7 @@ interface NavItemsProps {
 }
 
 const NavItems: FC<NavItemsProps> = ({ className, user }) => {
+	const { t } = useTranslation();
 	const location = useLocation();
 
 	return (
@@ -153,7 +156,7 @@ const NavItems: FC<NavItemsProps> = ({ className, user }) => {
 				}}
 				to="/workspaces"
 			>
-				Workspaces
+				{t("workspaces")}
 			</NavLink>
 			<NavLink
 				className={({ isActive }) => {
@@ -161,7 +164,7 @@ const NavItems: FC<NavItemsProps> = ({ className, user }) => {
 				}}
 				to="/templates"
 			>
-				Templates
+				{t("templates")}
 			</NavLink>
 			<TasksNavItem user={user} />
 			<AgentsNavItem />
@@ -174,6 +177,7 @@ type TasksNavItemProps = {
 };
 
 const TasksNavItem: FC<TasksNavItemProps> = ({ user }) => {
+	const { t } = useTranslation();
 	const { metadata } = useEmbeddedMetadata();
 	const canSeeTasks = Boolean(
 		metadata["tasks-tab-visible"].value ||
@@ -205,7 +209,7 @@ const TasksNavItem: FC<TasksNavItemProps> = ({ user }) => {
 				return cn(linkStyles.default, { [linkStyles.active]: isActive });
 			}}
 		>
-			Tasks
+			{t("tasks")}
 			{idleCount > 0 && (
 				<Tooltip>
 					<TooltipTrigger asChild>
@@ -213,23 +217,24 @@ const TasksNavItem: FC<TasksNavItemProps> = ({ user }) => {
 							variant="info"
 							size="xs"
 							className="ml-2"
-							aria-label={idleTasksLabel(idleCount)}
+							aria-label={idleTasksLabel(idleCount, t)}
 						>
 							{idleCount}
 						</Badge>
 					</TooltipTrigger>
-					<TooltipContent>{idleTasksLabel(idleCount)}</TooltipContent>
+					<TooltipContent>{idleTasksLabel(idleCount, t)}</TooltipContent>
 				</Tooltip>
 			)}
 		</NavLink>
 	);
 };
 
-function idleTasksLabel(count: number) {
-	return `You have ${count} ${count === 1 ? "task" : "tasks"} waiting for input`;
+function idleTasksLabel(count: number, t: TFunction) {
+	return t("idleTasksLabel", { count });
 }
 
 const AgentsNavItem: FC = () => {
+	const { t } = useTranslation();
 	const { metadata } = useEmbeddedMetadata();
 	const canSeeAgents = Boolean(
 		metadata["agents-tab-visible"].value ||
@@ -248,7 +253,7 @@ const AgentsNavItem: FC = () => {
 			}}
 			to="/agents"
 		>
-			Agents
+			{t("agents")}
 		</NavLink>
 	);
 };
@@ -265,6 +270,7 @@ interface SupportButtonProps {
 }
 
 const SupportButton: FC<SupportButtonProps> = ({ name, target, icon }) => {
+	const { t } = useTranslation();
 	return (
 		<Button asChild variant="outline">
 			<a
@@ -275,7 +281,7 @@ const SupportButton: FC<SupportButtonProps> = ({ name, target, icon }) => {
 			>
 				{icon && <SupportIcon icon={icon} className="text-content-secondary" />}
 				{name}
-				<span className="sr-only"> (link opens in new tab)</span>
+				<span className="sr-only"> ({t("linkOpensInNewTab")})</span>
 			</a>
 		</Button>
 	);

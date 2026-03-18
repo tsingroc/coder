@@ -4,6 +4,7 @@ import { Loader } from "components/Loader/Loader";
 import { Stack } from "components/Stack/Stack";
 import { useAuthenticated } from "hooks";
 import type { ComponentProps, FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
 import { Section } from "../Section";
@@ -14,6 +15,7 @@ import {
 } from "./SingleSignOnSection";
 
 const SecurityPage: FC = () => {
+	const { t } = useTranslation("userSettings");
 	const { user: me } = useAuthenticated();
 	const updatePasswordMutation = useMutation(updatePassword());
 	const authMethodsQuery = useQuery(authMethods());
@@ -39,7 +41,7 @@ const SecurityPage: FC = () => {
 							userId: me.id,
 							...data,
 						});
-						toast.success("Updated password.");
+						toast.success(t("passwordUpdated"));
 						// Refresh the browser session. We need to improve the AuthProvider
 						// to include better API to handle these scenarios
 						window.location.href = location.origin;
@@ -70,9 +72,10 @@ export const SecurityPageView: FC<SecurityPageViewProps> = ({
 	security,
 	oidc,
 }) => {
+	const { t } = useTranslation("userSettings");
 	return (
 		<Stack spacing={6}>
-			<Section title="Security" description="Update your account password">
+			<Section title={t("security")} description={t("securityDescription")}>
 				<SecurityForm {...security.form} />
 			</Section>
 			{oidc && <SingleSignOnSection {...oidc.section} />}

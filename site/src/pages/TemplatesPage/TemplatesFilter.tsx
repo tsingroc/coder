@@ -13,6 +13,7 @@ import {
 } from "components/Filter/SelectFilter";
 import { useDashboard } from "modules/dashboard/useDashboard";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	DEFAULT_USER_FILTER_WIDTH,
 	type UserFilterMenu,
@@ -32,6 +33,7 @@ export const TemplatesFilter: FC<TemplatesFilterProps> = ({
 	userMenu,
 }) => {
 	const { showOrganizations } = useDashboard();
+	const { t } = useTranslation();
 	const width = showOrganizations ? DEFAULT_USER_FILTER_WIDTH : undefined;
 	const organizationMenu = useFilterMenu({
 		onChange: (option) =>
@@ -55,9 +57,9 @@ export const TemplatesFilter: FC<TemplatesFilterProps> = ({
 	return (
 		<Filter
 			presets={[
-				{ query: "", name: "All templates" },
-				{ query: "author:me", name: "Templates you authored" },
-				{ query: "deprecated:true", name: "Deprecated templates" },
+				{ query: "", name: t("allTemplates") },
+				{ query: "author:me", name: t("templatesYouAuthored") },
+				{ query: "deprecated:true", name: t("deprecatedTemplates") },
 			]}
 			// TODO: Add docs for this
 			// learnMoreLink={docs("/templates#template-filtering")}
@@ -68,8 +70,8 @@ export const TemplatesFilter: FC<TemplatesFilterProps> = ({
 				<>
 					{userMenu && <UserMenu width={width} menu={userMenu} />}
 					<SelectFilter
-						placeholder="All organizations"
-						label="Select an organization"
+						placeholder={t("allOrganizations")}
+						label={t("selectOrganization")}
 						options={organizationMenu.searchOptions}
 						selectedOption={organizationMenu.selectedOption ?? undefined}
 						onSelect={organizationMenu.selectOption}

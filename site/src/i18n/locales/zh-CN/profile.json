@@ -1,0 +1,274 @@
+{
+	"title": "个人资料",
+	"subtitle": "管理您的个人信息和偏好设置。",
+	"sections": {
+		"info": "个人信息",
+		"preferences": "偏好设置",
+		"security": "安全",
+		"activity": "活动",
+		"sessions": "活动会话",
+		"apiKeys": "API 密钥"
+	},
+	"info": {
+		"title": "个人信息",
+		"description": "更新向其他用户显示的个人信息。",
+		"fields": {
+			"username": {
+				"label": "用户名",
+				"description": "您的唯一用户名（无法更改）",
+				"placeholder": "username"
+			},
+			"email": {
+				"label": "电子邮件地址",
+				"description": "您的主要电子邮件地址",
+				"placeholder": "you@example.com",
+				"verified": "已验证",
+				"unverified": "未验证",
+				"verify": "验证电子邮件"
+			},
+			"displayName": {
+				"label": "显示名称",
+				"description": "向其他用户显示的名称",
+				"placeholder": "张三"
+			},
+			"bio": {
+				"label": "个人简介",
+				"description": "关于您的简要描述",
+				"placeholder": "示例公司的软件工程师..."
+			},
+			"location": {
+				"label": "位置",
+				"description": "您的城市或位置",
+				"placeholder": "北京，中国"
+			},
+			"company": {
+				"label": "公司",
+				"description": "您的公司或组织",
+				"placeholder": "示例公司"
+			},
+			"website": {
+				"label": "网站",
+				"description": "您的个人网站或作品集",
+				"placeholder": "https://example.com"
+			},
+			"jobTitle": {
+				"label": "职位",
+				"description": "您当前的角色或职位",
+				"placeholder": "软件工程师"
+			},
+			"phone": {
+				"label": "电话号码",
+				"description": "您的联系电话",
+				"placeholder": "+86 138 0000 0000"
+			}
+		},
+		"avatar": {
+			"label": "头像",
+			"upload": "上传新头像",
+			"remove": "移除头像",
+			"dragDrop": "将图片拖放到此处，或点击浏览",
+			"formats": "支持的格式：JPG、PNG、GIF（最大 5MB）",
+			"success": "头像更新成功",
+			"failed": "头像更新失败"
+		},
+		"actions": {
+			"save": "保存更改",
+			"saving": "保存中...",
+			"cancel": "取消"
+		},
+		"messages": {
+			"success": "个人资料更新成功！",
+			"failed": "个人资料更新失败。请重试。",
+			"emailUpdateSent": "确认邮件已发送至 {{email}}。请点击链接确认您的新电子邮件地址。"
+		}
+	},
+	"preferences": {
+		"title": "偏好设置",
+		"description": "自定义您的 Coder 体验。",
+		"appearance": {
+			"title": "外观",
+			"theme": {
+				"label": "主题",
+				"description": "选择您喜欢的配色方案",
+				"dark": "深色",
+				"light": "浅色",
+				"system": "系统默认"
+			},
+			"language": {
+				"label": "语言",
+				"description": "选择您偏好的语言",
+				"en": "English",
+				"zhCN": "简体中文"
+			},
+			"homePage": {
+				"label": "主页",
+				"description": "选择首次登录时看到的页面",
+				"workspaces": "工作区",
+				"templates": "模板",
+				"agents": "智能助手"
+			}
+		},
+		"notifications": {
+			"title": "通知",
+			"description": "管理您如何接收通知。",
+			"email": {
+				"label": "电子邮件通知",
+				"description": "通过电子邮件接收通知",
+				"workspaceUpdates": "工作区更新",
+				"templateChanges": "模板更改",
+				"securityAlerts": "安全警报",
+				"weeklyDigest": "每周摘要"
+			},
+			"desktop": {
+				"label": "桌面通知",
+				"description": "显示桌面通知",
+				"enabled": "启用桌面通知",
+				"permission": "授予显示通知的权限"
+			}
+		},
+		"accessibility": {
+			"title": "无障碍",
+			"description": "自定义无障碍选项。",
+			"reducedMotion": {
+				"label": "减少动画",
+				"description": "减少动画和移动效果"
+			},
+			"highContrast": {
+				"label": "高对比度模式",
+				"description": "增加对比度以提高可见性"
+			},
+			"fontSize": {
+				"label": "字体大小",
+				"description": "调整基础字体大小",
+				"small": "小",
+				"medium": "中",
+				"large": "大",
+				"extraLarge": "特大"
+			}
+		}
+	},
+	"security": {
+		"title": "安全",
+		"description": "管理您的账户安全设置。",
+		"password": {
+			"title": "更改密码",
+			"description": "定期更新密码以保护账户安全。",
+			"currentPassword": {
+				"label": "当前密码",
+				"placeholder": "输入您当前的密码",
+				"required": "当前密码为必填项"
+			},
+			"newPassword": {
+				"label": "新密码",
+				"placeholder": "输入新密码",
+				"required": "新密码为必填项",
+				"strength": "密码强度"
+			},
+			"confirmPassword": {
+				"label": "确认新密码",
+				"placeholder": "确认您的新密码",
+				"required": "请确认您的新密码",
+				"mismatch": "密码不匹配"
+			},
+			"actions": {
+				"submit": "更改密码",
+				"submitting": "更改中..."
+			},
+			"messages": {
+				"success": "密码更改成功！",
+				"failed": "密码更改失败。请检查您的当前密码并重试。",
+				"weak": "新密码太弱。请选择更强的密码。"
+			}
+		},
+		"twoFactor": {
+			"title": "双因素身份验证",
+			"description": "为您的账户添加额外的安全层。",
+			"enabled": "已启用",
+			"disabled": "未启用",
+			"enable": {
+				"title": "启用双因素身份验证",
+				"description": "按照以下步骤设置 2FA：",
+				"step1": "下载身份验证器应用程序（Google Authenticator、Authy 等）",
+				"step2": "使用您的应用程序扫描下方的二维码",
+				"step3": "输入应用程序中的 6 位验证码",
+				"verify": "验证并启用",
+				"code": {
+					"label": "验证码",
+					"placeholder": "123456",
+					"required": "验证码为必填项",
+					"invalid": "无效的验证码"
+				},
+				"backupCodes": {
+					"title": "备用码",
+					"description": "将这些备用码保存在安全的地方。如果您丢失了身份验证器设备，可以使用它们访问您的账户。",
+					"download": "下载备用码",
+					"copy": "复制备用码"
+				}
+			},
+			"disable": {
+				"title": "禁用双因素身份验证",
+				"description": "确定要禁用 2FA 吗？您的账户安全性将降低。",
+				"confirm": "确认禁用",
+				"requirePassword": "输入您的密码以确认",
+				"messages": {
+					"success": "双因素身份验证已禁用",
+					"failed": "禁用双因素身份验证失败"
+				}
+			}
+		},
+		"sessions": {
+			"title": "活动会话",
+			"description": "管理当前登录到您账户的所有设备。",
+			"current": {
+				"label": "当前会话",
+				"device": "此设备",
+				"location": "当前位置",
+				"lastActive": "当前活跃"
+			},
+			"session": {
+				"device": "设备",
+				"browser": "浏览器",
+				"location": "位置",
+				"lastActive": "最后活跃",
+				"ipAddress": "IP 地址",
+				"actions": "操作",
+				"revoke": "撤销"
+			},
+			"actions": {
+				"revokeAll": "撤销所有其他会话",
+				"confirmRevokeAll": "确定要撤销所有其他会话吗？您将从此设备以外的所有地方被登出。"
+			}
+		}
+	},
+	"activity": {
+		"title": "活动",
+		"description": "查看您最近的账户活动。",
+		"tabs": {
+			"overview": "概述",
+			"workspaces": "工作区",
+			"templates": "模板",
+			"auditLog": "审计日志"
+		},
+		"overview": {
+			"title": "活动概述",
+			"stats": {
+				"workspacesCreated": "创建的工作区",
+				"templatesUsed": "使用的模板",
+				"totalBuildTime": "总构建时间",
+				"activeDays": "活跃天数"
+			},
+			"recentActivity": {
+				"title": "最近活动",
+				"viewAll": "查看所有活动"
+			}
+		}
+	},
+	"errors": {
+		"updateFailed": "个人资料更新失败。请重试。",
+		"uploadFailed": "图片上传失败。请重试。",
+		"invalidFileType": "无效的文件类型。请上传 JPG、PNG 或 GIF。",
+		"fileTooLarge": "文件太大。最大大小为 5MB。",
+		"usernameExists": "用户名已存在",
+		"emailExists": "电子邮件已被注册"
+	}
+}

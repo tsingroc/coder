@@ -1,15 +1,21 @@
 {
-	"hooks": {
-		"PostToolUse": [
-			{
-				"matcher": "Edit|Write|MultiEdit",
-				"hooks": [
-					{
-						"type": "command",
-						"command": ".claude/scripts/format.sh"
-					}
-				]
-			}
-		]
-	}
+  "permissions": {
+    "allow": [
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_install"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/scripts/format.sh"
+          }
+        ]
+      }
+    ]
+  }
 }

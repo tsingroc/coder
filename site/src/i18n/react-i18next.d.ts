@@ -1,0 +1,2935 @@
+import "i18next";
+import "react-i18next";
+
+// Extend i18next to add custom typing for translation resources
+declare module "i18next" {
+	interface CustomTypeOptions {
+		// Default namespace
+		defaultNS: "common";
+		// Available namespaces
+		resources: {
+			common: {
+				// Common translations
+				cancel: string;
+				save: string;
+				delete: string;
+				edit: string;
+				create: string;
+				loading: string;
+				error: string;
+				success: string;
+				confirm: string;
+				close: string;
+				back: string;
+				next: string;
+				submit: string;
+				required: string;
+				or: string;
+				yes: string;
+				no: string;
+				search: string;
+				filter: string;
+				sort: string;
+				refresh: string;
+				download: string;
+				upload: string;
+				copy: string;
+				paste: string;
+				clear: string;
+				reset: string;
+				apply: string;
+				view: string;
+				hide: string;
+				show: string;
+				enable: string;
+				disable: string;
+				active: string;
+				inactive: string;
+				enabled: string;
+				disabled: string;
+				open: string;
+				closed: string;
+				public: string;
+				private: string;
+				name: string;
+				description: string;
+				status: string;
+				actions: string;
+				details: string;
+				settings: string;
+				help: string;
+				about: string;
+				moreInfo: string;
+				lastConnection: string;
+				lastConnectionDescription: string;
+				documentation: string;
+				support: string;
+				version: string;
+				build: string;
+				updated: string;
+				created: string;
+				never: string;
+				all: string;
+				none: string;
+				other: string;
+				linkOpensInNewTab: string;
+				idleTasksLabel: string;
+				filters: string;
+				search: string;
+				searchPlaceholder: string;
+				viewAdvancedFiltering: string;
+				clearSearch: string;
+				selectUser: string;
+				allUsers: string;
+				noUsersFound: string;
+				searchUser: string;
+				searchUserPlaceholder: string;
+				allTemplates: string;
+				selectTemplate: string;
+				noTemplatesFound: string;
+				searchTemplate: string;
+				searchTemplatePlaceholder: string;
+				templatesYouAuthored: string;
+				deprecatedTemplates: string;
+				allOrganizations: string;
+				selectOrganization: string;
+				organization: string;
+				selectStatus: string;
+				allStatuses: string;
+				selectAllWorkspaces: string;
+				noRecordsAvailable: string;
+				noResultsMatched: string;
+				createWorkspace: string;
+				workspaceDescription: string;
+				toCreateWorkspaceNeedTemplate: string;
+				goToTemplates: string;
+				noTemplatesAvailable: string;
+				selectTemplateBelow: string;
+				seeAllTemplates: string;
+				workspaces: string;
+				templates: string;
+				template: string;
+				tasks: string;
+				agents: string;
+				adminSettings: string;
+				deployment: string;
+				organizations: string;
+				auditLogs: string;
+				connectionLogs: string;
+				aiBridgeLogs: string;
+				healthcheck: string;
+				building: string;
+				transmission: string;
+				activeConnections: string;
+				deploymentBanner: {
+					healthDetectedProblems: string;
+					healthStatus: string;
+					activityInLastMinutes: string;
+					dataSentToWorkspaces: string;
+					dataSentFromWorkspaces: string;
+					noRecentConnections: string;
+					averageLatency: string;
+					vscodeEditors: string;
+					jetbrainsEditors: string;
+					sshSessions: string;
+					webTerminalSessions: string;
+					lastAggregated: string;
+					countdownToRefresh: string;
+					accessUrlError: string;
+					databaseError: string;
+					derpError: string;
+					websocketError: string;
+					workspaceProxyError: string;
+				};
+				errorPage: {
+					title: string;
+					description: string;
+					discordCommunity: string;
+					openIssue: string;
+					linkOpensNewTab: string;
+					reloadPage: string;
+					showError: string;
+					hideError: string;
+				};
+				userDropdown: {
+					installCLI: string;
+					account: string;
+					signOut: string;
+					browseSourceCode: string;
+					copied: string;
+					copyDeploymentId: string;
+					copyright: string;
+				};
+			};
+			login: {
+				// Login page translations
+				welcome: string;
+				welcomeBack: string;
+				signInTitle: string;
+				emailLabel: string;
+				passwordLabel: string;
+				emailInvalid: string;
+				emailRequired: string;
+				passwordRequired: string;
+				passwordSignIn: string;
+				githubSignIn: string;
+				oidcSignIn: string;
+				forgotPassword: string;
+				resetPassword: string;
+				rememberMe: string;
+				noAccount: string;
+				signUp: string;
+				loginError: string;
+				loginSuccess: string;
+				logout: string;
+				logoutConfirm: string;
+				loading: string;
+				backToHome: string;
+			};
+			workspace: {
+				// Workspace page translations
+				pageTitle: string;
+				yourWorkspacesButton: string;
+				allWorkspacesButton: string;
+				runningWorkspacesButton: string;
+				seeAllTemplates: string;
+				template: string;
+				newWorkspace: string;
+				bulkActions: string;
+				start: string;
+				stop: string;
+				update: string;
+				delete: string;
+				pageNotFound: string;
+				pageNotFoundDescription: string;
+				backToFirstPage: string;
+				workspace: string;
+				workspaces: string;
+				empty: {
+					title: string;
+					description: string;
+					goToTemplates: string;
+				};
+			};
+			createWorkspace: {
+				// Create workspace page translations
+				title: string;
+				newWorkspace: string;
+				general: string;
+				adminOnlyMessage: string;
+				userMessage: string;
+				workspaceName: string;
+				versionId: string;
+				versionPreset: string;
+				owner: string;
+				needSuggestion: string;
+				externalAuth: string;
+				externalAuthDescription: string;
+				externalAuthError: string;
+				cancel: string;
+				create: string;
+				back: string;
+				viewSource: string;
+				viewDocs: string;
+				selectPreset: string;
+				duplicateWarning: string;
+				dynamicParametersTooltip: string;
+				createWorkspaceForm: string;
+				template: {
+					title: string;
+					description: string;
+					selectTemplate: string;
+					noTemplates: string;
+					templateDetails: string;
+					version: string;
+					activeDevelopers: string;
+					buildTime: string;
+				};
+				parameters: {
+					title: string;
+					description: string;
+					required: string;
+					optional: string;
+					defaultValue: string;
+					noParameters: string;
+				};
+				validation: {
+					nameRequired: string;
+					nameInvalid: string;
+					nameExists: string;
+					templateRequired: string;
+					parameterRequired: string;
+					parameterInvalid: string;
+				};
+				actions: {
+					creating: string;
+					created: string;
+					createFailed: string;
+					checkingName: string;
+				};
+				options: {
+					autoStart: string;
+					autoStartDescription: string;
+					ttl: string;
+					ttlDescription: string;
+					ttlDisabled: string;
+					ttlHours: string;
+				};
+			};
+			workspaceDetail: {
+				// Workspace detail page translations
+				title: string;
+				backToWorkspaces: string;
+				owner: string;
+				organization: string;
+				version: string;
+				copyWorkspaceName: string;
+				dailyUsage: string;
+				creditsOf: string;
+				seeAffectedWorkspaces: string;
+				seeAffectedWorkspacesFor: string;
+				deletionOn: string;
+				deletionSoon: string;
+				scheduleSettings: string;
+				restartWorkspace: string;
+				restartConfirm: string;
+				restartDescription: string;
+				failedToBuild: string;
+				pleaseTryRefreshing: string;
+				unableToProcessData: string;
+				unableToGetChanges: string;
+				connectionClosed: string;
+				errorActivating: string;
+				status: {
+					title: string;
+					starting: string;
+					running: string;
+					stopping: string;
+					stopped: string;
+					error: string;
+					pending: string;
+					canceling: string;
+					canceled: string;
+					deleting: string;
+					deleting_date: string;
+				};
+				resources: {
+					title: string;
+					cpu: string;
+					memory: string;
+					disk: string;
+					network: string;
+					uptime: string;
+					lastUsed: string;
+				};
+				actions: {
+					start: string;
+					stop: string;
+					restart: string;
+					update: string;
+					delete: string;
+					openSSH: string;
+					openVSCode: string;
+					openBrowser: string;
+					viewLogs: string;
+					viewHistory: string;
+					viewTemplates: string;
+					settings: string;
+				};
+				applications: {
+					title: string;
+					noApplications: string;
+					loading: string;
+					port: string;
+					access: string;
+					health: string;
+					healthy: string;
+					unhealthy: string;
+					starting: string;
+					openApp: string;
+				};
+				timeline: {
+					title: string;
+					created: string;
+					started: string;
+					stopped: string;
+					deleted: string;
+					updated: string;
+					noEvents: string;
+				};
+			};
+			userSettings: {
+				// User settings page translations
+				title: string;
+				account: string;
+				accountDescription: string;
+				appearance: string;
+				appearanceTitle: string;
+				theme: string;
+				themeAuto: string;
+				themeDark: string;
+				themeLight: string;
+				terminalFont: string;
+				externalAuth: string;
+				oauth2Apps: string;
+				schedule: string;
+				sshKeys: string;
+				security: string;
+				securityDescription: string;
+				tokens: string;
+				notifications: string;
+				email: string;
+				username: string;
+				fullName: string;
+				nameHelperText: string;
+				updateProfile: string;
+				changePassword: string;
+				oldPassword: string;
+				newPassword: string;
+				confirmPassword: string;
+				passwordUpdated: string;
+				oldPasswordRequired: string;
+				newPasswordRequired: string;
+				confirmPasswordRequired: string;
+				passwordMinLength: string;
+				passwordMaxLength: string;
+				confirmPasswordMatch: string;
+				updatePassword: string;
+				passwordBasedAccountsOnly: string;
+				sshKeysDescription: string;
+				sshKeysRegenerate: string;
+				tokensId: string;
+				tokensName: string;
+				tokensLastUsed: string;
+				tokensExpiresAt: string;
+				tokensCreatedAt: string;
+				tokensDelete: string;
+				tokensNoTokensFound: string;
+				tokensNever: string;
+				tokensTitle: string;
+				tokensDescription: string;
+				tokensAdd: string;
+				notificationsSettingsTitle: string;
+				notificationsDescription: string;
+				notificationsDisabled: string;
+				notificationsDisableError: string;
+				notificationsUpdated: string;
+				notificationsUpdateError: string;
+				notificationsDeliveryVia: string;
+				externalAuthApplication: string;
+				externalAuthLinkToConnect: string;
+				externalAuthNoProviders: string;
+				externalAuthTokenRefresh: string;
+				externalAuthError: string;
+				externalAuthAuthenticated: string;
+				externalAuthClickToLogin: string;
+				externalAuthOpenMenu: string;
+				externalAuthTestValidate: string;
+				externalAuthUnlink: string;
+				oauth2Name: string;
+				oauth2NoApps: string;
+				oauth2Revoke: string;
+				scheduleTimeFormat: string;
+				scheduleDefaultInfo: string;
+				scheduleDisabledError: string;
+				scheduleStartTime: string;
+				scheduleTimezone: string;
+				scheduleNextOccurrence: string;
+				scheduleUpdate: string;
+				ssoTitle: string;
+				ssoDescription: string;
+				ssoNoProviders: string;
+				ssoNoProvidersDescription: string;
+				ssoLearnProvider: string;
+				ssoAuthenticatedWith: string;
+				ssoChangeTitle: string;
+				ssoChangeDescription: string;
+				ssoConfirmPassword: string;
+				ssoPasswordIncorrect: string;
+			};
+			templates: {
+				// Templates page translations
+				title: string;
+				subtitle: string;
+				emptyState: {
+					title: string;
+					description: string;
+				};
+				table: {
+					name: string;
+					buildTime: string;
+					usedBy: string;
+					lastUpdated: string;
+					actions: string;
+				};
+				tooltip: {
+					title: string;
+					text: string;
+					link: string;
+				};
+				buttons: {
+					createTemplate: string;
+					useTemplate: string;
+					createWorkspace: string;
+					viewDocs: string;
+				};
+				developerCount: string;
+				starterTemplates: {
+					title: string;
+					description: string;
+					createYourOwn: string;
+					viewAllStarterTemplates: string;
+					readMore: string;
+					useTemplate: string;
+				};
+				empty: {
+					noResults: string;
+					firstTemplate: string;
+					firstTemplateDescription: string;
+					contactAdmin: string;
+					contactAdminDescription: string;
+				};
+			};
+			templateDetail: {
+				// Template detail page translations
+				title: string;
+				sections: {
+					docs: string;
+					files: string;
+					resources: string;
+					versions: string;
+					prebuilds: string;
+					insights: string;
+					permissions: string;
+					schedule: string;
+					variables: string;
+				};
+				actions: {
+					edit: string;
+					useTemplate: string;
+					delete: string;
+					updateVersion: string;
+					buildLogs: string;
+					clone: string;
+					export: string;
+					share: string;
+				};
+				info: {
+					name: string;
+					version: string;
+					lastUsed: string;
+					activeDevelopers: string;
+					buildTime: string;
+					createdBy: string;
+					createdAt: string;
+					updatedBy: string;
+					updatedAt: string;
+					description: string;
+					icon: string;
+				};
+				emptyStates: {
+					noVersions: string;
+					noPrebuilds: string;
+					noFiles: string;
+					noResources: string;
+					noPermissions: string;
+				};
+				versions: {
+					title: string;
+					createVersion: string;
+					currentVersion: string;
+					stable: string;
+					deprecated: string;
+					createdAt: string;
+					createdBy: string;
+					message: string;
+					noVersions: string;
+				};
+				resources: {
+					title: string;
+					type: string;
+					name: string;
+					count: string;
+					addResource: string;
+					noResources: string;
+				};
+				permissions: {
+					title: string;
+					user: string;
+					group: string;
+					role: string;
+					actions: string;
+					addPermission: string;
+					allUsers: string;
+					noPermissions: string;
+				};
+				prebuilds: {
+					title: string;
+					description: string;
+					enabled: string;
+					disabled: string;
+					lastBuild: string;
+					status: string;
+					success: string;
+					failed: string;
+					pending: string;
+					running: string;
+					createPrebuild: string;
+					noPrebuilds: string;
+				};
+				variables: {
+					title: string;
+					description: string;
+					name: string;
+					type: string;
+					value: string;
+					required: string;
+					addVariable: string;
+					noVariables: string;
+				};
+			};
+			users: {
+				// Users page translations
+				title: string;
+				titlePlural: string;
+				table: {
+					username: string;
+					email: string;
+					status: string;
+					roles: string;
+					actions: string;
+				};
+				status: {
+					active: string;
+					suspended: string;
+				};
+				buttons: {
+					addUser: string;
+					resetPassword: string;
+					suspend: string;
+					activate: string;
+					editRoles: string;
+				};
+				emptyState: {
+					title: string;
+					createFirst: string;
+				};
+				roles: {
+					owner: string;
+					admin: string;
+					user: string;
+					member: string;
+				};
+				resetPassword: {
+					title: string;
+					message: string;
+					confirmText: string;
+				};
+			};
+			notFound: {
+				// 404 page translations
+				title: string;
+				message: string;
+				description: string;
+				goBack: string;
+				goHome: string;
+				contactSupport: string;
+				search: string;
+				commonIssues: {
+					title: string;
+					wrongUrl: string;
+					wrongUrlDescription: string;
+					movedPage: string;
+					movedPageDescription: string;
+					deletedPage: string;
+					deletedPageDescription: string;
+					noPermission: string;
+					noPermissionDescription: string;
+				};
+				suggestions: {
+					title: string;
+					checkUrl: string;
+					useSearch: string;
+					visitHome: string;
+					viewDocs: string;
+					contactAdmin: string;
+				};
+				help: {
+					title: string;
+					documentation: string;
+					community: string;
+					support: string;
+				};
+			};
+			terminal: {
+				// Terminal page translations
+				title: string;
+				connecting: string;
+				connected: string;
+				disconnected: string;
+				reconnect: string;
+				resize: string;
+				download: string;
+				alerts: {
+					connectionFailed: string;
+					disconnectedTitle: string;
+					disconnectedMessage: string;
+					workspaceStarting: string;
+					workspaceStopped: string;
+					connectionTimeout: string;
+					accessDenied: string;
+					agentUnavailable: string;
+				};
+				buttons: {
+					reconnect: string;
+					close: string;
+					clear: string;
+					copy: string;
+					paste: string;
+					selectAll: string;
+					downloadLogs: string;
+					uploadFile: string;
+					settings: string;
+				};
+				settings: {
+					title: string;
+					fontSize: string;
+					fontFamily: string;
+					theme: string;
+					themeDark: string;
+					themeLight: string;
+					themeAuto: string;
+					scrollback: string;
+					cursorBlink: string;
+					bell: string;
+					confirmActions: string;
+				};
+				status: {
+					title: string;
+					connecting: string;
+					connected: string;
+					disconnected: string;
+					failed: string;
+					timeout: string;
+					ready: string;
+				};
+				actions: {
+					restartShell: string;
+					killProcess: string;
+					runCommand: string;
+					sendSignal: string;
+				};
+				messages: {
+					welcome: string;
+					sessionStarted: string;
+					sessionEnded: string;
+					commandExecuting: string;
+					commandCompleted: string;
+					commandFailed: string;
+				};
+				shortcuts: {
+					title: string;
+					copy: string;
+					paste: string;
+					clear: string;
+					find: string;
+					zoomIn: string;
+					zoomOut: string;
+					resetZoom: string;
+				};
+				toolbar: {
+					title: string;
+					tabs: string;
+					newTab: string;
+					splitHorizontal: string;
+					splitVertical: string;
+					closeTab: string;
+					switchTab: string;
+				};
+			};
+			tasks: {
+				// Tasks page translations
+				title: string;
+				titlePlural: string;
+				aiTitle: string;
+				subtitle: string;
+				page: {
+					myTasks: string;
+					allTasks: string;
+					waitingForInput: string;
+					bulkActions: string;
+					delete: string;
+				};
+				toolbar: {
+					selected: string;
+					of: string;
+					showing: string;
+					to: string;
+					task_one: string;
+					task_other: string;
+				};
+				notificationAlert: {
+					title: string;
+					goToSettings: string;
+					accountSettings: string;
+					toChange: string;
+				};
+				empty: {
+					noTaskTemplates: string;
+					learnAboutTasks: string;
+					toGetStarted: string;
+				};
+				table: {
+					name: string;
+					status: string;
+					createdBy: string;
+					createdAt: string;
+					startedAt: string;
+					completedAt: string;
+					duration: string;
+					actions: string;
+				};
+				status: {
+					pending: string;
+					running: string;
+					succeeded: string;
+					failed: string;
+					cancelled: string;
+					canceling: string;
+					timeout: string;
+				};
+				buttons: {
+					createTask: string;
+					viewDetails: string;
+					cancel: string;
+					retry: string;
+					delete: string;
+					downloadLogs: string;
+					viewOutput: string;
+				};
+				emptyState: {
+					title: string;
+					description: string;
+				};
+				details: {
+					title: string;
+					taskId: string;
+					organization: string;
+					workspace: string;
+					template: string;
+					version: string;
+					initiator: string;
+					createdAt: string;
+					startedAt: string;
+					completedAt: string;
+					status: string;
+					error: string;
+					output: string;
+					logs: string;
+				};
+				messages: {
+					pending: string;
+					running: string;
+					succeeded: string;
+					failed: string;
+					cancelled: string;
+					canceling: string;
+					timeout: string;
+				};
+				filters: {
+					title: string;
+					status: string;
+					allStatuses: string;
+					createdAfter: string;
+					createdBefore: string;
+					createdBy: string;
+					apply: string;
+					clear: string;
+					noResults: string;
+				};
+			};
+			agents: {
+				// Agents page translations
+				title: string;
+				subtitle: string;
+				newAgent: string;
+				noAgentsYet: string;
+				sidebar: {
+					title: string;
+					newAgent: string;
+					active: string;
+					archived: string;
+					search: string;
+					filterAgents: string;
+					noAgents: string;
+					noActiveAgents: string;
+					noArchivedAgents: string;
+					noMatchingAgents: string;
+					collapse: string;
+					collapseSidebar: string;
+					expand: string;
+					expandSidebar: string;
+					settings: string;
+				};
+				create: {
+					title: string;
+					placeholder: string;
+					chatPlaceholder: string;
+					attachFiles: string;
+					muteCompletionChime: string;
+					enableCompletionChime: string;
+					disableCompletionSound: string;
+					enableCompletionSound: string;
+					selectWorkspace: string;
+					selectModel: string;
+					create: string;
+					creating: string;
+					noWorkspace: string;
+					noModel: string;
+					workspaceLabel: string;
+					modelLabel: string;
+				};
+				chat: {
+					start: string;
+					emptyState: {
+						title: string;
+						description: string;
+					};
+					input: {
+						placeholder: string;
+						send: string;
+						attach: string;
+						stop: string;
+					};
+					actions: {
+						copy: string;
+						regenerate: string;
+						edit: string;
+						delete: string;
+						archive: string;
+						unarchive: string;
+						createWorkspace: string;
+						viewDiff: string;
+						applyChanges: string;
+					};
+					status: {
+						pending: string;
+						processing: string;
+						completed: string;
+						failed: string;
+						cancelled: string;
+					};
+				};
+				model: {
+					selector: {
+						title: string;
+						default: string;
+						custom: string;
+						selectModel: string;
+						loadingModels: string;
+						noAvailableModels: string;
+						noModelsConfigured: string;
+					};
+					status: {
+						loadingModelCatalog: string;
+						modelCatalogUnavailable: string;
+						modelsConfiguredUnavailable: string;
+						noChatModelsConfigured: string;
+						noModelsConfiguredAskAdmin: string;
+						modelsConfiguredUnavailableAskAdmin: string;
+					};
+					admin: {
+						title: string;
+						description: string;
+						providers: {
+							title: string;
+							addProvider: string;
+							editProvider: string;
+							deleteProvider: string;
+							providerName: string;
+							apiKey: string;
+							baseURL: string;
+							enabled: string;
+							noProviders: string;
+						};
+						models: {
+							title: string;
+							addModel: string;
+							editModel: string;
+							deleteModel: string;
+							modelName: string;
+							provider: string;
+							default: string;
+							noModels: string;
+						};
+						test: {
+							title: string;
+							testConnection: string;
+							testPrompt: string;
+							testResult: string;
+							success: string;
+							failed: string;
+						};
+					};
+				};
+				workspace: {
+					creation: {
+						title: string;
+						description: string;
+						naming: string;
+						name: string;
+						template: string;
+						creating: string;
+						success: string;
+						failed: string;
+					};
+					watcher: {
+						title: string;
+						building: string;
+						starting: string;
+						ready: string;
+						failed: string;
+					};
+					changes: {
+						title: string;
+						filesChanged: string;
+						additions: string;
+						deletions: string;
+						viewDiff: string;
+						apply: string;
+						discard: string;
+					};
+					label: string;
+					search: string;
+					autoCreate: string;
+					noneFound: string;
+				};
+				files: {
+					attach: {
+						title: string;
+						select: string;
+						dragDrop: string;
+						maxSize: string;
+						maxFiles: string;
+						remove: string;
+						clear: string;
+					};
+					preview: {
+						title: string;
+						image: string;
+						code: string;
+						document: string;
+						unknown: string;
+					};
+				};
+				archive: {
+					title: string;
+					message: string;
+					confirm: string;
+					cancel: string;
+					archiving: string;
+					success: string;
+					failed: string;
+				};
+				delete: {
+					title: string;
+					message: string;
+					confirm: string;
+					cancel: string;
+					deleting: string;
+					success: string;
+					failed: string;
+				};
+				errors: {
+					loadFailed: string;
+					createFailed: string;
+					sendFailed: string;
+					archiveFailed: string;
+					deleteFailed: string;
+					workspaceFailed: string;
+					modelFailed: string;
+					uploadFailed: string;
+					networkError: string;
+					serverError: string;
+					unknownError: string;
+				};
+				notifications: {
+					messageReceived: string;
+					workspaceReady: string;
+					workspaceFailed: string;
+					agentDeleted: string;
+				};
+				keyboard: {
+					shortcuts: {
+						title: string;
+						newChat: string;
+						sendMessage: string;
+						newLine: string;
+						focusInput: string;
+						toggleSidebar: string;
+						search: string;
+					};
+				};
+				help: {
+					title: string;
+					description: string;
+					gettingStarted: string;
+					bestPractices: string;
+					documentation: string;
+					support: string;
+				};
+				empty: {
+					title: string;
+					description: string;
+				};
+				tree: {
+					collapse: string;
+					expand: string;
+					openActionsFor: string;
+				};
+				menu: {
+					unarchiveAgent: string;
+					archiveAgent: string;
+					archiveAndDeleteWorkspace: string;
+				};
+				common: {
+					retry: string;
+					defaultModel: string;
+					file_one: string;
+					file_other: string;
+				};
+			};
+			cliInstall: {
+				// CLI install page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					install: {
+						title: string;
+						description: string;
+						alternativeMethod: string;
+						manualDownload: string;
+						packageManager: string;
+						verifyChecksum: string;
+						troubleshooting: string;
+					};
+					authenticate: {
+						title: string;
+						description: string;
+						sessionToken: string;
+						sessionTokenDescription: string;
+						createToken: string;
+						tokenExpiry: string;
+						authSuccess: string;
+						authFailed: string;
+					};
+					verify: {
+						title: string;
+						description: string;
+						successMessage: string;
+						testCommand: string;
+						listWorkspaces: string;
+						versionMismatch: string;
+					};
+				};
+				osTabs: {
+					linux: string;
+					macOS: string;
+					windows: string;
+				};
+				requirements: {
+					title: string;
+					os: string;
+					architecture: string;
+					dependencies: string;
+					network: string;
+				};
+				commands: {
+					login: string;
+					logout: string;
+					list: string;
+					create: string;
+					start: string;
+					stop: string;
+					delete: string;
+					ssh: string;
+					portForward: string;
+					sync: string;
+					help: string;
+					version: string;
+				};
+				errors: {
+					notFound: string;
+					permissionDenied: string;
+					connectionFailed: string;
+					unauthorized: string;
+					workspaceNotFound: string;
+					alreadyRunning: string;
+					alreadyStopped: string;
+				};
+				examples: {
+					quickStart: string;
+					createWorkspace: string;
+					startWorkspace: string;
+					sshWorkspace: string;
+					listAllWorkspaces: string;
+					portForwardExample: string;
+				};
+			};
+			orgSettings: {
+				// Organization settings page translations
+				title: string;
+				sections: {
+					general: string;
+					members: string;
+					provisioners: string;
+					provisionerJobs: string;
+					provisionerKeys: string;
+					roles: string;
+					idpSync: string;
+					groups: string;
+					permissions: string;
+					auditLog: string;
+					licenses: string;
+					network: string;
+					proxies: string;
+				};
+				actions: {
+					addMember: string;
+					createRole: string;
+					viewAuditLog: string;
+					exportData: string;
+					deleteOrg: string;
+					leaveOrg: string;
+					settings: string;
+					save: string;
+				};
+				emptyStates: {
+					noMembers: string;
+					noRoles: string;
+					noGroups: string;
+					noProvisioners: string;
+					noAuditLogs: string;
+				};
+				members: {
+					title: string;
+					name: string;
+					email: string;
+					roles: string;
+					status: string;
+					addedAt: string;
+					actions: string;
+					active: string;
+					suspended: string;
+					removeMember: string;
+					updateRoles: string;
+					assignRole: string;
+				};
+				roles: {
+					title: string;
+					name: string;
+					displayName: string;
+					permissions: string;
+					organization: string;
+					users: string;
+					builtIn: string;
+					custom: string;
+					createRole: string;
+					editRole: string;
+					deleteRole: string;
+					assignPermissions: string;
+					noRoles: string;
+				};
+				groups: {
+					title: string;
+					name: string;
+					displayName: string;
+					members: string;
+					quotas: string;
+					createGroup: string;
+					editGroup: string;
+					deleteGroup: string;
+					addMembers: string;
+					removeMembers: string;
+				};
+				auditLog: {
+					title: string;
+					timestamp: string;
+					user: string;
+					action: string;
+					resource: string;
+					details: string;
+					ipAddress: string;
+					userAgent: string;
+					filterByDate: string;
+					filterByUser: string;
+					filterByAction: string;
+					exportLog: string;
+					noLogs: string;
+				};
+			};
+			aiBridge: {
+				// AI Bridge page translations
+				title: string;
+				subtitle: string;
+				tabs: {
+					requestLogs: string;
+					settings: string;
+				};
+				requestLogs: {
+					title: string;
+					description: string;
+					filters: {
+						title: string;
+						provider: string;
+						model: string;
+						status: string;
+						user: string;
+						dateRange: string;
+						clearAll: string;
+						applyFilters: string;
+					};
+					table: {
+						timestamp: string;
+						provider: string;
+						model: string;
+						user: string;
+						status: string;
+						duration: string;
+						tokens: string;
+						actions: string;
+					};
+					status: {
+						success: string;
+						error: string;
+						pending: string;
+						cancelled: string;
+					};
+					actions: {
+						viewDetails: string;
+						export: string;
+						replay: string;
+					};
+					details: {
+						title: string;
+						requestId: string;
+						timestamp: string;
+						provider: string;
+						model: string;
+						user: string;
+						status: string;
+						request: string;
+						response: string;
+						metadata: string;
+						tokensUsed: string;
+						duration: string;
+						cost: string;
+					};
+					empty: {
+						title: string;
+						description: string;
+					};
+					export: {
+						title: string;
+						format: string;
+						csv: string;
+						json: string;
+						dateRange: string;
+						includeFilters: string;
+						export: string;
+					};
+				};
+				settings: {
+					title: string;
+					description: string;
+					providers: {
+						title: string;
+						addProvider: string;
+						noProviders: string;
+						enabled: string;
+						disabled: string;
+					};
+					models: {
+						title: string;
+						addModel: string;
+						noModels: string;
+						default: string;
+					};
+					quotas: {
+						title: string;
+						description: string;
+						dailyLimit: string;
+						monthlyLimit: string;
+						tokenLimit: string;
+						resetQuota: string;
+					};
+					audit: {
+						title: string;
+						logLevel: string;
+						logAllRequests: string;
+						logSuccessfulRequests: string;
+						logFailedRequests: string;
+						retention: string;
+						retentionDays: string;
+					};
+				};
+				providers: {
+					openai: string;
+					anthropic: string;
+					google: string;
+					azure: string;
+					custom: string;
+				};
+				models: {
+					gpt4: string;
+					gpt35: string;
+					claude: string;
+					gemini: string;
+					llama: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					docs: string;
+					support: string;
+				};
+			};
+			agents: {
+				// Agents page translations
+				title: string;
+				subtitle: string;
+				newAgent: string;
+				noAgentsYet: string;
+				sidebar: {
+					title: string;
+					newAgent: string;
+					active: string;
+					archived: string;
+					search: string;
+					noAgents: string;
+					noActiveAgents: string;
+					noArchivedAgents: string;
+					noMatchingAgents: string;
+					collapse: string;
+					expand: string;
+					filterAgents: string;
+					collapseSidebar: string;
+					expandSidebar: string;
+					settings: string;
+				};
+				create: {
+					title: string;
+					placeholder: string;
+					chatPlaceholder: string;
+					attachFiles: string;
+					muteCompletionChime: string;
+					enableCompletionChime: string;
+					disableCompletionSound: string;
+					enableCompletionSound: string;
+					selectWorkspace: string;
+					selectModel: string;
+					create: string;
+					creating: string;
+					noWorkspace: string;
+					noModel: string;
+					workspaceLabel: string;
+					modelLabel: string;
+				};
+				chat: {
+					start: string;
+					emptyState: {
+						title: string;
+						description: string;
+						examples: {
+							help: string;
+							debug: string;
+							explain: string;
+							refactor: string;
+						};
+					};
+					input: {
+						placeholder: string;
+						send: string;
+						attach: string;
+						stop: string;
+					};
+					actions: {
+						copy: string;
+						regenerate: string;
+						edit: string;
+						delete: string;
+						archive: string;
+						unarchive: string;
+						createWorkspace: string;
+						viewDiff: string;
+						applyChanges: string;
+						save: string;
+					};
+					status: {
+						pending: string;
+						processing: string;
+						completed: string;
+						failed: string;
+						cancelled: string;
+					};
+					editingQueuedMessage: string;
+					stop: string;
+				};
+				model: {
+					selector: {
+						title: string;
+						default: string;
+						custom: string;
+						selectModel: string;
+						loadingModels: string;
+						noAvailableModels: string;
+						noModelsConfigured: string;
+					};
+					status: {
+						loadingModelCatalog: string;
+						modelCatalogUnavailable: string;
+						modelsConfiguredUnavailable: string;
+						noChatModelsConfigured: string;
+						noModelsConfiguredAskAdmin: string;
+						modelsConfiguredUnavailableAskAdmin: string;
+					};
+					admin: {
+						title: string;
+						description: string;
+						providers: {
+							title: string;
+							addProvider: string;
+							editProvider: string;
+							deleteProvider: string;
+							providerName: string;
+							apiKey: string;
+							baseURL: string;
+							enabled: string;
+							noProviders: string;
+						};
+						models: {
+							title: string;
+							addModel: string;
+							editModel: string;
+							deleteModel: string;
+							modelName: string;
+							provider: string;
+							default: string;
+							noModels: string;
+						};
+						test: {
+							title: string;
+							testConnection: string;
+							testPrompt: string;
+							testResult: string;
+							success: string;
+							failed: string;
+						};
+					};
+				};
+				workspace: {
+					creation: {
+						title: string;
+						description: string;
+						naming: string;
+						name: string;
+						template: string;
+						creating: string;
+						success: string;
+						failed: string;
+					};
+					watcher: {
+						title: string;
+						building: string;
+						starting: string;
+						ready: string;
+						failed: string;
+					};
+					changes: {
+						title: string;
+						filesChanged: string;
+						additions: string;
+						deletions: string;
+						viewDiff: string;
+						apply: string;
+						discard: string;
+					};
+					label: string;
+					search: string;
+					autoCreate: string;
+					noneFound: string;
+				};
+				files: {
+					attach: {
+						title: string;
+						select: string;
+						dragDrop: string;
+						maxSize: string;
+						maxFiles: string;
+						remove: string;
+						clear: string;
+					};
+					preview: {
+						title: string;
+						image: string;
+						code: string;
+						document: string;
+						unknown: string;
+					};
+				};
+				archive: {
+					title: string;
+					message: string;
+					confirm: string;
+					cancel: string;
+					archiving: string;
+					success: string;
+					failed: string;
+				};
+				delete: {
+					title: string;
+					message: string;
+					confirm: string;
+					cancel: string;
+					deleting: string;
+					success: string;
+					failed: string;
+				};
+				errors: {
+					loadFailed: string;
+					createFailed: string;
+					sendFailed: string;
+					archiveFailed: string;
+					deleteFailed: string;
+					workspaceFailed: string;
+					modelFailed: string;
+					uploadFailed: string;
+					networkError: string;
+					serverError: string;
+					unknownError: string;
+				};
+				notifications: {
+					messageReceived: string;
+					workspaceReady: string;
+					workspaceFailed: string;
+					agentDeleted: string;
+				};
+				keyboard: {
+					shortcuts: {
+						title: string;
+						newChat: string;
+						sendMessage: string;
+						newLine: string;
+						focusInput: string;
+						toggleSidebar: string;
+						search: string;
+					};
+				};
+				help: {
+					title: string;
+					description: string;
+					gettingStarted: string;
+					bestPractices: string;
+					documentation: string;
+					support: string;
+				};
+				empty: {
+					title: string;
+					description: string;
+				};
+				tree: {
+					collapse: string;
+					expand: string;
+					openActionsFor: string;
+				};
+				menu: {
+					unarchiveAgent: string;
+					archiveAgent: string;
+					archiveAndDeleteWorkspace: string;
+				};
+				common: {
+					retry: string;
+					defaultModel: string;
+					file_one: string;
+					file_other: string;
+				};
+			};
+			deploymentSecurity: {
+				// Deployment security settings translations
+				title: string;
+				subtitle: string;
+				sections: {
+					auth: {
+						title: string;
+						description: string;
+						password: {
+							title: string;
+							minLength: string;
+							complexity: string;
+							requireLowercase: string;
+							requireUppercase: string;
+							requireNumbers: string;
+							requireSpecial: string;
+							expiryDays: string;
+							history: string;
+						};
+						mfa: {
+							title: string;
+							description: string;
+							requireMFA: string;
+							allowedMethods: string;
+							totp: string;
+							sms: string;
+							email: string;
+							webauthn: string;
+						};
+					};
+					session: {
+						title: string;
+						description: string;
+						duration: string;
+						renew: string;
+						maxConcurrent: string;
+						idleTimeout: string;
+						rememberMe: string;
+					};
+					oauth2: {
+						title: string;
+						description: string;
+						enabled: string;
+						providers: string;
+						addProvider: string;
+						noProviders: string;
+						gitHub: string;
+						gitLab: string;
+						google: string;
+						oidc: string;
+						azure: string;
+						clientID: string;
+						clientSecret: string;
+						redirectURL: string;
+						displayName: string;
+						iconURL: string;
+					};
+					bruteForce: {
+						title: string;
+						description: string;
+						enabled: string;
+						maxAttempts: string;
+						lockoutDuration: string;
+						window: string;
+					};
+					captcha: {
+						title: string;
+						description: string;
+						enabled: string;
+						provider: string;
+						siteKey: string;
+						secretKey: string;
+						threshold: string;
+					};
+					rateLimit: {
+						title: string;
+						description: string;
+						enabled: string;
+						requestsPerMinute: string;
+						burstSize: string;
+						whitelist: string;
+						blacklist: string;
+					};
+				};
+				actions: {
+					save: string;
+					saving: string;
+					reset: string;
+					test: string;
+				};
+				messages: {
+					saved: string;
+					testFailed: string;
+					testSuccess: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					docs: string;
+					support: string;
+				};
+			};
+			deploymentSettings: {
+				// Deployment settings translations
+				title: string;
+				subtitle: string;
+				tabs: {
+					general: string;
+					security: string;
+					network: string;
+					storage: string;
+					logging: string;
+					advanced: string;
+				};
+				general: {
+					title: string;
+					description: string;
+					instanceName: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					logo: {
+						label: string;
+						description: string;
+						upload: string;
+						remove: string;
+					};
+					serviceBanner: {
+						label: string;
+						description: string;
+						enabled: string;
+						backgroundColor: string;
+						textColor: string;
+						message: string;
+					};
+					notifications: {
+						title: string;
+						email: string;
+						smtp: string;
+						server: string;
+						port: string;
+						username: string;
+						password: string;
+						from: string;
+						testEmail: string;
+					};
+				};
+				network: {
+					title: string;
+					description: string;
+					accessURL: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					wildcard: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					derp: {
+						title: string;
+						description: string;
+						enabled: string;
+						server: string;
+						region: string;
+						regionName: string;
+						stun: string;
+						relay: string;
+					};
+					portForwarding: {
+						title: string;
+						description: string;
+						enabled: string;
+						range: string;
+						tcp: string;
+						udp: string;
+					};
+				};
+				storage: {
+					title: string;
+					description: string;
+					paths: {
+						title: string;
+						home: string;
+						cache: string;
+						logs: string;
+						temp: string;
+					};
+					quotas: {
+						title: string;
+						description: string;
+						userQuota: string;
+						workspaceQuota: string;
+						enforced: string;
+					};
+					backup: {
+						title: string;
+						description: string;
+						enabled: string;
+						schedule: string;
+						retention: string;
+						location: string;
+						backupNow: string;
+					};
+				};
+				logging: {
+					title: string;
+					description: string;
+					level: {
+						label: string;
+						description: string;
+						debug: string;
+						info: string;
+						warn: string;
+						error: string;
+					};
+					humanize: {
+						label: string;
+						description: string;
+					};
+					stacktraces: {
+						label: string;
+						description: string;
+					};
+					output: {
+						title: string;
+						stdout: string;
+						file: string;
+						rotation: string;
+						maxSize: string;
+						maxAge: string;
+						maxBackups: string;
+					};
+				};
+				advanced: {
+					title: string;
+					description: string;
+					experimental: {
+						title: string;
+						description: string;
+						warning: string;
+					};
+					telemetry: {
+						title: string;
+						description: string;
+						enabled: string;
+						url: string;
+					};
+					metrics: {
+						title: string;
+						description: string;
+						enabled: string;
+						prometheus: string;
+					};
+					debug: {
+						title: string;
+						enable: string;
+						pprof: string;
+						verbose: string;
+					};
+				};
+				actions: {
+					save: string;
+					saving: string;
+					reload: string;
+					reset: string;
+				};
+				messages: {
+					saved: string;
+					reloadRequired: string;
+					restartRequired: string;
+					reloadSuccess: string;
+					restartSuccess: string;
+				};
+				warnings: {
+					experimental: string;
+					restartRequired: string;
+					irreversible: string;
+				};
+			};
+			connectionLogs: {
+				// Connection logs page translations
+				title: string;
+				subtitle: string;
+				table: {
+					timestamp: string;
+					user: string;
+					workspace: string;
+					action: string;
+					status: string;
+					duration: string;
+					ipAddress: string;
+					userAgent: string;
+				};
+				actions: {
+					connecting: string;
+					connected: string;
+					disconnected: string;
+					rejected: string;
+					failed: string;
+				};
+				status: {
+					success: string;
+					failed: string;
+					timeout: string;
+					rejected: string;
+				};
+				filters: {
+					title: string;
+					user: string;
+					workspace: string;
+					status: string;
+					dateRange: string;
+					action: string;
+					clearAll: string;
+					applyFilters: string;
+				};
+				actions: {
+					viewDetails: string;
+					export: string;
+					refresh: string;
+				};
+				details: {
+					title: string;
+					connectionId: string;
+					timestamp: string;
+					user: string;
+					workspace: string;
+					workspaceID: string;
+					action: string;
+					status: string;
+					duration: string;
+					ipAddress: string;
+					userAgent: string;
+					error: string;
+					metadata: string;
+				};
+				empty: {
+					title: string;
+					description: string;
+				};
+				export: {
+					title: string;
+					format: string;
+					csv: string;
+					json: string;
+					dateRange: string;
+					includeFilters: string;
+					export: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					documentation: string;
+					troubleshooting: string;
+				};
+			};
+			templateGallery: {
+				// Template gallery page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					featured: string;
+					all: string;
+					categories: string;
+					recent: string;
+					popular: string;
+				};
+				categories: {
+					all: string;
+					development: string;
+					dataScience: string;
+					devops: string;
+					design: string;
+					education: string;
+					custom: string;
+				};
+				template: {
+					title: string;
+					description: string;
+					icon: string;
+					version: string;
+					activeDevelopers: string;
+					usedBy: string;
+					lastUpdated: string;
+					tags: string;
+					owner: string;
+					organization: string;
+				};
+				actions: {
+					useTemplate: string;
+					viewDetails: string;
+					preview: string;
+					documentation: string;
+					clone: string;
+					share: string;
+					favorite: string;
+					unfavorite: string;
+				};
+				filters: {
+					title: string;
+					category: string;
+					organization: string;
+					owner: string;
+					tags: string;
+					search: string;
+					sortBy: string;
+					sortOptions: {
+						name: string;
+						updated: string;
+						popularity: string;
+						developers: string;
+					};
+				};
+				empty: {
+					title: string;
+					description: string;
+					createTemplate: string;
+					browseAll: string;
+				};
+				createTemplate: {
+					title: string;
+					fromScratch: string;
+					fromGallery: string;
+					import: string;
+					description: string;
+				};
+				modal: {
+					title: string;
+					tabs: {
+						overview: string;
+						documentation: string;
+						versions: string;
+						resources: string;
+						permissions: string;
+					};
+					overview: {
+						description: string;
+						tags: string;
+						owner: string;
+						createdAt: string;
+						updatedAt: string;
+						activeDevelopers: string;
+						buildTime: string;
+					};
+					actions: {
+						useTemplate: string;
+						close: string;
+					};
+				};
+				help: {
+					title: string;
+					description: string;
+					documentation: string;
+					createGuide: string;
+				};
+			};
+			createTemplate: {
+				// Create template page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					source: string;
+					configuration: string;
+					resources: string;
+					permissions: string;
+					variables: string;
+					documentation: string;
+					versions: string;
+				};
+				source: {
+					title: string;
+					description: string;
+					options: {
+						scratch: string;
+						example: string;
+						import: string;
+						clone: string;
+					};
+					scratch: {
+						title: string;
+						description: string;
+					};
+					example: {
+						title: string;
+						description: string;
+						selectExample: string;
+					};
+					import: {
+						title: string;
+						description: string;
+						repositoryURL: string;
+						branch: string;
+						path: string;
+						auth: string;
+					};
+					clone: {
+						title: string;
+						description: string;
+						selectTemplate: string;
+					};
+				};
+				configuration: {
+					title: string;
+					name: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					display: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					description: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					icon: {
+						label: string;
+						description: string;
+					};
+					tags: {
+						label: string;
+						description: string;
+						placeholder: string;
+					};
+					organization: {
+						label: string;
+						description: string;
+					};
+					defaultTTL: {
+						label: string;
+						description: string;
+						infinite: string;
+						hours: string;
+					};
+					maxTTL: {
+						label: string;
+						description: string;
+						unlimited: string;
+					};
+					autoStart: {
+						label: string;
+						description: string;
+					};
+					requireActiveVersion: {
+						label: string;
+						description: string;
+					};
+					canAlwaysEdit: {
+						label: string;
+						description: string;
+					};
+				};
+				resources: {
+					title: string;
+					description: string;
+					addResource: string;
+					noResources: string;
+					resource: {
+						name: string;
+						type: string;
+						count: string;
+						description: string;
+					};
+					types: {
+						agent: string;
+						container: string;
+						kubernetes_pod: string;
+						vm: string;
+						database: string;
+						storage: string;
+					};
+				};
+				permissions: {
+					title: string;
+					description: string;
+					addPermission: string;
+					noPermissions: string;
+					permission: {
+						user: string;
+						group: string;
+						role: string;
+						actions: string;
+					};
+					actions: {
+						use: string;
+						read: string;
+						update: string;
+						delete: string;
+					};
+					allUsers: string;
+					allMembers: string;
+				};
+				variables: {
+					title: string;
+					description: string;
+					addVariable: string;
+					noVariables: string;
+					variable: {
+						name: string;
+						type: string;
+						defaultValue: string;
+						required: string;
+						description: string;
+						options: string;
+					};
+					types: {
+						string: string;
+						number: string;
+						boolean: string;
+						list: string;
+					};
+				};
+				documentation: {
+					title: string;
+					description: string;
+					readme: {
+						title: string;
+						description: string;
+						placeholder: string;
+					};
+					exampleUsage: {
+						title: string;
+						description: string;
+					};
+					troubleshooting: {
+						title: string;
+						description: string;
+					};
+				};
+				validation: {
+					nameRequired: string;
+					nameInvalid: string;
+					displayRequired: string;
+					invalidURL: string;
+					connectionFailed: string;
+					noResources: string;
+					variableInvalid: string;
+					permissionInvalid: string;
+				};
+				actions: {
+					create: string;
+					creating: string;
+					saveDraft: string;
+					preview: string;
+					test: string;
+					cancel: string;
+					back: string;
+					next: string;
+				};
+				messages: {
+					creating: string;
+					created: string;
+					createFailed: string;
+					importing: string;
+					imported: string;
+					importFailed: string;
+					testing: string;
+					testSuccess: string;
+					testFailed: string;
+				};
+				help: {
+					title: string;
+					description: string;
+					docs: string;
+					examples: string;
+					bestPractices: string;
+				};
+			};
+			account: {
+				// Account creation and management translations
+				title: string;
+				subtitle: string;
+				createAccount: {
+					title: string;
+					welcome: string;
+					description: string;
+					email: {
+						label: string;
+						placeholder: string;
+						required: string;
+						invalid: string;
+					};
+					username: {
+						label: string;
+						placeholder: string;
+						required: string;
+						invalid: string;
+						exists: string;
+					};
+					password: {
+						label: string;
+						placeholder: string;
+						required: string;
+						weak: string;
+						mismatch: string;
+					};
+					confirmPassword: {
+						label: string;
+						placeholder: string;
+						required: string;
+					};
+					name: {
+						label: string;
+						placeholder: string;
+						required: string;
+					};
+					terms: {
+						agree: string;
+						termsOfService: string;
+						privacyPolicy: string;
+						required: string;
+					};
+					actions: {
+						submit: string;
+						submitting: string;
+						signIn: string;
+					};
+					messages: {
+						success: string;
+						failed: string;
+						emailSent: string;
+						emailError: string;
+					};
+				};
+				verifyEmail: {
+					title: string;
+					description: string;
+					resend: {
+						title: string;
+						action: string;
+						success: string;
+						failed: string;
+						wait: string;
+					};
+					actions: {
+						verified: string;
+						continue: string;
+						back: string;
+					};
+					messages: {
+						success: string;
+						invalid: string;
+						error: string;
+					};
+				};
+				resetPassword: {
+					title: string;
+					request: {
+						title: string;
+						description: string;
+						email: {
+							label: string;
+							placeholder: string;
+							required: string;
+						};
+						actions: {
+							submit: string;
+							submitting: string;
+							back: string;
+						};
+						messages: {
+							success: string;
+							failed: string;
+							throttled: string;
+						};
+					};
+					confirm: {
+						title: string;
+						description: string;
+						password: {
+							label: string;
+							placeholder: string;
+							required: string;
+						};
+						confirmPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+							mismatch: string;
+						};
+						strength: {
+							label: string;
+							weak: string;
+							fair: string;
+							good: string;
+							strong: string;
+						};
+						actions: {
+							submit: string;
+							submitting: string;
+							back: string;
+						};
+						messages: {
+							success: string;
+							failed: string;
+							invalid: string;
+						};
+					};
+				};
+				accountSetup: {
+					title: string;
+					description: string;
+					fields: {
+						displayName: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						username: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						bio: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						location: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+						company: {
+							label: string;
+							placeholder: string;
+							description: string;
+						};
+					};
+					actions: {
+						submit: string;
+						submitting: string;
+						skip: string;
+					};
+					messages: {
+						success: string;
+						failed: string;
+						canCompleteLater: string;
+					};
+				};
+				errors: {
+					auth: {
+						invalidCredentials: string;
+						userNotFound: string;
+						emailNotVerified: string;
+						accountDisabled: string;
+						sessionExpired: string;
+						tooManyAttempts: string;
+						serverError: string;
+					};
+					validation: {
+						emailInvalid: string;
+						emailTaken: string;
+						usernameInvalid: string;
+						usernameTaken: string;
+						passwordTooShort: string;
+						passwordTooWeak: string;
+						passwordRequired: string;
+						termsRequired: string;
+					};
+					network: {
+						connectionFailed: string;
+						timeout: string;
+					};
+				};
+				help: {
+					troubleSigningIn: string;
+					forgotPassword: string;
+					contactSupport: string;
+					needHelp: string;
+				};
+			};
+			profile: {
+				// User profile page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					info: string;
+					preferences: string;
+					security: string;
+					activity: string;
+					sessions: string;
+					apiKeys: string;
+				};
+				info: {
+					title: string;
+					description: string;
+					fields: {
+						username: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						email: {
+							label: string;
+							description: string;
+							placeholder: string;
+							verified: string;
+							unverified: string;
+							verify: string;
+						};
+						displayName: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						bio: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						location: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						company: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						website: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						jobTitle: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+						phone: {
+							label: string;
+							description: string;
+							placeholder: string;
+						};
+					};
+					avatar: {
+						label: string;
+						upload: string;
+						remove: string;
+						dragDrop: string;
+						formats: string;
+						success: string;
+						failed: string;
+					};
+					actions: {
+						save: string;
+						saving: string;
+						cancel: string;
+					};
+					messages: {
+						success: string;
+						failed: string;
+						emailUpdateSent: string;
+					};
+				};
+				preferences: {
+					title: string;
+					description: string;
+					appearance: {
+						title: string;
+						theme: {
+							label: string;
+							description: string;
+							dark: string;
+							light: string;
+							system: string;
+						};
+						language: {
+							label: string;
+							description: string;
+							en: string;
+							zhCN: string;
+						};
+						homePage: {
+							label: string;
+							description: string;
+							workspaces: string;
+							templates: string;
+							agents: string;
+						};
+					};
+					notifications: {
+						title: string;
+						description: string;
+						email: {
+							label: string;
+							description: string;
+							workspaceUpdates: string;
+							templateChanges: string;
+							securityAlerts: string;
+							weeklyDigest: string;
+						};
+						desktop: {
+							label: string;
+							description: string;
+							enabled: string;
+							permission: string;
+						};
+					};
+					accessibility: {
+						title: string;
+						description: string;
+						reducedMotion: {
+							label: string;
+							description: string;
+						};
+						highContrast: {
+							label: string;
+							description: string;
+						};
+						fontSize: {
+							label: string;
+							description: string;
+							small: string;
+							medium: string;
+							large: string;
+							extraLarge: string;
+						};
+					};
+				};
+				security: {
+					title: string;
+					description: string;
+					password: {
+						title: string;
+						description: string;
+						currentPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+						};
+						newPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+							strength: string;
+						};
+						confirmPassword: {
+							label: string;
+							placeholder: string;
+							required: string;
+							mismatch: string;
+						};
+						actions: {
+							submit: string;
+							submitting: string;
+						};
+						messages: {
+							success: string;
+							failed: string;
+							weak: string;
+						};
+					};
+					twoFactor: {
+						title: string;
+						description: string;
+						enabled: string;
+						disabled: string;
+						enable: {
+							title: string;
+							description: string;
+							step1: string;
+							step2: string;
+							step3: string;
+							verify: string;
+							code: {
+								label: string;
+								placeholder: string;
+								required: string;
+								invalid: string;
+							};
+							backupCodes: {
+								title: string;
+								description: string;
+								download: string;
+								copy: string;
+							};
+						};
+						disable: {
+							title: string;
+							description: string;
+							confirm: string;
+							requirePassword: string;
+							messages: {
+								success: string;
+								failed: string;
+							};
+						};
+					};
+					sessions: {
+						title: string;
+						description: string;
+						current: {
+							label: string;
+							device: string;
+							location: string;
+							lastActive: string;
+						};
+						session: {
+							device: string;
+							browser: string;
+							location: string;
+							lastActive: string;
+							ipAddress: string;
+							actions: string;
+							revoke: string;
+						};
+						actions: {
+							revokeAll: string;
+							confirmRevokeAll: string;
+						};
+					};
+				};
+				activity: {
+					title: string;
+					description: string;
+					tabs: {
+						overview: string;
+						workspaces: string;
+						templates: string;
+						auditLog: string;
+					};
+					overview: {
+						title: string;
+						stats: {
+							workspacesCreated: string;
+							templatesUsed: string;
+							totalBuildTime: string;
+							activeDays: string;
+						};
+						recentActivity: {
+							title: string;
+							viewAll: string;
+						};
+					};
+				};
+				errors: {
+					updateFailed: string;
+					uploadFailed: string;
+					invalidFileType: string;
+					fileTooLarge: string;
+					usernameExists: string;
+					emailExists: string;
+				};
+			};
+			health: {
+				// Health page translations
+				title: string;
+				subtitle: string;
+				sections: {
+					overview: string;
+					derp: string;
+					database: string;
+					provisionerDaemons: string;
+					workspaceProxy: string;
+					accessURL: string;
+					websocket: string;
+					services: string;
+					metrics: string;
+				};
+				status: {
+					healthy: string;
+					unhealthy: string;
+					disabled: string;
+					initializing: string;
+					warning: string;
+					degraded: string;
+					unknown: string;
+				};
+				overview: {
+					title: string;
+					uptime: string;
+					version: string;
+					deployedAt: string;
+					restartCount: string;
+					lastHealthCheck: string;
+					overallHealth: string;
+				};
+				derp: {
+					title: string;
+					description: string;
+					regionCount: string;
+					nodeCount: string;
+					activeConnections: string;
+					relayRegion: string;
+					regionName: string;
+					regionEnabled: string;
+					regionLatency: string;
+				};
+				database: {
+					title: string;
+					description: string;
+					connected: string;
+					disconnected: string;
+					responseTime: string;
+					queryCount: string;
+					connectionPool: string;
+					activeConnections: string;
+					idleConnections: string;
+					maxConnections: string;
+					databaseSize: string;
+					replicationLag: string;
+				};
+				provisionerDaemons: {
+					title: string;
+					description: string;
+					daemonCount: string;
+					activeDaemons: string;
+					idleDaemons: string;
+					organization: string;
+					tags: string;
+					version: string;
+					jobsCompleted: string;
+					jobsFailed: string;
+					jobsRunning: string;
+					lastJob: string;
+					status: string;
+				};
+				workspaceProxy: {
+					title: string;
+					description: string;
+					proxyCount: string;
+					healthyProxies: string;
+					unhealthyProxies: string;
+					proxyName: string;
+					proxyURL: string;
+					version: string;
+					region: string;
+					workspaceCount: string;
+					status: string;
+					lastSeen: string;
+				};
+				accessURL: {
+					title: string;
+					description: string;
+					url: string;
+					hostname: string;
+					port: string;
+					tls: string;
+					reachable: string;
+					unreachable: string;
+					certificate: string;
+					certificateExpiry: string;
+				};
+				websocket: {
+					title: string;
+					description: string;
+					connections: string;
+					messagesPerSecond: string;
+					activeConnections: string;
+					rejectedConnections: string;
+					averageLatency: string;
+				};
+				actions: {
+					refresh: string;
+					exportReport: string;
+					viewLogs: string;
+					troubleshoot: string;
+					configureAlerts: string;
+				};
+				errors: {
+					connectionFailed: string;
+					timeout: string;
+					serviceUnavailable: string;
+					databaseError: string;
+					invalidResponse: string;
+				};
+			};
+		};
+	}
+}

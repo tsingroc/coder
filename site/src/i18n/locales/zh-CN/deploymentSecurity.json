@@ -1,0 +1,101 @@
+{
+	"title": "安全",
+	"subtitle": "为您的 Coder 部署配置安全设置。",
+	"sections": {
+		"auth": {
+			"title": "身份验证",
+			"description": "管理身份验证方法和策略。",
+			"password": {
+				"title": "密码策略",
+				"minLength": "最小密码长度",
+				"complexity": "密码复杂度",
+				"requireLowercase": "需要小写字母",
+				"requireUppercase": "需要大写字母",
+				"requireNumbers": "需要数字",
+				"requireSpecial": "需要特殊字符",
+				"expiryDays": "密码有效期（天）",
+				"history": "密码历史记录数"
+			},
+			"mfa": {
+				"title": "多因素身份验证",
+				"description": "要求所有用户使用 MFA",
+				"requireMFA": "需要 MFA",
+				"allowedMethods": "允许的方法",
+				"totp": "TOTP 应用程序（基于时间的一次性密码）",
+				"sms": "短信验证",
+				"email": "电子邮件验证",
+				"webauthn": "安全密钥 / WebAuthn"
+			}
+		},
+		"session": {
+			"title": "会话管理",
+			"description": "配置用户会话设置。",
+			"duration": "会话持续时间",
+			"renew": "自动续订会话",
+			"maxConcurrent": "最大并发会话数",
+			"idleTimeout": "空闲超时（分钟）",
+			"rememberMe": "记住我持续时间（天）"
+		},
+		"oauth2": {
+			"title": "OAuth2 配置",
+			"description": "配置 OAuth2 提供商以进行外部身份验证。",
+			"enabled": "已启用 OAuth2",
+			"providers": "提供商",
+			"addProvider": "添加提供商",
+			"noProviders": "未配置 OAuth2 提供商",
+			"gitHub": "GitHub",
+			"gitLab": "GitLab",
+			"google": "Google",
+			"oidc": "OpenID Connect",
+			"azure": "Azure AD",
+			"clientID": "客户端 ID",
+			"clientSecret": "客户端密钥",
+			"redirectURL": "重定向 URL",
+			"displayName": "显示名称",
+			"iconURL": "图标 URL"
+		},
+		"bruteForce": {
+			"title": "暴力破解防护",
+			"description": "防止自动化攻击。",
+			"enabled": "启用防护",
+			"maxAttempts": "最大登录尝试次数",
+			"lockoutDuration": "锁定持续时间（分钟）",
+			"window": "时间窗口（分钟）"
+		},
+		"captcha": {
+			"title": "验证码",
+			"description": "要求登录和注册时使用验证码。",
+			"enabled": "启用验证码",
+			"provider": "提供商",
+			"siteKey": "站点密钥",
+			"secretKey": "私密密钥",
+			"threshold": "分数阈值"
+		},
+		"rateLimit": {
+			"title": "速率限制",
+			"description": "限制 API 请求速率以防止滥用。",
+			"enabled": "启用速率限制",
+			"requestsPerMinute": "每分钟请求数",
+			"burstSize": "突发大小",
+			"whitelist": "IP 白名单",
+			"blacklist": "IP 黑名单"
+		}
+	},
+	"actions": {
+		"save": "保存更改",
+		"saving": "保存中...",
+		"reset": "重置为默认值",
+		"test": "测试配置"
+	},
+	"messages": {
+		"saved": "安全设置已成功保存。",
+		"testFailed": "配置测试失败。",
+		"testSuccess": "配置测试成功。"
+	},
+	"help": {
+		"title": "安全帮助",
+		"description": "了解 Coder 部署的安全最佳实践。",
+		"docs": "文档",
+		"support": "联系支持"
+	}
+}

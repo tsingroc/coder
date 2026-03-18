@@ -81,6 +81,7 @@ import {
 } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import { cn } from "utils/cn";
 import { getDisplayWorkspaceTemplateName } from "utils/workspace";
 import { WorkspaceSharingIndicator } from "./WorkspaceSharingIndicator";
@@ -108,6 +109,7 @@ export const WorkspacesTable: FC<WorkspacesTableProps> = ({
 	onActionSuccess,
 	onActionError,
 }) => {
+	const { t } = useTranslation();
 	const dashboard = useDashboard();
 
 	return (
@@ -134,16 +136,16 @@ export const WorkspacesTable: FC<WorkspacesTableProps> = ({
 										onCheckChange(workspaces);
 									}
 								}}
-								aria-label="Select all workspaces"
+								aria-label={t("selectAllWorkspaces")}
 								className="my-0"
 							/>
-							Name
+							{t("name")}
 						</div>
 					</TableHead>
-					<TableHead className="w-1/3">Template</TableHead>
-					<TableHead className="w-1/3">Status</TableHead>
+					<TableHead className="w-1/3">{t("template")}</TableHead>
+					<TableHead className="w-1/3">{t("status")}</TableHead>
 					<TableHead className="w-0">
-						<span className="sr-only">Actions</span>
+						<span className="sr-only">{t("actions")}</span>
 					</TableHead>
 				</TableRow>
 			</TableHeader>

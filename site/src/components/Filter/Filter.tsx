@@ -20,6 +20,7 @@ import { SearchField } from "components/SearchField/SearchField";
 import { useDebouncedFunction } from "hooks/debounce";
 import { ExternalLinkIcon, SlidersHorizontal } from "lucide-react";
 import { type FC, type ReactNode, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type PresetFilter = {
 	name: string;
@@ -182,6 +183,7 @@ export const Filter: FC<FilterProps> = ({
 	singleRowBreakpoint = "lg",
 }) => {
 	const theme = useTheme();
+	const { t } = useTranslation();
 	// Storing local copy of the filter query so that it can be updated more
 	// aggressively without re-renders rippling out to the rest of the app every
 	// single time. Exists for performance reasons - not really a good way to
@@ -237,7 +239,7 @@ export const Filter: FC<FilterProps> = ({
 							ref={textboxInputRef}
 							className="w-full"
 							value={queryCopy}
-							aria-label="Filter"
+							aria-label={t("search")}
 							aria-invalid={shouldDisplayError}
 							onChange={(query) => {
 								setQueryCopy(query);
@@ -252,7 +254,7 @@ export const Filter: FC<FilterProps> = ({
 								if (queryCopy === filter.query) return;
 								setQueryCopy(filter.query);
 							}}
-							placeholder="Search..."
+							placeholder={t("searchPlaceholder")}
 						/>
 						{hasError(error) && (
 							<span className="text-content-destructive text-sm">
@@ -284,12 +286,14 @@ const PresetMenu: FC<PresetMenuProps> = ({
 	learnMoreLink2,
 	onSelect,
 }) => {
+	const { t } = useTranslation();
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline">
 					<SlidersHorizontal />
-					Filters
+					{t("filters")}
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent side="bottom" align="start">
@@ -309,7 +313,7 @@ const PresetMenu: FC<PresetMenuProps> = ({
 					<DropdownMenuItem asChild>
 						<a href={learnMoreLink} target="_blank">
 							<ExternalLinkIcon className="size-icon-xs" />
-							View advanced filtering
+							{t("viewAdvancedFiltering")}
 						</a>
 					</DropdownMenuItem>
 				)}

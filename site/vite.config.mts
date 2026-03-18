@@ -110,6 +110,19 @@ export default defineConfig({
 							);
 						});
 					}
+					// Rewrite Set-Cookie headers to use localhost domain
+					proxy.on("proxyRes", (proxyRes) => {
+						const cookies = proxyRes.headers["set-cookie"];
+						if (Array.isArray(cookies)) {
+							proxyRes.headers["set-cookie"] = cookies.map((cookie) => {
+								// Remove domain attribute and set Secure=false for localhost
+								return cookie
+									.replace(/; Domain=[^;]+/gi, "")
+									.replace(/; Secure/gi, "")
+									.replace(/; SameSite=Strict/gi, "; SameSite=Lax");
+							});
+						}
+					});
 					// Vite does not catch socket errors, and stops the webserver.
 					// As /logs endpoint can return HTTP 4xx status, we need to embrace
 					// Vite with a custom error handler to prevent from quitting.

@@ -1,0 +1,43 @@
+{
+	"title": "Templates",
+	"subtitle": "Select a template to create a workspace.",
+	"emptyState": {
+		"title": "No templates found",
+		"description": "Templates allow you to create workspaces with pre-configured resources."
+	},
+	"table": {
+		"name": "Name",
+		"buildTime": "Build time",
+		"usedBy": "Used by",
+		"lastUpdated": "Last updated",
+		"actions": "Actions"
+	},
+	"tooltip": {
+		"title": "What is a template?",
+		"text": "With templates you can create a common configuration for your workspaces using Terraform.",
+		"link": "Manage templates"
+	},
+	"buttons": {
+		"createTemplate": "Create template",
+		"useTemplate": "Use template",
+		"createWorkspace": "Create workspace",
+		"viewDocs": "View docs"
+	},
+	"developerCount": "{{count}} developer",
+	"developerCount_plural": "{{count}} developers",
+	"starterTemplates": {
+		"title": "Create your first template",
+		"description": "Templates are written in Terraform and describe the infrastructure for workspaces. You can start using a starter template below or",
+		"createYourOwn": "create your own",
+		"viewAllStarterTemplates": "View all starter templates",
+		"readMore": "Read more",
+		"useTemplate": "Use template"
+	},
+	"empty": {
+		"noResults": "No results matched your search",
+		"firstTemplate": "Create your first template",
+		"firstTemplateDescription": "Templates are written in Terraform and describe the infrastructure for workspaces. You can start using a starter template below or",
+		"contactAdmin": "Create a Template",
+		"contactAdminDescription": "Contact your Coder administrator to create a template. You can share the code below."
+	}
+}

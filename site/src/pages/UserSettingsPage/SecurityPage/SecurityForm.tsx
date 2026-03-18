@@ -7,6 +7,7 @@ import { PasswordField } from "components/PasswordField/PasswordField";
 import { Spinner } from "components/Spinner/Spinner";
 import { type FormikContextType, useFormik } from "formik";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { getFormHelpers } from "utils/formUtils";
 import * as Yup from "yup";
 
@@ -16,25 +17,13 @@ interface SecurityFormValues {
 	confirm_password: string;
 }
 
-export const Language = {
-	oldPasswordLabel: "Old Password",
-	newPasswordLabel: "New Password",
-	confirmPasswordLabel: "Confirm Password",
-	oldPasswordRequired: "Old password is required",
-	newPasswordRequired: "New password is required",
-	confirmPasswordRequired: "Password confirmation is required",
-	passwordMinLength: "Password must be at least 8 characters",
-	passwordMaxLength: "Password must be no more than 64 characters",
-	confirmPasswordMatch: "Password and confirmation must match",
-	updatePassword: "Update password",
-};
-
-const validationSchema = Yup.object({
-	old_password: Yup.string().trim().required(Language.oldPasswordRequired),
-	password: Yup.string().trim().required(Language.newPasswordRequired),
+const getValidationSchema = (t: any) =>
+	Yup.object({
+	old_password: Yup.string().trim().required(t("oldPasswordRequired")),
+	password: Yup.string().trim().required(t("newPasswordRequired")),
 	confirm_password: Yup.string()
 		.trim()
-		.test("passwords-match", Language.confirmPasswordMatch, function (value) {
+		.test("passwords-match", t("confirmPasswordMatch"), function (value) {
 			return (this.parent as SecurityFormValues).password === value;
 		}),
 });
@@ -52,6 +41,8 @@ export const SecurityForm: FC<SecurityFormProps> = ({
 	onSubmit,
 	error,
 }) => {
+	const { t } = useTranslation("userSettings");
+	const validationSchema = getValidationSchema(t);
 	const form: FormikContextType<SecurityFormValues> =
 		useFormik<SecurityFormValues>({
 			initialValues: {
@@ -67,7 +58,7 @@ export const SecurityForm: FC<SecurityFormProps> = ({
 	if (disabled) {
 		return (
 			<Alert severity="info">
-				Password changes are only allowed for password based accounts.
+				{t("passwordBasedAccountsOnly")}
 			</Alert>
 		);
 	}
@@ -80,27 +71,27 @@ export const SecurityForm: FC<SecurityFormProps> = ({
 					{...getFieldHelpers("old_password")}
 					autoComplete="old_password"
 					fullWidth
-					label={Language.oldPasswordLabel}
+					label={t("oldPassword")}
 					type="password"
 				/>
 				<PasswordField
 					{...getFieldHelpers("password")}
 					autoComplete="password"
 					fullWidth
-					label={Language.newPasswordLabel}
+					label={t("newPassword")}
 				/>
 				<TextField
 					{...getFieldHelpers("confirm_password")}
 					autoComplete="confirm_password"
 					fullWidth
-					label={Language.confirmPasswordLabel}
+					label={t("confirmPassword")}
 					type="password"
 				/>
 
 				<div>
 					<Button disabled={isLoading} type="submit">
 						<Spinner loading={isLoading} />
-						{Language.updatePassword}
+						{t("updatePassword")}
 					</Button>
 				</div>
 			</FormFields>

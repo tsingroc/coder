@@ -4,6 +4,7 @@ import { Button } from "components/Button/Button";
 import { EmptyState } from "components/EmptyState/EmptyState";
 import { linkToTemplate, useLinks } from "modules/navigation";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 interface WorkspacesEmptyProps {
@@ -18,12 +19,12 @@ export const WorkspacesEmpty: FC<WorkspacesEmptyProps> = ({
 	canCreateTemplate,
 }) => {
 	const getLink = useLinks();
+	const { t } = useTranslation();
 
 	const totalFeaturedTemplates = 6;
 	const featuredTemplates = templates?.slice(0, totalFeaturedTemplates);
-	const defaultTitle = "Create a workspace";
-	const defaultMessage =
-		"A workspace is your personal, customizable development environment.";
+	const defaultTitle = t("createWorkspace");
+	const defaultMessage = t("workspaceDescription");
 	const defaultImage = (
 		<div className="max-w-[50%] h-[272px] overflow-hidden mt-12 opacity-85">
 			<img src="/featured/workspaces.webp" alt="" className="max-w-full" />
@@ -31,17 +32,17 @@ export const WorkspacesEmpty: FC<WorkspacesEmptyProps> = ({
 	);
 
 	if (isUsingFilter) {
-		return <EmptyState message="No results matched your search" />;
+		return <EmptyState message={t("noResultsMatched")} />;
 	}
 
 	if (templates && templates.length === 0 && canCreateTemplate) {
 		return (
 			<EmptyState
 				message={defaultTitle}
-				description={`${defaultMessage} To create a workspace, you first need to create a template.`}
+				description={`${defaultMessage} ${t("toCreateWorkspaceNeedTemplate")}`}
 				cta={
 					<Button asChild>
-						<Link to="/templates">Go to templates</Link>
+						<Link to="/templates">{t("goToTemplates")}</Link>
 					</Button>
 				}
 				className="pb-0"
@@ -54,7 +55,7 @@ export const WorkspacesEmpty: FC<WorkspacesEmptyProps> = ({
 		return (
 			<EmptyState
 				message={defaultTitle}
-				description={`${defaultMessage} There are no templates available, but you will see them here once your admin adds them.`}
+				description={`${defaultMessage} ${t("noTemplatesAvailable")}`}
 				className="pb-0"
 				image={defaultImage}
 			/>
@@ -64,7 +65,7 @@ export const WorkspacesEmpty: FC<WorkspacesEmptyProps> = ({
 	return (
 		<EmptyState
 			message={defaultTitle}
-			description={`${defaultMessage} Select one template below to start.`}
+			description={`${defaultMessage} ${t("selectTemplateBelow")}`}
 			cta={
 				<div>
 					<div className="flex flex-wrap gap-4 mb-6 justify-center max-w-[800px]">
@@ -101,7 +102,7 @@ export const WorkspacesEmpty: FC<WorkspacesEmptyProps> = ({
 
 					{templates && templates.length > totalFeaturedTemplates && (
 						<Button asChild>
-							<Link to="/templates">See all templates</Link>
+							<Link to="/templates">{t("seeAllTemplates")}</Link>
 						</Button>
 					)}
 				</div>

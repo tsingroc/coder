@@ -4,6 +4,7 @@ import { Button } from "components/Button/Button";
 import { Stack } from "components/Stack/Stack";
 import { PlusIcon } from "lucide-react";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
 import { Section } from "../Section";
 import { ConfirmDeleteDialog } from "./ConfirmDeleteDialog";
@@ -13,6 +14,7 @@ import { TokensPageView } from "./TokensPageView";
 const cliCreateCommand = "coder tokens create";
 
 const TokensPage: FC = () => {
+	const { t } = useTranslation("userSettings");
 	const [tokenToDelete, setTokenToDelete] = useState<
 		APIKeyWithOwner | undefined
 	>(undefined);
@@ -33,13 +35,11 @@ const TokensPage: FC = () => {
 	return (
 		<>
 			<Section
-				title="Tokens"
+				title={t("tokensTitle")}
 				css={styles.section}
 				description={
 					<>
-						Tokens are used to authenticate with the Coder API. You can create a
-						token with the Coder CLI using the <code>{cliCreateCommand}</code>{" "}
-						command.
+						{t("tokensDescription", { code: cliCreateCommand })}
 					</>
 				}
 				layout="fluid"
@@ -64,16 +64,20 @@ const TokensPage: FC = () => {
 	);
 };
 
-const TokenActions: FC = () => (
-	<Stack direction="row" justifyContent="end" css={{ marginBottom: 8 }}>
-		<Button asChild variant="outline">
-			<RouterLink to="new">
-				<PlusIcon />
-				Add token
-			</RouterLink>
-		</Button>
-	</Stack>
-);
+const TokenActions: FC = () => {
+	const { t } = useTranslation("userSettings");
+
+	return (
+		<Stack direction="row" justifyContent="end" css={{ marginBottom: 8 }}>
+			<Button asChild variant="outline">
+				<RouterLink to="new">
+					<PlusIcon />
+					{t("tokensAdd")}
+				</RouterLink>
+			</Button>
+		</Stack>
+	);
+};
 
 const styles = {
 	section: (theme) => css`

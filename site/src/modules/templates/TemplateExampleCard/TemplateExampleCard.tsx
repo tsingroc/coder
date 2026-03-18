@@ -5,6 +5,7 @@ import { Button } from "components/Button/Button";
 import { ExternalImage } from "components/ExternalImage/ExternalImage";
 import { Pill } from "components/Pill/Pill";
 import type { FC, HTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
 
 type TemplateExampleCardProps = HTMLAttributes<HTMLDivElement> & {
@@ -17,6 +18,8 @@ export const TemplateExampleCard: FC<TemplateExampleCardProps> = ({
 	activeTag,
 	...divProps
 }) => {
+	const { t } = useTranslation("templates");
+
 	return (
 		<div css={styles.card} {...divProps}>
 			<div css={styles.header}>
@@ -49,7 +52,7 @@ export const TemplateExampleCard: FC<TemplateExampleCardProps> = ({
 						to={`/starter-templates/${example.id}`}
 						css={{ display: "inline-block", fontSize: 13, marginTop: 4 }}
 					>
-						Read more
+						{t("starterTemplates.readMore")}
 					</Link>
 				</span>
 			</div>
@@ -57,7 +60,7 @@ export const TemplateExampleCard: FC<TemplateExampleCardProps> = ({
 			<div css={styles.useButtonContainer}>
 				<Button asChild className="w-full">
 					<RouterLink to={`/templates/new?exampleId=${example.id}`}>
-						Use template
+						{t("starterTemplates.useTemplate")}
 					</RouterLink>
 				</Button>
 			</div>

@@ -1,0 +1,125 @@
+{
+	"title": "AI Bridge 日志",
+	"subtitle": "跨组织的 LLM 使用情况集中审计。",
+	"tabs": {
+		"requestLogs": "请求日志",
+		"settings": "设置"
+	},
+	"requestLogs": {
+		"title": "请求日志",
+		"description": "查看和过滤组织中所有的 AI Bridge 请求。",
+		"filters": {
+			"title": "筛选器",
+			"provider": "提供商",
+			"model": "模型",
+			"status": "状态",
+			"user": "用户",
+			"dateRange": "日期范围",
+			"clearAll": "清除全部",
+			"applyFilters": "应用筛选器"
+		},
+		"table": {
+			"timestamp": "时间戳",
+			"provider": "提供商",
+			"model": "模型",
+			"user": "用户",
+			"status": "状态",
+			"duration": "持续时间",
+			"tokens": "令牌",
+			"actions": "操作"
+		},
+		"status": {
+			"success": "成功",
+			"error": "错误",
+			"pending": "等待中",
+			"cancelled": "已取消"
+		},
+		"actions": {
+			"viewDetails": "查看详情",
+			"export": "导出",
+			"replay": "重放"
+		},
+		"details": {
+			"title": "请求详情",
+			"requestId": "请求 ID",
+			"timestamp": "时间戳",
+			"provider": "提供商",
+			"model": "模型",
+			"user": "用户",
+			"status": "状态",
+			"request": "请求",
+			"response": "响应",
+			"metadata": "元数据",
+			"tokensUsed": "已用令牌",
+			"duration": "持续时间",
+			"cost": "成本"
+		},
+		"empty": {
+			"title": "未找到请求日志",
+			"description": "没有符合筛选条件的 AI Bridge 请求日志。"
+		},
+		"export": {
+			"title": "导出日志",
+			"format": "格式",
+			"csv": "CSV",
+			"json": "JSON",
+			"dateRange": "日期范围",
+			"includeFilters": "包含当前筛选器",
+			"export": "导出"
+		}
+	},
+	"settings": {
+		"title": "AI Bridge 设置",
+		"description": "为您的组织配置 AI Bridge 提供商和模型。",
+		"providers": {
+			"title": "提供商",
+			"addProvider": "添加提供商",
+			"noProviders": "未配置提供商",
+			"enabled": "已启用",
+			"disabled": "已禁用"
+		},
+		"models": {
+			"title": "模型",
+			"addModel": "添加模型",
+			"noModels": "未配置模型",
+			"default": "默认"
+		},
+		"quotas": {
+			"title": "配额",
+			"description": "为 AI Bridge 请求设置使用限制。",
+			"dailyLimit": "每日请求限制",
+			"monthlyLimit": "每月请求限制",
+			"tokenLimit": "令牌限制",
+			"resetQuota": "重置配额"
+		},
+		"audit": {
+			"title": "审计设置",
+			"logLevel": "日志级别",
+			"logAllRequests": "记录所有请求",
+			"logSuccessfulRequests": "记录成功请求",
+			"logFailedRequests": "记录失败请求",
+			"retention": "日志保留",
+			"retentionDays": "保留期（天）"
+		}
+	},
+	"providers": {
+		"openai": "OpenAI",
+		"anthropic": "Anthropic",
+		"google": "Google",
+		"azure": "Azure OpenAI",
+		"custom": "自定义"
+	},
+	"models": {
+		"gpt4": "GPT-4",
+		"gpt35": "GPT-3.5",
+		"claude": "Claude",
+		"gemini": "Gemini",
+		"llama": "LLaMA"
+	},
+	"help": {
+		"title": "关于 AI Bridge",
+		"description": "AI Bridge 为跨组织的 LLM API 使用提供集中审计和管理。跟踪请求、监控成本并执行配额。",
+		"docs": "文档",
+		"support": "支持"
+	}
+}

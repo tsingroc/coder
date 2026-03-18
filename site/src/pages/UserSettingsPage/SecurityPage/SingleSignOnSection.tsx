@@ -15,6 +15,8 @@ import { ExternalImage } from "components/ExternalImage/ExternalImage";
 import { Stack } from "components/Stack/Stack";
 import { CircleCheck as CircleCheckIcon, KeyIcon } from "lucide-react";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { useMutation } from "react-query";
 import { docs } from "utils/docs";
 import { Section } from "../Section";
@@ -99,18 +101,20 @@ export const useSingleSignOnSection = () => {
 };
 
 const SSOEmptyState: FC = () => {
+	const { t } = useTranslation("userSettings");
+
 	return (
 		<EmptyState
 			className="rounded-lg border border-solid border-border min-h-0"
-			message="No SSO Providers"
-			description="No SSO providers are configured with this Coder deployment."
+			message={t("ssoNoProviders")}
+			description={t("ssoNoProvidersDescription")}
 			cta={
 				<Link
 					href={docs("/admin/users/oidc-auth")}
 					target="_blank"
 					rel="noreferrer"
 				>
-					Learn how to add a provider
+					{t("ssoLearnProvider")}
 				</Link>
 			}
 		/>
@@ -132,14 +136,15 @@ export const SingleSignOnSection: FC<SingleSignOnSectionProps> = ({
 	isConfirming,
 	error,
 }) => {
+	const { t } = useTranslation("userSettings");
 	const noSsoEnabled = !authMethods.github.enabled && !authMethods.oidc.enabled;
 
 	return (
 		<>
 			<Section
 				id="sso-section"
-				title="Single Sign On"
-				description="Authenticate in Coder using one-click"
+				title={t("ssoTitle")}
+				description={t("ssoDescription")}
 			>
 				<div className="grid gap-4">
 					{userLoginType.login_type === "password" ? (
@@ -176,7 +181,7 @@ export const SingleSignOnSection: FC<SingleSignOnSectionProps> = ({
 						<div className="bg-surface-secondary rounded-md border border-border border-solid p-4 flex gap-4 items-center text-sm">
 							<CircleCheckIcon className="text-content-success size-icon-xs" />
 							<span>
-								Authenticated with{" "}
+								{t("ssoAuthenticatedWith")}{" "}
 								<strong>
 									{userLoginType.login_type === "github"
 										? "GitHub"
@@ -239,6 +244,7 @@ const ConfirmLoginTypeChangeModal: FC<ConfirmLoginTypeChangeModalProps> = ({
 	onClose,
 	onConfirm,
 }) => {
+	const { t } = useTranslation(["userSettings", "common"]) as { t: any };
 	const [password, setPassword] = useState("");
 
 	const handleConfirm = () => {
@@ -253,16 +259,13 @@ const ConfirmLoginTypeChangeModal: FC<ConfirmLoginTypeChangeModalProps> = ({
 			}}
 			onConfirm={handleConfirm}
 			hideCancel={false}
-			cancelText="Cancel"
-			confirmText="Update"
-			title="Change login type"
+			cancelText={t("cancel")}
+			confirmText={t("update")}
+			title={t("ssoChangeTitle")}
 			confirmLoading={loading}
 			description={
 				<Stack spacing={4}>
-					<p>
-						After changing your login type, you will not be able to change it
-						again. Are you sure you want to proceed and change your login type?
-					</p>
+					<p>{t("ssoChangeDescription")}</p>
 					<TextField
 						autoFocus
 						onKeyDown={(event) => {
@@ -273,14 +276,14 @@ const ConfirmLoginTypeChangeModal: FC<ConfirmLoginTypeChangeModalProps> = ({
 						error={Boolean(error)}
 						helperText={
 							error
-								? getErrorMessage(error, "Your password is incorrect")
+								? getErrorMessage(error, t("ssoPasswordIncorrect"))
 								: undefined
 						}
 						name="confirm-password"
 						id="confirm-password"
 						value={password}
 						onChange={(e) => setPassword(e.currentTarget.value)}
-						label="Confirm your password"
+						label={t("ssoConfirmPassword")}
 						type="password"
 					/>
 				</Stack>

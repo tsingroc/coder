@@ -31,6 +31,7 @@ import {
 } from "modules/notifications/utils";
 import type { Permissions } from "modules/permissions";
 import { type FC, Fragment, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQueries, useQuery, useQueryClient } from "react-query";
 import { useSearchParams } from "react-router";
 import { toast } from "sonner";
@@ -38,6 +39,7 @@ import { pageTitle } from "utils/page";
 import { Section } from "../Section";
 
 const NotificationsPage: FC = () => {
+	const { t } = useTranslation("userSettings");
 	const { user, permissions } = useAuthenticated();
 	const [
 		disabledPreferences,
@@ -82,10 +84,10 @@ const NotificationsPage: FC = () => {
 		disableMutation
 			.mutateAsync(disabledId)
 			.then(() => {
-				toast.success("Notification has been disabled.");
+				toast.success(t("notificationsDisabled"));
 			})
 			.catch((error) => {
-				toast.error("Error disabling notification.", {
+				toast.error(t("notificationsDisableError"), {
 					description: getErrorDetail(error),
 				});
 			});
@@ -109,11 +111,11 @@ const NotificationsPage: FC = () => {
 
 	return (
 		<>
-			<title>{pageTitle("Notifications Settings")}</title>
+			<title>{pageTitle(t("notificationsSettingsTitle"))}</title>
 
 			<Section
-				title="Notifications"
-				description="Control which notifications you receive."
+				title={t("notifications")}
+				description={t("notificationsDescription")}
 				layout="fluid"
 			>
 				{ready ? (
@@ -149,17 +151,12 @@ const NotificationsPage: FC = () => {
 															},
 															{
 																onSuccess: () => {
-																	toast.success(
-																		"Notification preferences updated.",
-																	);
+																	toast.success(t("notificationsUpdated"));
 																},
 																onError: (error) => {
-																	toast.error(
-																		"Error updating notification preferences.",
-																		{
-																			description: getErrorDetail(error),
-																		},
-																	);
+																	toast.error(t("notificationsUpdateError"), {
+																		description: getErrorDetail(error),
+																	});
 																},
 															},
 														);
@@ -244,7 +241,7 @@ const NotificationsPage: FC = () => {
 																/>
 															</TooltipTrigger>
 															<TooltipContent side="bottom">
-																Delivery via {label}
+																{t("notificationsDeliveryVia", { method: label })}
 															</TooltipContent>
 														</Tooltip>
 													</div>

@@ -6,6 +6,7 @@ import { Button } from "components/Button/Button";
 import { CodeExample } from "components/CodeExample/CodeExample";
 import { Stack } from "components/Stack/Stack";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface SSHKeysPageViewProps {
 	isLoading: boolean;
@@ -20,6 +21,7 @@ export const SSHKeysPageView: FC<SSHKeysPageViewProps> = ({
 	sshKey,
 	onRegenerateClick,
 }) => {
+	const { t } = useTranslation("userSettings");
 	const theme = useTheme();
 
 	if (isLoading) {
@@ -45,21 +47,7 @@ export const SSHKeysPageView: FC<SSHKeysPageViewProps> = ({
 							margin: 0,
 						}}
 					>
-						The following public key is used to authenticate Git in workspaces.
-						You may add it to Git services (such as GitHub) that you need to
-						access from your workspace. Coder configures authentication via{" "}
-						<code
-							css={{
-								background: theme.palette.divider,
-								fontSize: 12,
-								padding: "2px 4px",
-								color: theme.palette.text.primary,
-								borderRadius: 2,
-							}}
-						>
-							$GIT_SSH_COMMAND
-						</code>
-						.
+						{t("sshKeysDescription", { code: "$GIT_SSH_COMMAND" })}
 					</p>
 					<CodeExample secret={false} code={sshKey.public_key.trim()} />
 					<div>
@@ -68,7 +56,7 @@ export const SSHKeysPageView: FC<SSHKeysPageViewProps> = ({
 							data-testid="regenerate"
 							variant="outline"
 						>
-							Regenerate&hellip;
+							{t("sshKeysRegenerate")}
 						</Button>
 					</div>
 				</>

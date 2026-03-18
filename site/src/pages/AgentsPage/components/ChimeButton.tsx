@@ -6,9 +6,12 @@ import {
 } from "components/Tooltip/Tooltip";
 import { Volume2Icon, VolumeOffIcon } from "lucide-react";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { getChimeEnabled, setChimeEnabled } from "./AgentDetail/useAgentChime";
 
 export const ChimeButton: FC = () => {
+	const { t } = useTranslation("agents");
+	const tc = t as (key: string) => string;
 	const [enabled, setEnabled] = useState(getChimeEnabled);
 
 	const handleClick = () => {
@@ -25,7 +28,7 @@ export const ChimeButton: FC = () => {
 					size="icon"
 					onClick={handleClick}
 					aria-label={
-						enabled ? "Mute completion chime" : "Enable completion chime"
+						enabled ? tc("create.muteCompletionChime") : tc("create.enableCompletionChime")
 					}
 					className="h-7 w-7 text-content-secondary hover:text-content-primary"
 				>
@@ -37,7 +40,7 @@ export const ChimeButton: FC = () => {
 				</Button>
 			</TooltipTrigger>
 			<TooltipContent>
-				{enabled ? "Disable completion sound" : "Enable completion sound"}
+				{enabled ? tc("create.disableCompletionSound") : tc("create.enableCompletionSound")}
 			</TooltipContent>
 		</Tooltip>
 	);

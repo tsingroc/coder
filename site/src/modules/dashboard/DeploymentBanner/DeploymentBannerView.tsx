@@ -36,6 +36,8 @@ import {
 	useState,
 } from "react";
 import { Link as RouterLink } from "react-router";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 import { getDisplayWorkspaceStatus } from "utils/workspace";
 
 interface DeploymentBannerViewProps {
@@ -49,6 +51,7 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 	stats,
 	fetchStats,
 }) => {
+	const { t } = useTranslation();
 	const aggregatedMinutes = useMemo(() => {
 		if (!stats) {
 			return;
@@ -97,7 +100,7 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 		return dayjs().to(dayjs(stats.collected_at));
 	}, [timeUntilRefresh, stats, fetchStats]);
 
-	const healthErrors = health ? getHealthErrors(health) : [];
+	const healthErrors = health ? getHealthErrors(health, t) : [];
 	const displayLatency = stats?.workspaces.connection_latency_ms.P50 || -1;
 
 	return (
@@ -138,7 +141,7 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 						{healthErrors.length > 0 ? (
 							<>
 								<HelpTooltipTitle>
-									We have detected problems with your Coder deployment.
+									{t("deploymentBanner.healthDetectedProblems")}
 								</HelpTooltipTitle>
 								<div className="flex flex-col gap-1">
 									{healthErrors.map((error) => (
@@ -147,14 +150,14 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 								</div>
 							</>
 						) : (
-							"Status of your Coder deployment. Only visible for admins!"
+							t("deploymentBanner.healthStatus")
 						)}
 					</TooltipContent>
 				</Tooltip>
 			</TooltipProvider>
 
 			<div className="flex items-center">
-				<div className="mr-4 text-content-primary">Workspaces</div>
+				<div className="mr-4 text-content-primary">{t("workspaces")}</div>
 				<div className="flex gap-2 text-content-secondary">
 					<WorkspaceBuildValue
 						status="pending"
@@ -187,10 +190,14 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 				<TooltipProvider delayDuration={100}>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<div className="mr-4 text-content-primary">Transmission</div>
+							<div className="mr-4 text-content-primary">
+								{t("transmission")}
+							</div>
 						</TooltipTrigger>
 						<TooltipContent>
-							{`Activity in the last ~${aggregatedMinutes} minutes`}
+							{t("deploymentBanner.activityInLastMinutes", {
+								minutes: aggregatedMinutes ?? 0,
+							})}
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
@@ -203,7 +210,9 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 									{stats ? prettyBytes(stats.workspaces.rx_bytes) : "-"}
 								</div>
 							</TooltipTrigger>
-							<TooltipContent>Data sent to workspaces</TooltipContent>
+							<TooltipContent>
+								{t("deploymentBanner.dataSentToWorkspaces")}
+							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
 					<ValueSeparator />
@@ -215,7 +224,9 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 									{stats ? prettyBytes(stats.workspaces.tx_bytes) : "-"}
 								</div>
 							</TooltipTrigger>
-							<TooltipContent>Data sent from workspaces</TooltipContent>
+							<TooltipContent>
+								{t("deploymentBanner.dataSentFromWorkspaces")}
+							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
 					<ValueSeparator />
@@ -231,8 +242,8 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 							</TooltipTrigger>
 							<TooltipContent>
 								{displayLatency < 0
-									? "No recent workspace connections have been made"
-									: "The average latency of user connections to workspaces"}
+									? t("deploymentBanner.noRecentConnections")
+									: t("deploymentBanner.averageLatency")}
 							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
@@ -240,7 +251,9 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 			</div>
 
 			<div className="flex items-center">
-				<div className="mr-4 text-content-primary">Active Connections</div>
+				<div className="mr-4 text-content-primary">
+					{t("activeConnections")}
+				</div>
 
 				<div className="flex gap-2 text-content-secondary">
 					<TooltipProvider delayDuration={100}>
@@ -254,7 +267,7 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 								</div>
 							</TooltipTrigger>
 							<TooltipContent>
-								VS Code Editors with the Coder Remote Extension
+								{t("deploymentBanner.vscodeEditors")}
 							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
@@ -269,7 +282,9 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 										: stats?.session_count.jetbrains}
 								</div>
 							</TooltipTrigger>
-							<TooltipContent>JetBrains Editors</TooltipContent>
+							<TooltipContent>
+								{t("deploymentBanner.jetbrainsEditors")}
+							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
 					<ValueSeparator />
@@ -283,7 +298,9 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 										: stats?.session_count.ssh}
 								</div>
 							</TooltipTrigger>
-							<TooltipContent>SSH Sessions</TooltipContent>
+							<TooltipContent>
+								{t("deploymentBanner.sshSessions")}
+							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
 					<ValueSeparator />
@@ -297,7 +314,9 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 										: stats?.session_count.reconnecting_pty}
 								</div>
 							</TooltipTrigger>
-							<TooltipContent>Web Terminal Sessions</TooltipContent>
+							<TooltipContent>
+								{t("deploymentBanner.webTerminalSessions")}
+							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
 				</div>
@@ -316,8 +335,7 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 							className="max-w-xs"
 							collisionPadding={{ right: 20 }}
 						>
-							The last time stats were aggregated. Workspaces report statistics
-							periodically, so it may take a bit for these to update!
+							{t("deploymentBanner.lastAggregated")}
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
@@ -343,7 +361,7 @@ export const DeploymentBannerView: FC<DeploymentBannerViewProps> = ({
 							className="max-w-xs"
 							collisionPadding={{ right: 20 }}
 						>
-							A countdown until stats are fetched again. Click to refresh!
+							{t("deploymentBanner.countdownToRefresh")}
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
@@ -361,12 +379,13 @@ const WorkspaceBuildValue: FC<WorkspaceBuildValueProps> = ({
 	status,
 	count,
 }) => {
+	const { t } = useTranslation();
 	const displayStatus = getDisplayWorkspaceStatus(status);
 	let statusText = displayStatus.text;
 	let icon = displayStatus.icon;
 	if (status === "starting") {
 		icon = <WrenchIcon className="size-icon-xs" />;
-		statusText = "Building";
+		statusText = t("building");
 	}
 
 	return (
@@ -384,7 +403,7 @@ const WorkspaceBuildValue: FC<WorkspaceBuildValueProps> = ({
 						</RouterLink>
 					</Link>
 				</TooltipTrigger>
-				<TooltipContent>{`${statusText} Workspaces`}</TooltipContent>
+				<TooltipContent>{`${statusText} ${t("workspaces")}`}</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>
 	);
@@ -403,7 +422,10 @@ const HealthIssue: FC<PropsWithChildren> = ({ children }) => {
 	);
 };
 
-const getHealthErrors = (health: HealthcheckReport) => {
+const getHealthErrors = (
+	health: HealthcheckReport,
+	t: TFunction,
+) => {
 	const warnings: string[] = [];
 	const sections = [
 		"access_url",
@@ -413,11 +435,11 @@ const getHealthErrors = (health: HealthcheckReport) => {
 		"workspace_proxy",
 	] as const;
 	const messages: Record<(typeof sections)[number], string> = {
-		access_url: "Your access URL may be configured incorrectly.",
-		database: "Your database is unhealthy.",
-		derp: "We're noticing DERP proxy issues.",
-		websocket: "We're noticing websocket issues.",
-		workspace_proxy: "We're noticing workspace proxy issues.",
+		access_url: t("deploymentBanner.accessUrlError"),
+		database: t("deploymentBanner.databaseError"),
+		derp: t("deploymentBanner.derpError"),
+		websocket: t("deploymentBanner.websocketError"),
+		workspace_proxy: t("deploymentBanner.workspaceProxyError"),
 	} as const;
 
 	for (const section of sections) {

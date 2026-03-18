@@ -30,6 +30,7 @@ import { useAuthenticated } from "hooks/useAuthenticated";
 import { useExternalAuth } from "hooks/useExternalAuth";
 import { ArrowUpIcon, InfoIcon, RedoIcon, RotateCcwIcon } from "lucide-react";
 import { type FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router";
 import TextareaAutosize, {
@@ -83,18 +84,19 @@ const TaskPromptLoadingError: FC<{
 	error: unknown;
 	onRetry: () => void;
 }> = ({ error, onRetry }) => {
+	const { t } = useTranslation("tasks");
 	return (
 		<div className="border border-solid rounded-lg w-full min-h-80 flex items-center justify-center">
 			<div className="flex flex-col items-center">
 				<h3 className="m-0 font-medium text-content-primary text-base">
-					{getErrorMessage(error, "Error loading Task templates")}
+					{getErrorMessage(error, t("empty.noTaskTemplates"))}
 				</h3>
 				<span className="text-content-secondary text-sm">
-					{getErrorDetail(error) ?? "Please try again"}
+					{getErrorDetail(error) ?? t("buttons.retry")}
 				</span>
 				<Button size="sm" onClick={onRetry} className="mt-4">
 					<RotateCcwIcon />
-					Try again
+					{t("buttons.retry")}
 				</Button>
 			</div>
 		</div>
@@ -117,17 +119,18 @@ const TaskPromptSkeleton: FC = () => {
 };
 
 const TaskPromptEmpty: FC = () => {
+	const { t } = useTranslation("tasks");
 	return (
 		<div className="rounded-lg border border-solid border-border w-full min-h-80 p-4 flex items-center justify-center">
 			<div className="flex flex-col items-center">
 				<h3 className="m-0 font-medium text-content-primary text-base">
-					No Task templates found
+					{t("empty.noTaskTemplates")}
 				</h3>
 				<span className="text-content-secondary text-sm">
 					<Link href={docs("/ai-coder/tasks")} target="_blank" rel="noreferrer">
-						Learn about Tasks
+						{t("empty.learnAboutTasks")}
 					</Link>{" "}
-					to get started.
+					{t("empty.toGetStarted")}
 				</span>
 			</div>
 		</div>

@@ -7,6 +7,7 @@ import {
 } from "components/Filter/SelectFilter";
 import { useAuthenticated } from "hooks";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { type UseFilterMenuOptions, useFilterMenu } from "./menu";
 
 export const DEFAULT_USER_FILTER_WIDTH = 175;
@@ -89,21 +90,23 @@ interface UserMenuProps {
 }
 
 export const UserMenu: FC<UserMenuProps> = ({ menu, width, placeholder }) => {
+	const { t } = useTranslation();
+
 	return (
 		<SelectFilter
-			label="Select user"
-			placeholder={placeholder ?? "All users"}
-			emptyText="No users found"
+			label={t("selectUser")}
+			placeholder={placeholder ?? t("allUsers")}
+			emptyText={t("noUsersFound")}
 			options={menu.searchOptions}
 			onSelect={menu.selectOption}
 			selectedOption={menu.selectedOption ?? undefined}
 			width={width}
 			selectFilterSearch={
 				<ComboboxInput
-					placeholder="Search user..."
+					placeholder={t("searchUserPlaceholder")}
 					value={menu.query}
 					onValueChange={menu.setQuery}
-					aria-label="Search user"
+					aria-label={t("searchUser")}
 				/>
 			}
 		/>
