@@ -188,6 +188,7 @@ declare module "i18next" {
 			};
 			workspace: {
 				// Workspace page translations
+				title: string;
 				pageTitle: string;
 				yourWorkspacesButton: string;
 				allWorkspacesButton: string;
@@ -195,6 +196,8 @@ declare module "i18next" {
 				seeAllTemplates: string;
 				template: string;
 				newWorkspace: string;
+				selectedWorkspaces: string;
+				selectedWorkspace: string;
 				bulkActions: string;
 				start: string;
 				stop: string;
@@ -203,12 +206,80 @@ declare module "i18next" {
 				pageNotFound: string;
 				pageNotFoundDescription: string;
 				backToFirstPage: string;
-				workspace: string;
 				workspaces: string;
-				empty: {
+				workspace: string;
+				status: {
+					starting: string;
+					running: string;
+					stopping: string;
+					stopped: string;
+					deleting: string;
+					deleted: string;
+					updating: string;
+					updated: string;
+					error: string;
+					pending: string;
+					canceling: string;
+					canceled: string;
+					failed: string;
+				};
+				table: {
+					name: string;
+					template: string;
+					owner: string;
+					status: string;
+					lastUsed: string;
+					builtAt: string;
+					outdated: string;
+					actions: string;
+				};
+				emptyState: {
 					title: string;
 					description: string;
-					goToTemplates: string;
+				};
+				messages: {
+					starting: string;
+					stopping: string;
+					updating: string;
+					deleting: string;
+					started: string;
+					stopped: string;
+					updated: string;
+					deleted: string;
+					error: string;
+				};
+				selectedCount: string;
+				showing: string;
+				to: string;
+				of: string;
+				selectAllWorkspaces: string;
+				selectWorkspace: string;
+				ownerLabel: string;
+				organizationLabel: string;
+				actions: {
+					start: string;
+					stop: string;
+					restart: string;
+					update: string;
+					delete: string;
+					open: string;
+					settings: string;
+					viewLogs: string;
+					viewHistory: string;
+					startWorkspace: string;
+					updateAndStart: string;
+					updateAndRestart: string;
+					cancelBuild: string;
+					retryBuild: string;
+					openVSCode: string;
+					openVSCodeInsiders: string;
+					openTerminal: string;
+					openApp: string;
+					stopWorkspace: string;
+					stopConfirmTitle: string;
+					stopConfirmDescription: string;
+					autoUpdateRequired: string;
+					autoUpdateRequiredRestart: string;
 				};
 			};
 			createWorkspace: {
@@ -248,6 +319,8 @@ declare module "i18next" {
 				parameters: {
 					title: string;
 					description: string;
+					templateSettingsDescription: string;
+					viewDocs: string;
 					required: string;
 					optional: string;
 					defaultValue: string;
@@ -311,6 +384,8 @@ declare module "i18next" {
 					canceling: string;
 					canceled: string;
 					deleting: string;
+					deleted: string;
+					updating: string;
 					deleting_date: string;
 				};
 				resources: {
@@ -335,6 +410,9 @@ declare module "i18next" {
 					viewHistory: string;
 					viewTemplates: string;
 					settings: string;
+					autoUpdateRequired: string;
+					autoUpdateRequiredRestart: string;
+					autoUpdateEnabled: string;
 				};
 				applications: {
 					title: string;
@@ -356,6 +434,48 @@ declare module "i18next" {
 					deleted: string;
 					updated: string;
 					noEvents: string;
+				};
+				stopIn: string;
+				subtractHour: string;
+				addHour: string;
+				updateAndRestart: string;
+				restart: string;
+				restartWithParams: string;
+				favorite: string;
+				share: string;
+				resourcesTab: string;
+				historyTab: string;
+				ready: string;
+				connectViaSSH: string;
+				appsWarning: {
+					title: string;
+					message: string;
+					message2: string;
+					message3: string;
+					learnMore: string;
+				};
+				vscodeDesktop: string;
+				terminal: string;
+				logs: string;
+				downloadLogs: string;
+				buildTimeline: string;
+				messages: {
+					updatedSuccessfully: string;
+					updateFailed: string;
+				};
+				resourcesFailed: string;
+				showMoreBuilds: string;
+				health: {
+					agentsNotConnected: string;
+					cannotBeUsed: string;
+					agentsDisconnected: string;
+					disconnectedMessage: string;
+					startingNotConnected: string;
+					timeoutMessage: string;
+					runningBut: string;
+					multipleAgentsNotConnected: string;
+					singleAgentNotConnected: string;
+					viewDocsToTroubleshoot: string;
 				};
 			};
 			userSettings: {

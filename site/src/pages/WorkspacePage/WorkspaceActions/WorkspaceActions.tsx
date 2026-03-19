@@ -5,11 +5,11 @@ import {
 	type ActionType,
 	abilitiesByWorkspaceStatus,
 } from "modules/workspaces/actions";
-import type { WorkspacePermissions } from "../../modules/workspaces/permissions";
+import type { WorkspacePermissions } from "modules/workspaces/permissions";
 import { WorkspaceMoreActions } from "modules/workspaces/WorkspaceMoreActions/WorkspaceMoreActions";
 import { type FC, Fragment, type ReactNode } from "react";
 import { useQuery } from "react-query";
-import mustUpdateWorkspace from "utils/workspace";
+import { mustUpdateWorkspace } from "utils/workspace";
 import {
 	ActivateButton,
 	CancelButton,

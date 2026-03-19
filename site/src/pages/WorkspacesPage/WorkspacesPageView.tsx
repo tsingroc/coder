@@ -29,7 +29,6 @@ import {
 } from "./filter/WorkspacesFilter";
 import { WorkspaceHelpTooltip } from "./WorkspaceHelpTooltip";
 import { WorkspacesButton } from "./WorkspacesButton";
-import { useWorkspaceLanguage } from "./Language";
 import { useTranslation } from "react-i18next";
 
 type TemplateQuery = UseQueryResult<Template[]>;
@@ -78,15 +77,14 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 	onActionSuccess,
 	onActionError,
 }) => {
-	const lang = useWorkspaceLanguage();
-	const { t } = useTranslation();
+	const { t } = useTranslation("workspace");
 
 	// Let's say the user has 5 workspaces, but tried to hit page 100, which
 	// does not exist. In this case, the page is not valid and we want to show a
 	// better error message.
 	const pageNumberIsInvalid = page !== 1 && workspaces?.length === 0;
 	const workspaceLabel =
-		(workspaces?.length ?? 0) === 1 ? lang.workspace : lang.workspaces;
+		(workspaces?.length ?? 0) === 1 ? t("workspace") : t("workspaces");
 
 	return (
 		<Margins className="pb-12">
@@ -96,13 +94,13 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 						templates={templates}
 						templatesFetchStatus={templatesFetchStatus}
 					>
-						{lang.newWorkspace}
+						{t("newWorkspace")}
 					</WorkspacesButton>
 				}
 			>
 				<PageHeaderTitle>
 					<Stack direction="row" spacing={1} alignItems="center">
-						<span>{lang.pageTitle}</span>
+						<span>{t("pageTitle")}</span>
 						<WorkspaceHelpTooltip />
 					</Stack>
 				</PageHeaderTitle>
@@ -140,7 +138,7 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 									size="sm"
 									className="ml-auto"
 								>
-									{lang.bulkActions}
+									{t("bulkActions")}
 									<Spinner loading={isRunningBatchAction}>
 										<ChevronDownIcon />
 									</Spinner>
@@ -157,7 +155,7 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 									}
 									onClick={onBatchStartTransition}
 								>
-									<PlayIcon /> {lang.start}
+									<PlayIcon /> {t("start")}
 								</DropdownMenuItem>
 								<DropdownMenuItem
 									disabled={
@@ -167,7 +165,7 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 									}
 									onClick={onBatchStopTransition}
 								>
-									<SquareIcon /> {lang.stop}
+									<SquareIcon /> {t("stop")}
 								</DropdownMenuItem>
 								<DropdownMenuSeparator />
 								<DropdownMenuItem onClick={onBatchUpdateTransition}>
@@ -175,13 +173,13 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 										className="size-icon-sm"
 										data-testid="bulk-action-update"
 									/>{" "}
-									{lang.update}&hellip;
+									{t("update")}&hellip;
 								</DropdownMenuItem>
 								<DropdownMenuItem
 									className="text-content-destructive focus:text-content-destructive"
 									onClick={onBatchDeleteTransition}
 								>
-									<TrashIcon /> {lang.delete}&hellip;
+									<TrashIcon /> {t("delete")}&hellip;
 								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
@@ -189,7 +187,7 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 				) : (
 					!pageNumberIsInvalid && (
 						<PaginationAmount
-							paginationUnitLabel={lang.workspaces}
+							paginationUnitLabel={t("workspaces")}
 							limit={limit}
 							totalRecords={count}
 							currentOffsetStart={(page - 1) * limit + 1}
@@ -204,15 +202,15 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 						border: `1px solid ${theme.palette.divider}`,
 						borderRadius: theme.shape.borderRadius,
 					})}
-					message={lang.pageNotFound}
-					description={lang.pageNotFoundDescription}
+					message={t("pageNotFound")}
+					description={t("pageNotFoundDescription")}
 					cta={
 						<Button
 							onClick={() => {
 								onPageChange(1);
 							}}
 						>
-							{lang.backToFirstPage}
+							{t("backToFirstPage")}
 						</Button>
 					}
 				/>

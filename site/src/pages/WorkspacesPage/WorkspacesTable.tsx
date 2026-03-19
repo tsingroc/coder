@@ -376,6 +376,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 	onActionSuccess,
 	onActionError,
 }) => {
+	const { t } = useTranslation("workspace");
 	const { user } = useAuthenticated();
 
 	const queryClient = useQueryClient();
@@ -635,6 +636,8 @@ type WorkspaceAppsProps = {
 };
 
 const WorkspaceApps: FC<WorkspaceAppsProps> = ({ workspace }) => {
+	const { t } = useTranslation("workspace");
+
 	/**
 	 * Coder is pretty flexible and allows an enormous variety of use cases, such
 	 * as having multiple resources with many agents, but they are not common. The
