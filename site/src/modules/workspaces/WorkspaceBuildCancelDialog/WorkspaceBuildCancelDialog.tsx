@@ -1,5 +1,6 @@
 import type { Workspace } from "api/typesGenerated";
 import { ConfirmDialog } from "components/Dialogs/ConfirmDialog/ConfirmDialog";
+import { useTranslation } from "react-i18next";
 import type { FC } from "react";
 
 interface WorkspaceBuildCancelDialogProps {
@@ -12,18 +13,23 @@ interface WorkspaceBuildCancelDialogProps {
 export const WorkspaceBuildCancelDialog: FC<
 	WorkspaceBuildCancelDialogProps
 > = ({ open, onClose, onConfirm, workspace }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	const action =
 		workspace.latest_build.status === "pending"
-			? "remove the current build from the build queue"
-			: "stop the current build process";
+			? t("buildCancelDialog.removeBuildQueue")
+			: t("buildCancelDialog.stopBuildProcess");
 
 	return (
 		<ConfirmDialog
 			open={open}
-			title="Cancel workspace build"
-			description={`Are you sure you want to cancel the build for workspace "${workspace.name}"? This will ${action}.`}
-			confirmText="Confirm"
-			cancelText="Discard"
+			title={t("buildCancelDialog.title")}
+			description={t("buildCancelDialog.description", {
+				name: workspace.name,
+				action: action,
+			})}
+			confirmText={t("buildCancelDialog.confirm")}
+			cancelText={t("buildCancelDialog.cancel")}
 			onClose={onClose}
 			onConfirm={onConfirm}
 			type="delete"

@@ -491,6 +491,167 @@ declare module "i18next" {
 					singleAgentNotConnected: string;
 					viewDocsToTroubleshoot: string;
 				};
+				actionsButtons: {
+					share: string;
+					debug: string;
+					retry: string;
+					debugWithParams: string;
+					retryWithParams: string;
+					buildWorkspace: string;
+				};
+				sharing: {
+					title: string;
+					workspace: string;
+					task: string;
+					ephemeralParametersDescription: string;
+					goToWorkspaceParameters: string;
+					buildOptions: string;
+					ephemeralParametersNote: string;
+					noEphemeralParameters: string;
+					readDocs: string;
+				};
+				moreActions: {
+					title: string;
+					stop: string;
+					settings: string;
+					changeVersion: string;
+					duplicate: string;
+					downloadLogs: string;
+					delete: string;
+					changeVersionDialog: {
+						title: string;
+						confirm: string;
+						cancel: string;
+						description: string;
+						templateVersionPlaceholder: string;
+						active: string;
+						publishedBy: string;
+					};
+					downloadLogsDialog: {
+						title: string;
+						download: string;
+						cancel: string;
+						description: string;
+						unhealthyWarning: string;
+						notAvailable: string;
+						error: string;
+					};
+					deleteDialog: {
+						title: string;
+						cancel: string;
+						confirm: string;
+						workspaceLabel: string;
+						createdLabel: string;
+						warning: string;
+						confirmPrompt: string;
+						confirmToProceed: string;
+						workspaceNameLabel: string;
+						nameMismatchError: string;
+						taskWarning: string;
+						deleteTaskWarning: string;
+						thisTask: string;
+						orphanResources: string;
+						orphanResourcesDescription: string;
+						learnMore: string;
+					};
+					deleteFailedError: string;
+				};
+				buildCancelDialog: {
+					title: string;
+					description: string;
+					confirm: string;
+					cancel: string;
+					removeBuildQueue: string;
+					stopBuildProcess: string;
+				};
+				classicParameterFlowDeprecationWarning: {
+					message: string;
+					dynamicParameters: string;
+					messageEnd: string;
+					goToTemplateSettings: string;
+				};
+				ephemeralParametersDialog: {
+					title: string;
+					description: string;
+					question: string;
+					continue: string;
+					goToWorkspaceParameters: string;
+				};
+				dormantBadge: {
+					deletionPending: string;
+					dormant: string;
+					tooltipPending: string;
+					tooltipDormant: string;
+				};
+				outdatedTooltip: {
+					srLabel: string;
+					title: string;
+					description: string;
+					newVersion: string;
+					message: string;
+					noMessage: string;
+					update: string;
+					errorUpdating: string;
+				};
+				errorDialog: {
+					title: string;
+					deleting: string;
+					building: string;
+					messageLabel: string;
+					detailLabel: string;
+					validationsLabel: string;
+					failedToBuild: string;
+					reviewSettings: string;
+				};
+				buildLog: {
+					seconds: string;
+				};
+				buildData: {
+					by: string;
+				};
+				statusIndicator: {
+					srLabel: string;
+					loading: string;
+				};
+				appStatus: {
+					noActivity: string;
+				};
+				dynamicParameter: {
+					immutable: string;
+					immutableTooltip: string;
+					ephemeral: string;
+					ephemeralTooltip: string;
+					preset: string;
+					presetTooltip: string;
+					urlAutofill: string;
+					urlAutofillTooltip: string;
+					required: string;
+					requiredDefaultTooltip: string;
+					selectOption: string;
+					noResultsFound: string;
+					hideValue: string;
+					showValue: string;
+				};
+				sharingForm: {
+					roleLabels: {
+						use: string;
+						admin: string;
+						useDescription: string;
+						adminDescription: string;
+					};
+					addMember: string;
+					sharingDisabled: string;
+					sharingDisabledDescription: string;
+					member: string;
+					role: string;
+					noMembers: string;
+					noMembersDescription: string;
+					openMenu: string;
+					remove: string;
+					restartRequired: string;
+					searchUserOrGroup: string;
+					noUsersOrGroupsFound: string;
+				};
 			};
 			userSettings: {
 				// User settings page translations

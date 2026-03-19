@@ -8,6 +8,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "components/Dialog/Dialog";
+import { useTranslation } from "react-i18next";
 import type { FC } from "react";
 import { useNavigate } from "react-router";
 
@@ -32,6 +33,7 @@ export const WorkspaceErrorDialog: FC<WorkspaceErrorDialogProps> = ({
 	templateVersionId,
 	isDeleting,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const navigate = useNavigate();
 
 	if (!error) {
@@ -55,21 +57,30 @@ export const WorkspaceErrorDialog: FC<WorkspaceErrorDialogProps> = ({
 			<DialogContent variant="destructive">
 				<DialogHeader>
 					<DialogTitle>
-						Error {isDeleting ? "deleting" : "building"} workspace
+						{t("errorDialog.title")}
+						{isDeleting ? t("errorDialog.deleting") : t("errorDialog.building")}
 					</DialogTitle>
 					<DialogDescription className="flex flex-row gap-4">
-						<strong className="text-content-primary">Message</strong>{" "}
-						<span>{getErrorMessage(error, "Failed to build workspace.")}</span>
+						<strong className="text-content-primary">
+							{t("errorDialog.messageLabel")}
+						</strong>{" "}
+						<span>
+							{getErrorMessage(error, t("errorDialog.failedToBuild"))}
+						</span>
 					</DialogDescription>
 					{errorDetail && showDetail && (
 						<DialogDescription className="flex flex-row gap-9">
-							<strong className="text-content-primary">Detail</strong>{" "}
+							<strong className="text-content-primary">
+								{t("errorDialog.detailLabel")}
+							</strong>{" "}
 							<span>{errorDetail}</span>
 						</DialogDescription>
 					)}
 					{validations && (
 						<DialogDescription className="flex flex-row gap-4">
-							<strong className="text-content-primary">Validations</strong>{" "}
+							<strong className="text-content-primary">
+								{t("errorDialog.validationsLabel")}
+							</strong>{" "}
 							<span>
 								{validations.map((validation) => validation.detail).join(", ")}
 							</span>
@@ -78,7 +89,7 @@ export const WorkspaceErrorDialog: FC<WorkspaceErrorDialogProps> = ({
 				</DialogHeader>
 				<DialogFooter>
 					<Button onClick={handleGoToParameters}>
-						Review workspace settings
+						{t("errorDialog.reviewSettings")}
 					</Button>
 				</DialogFooter>
 			</DialogContent>

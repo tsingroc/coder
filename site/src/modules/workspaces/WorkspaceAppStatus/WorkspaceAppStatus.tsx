@@ -6,6 +6,7 @@ import {
 } from "components/Tooltip/Tooltip";
 import capitalize from "lodash/capitalize";
 import { AppStatusStateIcon } from "modules/apps/AppStatusStateIcon";
+import { useTranslation } from "react-i18next";
 
 type WorkspaceAppStatusProps = {
 	status: APIWorkspaceAppStatus | null;
@@ -16,10 +17,12 @@ export const WorkspaceAppStatus = ({
 	status,
 	disabled,
 }: WorkspaceAppStatusProps) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	if (!status) {
 		return (
 			<span className="text-content-disabled text-sm">
-				-<span className="sr-only">No activity</span>
+				-<span className="sr-only">{t("appStatus.noActivity")}</span>
 			</span>
 		);
 	}

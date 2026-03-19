@@ -69,6 +69,25 @@ export const useWorkspaceDetailLanguage = () => {
 			autoUpdateRequiredRestart: t("actions.autoUpdateRequiredRestart"),
 			autoUpdateEnabled: t("actions.autoUpdateEnabled"),
 		},
+		actionsButtons: {
+			share: t("actionsButtons.share"),
+			debug: t("actionsButtons.debug"),
+			retry: t("actionsButtons.retry"),
+			debugWithParams: t("actionsButtons.debugWithParams"),
+			retryWithParams: t("actionsButtons.retryWithParams"),
+			buildWorkspace: t("actionsButtons.buildWorkspace"),
+		},
+		sharing: {
+			title: (type: string) => t("sharing.title", { type }),
+			workspace: t("sharing.workspace"),
+			task: t("sharing.task"),
+			ephemeralParametersDescription: t("sharing.ephemeralParametersDescription"),
+			goToWorkspaceParameters: t("sharing.goToWorkspaceParameters"),
+			buildOptions: t("sharing.buildOptions"),
+			ephemeralParametersNote: t("sharing.ephemeralParametersNote"),
+			noEphemeralParameters: t("sharing.noEphemeralParameters"),
+			readDocs: t("sharing.readDocs"),
+		},
 		messages: {
 			updatedSuccessfully: (name: string) =>
 				t("messages.updatedSuccessfully", { name }),
@@ -112,6 +131,15 @@ export const useWorkspaceDetailLanguage = () => {
 				t("health.multipleAgentsNotConnected", { count }),
 			singleAgentNotConnected: t("health.singleAgentNotConnected"),
 			viewDocsToTroubleshoot: t("health.viewDocsToTroubleshoot"),
+		},
+		moreActions: {
+			title: t("moreActions.title"),
+			stop: t("moreActions.stop"),
+			settings: t("moreActions.settings"),
+			changeVersion: t("moreActions.changeVersion"),
+			duplicate: t("moreActions.duplicate"),
+			downloadLogs: t("moreActions.downloadLogs"),
+			delete: t("moreActions.delete"),
 		},
 	};
 };

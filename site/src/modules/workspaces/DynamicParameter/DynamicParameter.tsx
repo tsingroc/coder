@@ -44,6 +44,7 @@ import {
 	Settings,
 	TriangleAlert,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { type FC, useId, useRef, useState } from "react";
 import { cn } from "utils/cn";
 import type { AutofillBuildParameter } from "utils/richParameters";
@@ -108,6 +109,8 @@ const ParameterLabel: FC<ParameterLabelProps> = ({
 	autofill,
 	id,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	const displayName = parameter.display_name
 		? parameter.display_name
 		: parameter.name;
@@ -143,13 +146,12 @@ const ParameterLabel: FC<ParameterLabelProps> = ({
 									<span className="flex items-center">
 										<Badge size="sm" variant="warning" border="none">
 											<TriangleAlert />
-											Immutable
+											{t("dynamicParameter.immutable")}
 										</Badge>
 									</span>
 								</TooltipTrigger>
 								<TooltipContent className="max-w-xs">
-									This value cannot be modified after the workspace has been
-									created.
+									{t("dynamicParameter.immutableTooltip")}
 								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
@@ -161,13 +163,12 @@ const ParameterLabel: FC<ParameterLabelProps> = ({
 									<span className="flex items-center">
 										<Badge size="sm" variant="green" border="none">
 											<Hourglass />
-											Ephemeral
+											{t("dynamicParameter.ephemeral")}
 										</Badge>
 									</span>
 								</TooltipTrigger>
 								<TooltipContent className="max-w-xs">
-									This parameter is ephemeral and will reset to the template
-									default on workspace restart.
+									{t("dynamicParameter.ephemeralTooltip")}
 								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
@@ -179,12 +180,12 @@ const ParameterLabel: FC<ParameterLabelProps> = ({
 									<span className="flex items-center">
 										<Badge size="sm">
 											<Settings />
-											Preset
+											{t("dynamicParameter.preset")}
 										</Badge>
 									</span>
 								</TooltipTrigger>
 								<TooltipContent className="max-w-xs">
-									Preset parameters cannot be modified.
+									{t("dynamicParameter.presetTooltip")}
 								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
@@ -196,12 +197,12 @@ const ParameterLabel: FC<ParameterLabelProps> = ({
 									<span className="flex items-center">
 										<Badge size="sm">
 											<LinkIcon />
-											URL Autofill
+											{t("dynamicParameter.urlAutofill")}
 										</Badge>
 									</span>
 								</TooltipTrigger>
 								<TooltipContent className="max-w-xs">
-									Autofilled from the URL.
+									{t("dynamicParameter.urlAutofillTooltip")}
 								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
@@ -212,12 +213,13 @@ const ParameterLabel: FC<ParameterLabelProps> = ({
 								<TooltipTrigger asChild>
 									<span className="flex items-center">
 										<Badge size="sm" variant="destructive" border="none">
-											Required
+											{t("dynamicParameter.required")}
 										</Badge>
 									</span>
 								</TooltipTrigger>
 								<TooltipContent className="max-w-xs">
-									{hasRequiredDiagnostic.summary || "Required parameter"}
+									{hasRequiredDiagnostic.summary ||
+										t("dynamicParameter.requiredDefaultTooltip")}
 								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
@@ -251,6 +253,8 @@ const ParameterField: FC<ParameterFieldProps> = ({
 	disabled,
 	id,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	if (value === undefined && parameter.value.valid) {
 		value = parameter.value.value;
 	}
@@ -342,7 +346,10 @@ const ParameterField: FC<ParameterFieldProps> = ({
 				>
 					<SelectTrigger>
 						<SelectValue
-							placeholder={parameter.styling?.placeholder || "Select option"}
+							placeholder={
+								parameter.styling?.placeholder ||
+								t("dynamicParameter.selectOption")
+							}
 						/>
 					</SelectTrigger>
 					<SelectContent>
@@ -399,10 +406,12 @@ const ParameterField: FC<ParameterFieldProps> = ({
 						onChange(JSON.stringify(values));
 					}}
 					hidePlaceholderWhenSelected
-					placeholder={parameter.styling?.placeholder || "Select option"}
+					placeholder={
+						parameter.styling?.placeholder || t("dynamicParameter.selectOption")
+					}
 					emptyIndicator={
 						<p className="text-center text-md text-content-primary">
-							No results found
+							{t("dynamicParameter.noResultsFound")}
 						</p>
 					}
 					disabled={disabled}
@@ -502,6 +511,7 @@ const MaskableInput: FC<MaskableInputProps> = ({
 	type,
 	...inputProps
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const [showMaskedInput, setShowMaskedInput] = useState(false);
 
 	return (
@@ -523,7 +533,11 @@ const MaskableInput: FC<MaskableInputProps> = ({
 					type="button"
 					variant="subtle"
 					size="icon"
-					aria-label={showMaskedInput ? "Hide value" : "Show value"}
+					aria-label={
+						showMaskedInput
+							? t("dynamicParameter.hideValue")
+							: t("dynamicParameter.showValue")
+					}
 					aria-pressed={showMaskedInput}
 					onClick={() => setShowMaskedInput((value) => !value)}
 					disabled={disabled}
@@ -548,6 +562,7 @@ const MaskableTextArea: FC<MaskableInputProps> = ({
 	placeholder,
 	required,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const [showMaskedInput, setShowMaskedInput] = useState(false);
 
@@ -577,7 +592,11 @@ const MaskableTextArea: FC<MaskableInputProps> = ({
 					type="button"
 					variant="subtle"
 					size="icon"
-					aria-label={showMaskedInput ? "Hide value" : "Show value"}
+					aria-label={
+						showMaskedInput
+							? t("dynamicParameter.hideValue")
+							: t("dynamicParameter.showValue")
+					}
 					aria-pressed={showMaskedInput}
 					onClick={() => setShowMaskedInput((value) => !value)}
 					disabled={disabled}

@@ -52,7 +52,7 @@ const getWorkspaceStatusText = (
 	switch (workspaceStatus) {
 		case undefined:
 			return {
-				text: "Loading",
+				text: t("statusIndicator.loading"),
 				type: "active",
 				icon: <PillSpinner />,
 			} as const;
@@ -137,7 +137,7 @@ export const WorkspaceStatusIndicator: FC<WorkspaceStatusIndicatorProps> = ({
 	const statusIndicator = (
 		<StatusIndicator variant={variantByStatusType[type]}>
 			<StatusIndicatorDot />
-			<span className="sr-only">Workspace status:</span> {text}
+			<span className="sr-only">{t("statusIndicator.srLabel")}</span> {text}
 			{children}
 		</StatusIndicator>
 	);
@@ -151,7 +151,7 @@ export const WorkspaceStatusIndicator: FC<WorkspaceStatusIndicatorProps> = ({
 			<TooltipTrigger asChild>
 				<StatusIndicator variant={variantByStatusType[type]}>
 					<StatusIndicatorDot />
-					<span className="sr-only">Workspace status:</span> {text}
+					<span className="sr-only">{t("statusIndicator.srLabel")}</span> {text}
 					{children}
 				</StatusIndicator>
 			</TooltipTrigger>

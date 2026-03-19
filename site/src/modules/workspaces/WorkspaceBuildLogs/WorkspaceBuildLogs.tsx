@@ -10,12 +10,9 @@ import {
 	useLayoutEffect,
 	useRef,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { BODY_FONT_FAMILY } from "theme/constants";
 import { cn } from "utils/cn";
-
-const Language = {
-	seconds: "seconds",
-};
 
 type Stage = ProvisionerJobLog["stage"];
 type LogsGroupedByStage = Record<Stage, ProvisionerJobLog[]>;
@@ -62,6 +59,7 @@ export const WorkspaceBuildLogs: FC<WorkspaceBuildLogsProps> = ({
 	className,
 	...attrs
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const groupedLogsByStage = groupLogsByStage(logs);
 
 	const ref = useRef<HTMLDivElement>(null);
@@ -99,7 +97,7 @@ export const WorkspaceBuildLogs: FC<WorkspaceBuildLogsProps> = ({
 							<div>{stage}</div>
 							{shouldDisplayDuration && (
 								<div css={styles.duration}>
-									{duration} {Language.seconds}
+									{duration} {t("buildLog.seconds")}
 								</div>
 							)}
 						</div>

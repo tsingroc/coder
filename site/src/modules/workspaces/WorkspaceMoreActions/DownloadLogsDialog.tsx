@@ -12,6 +12,7 @@ import { Stack } from "components/Stack/Stack";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import { type FC, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQueries, useQuery } from "react-query";
 import { toast } from "sonner";
 
@@ -35,6 +36,7 @@ export const DownloadLogsDialog: FC<DownloadLogsDialogProps> = ({
 	download = saveAs,
 }) => {
 	const theme = useTheme();
+	const { t } = useTranslation("workspaceDetail");
 
 	const buildLogsQuery = useQuery({
 		...buildLogs(workspace),
@@ -107,9 +109,10 @@ export const DownloadLogsDialog: FC<DownloadLogsDialogProps> = ({
 			open={open}
 			onClose={onClose}
 			hideCancel={false}
-			title="Download logs"
+			title={t("moreActions.downloadLogsDialog.title")}
 			confirmLoading={isDownloading}
-			confirmText="Download"
+			confirmText={t("moreActions.downloadLogsDialog.download")}
+			cancelText={t("moreActions.downloadLogsDialog.cancel")}
 			disabled={
 				isDownloading ||
 				// If a workspace isn't healthy, let the user download as many logs as
@@ -135,23 +138,24 @@ export const DownloadLogsDialog: FC<DownloadLogsDialogProps> = ({
 					}, theme.transitions.duration.leavingScreen);
 				} catch (error) {
 					setIsDownloading(false);
-					toast.error(`Error downloading workspace "${workspace.name}" logs.`, {
-						description: getErrorDetail(error),
-					});
+					toast.error(
+						t("moreActions.downloadLogsDialog.error", {
+							name: workspace.name,
+						}),
+						{
+							description: getErrorDetail(error),
+						},
+					);
 					console.error(error);
 				}
 			}}
 			description={
 				<Stack css={{ paddingBottom: 16 }}>
-					<p>
-						Downloading logs will create a zip file containing all logs from all
-						jobs in this workspace. This may take a while.
-					</p>
+					<p>{t("moreActions.downloadLogsDialog.description")}</p>
 
 					{!isWorkspaceHealthy && isLoadingFiles && (
 						<Alert severity="warning" prominent>
-							Your workspace is unhealthy. Some logs may be unavailable for
-							download.
+							{t("moreActions.downloadLogsDialog.unhealthyWarning")}
 						</Alert>
 					)}
 
@@ -178,6 +182,7 @@ type DownloadingItemProps = Readonly<{
 
 const DownloadingItem: FC<DownloadingItemProps> = ({ file, giveUpTimeMs }) => {
 	const theme = useTheme();
+	const { t } = useTranslation("workspaceDetail");
 	const [isWaiting, setIsWaiting] = useState(true);
 
 	useEffect(() => {
@@ -214,7 +219,9 @@ const DownloadingItem: FC<DownloadingItemProps> = ({ file, giveUpTimeMs }) => {
 				) : isWaiting ? (
 					<Skeleton variant="text" width={48} height={12} />
 				) : (
-					<p css={styles.notAvailableText}>Not available</p>
+					<p css={styles.notAvailableText}>
+						{t("moreActions.downloadLogsDialog.notAvailable")}
+					</p>
 				)}
 			</span>
 		</li>

@@ -8,6 +8,7 @@ import {
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
 import { InfoIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { createDayString } from "utils/createDayString";
 import {
 	buildReasonLabels,
@@ -17,6 +18,7 @@ import {
 } from "utils/workspace";
 
 export const WorkspaceBuildData = ({ build }: { build: WorkspaceBuild }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const theme = useTheme();
 	const statusType = getDisplayWorkspaceBuildStatus(theme, build).type;
 
@@ -43,7 +45,7 @@ export const WorkspaceBuildData = ({ build }: { build: WorkspaceBuild }) => {
 					}}
 				>
 					<span css={{ textTransform: "capitalize" }}>{build.transition}</span>{" "}
-					by{" "}
+					{t("buildData.by")}{" "}
 					<span css={{ fontWeight: 500 }}>
 						{getDisplayWorkspaceBuildInitiatedBy(build)}
 					</span>

@@ -12,6 +12,7 @@ import { AddWorkspaceUserOrGroup } from "modules/workspaces/WorkspaceSharingForm
 import { useWorkspaceSharing } from "modules/workspaces/WorkspaceSharingForm/useWorkspaceSharing";
 import { WorkspaceSharingForm } from "modules/workspaces/WorkspaceSharingForm/WorkspaceSharingForm";
 import type { FC } from "react";
+import { useWorkspaceDetailLanguage } from "../Language";
 
 interface ShareButtonProps {
 	workspace: Workspace;
@@ -22,6 +23,7 @@ export const ShareButton: FC<ShareButtonProps> = ({
 	workspace,
 	canUpdatePermissions,
 }) => {
+	const lang = useWorkspaceDetailLanguage();
 	const sharing = useWorkspaceSharing(workspace);
 
 	return (
@@ -29,13 +31,15 @@ export const ShareButton: FC<ShareButtonProps> = ({
 			<PopoverTrigger asChild>
 				<TopbarButton data-testid="workspace-share-button">
 					<Share2Icon />
-					Share
+					{lang.actionsButtons.share}
 				</TopbarButton>
 			</PopoverTrigger>
 			<PopoverContent align="end" className="w-[580px] p-4">
 				<div className="flex items-center gap-2 mb-4">
 					<h3 className="text-lg font-semibold m-0">
-						{workspace.task_id ? "Task" : "Workspace"} Sharing
+						{lang.sharing.title(
+							workspace.task_id ? lang.sharing.task : lang.sharing.workspace,
+						)}
 					</h3>
 					<FeatureStageBadge contentType="beta" size="sm" />
 				</div>

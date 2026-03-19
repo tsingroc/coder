@@ -8,6 +8,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "components/Dialog/Dialog";
+import { useTranslation } from "react-i18next";
 import type { FC } from "react";
 import { useNavigate } from "react-router";
 
@@ -30,6 +31,7 @@ export const EphemeralParametersDialog: FC<EphemeralParametersDialogProps> = ({
 	workspaceName,
 	templateVersionId,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const navigate = useNavigate();
 
 	const handleGoToParameters = () => {
@@ -43,13 +45,11 @@ export const EphemeralParametersDialog: FC<EphemeralParametersDialogProps> = ({
 		<Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Ephemeral Parameters Detected</DialogTitle>
+					<DialogTitle>{t("ephemeralParametersDialog.title")}</DialogTitle>
 					<DialogDescription>
-						This workspace template has{" "}
-						<strong className="text-content-primary">
-							{ephemeralParameters.length}
-						</strong>{" "}
-						ephemeral parameters that will be reset to their default values
+						{t("ephemeralParametersDialog.description", {
+							count: ephemeralParameters.length,
+						})}
 					</DialogDescription>
 					<DialogDescription>
 						<ul className="list-none pl-6 space-y-2">
@@ -68,19 +68,18 @@ export const EphemeralParametersDialog: FC<EphemeralParametersDialogProps> = ({
 						</ul>
 					</DialogDescription>
 					<DialogDescription>
-						Would you like to go to the workspace parameters page to review and
-						update these parameters before continuing?
+						{t("ephemeralParametersDialog.question")}
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter>
 					<Button onClick={onContinue} variant="outline">
-						Continue
+						{t("ephemeralParametersDialog.continue")}
 					</Button>
 					<Button
 						data-testid="workspace-parameters"
 						onClick={handleGoToParameters}
 					>
-						Go to workspace parameters
+						{t("ephemeralParametersDialog.goToWorkspaceParameters")}
 					</Button>
 				</DialogFooter>
 			</DialogContent>

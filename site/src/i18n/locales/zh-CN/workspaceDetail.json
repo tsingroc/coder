@@ -114,6 +114,71 @@
 	"updateWorkspaceConfirm": "更新",
 	"updateWorkspaceDescriptionPart1": "更新工作区将使用最新的模板版本启动工作区。这可能会",
 	"updateWorkspaceDescriptionPart2": "删除非持久化数据",
+	"actionsButtons": {
+		"share": "分享",
+		"debug": "调试",
+		"retry": "重试",
+		"debugWithParams": "使用构建参数调试",
+		"retryWithParams": "使用构建参数重试",
+		"buildWorkspace": "构建工作区"
+	},
+	"sharing": {
+		"title": "{{type}} 分享",
+		"workspace": "工作区",
+		"task": "任务",
+		"ephemeralParametersDescription": "此工作区具有临时参数，可能会在工作区启动时使用临时值。在工作区设置中配置以下参数。",
+		"goToWorkspaceParameters": "前往工作区参数",
+		"buildOptions": "构建选项",
+		"ephemeralParametersNote": "这些参数仅适用于单次工作区启动。",
+		"noEphemeralParameters": "此模板没有临时构建选项。",
+		"readDocs": "阅读文档"
+	},
+	"moreActions": {
+		"title": "工作区操作",
+		"stop": "停止…",
+		"settings": "设置",
+		"changeVersion": "更改版本…",
+		"duplicate": "复制…",
+		"downloadLogs": "下载日志…",
+		"delete": "删除…",
+		"changeVersionDialog": {
+			"title": "更改版本",
+			"confirm": "更改",
+			"cancel": "取消",
+			"description": "您即将更改此工作区的版本。",
+			"templateVersionPlaceholder": "模板版本名称",
+			"active": "当前版本",
+			"publishedBy": "发布者"
+		},
+		"downloadLogsDialog": {
+			"title": "下载日志",
+			"download": "下载",
+			"cancel": "取消",
+			"description": "下载日志将创建一个包含此工作区所有作业日志的 zip 文件。这可能需要一些时间。",
+			"unhealthyWarning": "您的工作区不健康。某些日志可能无法下载。",
+			"notAvailable": "不可用",
+			"error": "下载工作区 \"{{name}}\" 日志失败"
+		},
+		"deleteDialog": {
+			"title": "删除工作区",
+			"cancel": "取消",
+			"confirm": "删除",
+			"workspaceLabel": "工作区",
+			"createdLabel": "创建时间",
+			"warning": "删除此工作区是不可逆的！",
+			"confirmPrompt": "在下方输入",
+			"confirmToProceed": "以确认：",
+			"workspaceNameLabel": "工作区名称",
+			"nameMismatchError": "{{input}} 与此工作区的名称不匹配",
+			"taskWarning": "此工作区与任务相关",
+			"deleteTaskWarning": "删除此工作区也将删除",
+			"thisTask": "此任务",
+			"orphanResources": "孤立资源",
+			"orphanResourcesDescription": "作为模板管理员，您可以跳过资源清理来删除失败的工作区。卷和虚拟机等资源将不会被销毁。",
+			"learnMore": "了解更多"
+		},
+		"deleteFailedError": "删除工作区 \"{{name}}\" 失败"
+	},
 	"messages": {
 		"updatedSuccessfully": "\"{{name}}\" 的关机时间已成功更新。",
 		"updateFailed": "更新 \"{{name}}\" 的关机时间失败。请重试。"
@@ -131,5 +196,101 @@
 		"multipleAgentsNotConnected": "{{count}} 个代理尚未连接",
 		"singleAgentNotConnected": "代理尚未连接",
 		"viewDocsToTroubleshoot": "查看文档以进行故障排除"
+	},
+	"buildCancelDialog": {
+		"title": "取消工作区构建",
+		"description": "您确定要取消工作区 \"{{name}}\" 的构建吗？这将 {{action}}。",
+		"confirm": "确认",
+		"cancel": "放弃",
+		"removeBuildQueue": "从构建队列中移除当前构建",
+		"stopBuildProcess": "停止当前构建过程"
+	},
+	"classicParameterFlowDeprecationWarning": {
+		"message": "此模板正在使用经典参数流程，该流程将在未来版本中被<strong>弃用</strong>并移除。请迁移到模板设置上的",
+		"dynamicParameters": "动态参数",
+		"messageEnd": "以获得改进的功能。",
+		"goToTemplateSettings": "前往模板设置"
+	},
+	"ephemeralParametersDialog": {
+		"title": "检测到临时参数",
+		"description": "此工作区模板具有<strong>{{count}}</strong> 个将被重置为默认值的临时参数",
+		"question": "您是否要前往工作区参数页面查看并在继续之前更新这些参数？",
+		"continue": "继续",
+		"goToWorkspaceParameters": "前往工作区参数"
+	},
+	"dormantBadge": {
+		"deletionPending": "待删除",
+		"dormant": "休眠",
+		"tooltipPending": "此工作区已 {{time}} 未使用，已被标记为休眠。计划于 {{date}} 删除。",
+		"tooltipDormant": "此工作区已 {{time}} 未使用，已被标记为休眠。目前未计划自动删除，但如果此模板启用了自动删除，它将成为候选。"
+	},
+	"outdatedTooltip": {
+		"srLabel": "过时信息",
+		"title": "过时",
+		"description": "此工作区版本已过时，有新版本可用。",
+		"newVersion": "新版本",
+		"message": "消息",
+		"noMessage": "无消息",
+		"update": "更新",
+		"errorUpdating": "更新工作区 \"{{name}}\" 时出错"
+	},
+	"errorDialog": {
+		"title": "错误{{action}}工作区",
+		"deleting": "删除",
+		"building": "构建",
+		"messageLabel": "消息",
+		"detailLabel": "详情",
+		"validationsLabel": "验证",
+		"failedToBuild": "构建工作区失败。",
+		"reviewSettings": "查看工作区设置"
+	},
+	"buildLog": {
+		"seconds": "秒"
+	},
+	"buildData": {
+		"by": "由"
+	},
+	"statusIndicator": {
+		"srLabel": "工作区状态：",
+		"loading": "加载中"
+	},
+	"appStatus": {
+		"noActivity": "无活动"
+	},
+	"dynamicParameter": {
+		"immutable": "不可变",
+		"immutableTooltip": "工作区创建后无法修改此值。",
+		"ephemeral": "临时",
+		"ephemeralTooltip": "此参数是临时的，将在工作区重启时重置为模板默认值。",
+		"preset": "预设",
+		"presetTooltip": "预设参数无法修改。",
+		"urlAutofill": "URL 自动填充",
+		"urlAutofillTooltip": "从 URL 自动填充。",
+		"required": "必需",
+		"requiredDefaultTooltip": "必需参数",
+		"selectOption": "选择选项",
+		"noResultsFound": "未找到结果",
+		"hideValue": "隐藏值",
+		"showValue": "显示值"
+	},
+	"sharingForm": {
+		"roleLabels": {
+			"use": "使用",
+			"admin": "管理员",
+			"useDescription": "可以读取、访问、启动和停止此工作区。",
+			"adminDescription": "可以管理工作区元数据、权限和设置。"
+		},
+		"addMember": "添加成员",
+		"sharingDisabled": "此工作区无法共享",
+		"sharingDisabledDescription": "此组织已禁用工作区共享。",
+		"member": "成员",
+		"role": "角色",
+		"noMembers": "暂无共享的成员或组",
+		"noMembersDescription": "使用上方控件添加成员或组。",
+		"openMenu": "打开菜单",
+		"remove": "移除",
+		"restartRequired": "需要重新启动工作区才能使删除生效。",
+		"searchUserOrGroup": "搜索用户或组",
+		"noUsersOrGroupsFound": "未找到用户或组"
 	}
 }

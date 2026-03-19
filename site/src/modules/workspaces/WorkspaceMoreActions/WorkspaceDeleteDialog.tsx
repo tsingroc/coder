@@ -9,6 +9,7 @@ import type {
 import { ConfirmDialog } from "components/Dialogs/ConfirmDialog/ConfirmDialog";
 import dayjs from "dayjs";
 import { type FC, type FormEvent, useId, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { docs } from "utils/docs";
 
 interface WorkspaceDeleteDialogProps {
@@ -26,6 +27,7 @@ export const WorkspaceDeleteDialog: FC<WorkspaceDeleteDialogProps> = ({
 	onCancel,
 	onConfirm,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const hookId = useId();
 	const [userConfirmationText, setUserConfirmationText] = useState("");
 	const [orphanWorkspace, setOrphanWorkspace] =
@@ -63,27 +65,34 @@ export const WorkspaceDeleteDialog: FC<WorkspaceDeleteDialogProps> = ({
 			type="delete"
 			hideCancel={false}
 			open={isOpen}
-			title="Delete Workspace"
+			title={t("moreActions.deleteDialog.title")}
 			onConfirm={() => onConfirm(orphanWorkspace)}
 			onClose={onCancel}
+			cancelText={t("moreActions.deleteDialog.cancel")}
+			confirmText={t("moreActions.deleteDialog.confirm")}
 			disabled={!deletionConfirmed}
 			description={
 				<>
 					<div css={styles.workspaceInfo}>
 						<div>
 							<p className="name">{workspace.name}</p>
-							<p className="label">workspace</p>
+							<p className="label">
+								{t("moreActions.deleteDialog.workspaceLabel")}
+							</p>
 						</div>
 						<div css={{ textAlign: "right" }}>
 							<p className="info">{dayjs(workspace.created_at).fromNow()}</p>
-							<p className="label">created</p>
+							<p className="label">
+								{t("moreActions.deleteDialog.createdLabel")}
+							</p>
 						</div>
 					</div>
 
-					<p>Deleting this workspace is irreversible!</p>
+					<p>{t("moreActions.deleteDialog.warning")}</p>
 					<p>
-						Type &ldquo;<strong>{workspace.name}</strong>&rdquo; below to
-						confirm:
+						{t("moreActions.deleteDialog.confirmPrompt")} &ldquo;
+						<strong>{workspace.name}</strong>&rdquo;{" "}
+						{t("moreActions.deleteDialog.confirmToProceed")}
 					</p>
 
 					<form onSubmit={onSubmit}>
@@ -99,12 +108,14 @@ export const WorkspaceDeleteDialog: FC<WorkspaceDeleteDialogProps> = ({
 							onChange={(event) => setUserConfirmationText(event.target.value)}
 							onFocus={() => setIsFocused(true)}
 							onBlur={() => setIsFocused(false)}
-							label="Workspace name"
+							label={t("moreActions.deleteDialog.workspaceNameLabel")}
 							color={inputColor}
 							error={displayErrorMessage}
 							helperText={
 								displayErrorMessage &&
-								`${userConfirmationText} does not match the name of this workspace`
+								t("moreActions.deleteDialog.nameMismatchError", {
+									input: userConfirmationText,
+								})
 							}
 							InputProps={{ color: inputColor }}
 							inputProps={{
@@ -114,13 +125,15 @@ export const WorkspaceDeleteDialog: FC<WorkspaceDeleteDialogProps> = ({
 						{hasTask && (
 							<div css={styles.warnContainer}>
 								<div css={{ flexDirection: "column" }}>
-									<p className="info">This workspace is related to a task</p>
+									<p className="info">
+										{t("moreActions.deleteDialog.taskWarning")}
+									</p>
 									<span css={{ fontSize: 12, marginTop: 4, display: "block" }}>
-										Deleting this workspace will also delete{" "}
+										{t("moreActions.deleteDialog.deleteTaskWarning")}{" "}
 										<Link
 											href={`/tasks/${workspace.owner_name}/${workspace.task_id}`}
 										>
-											this task
+											{t("moreActions.deleteDialog.thisTask")}
 										</Link>
 										.
 									</span>
@@ -144,11 +157,12 @@ export const WorkspaceDeleteDialog: FC<WorkspaceDeleteDialogProps> = ({
 									/>
 								</div>
 								<div css={{ flexDirection: "column" }}>
-									<p className="info">Orphan Resources</p>
+									<p className="info">
+										{t("moreActions.deleteDialog.orphanResources")}
+									</p>
 									<span css={{ fontSize: 12, marginTop: 4, display: "block" }}>
-										As a Template Admin, you may skip resource cleanup to delete
-										a failed workspace. Resources such as volumes and virtual
-										machines will not be destroyed.&nbsp;
+										{t("moreActions.deleteDialog.orphanResourcesDescription")}
+										&nbsp;
 										<Link
 											href={docs(
 												"/user-guides/workspace-management#workspace-resources",
@@ -156,7 +170,7 @@ export const WorkspaceDeleteDialog: FC<WorkspaceDeleteDialogProps> = ({
 											target="_blank"
 											rel="noreferrer"
 										>
-											Learn more...
+											{t("moreActions.deleteDialog.learnMore")}
 										</Link>
 									</span>
 								</div>

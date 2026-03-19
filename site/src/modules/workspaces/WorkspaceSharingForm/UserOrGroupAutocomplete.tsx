@@ -7,6 +7,7 @@ import { AvatarData } from "components/Avatar/AvatarData";
 import { Check } from "lucide-react";
 import { getGroupSubtitle, isGroup } from "modules/groups";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { keepPreviousData, useQuery } from "react-query";
 
 type OrganizationMember = OrganizationMemberWithUserData & { id: string };
@@ -35,6 +36,7 @@ export const UserOrGroupAutocomplete: FC<UserOrGroupAutocompleteProps> = ({
 	organizationId,
 	exclude,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const [inputValue, setInputValue] = useState("");
 	const [open, setOpen] = useState(false);
 
@@ -128,8 +130,8 @@ export const UserOrGroupAutocomplete: FC<UserOrGroupAutocompleteProps> = ({
 			inputValue={inputValue}
 			onInputChange={setInputValue}
 			loading={membersQuery.isFetching || groupsQuery.isFetching}
-			placeholder="Search for user or group"
-			noOptionsText="No users or groups found"
+			placeholder={t("sharingForm.searchUserOrGroup")}
+			noOptionsText={t("sharingForm.noUsersOrGroupsFound")}
 			className="w-80"
 			id="workspace-user-or-group-autocomplete"
 		/>

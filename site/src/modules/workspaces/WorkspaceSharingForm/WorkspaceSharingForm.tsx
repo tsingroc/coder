@@ -38,6 +38,7 @@ import { TableLoader } from "components/TableLoader/TableLoader";
 import { EllipsisVertical, UserPlusIcon } from "lucide-react";
 import { getGroupSubtitle } from "modules/groups";
 import type { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 
 interface RoleSelectProps {
@@ -51,9 +52,11 @@ const RoleSelect: FC<RoleSelectProps> = ({
 	disabled,
 	onValueChange,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	const roleLabels: Record<WorkspaceRole, string> = {
-		use: "Use",
-		admin: "Admin",
+		use: t("sharingForm.roleLabels.use"),
+		admin: t("sharingForm.roleLabels.admin"),
 		"": "",
 	};
 
@@ -68,15 +71,19 @@ const RoleSelect: FC<RoleSelectProps> = ({
 			</SelectTrigger>
 			<SelectContent>
 				<SelectItem value="use" className="flex-col items-start py-2 w-64">
-					<div className="font-medium text-content-primary">Use</div>
+					<div className="font-medium text-content-primary">
+						{t("sharingForm.roleLabels.use")}
+					</div>
 					<div className="text-xs text-content-secondary leading-snug mt-0.5">
-						Can read, access, start, and stop this workspace.
+						{t("sharingForm.roleLabels.useDescription")}
 					</div>
 				</SelectItem>
 				<SelectItem value="admin" className="flex-col items-start py-2 w-64">
-					<div className="font-medium text-content-primary">Admin</div>
+					<div className="font-medium text-content-primary">
+						{t("sharingForm.roleLabels.admin")}
+					</div>
 					<div className="text-xs text-content-secondary leading-snug mt-0.5">
-						Can manage workspace metadata, permissions, and settings.
+						{t("sharingForm.roleLabels.adminDescription")}
 					</div>
 				</SelectItem>
 			</SelectContent>
@@ -97,6 +104,8 @@ export const AddWorkspaceMemberForm: FC<AddWorkspaceMemberFormProps> = ({
 	disabled,
 	children,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<form action={onSubmit}>
 			<div className="flex flex-row items-center gap-2">
@@ -105,7 +114,7 @@ export const AddWorkspaceMemberForm: FC<AddWorkspaceMemberFormProps> = ({
 					<Spinner loading={isLoading}>
 						<UserPlusIcon className="size-icon-sm" />
 					</Spinner>
-					Add member
+					{t("sharingForm.addMember")}
 				</Button>
 			</div>
 		</form>
@@ -123,6 +132,8 @@ export const RoleSelectField: FC<RoleSelectFieldProps> = ({
 	onChange,
 	disabled,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<Select
 			value={value}
@@ -133,8 +144,10 @@ export const RoleSelectField: FC<RoleSelectFieldProps> = ({
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>
-				<SelectItem value="use">Use</SelectItem>
-				<SelectItem value="admin">Admin</SelectItem>
+				<SelectItem value="use">{t("sharingForm.roleLabels.use")}</SelectItem>
+				<SelectItem value="admin">
+					{t("sharingForm.roleLabels.admin")}
+				</SelectItem>
 			</SelectContent>
 		</Select>
 	);
@@ -171,6 +184,7 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 	isCompact,
 	showRestartWarning,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const sharingSettingsQuery = useQuery(
 		workspaceSharingSettings(organizationId),
 	);
@@ -201,8 +215,8 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 				<TableRow>
 					<TableCell colSpan={999}>
 						<EmptyState
-							message="This workspace cannot be shared"
-							description="Workspace sharing has been disabled for this organization."
+							message={t("sharingForm.sharingDisabled")}
+							description={t("sharingForm.sharingDisabledDescription")}
 							isCompact={isCompact}
 						/>
 					</TableCell>
@@ -220,8 +234,10 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 	const tableHeader = (
 		<TableHeader>
 			<TableRow>
-				<TableHead className="w-[50%] py-2">Member</TableHead>
-				<TableHead className="w-[40%] py-2">Role</TableHead>
+				<TableHead className="w-[50%] py-2">
+					{t("sharingForm.member")}
+				</TableHead>
+				<TableHead className="w-[40%] py-2">{t("sharingForm.role")}</TableHead>
 				<TableHead className="w-[10%] py-2" />
 			</TableRow>
 		</TableHeader>
@@ -235,8 +251,8 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 				<TableRow>
 					<TableCell colSpan={999}>
 						<EmptyState
-							message="No shared members or groups yet"
-							description="Add a member or group using the controls above."
+							message={t("sharingForm.noMembers")}
+							description={t("sharingForm.noMembersDescription")}
 							isCompact={isCompact}
 						/>
 					</TableCell>
@@ -277,10 +293,12 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 											<Button
 												size="icon-lg"
 												variant="subtle"
-												aria-label="Open menu"
+												aria-label={t("sharingForm.openMenu")}
 											>
 												<EllipsisVertical aria-hidden="true" />
-												<span className="sr-only">Open menu</span>
+												<span className="sr-only">
+													{t("sharingForm.openMenu")}
+												</span>
 											</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="end">
@@ -288,7 +306,7 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 												className="text-content-destructive focus:text-content-destructive"
 												onClick={() => onRemoveGroup(group)}
 											>
-												Remove
+												{t("sharingForm.remove")}
 											</DropdownMenuItem>
 										</DropdownMenuContent>
 									</DropdownMenu>
@@ -325,10 +343,12 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 											<Button
 												size="icon-lg"
 												variant="subtle"
-												aria-label="Open menu"
+												aria-label={t("sharingForm.openMenu")}
 											>
 												<EllipsisVertical aria-hidden="true" />
-												<span className="sr-only">Open menu</span>
+												<span className="sr-only">
+													{t("sharingForm.openMenu")}
+												</span>
 											</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="end">
@@ -336,7 +356,7 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 												className="text-content-destructive focus:text-content-destructive"
 												onClick={() => onRemoveUser(user)}
 											>
-												Remove
+												{t("sharingForm.remove")}
 											</DropdownMenuItem>
 										</DropdownMenuContent>
 									</DropdownMenu>
@@ -355,9 +375,7 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 				{Boolean(error) && <ErrorAlert error={error} />}
 				{canUpdatePermissions && addMemberForm}
 				{showRestartWarning && (
-					<Alert severity="warning">
-						Workspace restart required for the removal to take effect.
-					</Alert>
+					<Alert severity="warning">{t("sharingForm.restartRequired")}</Alert>
 				)}
 				<div>
 					<Table>{tableHeader}</Table>
@@ -374,9 +392,7 @@ export const WorkspaceSharingForm: FC<WorkspaceSharingFormProps> = ({
 			{Boolean(error) && <ErrorAlert error={error} />}
 			{canUpdatePermissions && addMemberForm}
 			{showRestartWarning && (
-				<Alert severity="warning">
-					Workspace restart required for the removal to take effect.
-				</Alert>
+				<Alert severity="warning">{t("sharingForm.restartRequired")}</Alert>
 			)}
 			<Table>
 				{tableHeader}

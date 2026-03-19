@@ -32,6 +32,9 @@
 		"canceling": "Canceling",
 		"canceled": "Canceled",
 		"deleting": "Deleting",
+		"deleted": "Deleted",
+		"failed": "Failed",
+		"updating": "Updating",
 		"deleting_date": "Deleting on {{date}}"
 	},
 	"resources": {
@@ -55,7 +58,10 @@
 		"viewLogs": "View Logs",
 		"viewHistory": "View History",
 		"viewTemplates": "View Template",
-		"settings": "Settings"
+		"settings": "Settings",
+		"autoUpdateRequired": "This template requires automatic updates when the workspace starts. Contact your administrator if you want to preserve the template version.",
+		"autoUpdateRequiredRestart": "This template requires automatic updates when the workspace restarts. Contact your administrator if you want to preserve the template version.",
+		"autoUpdateEnabled": "This workspace has automatic updates enabled. If you want to preserve the template version, modify the update strategy in the workspace settings."
 	},
 	"applications": {
 		"title": "Applications",
@@ -108,6 +114,77 @@
 	},
 	"resourcesFailed": "Your workspace build failed, so the necessary resources couldn't be created.",
 	"showMoreBuilds": "Show more builds",
+	"buildLogs": "Build logs",
+	"cleaningUp": "Cleaning up",
+	"updateWorkspace": "Update workspace?",
+	"updateWorkspaceConfirm": "Update",
+	"updateWorkspaceDescriptionPart1": "Updating your workspace will start the workspace with the latest template version. This may",
+	"updateWorkspaceDescriptionPart2": "delete non-persistent data",
+	"actionsButtons": {
+		"share": "Share",
+		"debug": "Debug",
+		"retry": "Retry",
+		"debugWithParams": "Debug with build parameters",
+		"retryWithParams": "Retry with build parameters",
+		"buildWorkspace": "Build workspace"
+	},
+	"sharing": {
+		"title": "{{type}} share",
+		"workspace": "workspace",
+		"task": "task",
+		"ephemeralParametersDescription": "This workspace has ephemeral parameters that may be used with ephemeral values when the workspace starts. Configure the following parameters in the workspace settings.",
+		"goToWorkspaceParameters": "Go to workspace parameters",
+		"buildOptions": "Build options",
+		"ephemeralParametersNote": "These parameters apply to a single workspace start only.",
+		"noEphemeralParameters": "This template has no ephemeral build options.",
+		"readDocs": "Read documentation"
+	},
+	"moreActions": {
+		"title": "Workspace actions",
+		"stop": "Stop…",
+		"settings": "Settings",
+		"changeVersion": "Change version…",
+		"duplicate": "Duplicate…",
+		"downloadLogs": "Download logs…",
+		"delete": "Delete…",
+		"changeVersionDialog": {
+			"title": "Change version",
+			"confirm": "Change",
+			"cancel": "Cancel",
+			"description": "You are about to change the version of this workspace.",
+			"templateVersionPlaceholder": "Template version name",
+			"active": "Current version",
+			"publishedBy": "Published by"
+		},
+		"downloadLogsDialog": {
+			"title": "Download logs",
+			"download": "Download",
+			"cancel": "Cancel",
+			"description": "Downloading logs will create a zip file containing all job logs for this workspace. This may take some time.",
+			"unhealthyWarning": "Your workspace is unhealthy. Some logs may not be available for download.",
+			"notAvailable": "Not available",
+			"error": "Failed to download logs for workspace \"{{name}}\""
+		},
+		"deleteDialog": {
+			"title": "Delete workspace",
+			"cancel": "Cancel",
+			"confirm": "Delete",
+			"workspaceLabel": "Workspace",
+			"createdLabel": "Created",
+			"warning": "Deleting this workspace is irreversible!",
+			"confirmPrompt": "Type",
+			"confirmToProceed": "below to confirm:",
+			"workspaceNameLabel": "Workspace name",
+			"nameMismatchError": "{{input}} does not match this workspace's name",
+			"taskWarning": "This workspace is associated with a task",
+			"deleteTaskWarning": "Deleting this workspace will also delete",
+			"thisTask": "this task",
+			"orphanResources": "Orphan resources",
+			"orphanResourcesDescription": "As a template admin, you can skip resource cleanup to delete a failed workspace. Resources like volumes and VMs will not be destroyed.",
+			"learnMore": "Learn more"
+		},
+		"deleteFailedError": "Failed to delete workspace \"{{name}}\""
+	},
 	"health": {
 		"agentsNotConnected": "Workspace agents are not connected",
 		"cannotBeUsed": "Your workspace cannot be used until an agent connects. Continue to wait and check the log output of your workspace for any errors.",
@@ -119,5 +196,101 @@
 		"multipleAgentsNotConnected": "{{count}} agents have not connected yet",
 		"singleAgentNotConnected": "the agent has not connected yet",
 		"viewDocsToTroubleshoot": "View docs to troubleshoot"
+	},
+	"buildCancelDialog": {
+		"title": "Cancel workspace build",
+		"description": "Are you sure you want to cancel the build for workspace \"{{name}}\"? This will {{action}}.",
+		"confirm": "Confirm",
+		"cancel": "Abort",
+		"removeBuildQueue": "remove the current build from the build queue",
+		"stopBuildProcess": "stop the current build process"
+	},
+	"classicParameterFlowDeprecationWarning": {
+		"message": "This template is using the classic parameter flow which will be <strong>deprecated</strong> and removed in a future version. Please migrate to",
+		"dynamicParameters": "Dynamic Parameters",
+		"messageEnd": " on the template settings for improved functionality.",
+		"goToTemplateSettings": "Go to template settings"
+	},
+	"ephemeralParametersDialog": {
+		"title": "Ephemeral parameters detected",
+		"description": "This workspace template has <strong>{{count}}</strong> ephemeral parameters that will be reset to their default values",
+		"question": "Would you like to go to the workspace parameters page to review and update these parameters before continuing?",
+		"continue": "Continue",
+		"goToWorkspaceParameters": "Go to workspace parameters"
+	},
+	"dormantBadge": {
+		"deletionPending": "Deletion pending",
+		"dormant": "Dormant",
+		"tooltipPending": "This workspace has been unused for {{time}} and has been marked as dormant. It is scheduled for deletion on {{date}}.",
+		"tooltipDormant": "This workspace has been unused for {{time}} and has been marked as dormant. No automatic deletion is currently planned, but it will become a candidate if auto-delete is enabled for this template."
+	},
+	"outdatedTooltip": {
+		"srLabel": "Outdated information",
+		"title": "Outdated",
+		"description": "This workspace version is outdated and a new version is available.",
+		"newVersion": "New version",
+		"message": "Message",
+		"noMessage": "No message",
+		"update": "Update",
+		"errorUpdating": "Error updating workspace \"{{name}}\""
+	},
+	"errorDialog": {
+		"title": "Error {{action}} workspace",
+		"deleting": "deleting",
+		"building": "building",
+		"messageLabel": "Message",
+		"detailLabel": "Detail",
+		"validationsLabel": "Validations",
+		"failedToBuild": "Failed to build workspace.",
+		"reviewSettings": "Review workspace settings"
+	},
+	"buildLog": {
+		"seconds": "seconds"
+	},
+	"buildData": {
+		"by": "by"
+	},
+	"statusIndicator": {
+		"srLabel": "Workspace status: ",
+		"loading": "Loading"
+	},
+	"appStatus": {
+		"noActivity": "No activity"
+	},
+	"dynamicParameter": {
+		"immutable": "Immutable",
+		"immutableTooltip": "This value cannot be modified after the workspace is created.",
+		"ephemeral": "Ephemeral",
+		"ephemeralTooltip": "This parameter is ephemeral and will be reset to the template default on workspace restart.",
+		"preset": "Preset",
+		"presetTooltip": "Preset parameters cannot be modified.",
+		"urlAutofill": "URL Autofill",
+		"urlAutofillTooltip": "Auto-filled from URL.",
+		"required": "Required",
+		"requiredDefaultTooltip": "Required parameter",
+		"selectOption": "Select option",
+		"noResultsFound": "No results found",
+		"hideValue": "Hide value",
+		"showValue": "Show value"
+	},
+	"sharingForm": {
+		"roleLabels": {
+			"use": "Use",
+			"admin": "Admin",
+			"useDescription": "Can read, access, start, and stop this workspace.",
+			"adminDescription": "Can manage workspace metadata, permissions, and settings."
+		},
+		"addMember": "Add member",
+		"sharingDisabled": "This workspace cannot be shared",
+		"sharingDisabledDescription": "Workspace sharing has been disabled for this organization.",
+		"member": "Member",
+		"role": "Role",
+		"noMembers": "No shared members or groups yet",
+		"noMembersDescription": "Add a member or group using the controls above.",
+		"openMenu": "Open menu",
+		"remove": "Remove",
+		"restartRequired": "Workspace restart required for the removal to take effect.",
+		"searchUserOrGroup": "Search for user or group",
+		"noUsersOrGroupsFound": "No users or groups found"
 	}
 }

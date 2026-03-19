@@ -5,6 +5,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
+import { useTranslation } from "react-i18next";
 import type { FC } from "react";
 import {
 	DATE_FORMAT,
@@ -19,32 +20,36 @@ type WorkspaceDormantBadgeProps = {
 export const WorkspaceDormantBadge: FC<WorkspaceDormantBadgeProps> = ({
 	workspace,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return workspace.deleting_at ? (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<Badge role="status" variant="destructive" size="xs">
-					Deletion Pending
+					{t("dormantBadge.deletionPending")}
 				</Badge>
 			</TooltipTrigger>
 			<TooltipContent side="bottom" className="max-w-xs">
-				This workspace has not been used for{" "}
-				{relativeTimeWithoutSuffix(workspace.last_used_at)} and has been marked
-				dormant. It is scheduled to be deleted on{" "}
-				{formatDateTime(workspace.deleting_at, DATE_FORMAT.FULL_DATETIME)}.
+				{t("dormantBadge.tooltipPending", {
+					time: relativeTimeWithoutSuffix(workspace.last_used_at),
+					date: formatDateTime(
+						workspace.deleting_at,
+						DATE_FORMAT.FULL_DATETIME,
+					),
+				})}
 			</TooltipContent>
 		</Tooltip>
 	) : (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<Badge role="status" variant="warning" size="xs">
-					Dormant
+					{t("dormantBadge.dormant")}
 				</Badge>
 			</TooltipTrigger>
 			<TooltipContent side="bottom" className="max-w-xs">
-				This workspace has not been used for{" "}
-				{relativeTimeWithoutSuffix(workspace.last_used_at)} and has been marked
-				dormant. It is not scheduled for auto-deletion but will become a
-				candidate if auto-deletion is enabled on this template.
+				{t("dormantBadge.tooltipDormant", {
+					time: relativeTimeWithoutSuffix(workspace.last_used_at),
+				})}
 			</TooltipContent>
 		</Tooltip>
 	);

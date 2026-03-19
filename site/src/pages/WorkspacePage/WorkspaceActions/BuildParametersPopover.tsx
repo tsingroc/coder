@@ -24,6 +24,7 @@ import {
 } from "components/Popover/Popover";
 import { RichParameterInput } from "components/RichParameterInput/RichParameterInput";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 import { type FC, useState } from "react";
 import { useQuery } from "react-query";
 import { docs } from "utils/docs";
@@ -101,6 +102,8 @@ const BuildParametersPopoverContent: FC<BuildParametersPopoverContentProps> = ({
 	onSubmit,
 	setIsOpen,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	if (
 		!workspace.template_use_classic_parameter_flow &&
 		ephemeralParameters &&
@@ -109,9 +112,7 @@ const BuildParametersPopoverContent: FC<BuildParametersPopoverContentProps> = ({
 		return (
 			<div className="flex flex-col gap-4 p-5">
 				<p className="m-0 text-sm text-content-secondary">
-					This workspace has ephemeral parameters which may use a temporary
-					value on workspace start. Configure the following parameters in
-					workspace settings.
+					{t("sharing.ephemeralParametersDescription")}
 				</p>
 
 				<div>
@@ -135,7 +136,7 @@ const BuildParametersPopoverContent: FC<BuildParametersPopoverContentProps> = ({
 					href={`/@${workspace.owner_name}/${workspace.name}/settings/parameters`}
 					className="self-start"
 				>
-					Go to workspace parameters
+					{t("sharing.goToWorkspaceParameters")}
 				</Link>
 			</div>
 		);
@@ -147,9 +148,9 @@ const BuildParametersPopoverContent: FC<BuildParametersPopoverContentProps> = ({
 				ephemeralParameters.length > 0 ? (
 					<div className="divide-y">
 						<div className="p-5 text-content-secondary">
-							<HelpTooltipTitle>Build Options</HelpTooltipTitle>
+							<HelpTooltipTitle>{t("sharing.buildOptions")}</HelpTooltipTitle>
 							<HelpTooltipText>
-								These parameters only apply for a single workspace start.
+								{t("sharing.ephemeralParametersNote")}
 							</HelpTooltipText>
 						</div>
 						<div className="border-0 border-solid p-5">
@@ -170,9 +171,9 @@ const BuildParametersPopoverContent: FC<BuildParametersPopoverContentProps> = ({
 					</div>
 				) : (
 					<div className="p-5 text-content-secondary">
-						<HelpTooltipTitle>Build Options</HelpTooltipTitle>
+						<HelpTooltipTitle>{t("sharing.buildOptions")}</HelpTooltipTitle>
 						<HelpTooltipText>
-							This template has no ephemeral build options.
+							{t("sharing.noEphemeralParameters")}
 						</HelpTooltipText>
 						<HelpTooltipLinksGroup>
 							<HelpTooltipLink
@@ -180,7 +181,7 @@ const BuildParametersPopoverContent: FC<BuildParametersPopoverContentProps> = ({
 									"/admin/templates/extending-templates/parameters#ephemeral-parameters",
 								)}
 							>
-								Read the docs
+								{t("sharing.readDocs")}
 							</HelpTooltipLink>
 						</HelpTooltipLinksGroup>
 					</div>
@@ -203,6 +204,7 @@ const Form: FC<FormProps> = ({
 	buildParameters,
 	onSubmit,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const form = useFormik({
 		initialValues: {
 			rich_parameter_values: getInitialRichParameterValues(
@@ -242,7 +244,7 @@ const Form: FC<FormProps> = ({
 					type="submit"
 					className="w-full"
 				>
-					Build workspace
+					{t("actionsButtons.buildWorkspace")}
 				</Button>
 			</div>
 		</form>

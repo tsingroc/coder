@@ -29,6 +29,7 @@ import {
 	TrashIcon,
 } from "lucide-react";
 import { type FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Link as RouterLink } from "react-router";
 import { toast } from "sonner";
@@ -53,6 +54,7 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 	onStop,
 	isStopping,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const queryClient = useQueryClient();
 
 	const [workspaceErrorDialog, setWorkspaceErrorDialog] = useState<{
@@ -86,7 +88,7 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 			toast.error(
 				getErrorMessage(
 					error,
-					`Failed to delete workspace "${workspace.name}".`,
+					t("moreActions.deleteFailedError", { name: workspace.name }),
 				),
 				{
 					description: getErrorDetail(error),
@@ -128,7 +130,7 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 						disabled={disabled}
 					>
 						<EllipsisVertical aria-hidden="true" />
-						<span className="sr-only">Workspace actions</span>
+						<span className="sr-only">{t("moreActions.title")}</span>
 					</Button>
 				</DropdownMenuTrigger>
 
@@ -136,7 +138,7 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 					{onStop && (
 						<DropdownMenuItem onClick={onStop} disabled={isStopping}>
 							<SquareIcon />
-							Stop&hellip;
+							{t("moreActions.stop")}
 						</DropdownMenuItem>
 					)}
 
@@ -145,7 +147,7 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 							to={`/@${workspace.owner_name}/${workspace.name}/settings`}
 						>
 							<SettingsIcon />
-							Settings
+							{t("moreActions.settings")}
 						</RouterLink>
 					</DropdownMenuItem>
 
@@ -156,7 +158,7 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 							}}
 						>
 							<HistoryIcon />
-							Change version&hellip;
+							{t("moreActions.changeVersion")}
 						</DropdownMenuItem>
 					)}
 
@@ -165,12 +167,12 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 						disabled={!isDuplicationReady}
 					>
 						<CopyIcon />
-						Duplicate&hellip;
+						{t("moreActions.duplicate")}
 					</DropdownMenuItem>
 
 					<DropdownMenuItem onClick={() => setIsDownloadDialogOpen(true)}>
 						<DownloadIcon />
-						Download logs&hellip;
+						{t("moreActions.downloadLogs")}
 					</DropdownMenuItem>
 
 					<DropdownMenuSeparator />
@@ -183,7 +185,7 @@ export const WorkspaceMoreActions: FC<WorkspaceMoreActionsProps> = ({
 						data-testid="delete-button"
 					>
 						<TrashIcon />
-						Delete&hellip;
+						{t("moreActions.delete")}
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>

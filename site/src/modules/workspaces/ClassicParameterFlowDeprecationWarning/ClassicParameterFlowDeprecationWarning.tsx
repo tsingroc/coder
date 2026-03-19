@@ -1,5 +1,6 @@
 import { Alert } from "components/Alert/Alert";
 import { Link } from "components/Link/Link";
+import { useTranslation } from "react-i18next";
 import type { FC } from "react";
 import { docs } from "utils/docs";
 
@@ -11,6 +12,8 @@ interface ClassicParameterFlowDeprecationWarningProps {
 export const ClassicParameterFlowDeprecationWarning: FC<
 	ClassicParameterFlowDeprecationWarningProps
 > = ({ templateSettingsLink, isEnabled }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	if (!isEnabled) {
 		return null;
 	}
@@ -18,20 +21,19 @@ export const ClassicParameterFlowDeprecationWarning: FC<
 	return (
 		<Alert severity="warning" className="mb-2" prominent>
 			<div>
-				This template is using the classic parameter flow, which will be{" "}
-				<strong>deprecated</strong> and removed in a future release. Please
-				migrate to{" "}
+				{t("classicParameterFlowDeprecationWarning.message")}
+				<strong>deprecated</strong>
+				{t("classicParameterFlowDeprecationWarning.messageEnd")}
 				<a
 					href={docs("/admin/templates/extending-templates/dynamic-parameters")}
 					className="text-content-link"
 				>
-					dynamic parameters
-				</a>{" "}
-				on template settings for improved functionality.
+					{t("classicParameterFlowDeprecationWarning.dynamicParameters")}
+				</a>
 			</div>
 
 			<Link className="text-xs" href={templateSettingsLink}>
-				Go to Template Settings
+				{t("classicParameterFlowDeprecationWarning.goToTemplateSettings")}
 			</Link>
 		</Alert>
 	);

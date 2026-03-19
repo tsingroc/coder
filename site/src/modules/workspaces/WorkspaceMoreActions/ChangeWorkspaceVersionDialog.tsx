@@ -16,6 +16,7 @@ import { Stack } from "components/Stack/Stack";
 import { InfoIcon } from "lucide-react";
 import { TemplateUpdateMessage } from "modules/templates/TemplateUpdateMessage";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { createDayString } from "utils/createDayString";
 
@@ -28,6 +29,7 @@ type ChangeWorkspaceVersionDialogProps = DialogProps & {
 export const ChangeWorkspaceVersionDialog: FC<
 	ChangeWorkspaceVersionDialogProps
 > = ({ workspace, onClose, onConfirm, ...dialogProps }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const { data: versions } = useQuery({
 		...templateVersions(workspace.template_id),
 		select: (data) => [...data].reverse(),
@@ -51,12 +53,12 @@ export const ChangeWorkspaceVersionDialog: FC<
 			}}
 			hideCancel={false}
 			type="success"
-			cancelText="Cancel"
-			confirmText="Change"
-			title="Change version"
+			cancelText={t("moreActions.changeVersionDialog.cancel")}
+			confirmText={t("moreActions.changeVersionDialog.confirm")}
+			title={t("moreActions.changeVersionDialog.title")}
 			description={
 				<Stack>
-					<p>You are about to change the version of this workspace.</p>
+					<p>{t("moreActions.changeVersionDialog.description")}</p>
 					{validVersions ? (
 						<>
 							<FormFields>
@@ -109,7 +111,11 @@ export const ChangeWorkspaceVersionDialog: FC<
 															)}
 														</Stack>
 														{workspace.template_active_version_id ===
-															option.id && <Pill type="success">Active</Pill>}
+															option.id && (
+															<Pill type="success">
+																{t("moreActions.changeVersionDialog.active")}
+															</Pill>
+														)}
 													</Stack>
 												}
 												subtitle={createDayString(option.created_at)}
@@ -121,7 +127,9 @@ export const ChangeWorkspaceVersionDialog: FC<
 											<TextField
 												{...params}
 												fullWidth
-												placeholder="Template version name"
+												placeholder={t(
+													"moreActions.changeVersionDialog.templateVersionPlaceholder",
+												)}
 												InputProps={{
 													...params.InputProps,
 													endAdornment: (
@@ -146,7 +154,8 @@ export const ChangeWorkspaceVersionDialog: FC<
 									)}
 									<Alert severity="info">
 										<AlertTitle>
-											Published by {selectedVersion.created_by.username}
+											{t("moreActions.changeVersionDialog.publishedBy")}{" "}
+											{selectedVersion.created_by.username}
 										</AlertTitle>
 									</Alert>
 								</>

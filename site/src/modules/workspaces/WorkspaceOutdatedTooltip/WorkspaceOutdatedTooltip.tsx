@@ -19,6 +19,7 @@ import { linkToTemplate, useLinks } from "modules/navigation";
 import { type FC, type ReactNode, useState } from "react";
 import { useQuery } from "react-query";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import {
 	useWorkspaceUpdate,
 	WorkspaceUpdateDialogs,
@@ -61,6 +62,7 @@ const WorkspaceOutdatedTooltipContent: FC<TooltipContentProps> = ({
 	workspace,
 	isOpen,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const getLink = useLinks();
 	const theme = useTheme();
 	const { data: activeVersion } = useQuery({
@@ -72,7 +74,10 @@ const WorkspaceOutdatedTooltipContent: FC<TooltipContentProps> = ({
 		latestVersion: activeVersion,
 		onError: (error) => {
 			toast.error(
-				getErrorMessage(error, `Error updating workspace "${workspace.name}".`),
+				getErrorMessage(
+					error,
+					t("outdatedTooltip.errorUpdating", { name: workspace.name }),
+				),
 				{
 					description: getErrorDetail(error),
 				},
@@ -87,14 +92,12 @@ const WorkspaceOutdatedTooltipContent: FC<TooltipContentProps> = ({
 	return (
 		<>
 			<HelpTooltipContent disablePortal={false}>
-				<HelpTooltipTitle>Outdated</HelpTooltipTitle>
-				<HelpTooltipText>
-					This workspace version is outdated and a newer version is available.
-				</HelpTooltipText>
+				<HelpTooltipTitle>{t("outdatedTooltip.title")}</HelpTooltipTitle>
+				<HelpTooltipText>{t("outdatedTooltip.description")}</HelpTooltipText>
 
 				<div css={styles.container}>
 					<div css={{ lineHeight: "1.6" }}>
-						<div css={styles.bold}>New version</div>
+						<div css={styles.bold}>{t("outdatedTooltip.newVersion")}</div>
 						<div>
 							{activeVersion ? (
 								<Link
@@ -111,10 +114,10 @@ const WorkspaceOutdatedTooltipContent: FC<TooltipContentProps> = ({
 					</div>
 
 					<div css={{ lineHeight: "1.6" }}>
-						<div css={styles.bold}>Message</div>
+						<div css={styles.bold}>{t("outdatedTooltip.message")}</div>
 						<div>
 							{activeVersion ? (
-								activeVersion.message || "No message"
+								activeVersion.message || t("outdatedTooltip.noMessage")
 							) : (
 								<Skeleton variant="text" height={20} width={150} />
 							)}
@@ -127,7 +130,7 @@ const WorkspaceOutdatedTooltipContent: FC<TooltipContentProps> = ({
 						icon={RotateCcwIcon}
 						onClick={updateWorkspace.update}
 					>
-						Update
+						{t("outdatedTooltip.update")}
 					</HelpTooltipAction>
 				</HelpTooltipLinksGroup>
 			</HelpTooltipContent>
