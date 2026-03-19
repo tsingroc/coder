@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 const NotFoundPage: FC = () => {
 	const { t } = useTranslation("notFound");

@@ -37,11 +37,7 @@ const TokensPage: FC = () => {
 			<Section
 				title={t("tokensTitle")}
 				css={styles.section}
-				description={
-					<>
-						{t("tokensDescription", { code: cliCreateCommand })}
-					</>
-				}
+				description={<>{t("tokensDescription", { code: cliCreateCommand })}</>}
 				layout="fluid"
 			>
 				<TokenActions />

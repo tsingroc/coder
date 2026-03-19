@@ -15,6 +15,7 @@ import { SearchEmpty } from "components/Search/Search";
 import { ExternalLinkIcon } from "lucide-react";
 import { linkToTemplate, useLinks } from "modules/navigation";
 import { type FC, type ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { UseQueryResult } from "react-query";
 import {
 	Link as RouterLink,
@@ -34,6 +35,7 @@ export const WorkspacesButton: FC<WorkspacesButtonProps> = ({
 	templatesFetchStatus,
 	templates,
 }) => {
+	const { t } = useTranslation("workspace");
 	// Dataset should always be small enough that client-side filtering should be
 	// good enough. Can swap out down the line if it becomes an issue
 	const [searchTerm, setSearchTerm] = useState("");
@@ -43,14 +45,14 @@ export const WorkspacesButton: FC<WorkspacesButtonProps> = ({
 	if (templates?.length === 0) {
 		emptyState = (
 			<SearchEmpty>
-				No templates yet.{" "}
+				{t("noTemplatesYet")}{" "}
 				<Link to="/templates" component={RouterLink}>
-					Create one now.
+					{t("createOneNow")}
 				</Link>
 			</SearchEmpty>
 		);
 	} else if (processed.length === 0) {
-		emptyState = <SearchEmpty>No templates found</SearchEmpty>;
+		emptyState = <SearchEmpty>{t("noTemplatesFound")}</SearchEmpty>;
 	}
 
 	return (
@@ -69,7 +71,7 @@ export const WorkspacesButton: FC<WorkspacesButtonProps> = ({
 					value={searchTerm}
 					autoFocus={true}
 					onChange={setSearchTerm}
-					placeholder="Type/select a workspace template"
+					placeholder={t("typeSelectWorkspaceTemplate")}
 					aria-label="Template select for workspace"
 				/>
 
@@ -111,7 +113,7 @@ export const WorkspacesButton: FC<WorkspacesButtonProps> = ({
 						})}
 					>
 						<ExternalLinkIcon className="size-icon-xs" />
-						<span>See all templates</span>
+						<span>{t("seeAllTemplates")}</span>
 					</PopoverLink>
 				</div>
 			</PopoverContent>
@@ -124,6 +126,7 @@ interface WorkspaceResultsRowProps {
 }
 
 const WorkspaceResultsRow: FC<WorkspaceResultsRowProps> = ({ template }) => {
+	const { t } = useTranslation("workspace");
 	const getLink = useLinks();
 	const templateLink = getLink(
 		linkToTemplate(template.organization_name, template.name),
@@ -169,8 +172,7 @@ const WorkspaceResultsRow: FC<WorkspaceResultsRowProps> = ({ template }) => {
 					 * treat them as if they were 0.
 					 */}
 					{template.active_user_count <= 0 ? "No" : template.active_user_count}{" "}
-					developer
-					{template.active_user_count === 1 ? "" : "s"}
+					{t(template.active_user_count === 1 ? "developer" : "developers")}
 				</span>
 			</div>
 		</PopoverLink>

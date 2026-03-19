@@ -32,6 +32,9 @@
 		"canceling": "取消中",
 		"canceled": "已取消",
 		"deleting": "删除中",
+		"deleted": "已删除",
+		"failed": "失败",
+		"updating": "更新中",
 		"deleting_date": "{{date}} 删除"
 	},
 	"resources": {
@@ -105,6 +108,12 @@
 	"logs": "日志",
 	"downloadLogs": "下载日志",
 	"buildTimeline": "构建时间线",
+	"buildLogs": "构建日志",
+	"cleaningUp": "清理中",
+	"updateWorkspace": "更新工作区？",
+	"updateWorkspaceConfirm": "更新",
+	"updateWorkspaceDescriptionPart1": "更新工作区将使用最新的模板版本启动工作区。这可能会",
+	"updateWorkspaceDescriptionPart2": "删除非持久化数据",
 	"messages": {
 		"updatedSuccessfully": "\"{{name}}\" 的关机时间已成功更新。",
 		"updateFailed": "更新 \"{{name}}\" 的关机时间失败。请重试。"

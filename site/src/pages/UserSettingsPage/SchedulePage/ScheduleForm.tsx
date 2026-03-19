@@ -102,9 +102,7 @@ export const ScheduleForm: FC<ScheduleFormProps> = ({
 				)}
 
 				{!initialValues.user_can_set && (
-					<Alert severity="error">
-						{t("scheduleDisabledError")}
-					</Alert>
+					<Alert severity="error">{t("scheduleDisabledError")}</Alert>
 				)}
 
 				<Stack direction="row">

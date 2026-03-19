@@ -11,6 +11,7 @@ import { MemoizedInlineMarkdown } from "components/Markdown/Markdown";
 import { UpdateBuildParametersDialog } from "modules/workspaces/WorkspaceMoreActions/UpdateBuildParametersDialog";
 import { UpdateBuildParametersDialogExperimental } from "modules/workspaces/WorkspaceMoreActions/UpdateBuildParametersDialogExperimental";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";
 
 type UseWorkspaceUpdateOptions = {
@@ -118,18 +119,18 @@ const UpdateConfirmationDialog: FC<UpdateConfirmationDialogProps> = ({
 	latestVersion,
 	...dialogProps
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<ConfirmDialog
 			{...dialogProps}
 			hideCancel={false}
-			title="Update workspace?"
-			confirmText="Update"
+			title={t("updateWorkspace")}
+			confirmText={t("updateWorkspaceConfirm")}
 			description={
 				<div className="flex flex-col gap-2">
 					<p>
-						Updating your workspace will start the workspace on the latest
-						template version. This can{" "}
-						<strong>delete non-persistent data</strong>.
+						{t("updateWorkspaceDescriptionPart1")}{" "}
+						<strong>{t("updateWorkspaceDescriptionPart2")}</strong>.
 					</p>
 					{latestVersion?.message && (
 						<MemoizedInlineMarkdown allowedElements={["ol", "ul", "li"]}>

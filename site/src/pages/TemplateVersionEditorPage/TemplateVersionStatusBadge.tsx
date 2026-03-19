@@ -1,7 +1,9 @@
 import type { TemplateVersion } from "api/typesGenerated";
 import { Pill, PillSpinner } from "components/Pill/Pill";
+import type { TFunction } from "i18next";
 import { CheckIcon, CircleAlertIcon, HourglassIcon } from "lucide-react";
 import type { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import type { ThemeRole } from "theme/roles";
 import { getPendingStatusLabel } from "utils/provisionerJob";
 
@@ -12,12 +14,13 @@ interface TemplateVersionStatusBadgeProps {
 export const TemplateVersionStatusBadge: FC<
 	TemplateVersionStatusBadgeProps
 > = ({ version }) => {
-	const { text, icon, type } = getStatus(version);
+	const { t } = useTranslation("templateDetail");
+	const { text, icon, type } = getStatus(version, t);
 	return (
 		<Pill
 			icon={icon}
 			type={type}
-			title={`Build status is ${text}`}
+			title={`${t("status.buildStatus")} ${text}`}
 			role="status"
 		>
 			{text}
@@ -27,6 +30,7 @@ export const TemplateVersionStatusBadge: FC<
 
 const getStatus = (
 	version: TemplateVersion,
+	t: TFunction<"templateDetail">,
 ): {
 	type?: ThemeRole;
 	text: string;
@@ -36,7 +40,7 @@ const getStatus = (
 		case "running":
 			return {
 				type: "active",
-				text: "Running",
+				text: t("status.running"),
 				icon: <PillSpinner />,
 			};
 		case "pending":
@@ -48,26 +52,26 @@ const getStatus = (
 		case "canceling":
 			return {
 				type: "inactive",
-				text: "Canceling",
+				text: t("status.canceling"),
 				icon: <PillSpinner />,
 			};
 		case "canceled":
 			return {
 				type: "inactive",
-				text: "Canceled",
+				text: t("status.canceled"),
 				icon: <CircleAlertIcon className="size-icon-sm" />,
 			};
 		case "unknown":
 		case "failed":
 			return {
 				type: "error",
-				text: "Failed",
+				text: t("status.failed"),
 				icon: <CircleAlertIcon className="size-icon-sm" />,
 			};
 		case "succeeded":
 			return {
 				type: "success",
-				text: "Success",
+				text: t("status.succeeded"),
 				icon: <CheckIcon className="size-icon-sm" />,
 			};
 	}

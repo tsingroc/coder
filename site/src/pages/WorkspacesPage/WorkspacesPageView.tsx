@@ -21,6 +21,7 @@ import { TableToolbar } from "components/TableToolbar/TableToolbar";
 import { CloudIcon, PlayIcon, SquareIcon, TrashIcon } from "lucide-react";
 import { WorkspacesTable } from "pages/WorkspacesPage/WorkspacesTable";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import type { UseQueryResult } from "react-query";
 import { mustUpdateWorkspace } from "utils/workspace";
 import {
@@ -29,7 +30,6 @@ import {
 } from "./filter/WorkspacesFilter";
 import { WorkspaceHelpTooltip } from "./WorkspaceHelpTooltip";
 import { WorkspacesButton } from "./WorkspacesButton";
-import { useTranslation } from "react-i18next";
 
 type TemplateQuery = UseQueryResult<Template[]>;
 interface WorkspacesPageViewProps {

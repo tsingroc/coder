@@ -11,9 +11,9 @@ import {
 } from "components/Tooltip/Tooltip";
 import type { ProxyContextValue } from "contexts/ProxyContext";
 import { useEmbeddedMetadata } from "hooks/useEmbeddedMetadata";
+import type { TFunction } from "i18next";
 import { NotificationsInbox } from "modules/notifications/NotificationsInbox/NotificationsInbox";
 import type { FC } from "react";
-import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { NavLink, useLocation } from "react-router";

@@ -194,8 +194,15 @@ declare module "i18next" {
 				allWorkspacesButton: string;
 				runningWorkspacesButton: string;
 				seeAllTemplates: string;
+				allTemplates: string;
 				template: string;
 				newWorkspace: string;
+				noTemplatesYet: string;
+				createOneNow: string;
+				noTemplatesFound: string;
+				typeSelectWorkspaceTemplate: string;
+				developer: string;
+				developers: string;
 				selectedWorkspaces: string;
 				selectedWorkspace: string;
 				bulkActions: string;
@@ -380,6 +387,7 @@ declare module "i18next" {
 					stopping: string;
 					stopped: string;
 					error: string;
+					failed: string;
 					pending: string;
 					canceling: string;
 					canceled: string;
@@ -459,6 +467,12 @@ declare module "i18next" {
 				logs: string;
 				downloadLogs: string;
 				buildTimeline: string;
+				buildLogs: string;
+				cleaningUp: string;
+				updateWorkspace: string;
+				updateWorkspaceConfirm: string;
+				updateWorkspaceDescriptionPart1: string;
+				updateWorkspaceDescriptionPart2: string;
 				messages: {
 					updatedSuccessfully: string;
 					updateFailed: string;
@@ -613,6 +627,16 @@ declare module "i18next" {
 			templateDetail: {
 				// Template detail page translations
 				title: string;
+				status: {
+					running: string;
+					pending: string;
+					canceling: string;
+					canceled: string;
+					unknown: string;
+					failed: string;
+					succeeded: string;
+					buildStatus: string;
+				};
 				sections: {
 					docs: string;
 					files: string;

@@ -2,8 +2,8 @@ import { Button } from "components/Button/Button";
 import { CoderIcon } from "components/Icons/CoderIcon";
 import { Link } from "components/Link/Link";
 import { useEmbeddedMetadata } from "hooks/useEmbeddedMetadata";
-import { useTranslation } from "react-i18next";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	type ErrorResponse,
 	isRouteErrorResponse,
@@ -40,7 +40,9 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 					<CoderIcon className="w-11 h-11" />
 
 					<div className="text-content-primary flex flex-col gap-1">
-						<h1 className="text-2xl font-semibold m-0">{t("errorPage.title")}</h1>
+						<h1 className="text-2xl font-semibold m-0">
+							{t("errorPage.title")}
+						</h1>
 						<p className="leading-6 m-0 text-content-secondary text-sm">
 							{t("errorPage.description")}
 							<Link
@@ -49,7 +51,10 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 								rel="noreferrer"
 							>
 								{t("errorPage.discordCommunity")}
-								<span className="sr-only"> {t("errorPage.linkOpensNewTab")}</span>
+								<span className="sr-only">
+									{" "}
+									{t("errorPage.linkOpensNewTab")}
+								</span>
 							</Link>{" "}
 							{t("or")}{" "}
 							<Link
@@ -62,7 +67,10 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 								)}
 							>
 								{t("errorPage.openIssue")}
-								<span className="sr-only"> {t("errorPage.linkOpensNewTab")}</span>
+								<span className="sr-only">
+									{" "}
+									{t("errorPage.linkOpensNewTab")}
+								</span>
 							</Link>
 							.
 						</p>
@@ -80,7 +88,9 @@ export const GlobalErrorBoundaryInner: FC<GlobalErrorBoundaryInnerProps> = ({
 							className="min-w-32"
 							onClick={() => setShowErrorMessage(!showErrorMessage)}
 						>
-							{showErrorMessage ? t("errorPage.hideError") : t("errorPage.showError")}
+							{showErrorMessage
+								? t("errorPage.hideError")
+								: t("errorPage.showError")}
 						</Button>
 					)}
 				</div>

@@ -156,7 +156,8 @@ const TasksPage: FC = () => {
 						>
 							{t("notificationAlert.title")}{" "}
 							<Link href="/settings/notifications">
-								{t("notificationAlert.goToSettings")} {t("notificationAlert.accountSettings")}
+								{t("notificationAlert.goToSettings")}{" "}
+								{t("notificationAlert.accountSettings")}
 							</Link>{" "}
 							{t("notificationAlert.toChange")}
 						</Alert>
@@ -244,9 +245,13 @@ const TasksPage: FC = () => {
 										{checkedTasks.length > 0 ? (
 											<>
 												<div>
-													{t("toolbar.selected")} <strong>{checkedTasks.length}</strong> {t("toolbar.of")}{" "}
+													{t("toolbar.selected")}{" "}
+													<strong>{checkedTasks.length}</strong>{" "}
+													{t("toolbar.of")}{" "}
 													<strong>{displayedTasks?.length}</strong>{" "}
-													{displayedTasks?.length === 1 ? t("toolbar.task_one") : t("toolbar.task_other")}
+													{displayedTasks?.length === 1
+														? t("toolbar.task_one")
+														: t("toolbar.task_other")}
 												</div>
 
 												<DropdownMenu>
@@ -279,13 +284,16 @@ const TasksPage: FC = () => {
 												{displayedTasks && displayedTasks.length > 0 ? (
 													<>
 														<strong>1</strong> {t("toolbar.to")}{" "}
-														<strong>{displayedTasks.length}</strong> {t("toolbar.of")}{" "}
+														<strong>{displayedTasks.length}</strong>{" "}
+														{t("toolbar.of")}{" "}
 														<strong>{displayedTasks.length}</strong>
 													</>
 												) : (
 													<strong>0</strong>
 												)}{" "}
-												{displayedTasks?.length === 1 ? t("toolbar.task_one") : t("toolbar.task_other")}
+												{displayedTasks?.length === 1
+													? t("toolbar.task_one")
+													: t("toolbar.task_other")}
 											</div>
 										)}
 									</TableToolbar>

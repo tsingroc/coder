@@ -7,7 +7,6 @@ import type {
 import { ErrorAlert } from "components/Alert/ErrorAlert";
 import { Avatar } from "components/Avatar/Avatar";
 import type { ModelSelectorOption } from "components/ai-elements";
-import type { TFunction } from "i18next";
 import { Button } from "components/Button/Button";
 import {
 	DropdownMenu,
@@ -21,7 +20,7 @@ import { ScrollArea } from "components/ScrollArea/ScrollArea";
 import { Skeleton } from "components/Skeleton/Skeleton";
 import { Spinner } from "components/Spinner/Spinner";
 import { useAuthenticated } from "hooks";
-import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import {
 	AlertTriangleIcon,
 	ArchiveIcon,
@@ -55,6 +54,7 @@ import {
 	useRef,
 	useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink, useParams } from "react-router";
 import { cn } from "utils/cn";
 import { shortRelativeTime } from "utils/time";

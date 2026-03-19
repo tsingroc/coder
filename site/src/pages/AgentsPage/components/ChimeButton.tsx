@@ -28,7 +28,9 @@ export const ChimeButton: FC = () => {
 					size="icon"
 					onClick={handleClick}
 					aria-label={
-						enabled ? tc("create.muteCompletionChime") : tc("create.enableCompletionChime")
+						enabled
+							? tc("create.muteCompletionChime")
+							: tc("create.enableCompletionChime")
 					}
 					className="h-7 w-7 text-content-secondary hover:text-content-primary"
 				>
@@ -40,7 +42,9 @@ export const ChimeButton: FC = () => {
 				</Button>
 			</TooltipTrigger>
 			<TooltipContent>
-				{enabled ? tc("create.disableCompletionSound") : tc("create.enableCompletionSound")}
+				{enabled
+					? tc("create.disableCompletionSound")
+					: tc("create.enableCompletionSound")}
 			</TooltipContent>
 		</Tooltip>
 	);

@@ -1,5 +1,15 @@
 {
 	"title": "模板",
+	"status": {
+		"running": "运行中",
+		"pending": "等待中",
+		"canceling": "取消中",
+		"canceled": "已取消",
+		"unknown": "未知",
+		"failed": "失败",
+		"succeeded": "成功",
+		"buildStatus": "构建状态"
+	},
 	"sections": {
 		"docs": "文档",
 		"files": "文件",

@@ -50,8 +50,8 @@ import type { AutofillBuildParameter } from "utils/richParameters";
 import * as Yup from "yup";
 import type { CreateWorkspaceMode } from "./CreateWorkspacePage";
 import { ExternalAuthButton } from "./ExternalAuthButton";
-import type { CreateWorkspacePermissions } from "./permissions";
 import { useCreateWorkspaceLanguage } from "./Language";
+import type { CreateWorkspacePermissions } from "./permissions";
 
 interface CreateWorkspacePageViewProps {
 	autofillParameters: AutofillBuildParameter[];

@@ -9,6 +9,7 @@ import { Label } from "components/Label/Label";
 import { RadioGroup, RadioGroupItem } from "components/RadioGroup/RadioGroup";
 import { Spinner } from "components/Spinner/Spinner";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { DEFAULT_THEME } from "theme";
 import {
 	DEFAULT_TERMINAL_FONT,
@@ -16,7 +17,6 @@ import {
 	terminalFonts,
 } from "theme/constants";
 import { cn } from "utils/cn";
-import { useTranslation } from "react-i18next";
 import { Section } from "../Section";
 
 // Display Geist Mono (the default monospace font) first, then the rest
@@ -103,7 +103,9 @@ export const AppearanceForm: FC<AppearanceFormProps> = ({
 			<Section
 				title={
 					<div className="flex flex-row items-center gap-2">
-						<span id="fonts-radio-buttons-group-label">{t("terminalFont")}</span>
+						<span id="fonts-radio-buttons-group-label">
+							{t("terminalFont")}
+						</span>
 						<Spinner loading={isUpdating} size="sm" />
 					</div>
 				}

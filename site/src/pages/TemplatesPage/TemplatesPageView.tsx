@@ -41,15 +41,15 @@ import { ArrowRightIcon, PlusIcon } from "lucide-react";
 import { linkToTemplate, useLinks } from "modules/navigation";
 import type { WorkspacePermissions } from "modules/permissions/workspaces";
 import type { FC } from "react";
-import { Link as RouterLink, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { Link as RouterLink, useNavigate } from "react-router";
 import { createDayString } from "utils/createDayString";
 import { docs } from "utils/docs";
 import { formatTemplateBuildTime } from "utils/templates";
 import { EmptyTemplates } from "./EmptyTemplates";
+import { useLanguage } from "./Language";
 import { TemplatesFilter } from "./TemplatesFilter";
 import type { TemplateFilterState } from "./TemplatesPage";
-import { useLanguage } from "./Language";
 
 const TemplateHelpTooltip: FC = () => {
 	const language = useLanguage();

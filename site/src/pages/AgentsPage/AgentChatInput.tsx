@@ -22,8 +22,8 @@ import {
 	XIcon,
 } from "lucide-react";
 import type React from "react";
-import { useTranslation } from "react-i18next";
 import { memo, type ReactNode, useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "utils/cn";
 import { ImageLightbox } from "./ImageLightbox";
 import { formatProviderLabel } from "./modelOptions";
@@ -515,7 +515,10 @@ export const AgentChatInput = memo<AgentChatInputProps>(
 			}
 		};
 
-		const sendButtonLabel = editingQueuedMessageID !== null ? tc("chat.actions.save") : t("chat.input.send");
+		const sendButtonLabel =
+			editingQueuedMessageID !== null
+				? tc("chat.actions.save")
+				: t("chat.input.send");
 
 		const content = (
 			<div className="mx-auto w-full max-w-3xl pb-4">

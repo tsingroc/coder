@@ -8,9 +8,9 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import { I18nextProvider } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router";
-import { I18nextProvider } from "react-i18next";
 import { Toaster } from "./components/Toaster/Toaster";
 import { AuthProvider } from "./contexts/auth/AuthProvider";
 import { DiffsWorkerPoolProvider } from "./contexts/DiffsWorkerPoolProvider";

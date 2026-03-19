@@ -3,6 +3,7 @@ import type { ProvisionerJobLog } from "api/typesGenerated";
 import { Loader } from "components/Loader/Loader";
 import { WorkspaceBuildLogs } from "modules/workspaces/WorkspaceBuildLogs/WorkspaceBuildLogs";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface WorkspaceBuildLogsSectionProps {
 	logs?: ProvisionerJobLog[];
@@ -11,6 +12,7 @@ interface WorkspaceBuildLogsSectionProps {
 export const WorkspaceBuildLogsSection: FC<WorkspaceBuildLogsSectionProps> = ({
 	logs,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const theme = useTheme();
 
 	return (
@@ -34,7 +36,7 @@ export const WorkspaceBuildLogsSection: FC<WorkspaceBuildLogsSectionProps> = ({
 					borderRadius: "8px 8px 0 0",
 				}}
 			>
-				Build logs
+				{t("buildLogs")}
 			</header>
 			<div css={{ height: "400px", overflowY: "auto" }}>
 				{logs ? (

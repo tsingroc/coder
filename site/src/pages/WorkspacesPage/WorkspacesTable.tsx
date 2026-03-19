@@ -79,9 +79,9 @@ import {
 	type ReactNode,
 	useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
 import { cn } from "utils/cn";
 import { getDisplayWorkspaceTemplateName } from "utils/workspace";
 import { WorkspaceSharingIndicator } from "./WorkspaceSharingIndicator";

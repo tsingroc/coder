@@ -19,14 +19,14 @@ interface SecurityFormValues {
 
 const getValidationSchema = (t: any) =>
 	Yup.object({
-	old_password: Yup.string().trim().required(t("oldPasswordRequired")),
-	password: Yup.string().trim().required(t("newPasswordRequired")),
-	confirm_password: Yup.string()
-		.trim()
-		.test("passwords-match", t("confirmPasswordMatch"), function (value) {
-			return (this.parent as SecurityFormValues).password === value;
-		}),
-});
+		old_password: Yup.string().trim().required(t("oldPasswordRequired")),
+		password: Yup.string().trim().required(t("newPasswordRequired")),
+		confirm_password: Yup.string()
+			.trim()
+			.test("passwords-match", t("confirmPasswordMatch"), function (value) {
+				return (this.parent as SecurityFormValues).password === value;
+			}),
+	});
 
 interface SecurityFormProps {
 	disabled: boolean;
@@ -56,11 +56,7 @@ export const SecurityForm: FC<SecurityFormProps> = ({
 	const getFieldHelpers = getFormHelpers<SecurityFormValues>(form, error);
 
 	if (disabled) {
-		return (
-			<Alert severity="info">
-				{t("passwordBasedAccountsOnly")}
-			</Alert>
-		);
+		return <Alert severity="info">{t("passwordBasedAccountsOnly")}</Alert>;
 	}
 
 	return (

@@ -241,7 +241,9 @@ const NotificationsPage: FC = () => {
 																/>
 															</TooltipTrigger>
 															<TooltipContent side="bottom">
-																{t("notificationsDeliveryVia", { method: label })}
+																{t("notificationsDeliveryVia", {
+																	method: label,
+																})}
 															</TooltipContent>
 														</Tooltip>
 													</div>

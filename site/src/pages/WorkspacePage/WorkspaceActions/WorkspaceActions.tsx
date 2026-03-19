@@ -10,6 +10,7 @@ import { WorkspaceMoreActions } from "modules/workspaces/WorkspaceMoreActions/Wo
 import { type FC, Fragment, type ReactNode } from "react";
 import { useQuery } from "react-query";
 import { mustUpdateWorkspace } from "utils/workspace";
+import { useWorkspaceDetailLanguage } from "../Language";
 import {
 	ActivateButton,
 	CancelButton,
@@ -23,7 +24,6 @@ import {
 import { DebugButton } from "./DebugButton";
 import { RetryButton } from "./RetryButton";
 import { ShareButton } from "./ShareButton";
-import { useWorkspaceDetailLanguage } from "../Language";
 
 interface WorkspaceActionsProps {
 	workspace: Workspace;

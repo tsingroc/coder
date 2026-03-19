@@ -9,6 +9,7 @@ import { ProvisionerStatusAlert } from "modules/provisioners/ProvisionerStatusAl
 import { AgentRow } from "modules/resources/AgentRow";
 import { WorkspaceTimings } from "modules/workspaces/WorkspaceTiming/WorkspaceTimings";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import type { WorkspacePermissions } from "../../modules/workspaces/permissions";
 import { HistorySidebar } from "./HistorySidebar";
@@ -23,7 +24,6 @@ import {
 import { WorkspaceDeletedBanner } from "./WorkspaceDeletedBanner";
 import { findTroubleshootingURL } from "./WorkspaceNotifications/WorkspaceNotifications";
 import { WorkspaceTopbar } from "./WorkspaceTopbar";
-import { useTranslation } from "react-i18next";
 
 interface WorkspaceProps {
 	workspace: TypesGen.Workspace;

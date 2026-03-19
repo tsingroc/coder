@@ -49,9 +49,7 @@ const OAuth2ProviderPageView: FC<OAuth2ProviderPageViewProps> = ({
 					{apps?.length === 0 && (
 						<TableRow>
 							<TableCell colSpan={999}>
-								<div css={{ textAlign: "center" }}>
-									{t("oauth2NoApps")}
-								</div>
+								<div css={{ textAlign: "center" }}>{t("oauth2NoApps")}</div>
 							</TableCell>
 						</TableRow>
 					)}

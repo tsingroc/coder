@@ -17,6 +17,7 @@ import {
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
 import dayjs from "dayjs";
+import type { TFunction } from "i18next";
 import {
 	AppWindowIcon,
 	CircleAlertIcon,
@@ -35,9 +36,8 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import { Link as RouterLink } from "react-router";
-import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
+import { Link as RouterLink } from "react-router";
 import { getDisplayWorkspaceStatus } from "utils/workspace";
 
 interface DeploymentBannerViewProps {
@@ -422,10 +422,7 @@ const HealthIssue: FC<PropsWithChildren> = ({ children }) => {
 	);
 };
 
-const getHealthErrors = (
-	health: HealthcheckReport,
-	t: TFunction,
-) => {
+const getHealthErrors = (health: HealthcheckReport, t: TFunction) => {
 	const warnings: string[] = [];
 	const sections = [
 		"access_url",

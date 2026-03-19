@@ -11,6 +11,7 @@ import { Button } from "components/Button/Button";
 import sortBy from "lodash/sortBy";
 import uniqBy from "lodash/uniqBy";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	calcDuration,
 	formatTime,
@@ -51,6 +52,7 @@ export const WorkspaceTimings: FC<WorkspaceTimingsProps> = ({
 	agentConnectionTimings = [],
 	defaultIsOpen = false,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const [view, setView] = useState<TimingView>({ name: "default" });
 	const [isOpen, setIsOpen] = useState(defaultIsOpen);
 
@@ -108,7 +110,7 @@ export const WorkspaceTimings: FC<WorkspaceTimingsProps> = ({
 				onClick={() => setIsOpen((o) => !o)}
 			>
 				<ChevronDownIcon open={isOpen} className="size-4 mr-4" />
-				<span>Build timeline</span>
+				<span>{t("buildTimeline")}</span>
 				<span
 					css={(theme) => ({
 						marginLeft: "auto",

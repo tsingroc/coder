@@ -1,8 +1,8 @@
 import type * as TypesGen from "api/typesGenerated";
 import { CodeExample } from "components/CodeExample/CodeExample";
 import { ConfirmDialog } from "components/Dialogs/ConfirmDialog/ConfirmDialog";
-import { useTranslation } from "react-i18next";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ResetPasswordDialogProps {
 	open: boolean;
@@ -26,7 +26,8 @@ export const ResetPasswordDialog: FC<ResetPasswordDialogProps> = ({
 	const description = (
 		<>
 			<p>
-				You will need to send <strong>{user?.username || ""}</strong> the following password:
+				You will need to send <strong>{user?.username || ""}</strong> the
+				following password:
 			</p>
 			<CodeExample
 				secret={false}

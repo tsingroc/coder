@@ -175,13 +175,19 @@ const ExternalAuthRow: FC<ExternalAuthRowProps> = ({
 					}}
 				>
 					<Spinner loading={externalAuthPollingState === "polling"} />
-					{authenticated ? t("externalAuthAuthenticated") : t("externalAuthClickToLogin")}
+					{authenticated
+						? t("externalAuthAuthenticated")
+						: t("externalAuthClickToLogin")}
 				</Button>
 			</TableCell>
 			<TableCell>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button size="icon-lg" variant="subtle" aria-label={t("externalAuthOpenMenu")}>
+						<Button
+							size="icon-lg"
+							variant="subtle"
+							aria-label={t("externalAuthOpenMenu")}
+						>
 							<EllipsisVertical aria-hidden="true" />
 							<span className="sr-only">{t("externalAuthOpenMenu")}</span>
 						</Button>
