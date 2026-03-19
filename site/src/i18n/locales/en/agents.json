@@ -184,7 +184,7 @@
 		"title": "Archive conversation",
 		"message": "Are you sure you want to archive this conversation? You can find it in the Archived tab.",
 		"confirm": "Archive",
-	"cancel": "Cancel",
+		"cancel": "Cancel",
 		"archiving": "Archiving...",
 		"success": "Conversation archived",
 		"failed": "Failed to archive conversation"

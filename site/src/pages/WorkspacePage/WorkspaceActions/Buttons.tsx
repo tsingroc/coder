@@ -16,6 +16,7 @@ import {
 	StarOffIcon,
 } from "lucide-react";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { BuildParametersPopover } from "./BuildParametersPopover";
 
 export interface ActionButtonProps {
@@ -33,6 +34,8 @@ export const UpdateButton: FC<ActionButtonProps> = ({
 	isRunning,
 	requireActiveVersion,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
@@ -42,21 +45,19 @@ export const UpdateButton: FC<ActionButtonProps> = ({
 					onClick={() => handleAction()}
 				>
 					{requireActiveVersion ? <PlayIcon /> : <CloudIcon />}
-					{loading ? (
-						<>Updating&hellip;</>
-					) : isRunning ? (
-						<>Update and restart&hellip;</>
-					) : (
-						<>Update and start&hellip;</>
-					)}
+					{loading
+						? `${t("status.updating")}…`
+						: isRunning
+							? t("updateAndRestart")
+							: t("actions.update")}
 				</TopbarButton>
 			</TooltipTrigger>
 			<TooltipContent side="bottom" className="max-w-xs">
 				{requireActiveVersion
-					? "This template requires automatic updates on workspace startup. Contact your administrator if you want to preserve the template version."
+					? t("actions.autoUpdateRequired")
 					: isRunning
-						? "Stop workspace and restart it with the latest template version."
-						: "Start workspace with the latest template version."}
+						? t("actions.update")
+						: t("actions.update")}
 			</TooltipContent>
 		</Tooltip>
 	);
@@ -66,10 +67,12 @@ export const ActivateButton: FC<ActionButtonProps> = ({
 	handleAction,
 	loading,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<TopbarButton disabled={loading} onClick={() => handleAction()}>
 			<PowerIcon />
-			{loading ? <>Activating&hellip;</> : "Activate"}
+			{loading ? <>{t("status.starting")}…</> : t("actions.start")}
 		</TopbarButton>
 	);
 };
@@ -85,6 +88,8 @@ export const StartButton: FC<ActionButtonPropsWithWorkspace> = ({
 	disabled,
 	tooltipText,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	let mainButton = (
 		<TopbarButton
 			data-testid="workspace-start"
@@ -92,7 +97,7 @@ export const StartButton: FC<ActionButtonPropsWithWorkspace> = ({
 			disabled={disabled || loading}
 		>
 			<PlayIcon />
-			{loading ? <>Starting&hellip;</> : "Start"}
+			{loading ? <>{t("status.starting")}…</> : t("actions.start")}
 		</TopbarButton>
 	);
 
@@ -111,7 +116,7 @@ export const StartButton: FC<ActionButtonPropsWithWorkspace> = ({
 		<div className="flex gap-1 items-center">
 			{mainButton}
 			<BuildParametersPopover
-				label="Start with build parameters"
+				label={t("restartWithParams")}
 				workspace={workspace}
 				disabled={loading}
 				onSubmit={handleAction}
@@ -124,6 +129,8 @@ export const StopButton: FC<ActionButtonProps> = ({
 	handleAction,
 	loading,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<TopbarButton
 			disabled={loading}
@@ -131,7 +138,7 @@ export const StopButton: FC<ActionButtonProps> = ({
 			data-testid="workspace-stop-button"
 		>
 			<SquareIcon />
-			{loading ? <>Stopping&hellip;</> : "Stop"}
+			{loading ? <>{t("status.stopping")}…</> : t("actions.stop")}
 		</TopbarButton>
 	);
 };
@@ -141,6 +148,8 @@ export const RestartButton: FC<ActionButtonPropsWithWorkspace> = ({
 	loading,
 	workspace,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<div className="flex gap-1 items-center">
 			<TopbarButton
@@ -149,10 +158,10 @@ export const RestartButton: FC<ActionButtonPropsWithWorkspace> = ({
 				disabled={loading}
 			>
 				<RotateCcwIcon />
-				{loading ? <>Restarting&hellip;</> : <>Restart&hellip;</>}
+				{loading ? `${t("status.updating")}…` : t("restart")}
 			</TopbarButton>
 			<BuildParametersPopover
-				label="Restart with build parameters"
+				label={t("restartWithParams")}
 				workspace={workspace}
 				disabled={loading}
 				onSubmit={handleAction}
@@ -162,10 +171,12 @@ export const RestartButton: FC<ActionButtonPropsWithWorkspace> = ({
 };
 
 export const CancelButton: FC<ActionButtonProps> = ({ handleAction }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<TopbarButton onClick={() => handleAction()}>
 			<BanIcon />
-			Cancel
+			{t("status.canceling")}
 		</TopbarButton>
 	);
 };
@@ -194,10 +205,12 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
 	workspaceID,
 	isFavorite,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	return (
 		<TopbarButton onClick={() => onToggle(workspaceID)}>
 			{isFavorite ? <StarOffIcon /> : <StarIcon />}
-			{isFavorite ? "Unfavorite" : "Favorite"}
+			{isFavorite ? t("share") : t("favorite")}
 		</TopbarButton>
 	);
 };

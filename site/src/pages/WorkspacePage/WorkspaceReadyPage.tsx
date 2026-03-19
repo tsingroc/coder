@@ -75,15 +75,9 @@ export const WorkspaceReadyPage: FC<WorkspaceReadyPageProps> = ({
 				error: error,
 			});
 		} else {
-			toast.error(
-				getErrorMessage(
-					error,
-					lang.failedToBuild(workspace.name),
-				),
-				{
-					description: getErrorDetail(error),
-				},
-			);
+			toast.error(getErrorMessage(error, lang.failedToBuild(workspace.name)), {
+				description: getErrorDetail(error),
+			});
 		}
 	};
 
@@ -360,10 +354,7 @@ export const WorkspaceReadyPage: FC<WorkspaceReadyPageProps> = ({
 						await activateWorkspaceMutation.mutateAsync();
 					} catch (e) {
 						toast.error(
-							getErrorMessage(
-								e,
-								lang.errorActivating(workspace.name),
-							),
+							getErrorMessage(e, lang.errorActivating(workspace.name)),
 							{
 								description: getErrorDetail(e),
 							},

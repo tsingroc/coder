@@ -5,11 +5,11 @@ import {
 	type ActionType,
 	abilitiesByWorkspaceStatus,
 } from "modules/workspaces/actions";
-import type { WorkspacePermissions } from "modules/workspaces/permissions";
+import type { WorkspacePermissions } from "../../modules/workspaces/permissions";
 import { WorkspaceMoreActions } from "modules/workspaces/WorkspaceMoreActions/WorkspaceMoreActions";
 import { type FC, Fragment, type ReactNode } from "react";
 import { useQuery } from "react-query";
-import { mustUpdateWorkspace } from "utils/workspace";
+import mustUpdateWorkspace from "utils/workspace";
 import {
 	ActivateButton,
 	CancelButton,
@@ -23,6 +23,7 @@ import {
 import { DebugButton } from "./DebugButton";
 import { RetryButton } from "./RetryButton";
 import { ShareButton } from "./ShareButton";
+import { useWorkspaceDetailLanguage } from "../Language";
 
 interface WorkspaceActionsProps {
 	workspace: Workspace;
@@ -55,6 +56,7 @@ export const WorkspaceActions: FC<WorkspaceActionsProps> = ({
 	handleDebug,
 	handleDormantActivate,
 }) => {
+	const lang = useWorkspaceDetailLanguage();
 	const {
 		permissions: { viewDeploymentConfig },
 		user,
@@ -79,6 +81,7 @@ export const WorkspaceActions: FC<WorkspaceActionsProps> = ({
 		workspace,
 		mustUpdate,
 		permissions.updateWorkspaceVersion,
+		lang,
 	);
 
 	// A mapping of button type to the corresponding React component
@@ -148,10 +151,10 @@ export const WorkspaceActions: FC<WorkspaceActionsProps> = ({
 				tooltipText={tooltipText}
 			/>
 		),
-		deleting: <DisabledButton label="Deleting" />,
-		canceling: <DisabledButton label="Canceling..." />,
-		deleted: <DisabledButton label="Deleted" />,
-		pending: <DisabledButton label="Pending..." />,
+		deleting: <DisabledButton label={lang.status.deleting} />,
+		canceling: <DisabledButton label={lang.status.canceling} />,
+		deleted: <DisabledButton label={lang.status.deleted} />,
+		pending: <DisabledButton label={lang.status.pending} />,
 		activate: <ActivateButton handleAction={handleDormantActivate} />,
 		activating: <ActivateButton loading handleAction={handleDormantActivate} />,
 		retry: (
@@ -208,6 +211,7 @@ function getTooltipText(
 	workspace: Workspace,
 	mustUpdate: boolean,
 	canChangeVersions: boolean,
+	lang: ReturnType<typeof useWorkspaceDetailLanguage>,
 ): string {
 	if (!mustUpdate && !canChangeVersions) {
 		return "";
@@ -218,11 +222,11 @@ function getTooltipText(
 		canChangeVersions &&
 		workspace.template_require_active_version
 	) {
-		return "This template requires automatic updates on workspace startup, but template administrators can ignore this policy.";
+		return lang.actions.autoUpdateRequired;
 	}
 
 	if (workspace.automatic_updates === "always") {
-		return "Automatic updates are enabled for this workspace. Modify the update policy in workspace settings if you want to preserve the template version.";
+		return lang.actions.autoUpdateEnabled;
 	}
 
 	return "";

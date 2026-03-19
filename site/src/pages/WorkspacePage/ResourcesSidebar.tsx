@@ -7,6 +7,7 @@ import {
 	SidebarItem,
 } from "components/FullPageLayout/Sidebar";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { getResourceIconPath } from "utils/workspace";
 
 type ResourcesSidebarProps = {
@@ -22,11 +23,12 @@ export const ResourcesSidebar: FC<ResourcesSidebarProps> = ({
 	isSelected,
 	resources,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const theme = useTheme();
 
 	return (
 		<Sidebar>
-			<SidebarCaption>Resources</SidebarCaption>
+			<SidebarCaption>{t("resourcesTab")}</SidebarCaption>
 			{failed && (
 				<p
 					css={{
@@ -37,8 +39,7 @@ export const ResourcesSidebar: FC<ResourcesSidebarProps> = ({
 						lineHeight: "1.5",
 					}}
 				>
-					Your workspace build failed, so the necessary resources couldn&apos;t
-					be created.
+					{t("resourcesFailed")}
 				</p>
 			)}
 			{resources.length === 0 &&

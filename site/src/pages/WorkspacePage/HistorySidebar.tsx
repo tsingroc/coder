@@ -15,6 +15,7 @@ import {
 	WorkspaceBuildDataSkeleton,
 } from "modules/workspaces/WorkspaceBuildData/WorkspaceBuildData";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useInfiniteQuery } from "react-query";
 
 interface HistorySidebarProps {
@@ -22,6 +23,7 @@ interface HistorySidebarProps {
 }
 
 export const HistorySidebar: FC<HistorySidebarProps> = ({ workspace }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const buildsQuery = useInfiniteQuery({
 		...infiniteWorkspaceBuilds(workspace?.id ?? ""),
 		enabled: workspace !== undefined,
@@ -30,7 +32,7 @@ export const HistorySidebar: FC<HistorySidebarProps> = ({ workspace }) => {
 
 	return (
 		<Sidebar>
-			<SidebarCaption>History</SidebarCaption>
+			<SidebarCaption>{t("historyTab")}</SidebarCaption>
 			<ScrollArea>
 				<div className="flex flex-col gap-px">
 					{builds
@@ -59,7 +61,7 @@ export const HistorySidebar: FC<HistorySidebarProps> = ({ workspace }) => {
 								<Spinner loading={buildsQuery.isFetchingNextPage}>
 									<ArrowDownIcon />
 								</Spinner>
-								Show more builds
+								{t("showMoreBuilds")}
 							</Button>
 						</div>
 					)}

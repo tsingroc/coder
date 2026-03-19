@@ -555,16 +555,15 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 					{parameters.length > 0 && (
 						<section className="flex flex-col gap-9">
 							<hgroup>
-								<h2 className="text-xl font-semibold m-0">Parameters</h2>
+								<h2 className="text-xl font-semibold m-0">{lang.parameters}</h2>
 								<p className="text-sm text-content-secondary m-0">
-									These are the settings used by your template. Immutable
-									parameters cannot be modified once the workspace is created.
+									{lang.templateSettingsDescription}
 									<Link
 										href={docs(
 											"/admin/templates/extending-templates/dynamic-parameters",
 										)}
 									>
-										View docs
+										{lang.viewDocs}
 									</Link>
 								</p>
 							</hgroup>
@@ -574,7 +573,7 @@ export const CreateWorkspacePageView: FC<CreateWorkspacePageViewProps> = ({
 							{presets.length > 0 && (
 								<div className="flex flex-col gap-2">
 									<div className="flex gap-2 items-center">
-										<Label className="text-sm">Preset</Label>
+										<Label className="text-sm">{lang.preset}</Label>
 									</div>
 									<div className="flex flex-col gap-4">
 										<div className="max-w-lg">

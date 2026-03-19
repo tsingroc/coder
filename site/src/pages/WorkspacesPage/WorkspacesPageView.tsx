@@ -30,6 +30,7 @@ import {
 import { WorkspaceHelpTooltip } from "./WorkspaceHelpTooltip";
 import { WorkspacesButton } from "./WorkspacesButton";
 import { useWorkspaceLanguage } from "./Language";
+import { useTranslation } from "react-i18next";
 
 type TemplateQuery = UseQueryResult<Template[]>;
 interface WorkspacesPageViewProps {
@@ -78,6 +79,7 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 	onActionError,
 }) => {
 	const lang = useWorkspaceLanguage();
+	const { t } = useTranslation();
 
 	// Let's say the user has 5 workspaces, but tried to hit page 100, which
 	// does not exist. In this case, the page is not valid and we want to show a
@@ -124,8 +126,10 @@ export const WorkspacesPageView: FC<WorkspacesPageViewProps> = ({
 				{checkedWorkspaces.length > 0 ? (
 					<>
 						<div>
-							Selected <strong>{checkedWorkspaces.length}</strong> of{" "}
-							<strong>{workspaces?.length}</strong> {workspaceLabel}
+							{t("showing")} <strong>{checkedWorkspaces.length}</strong>{" "}
+							{t("to")}
+							<strong>{workspaces?.length}</strong> {t("of")}{" "}
+							<strong>{count ?? 0}</strong> {workspaceLabel}
 						</div>
 
 						<DropdownMenu>

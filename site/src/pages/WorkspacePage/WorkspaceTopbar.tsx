@@ -182,7 +182,8 @@ export const WorkspaceTopbar: FC<WorkspaceProps> = ({
 							</TopbarIcon>
 
 							<span>
-								{workspace.latest_build.daily_cost} {lang.creditsOf} {quota.budget}
+								{workspace.latest_build.daily_cost} {lang.creditsOf}{" "}
+								{quota.budget}
 							</span>
 						</TopbarData>
 					</Link>
@@ -268,7 +269,11 @@ const OwnerBreadcrumb: FC<OwnerBreadcrumbProps> = ({
 			</HelpTooltipTrigger>
 
 			<HelpTooltipContent align="center">
-				<AvatarData title={ownerName} subtitle={lang.owner} src={ownerAvatarUrl} />
+				<AvatarData
+					title={ownerName}
+					subtitle={lang.owner}
+					src={ownerAvatarUrl}
+				/>
 			</HelpTooltipContent>
 		</HelpTooltip>
 	);

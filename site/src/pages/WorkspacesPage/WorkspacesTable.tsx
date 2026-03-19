@@ -109,7 +109,7 @@ export const WorkspacesTable: FC<WorkspacesTableProps> = ({
 	onActionSuccess,
 	onActionError,
 }) => {
-	const { t } = useTranslation();
+	const { t } = useTranslation("workspace");
 	const dashboard = useDashboard();
 
 	return (
@@ -139,13 +139,13 @@ export const WorkspacesTable: FC<WorkspacesTableProps> = ({
 								aria-label={t("selectAllWorkspaces")}
 								className="my-0"
 							/>
-							{t("name")}
+							{t("table.name")}
 						</div>
 					</TableHead>
-					<TableHead className="w-1/3">{t("template")}</TableHead>
-					<TableHead className="w-1/3">{t("status")}</TableHead>
+					<TableHead className="w-1/3">{t("table.template")}</TableHead>
+					<TableHead className="w-1/3">{t("table.status")}</TableHead>
 					<TableHead className="w-0">
-						<span className="sr-only">{t("actions")}</span>
+						<span className="sr-only">{t("table.actions")}</span>
 					</TableHead>
 				</TableRow>
 			</TableHeader>
@@ -194,7 +194,7 @@ export const WorkspacesTable: FC<WorkspacesTableProps> = ({
 												);
 											}
 										}}
-										aria-label={`Select workspace ${workspace.name}`}
+										aria-label={t("selectWorkspace", { name: workspace.name })}
 									/>
 									<AvatarData
 										title={
@@ -217,7 +217,7 @@ export const WorkspacesTable: FC<WorkspacesTableProps> = ({
 										}
 										subtitle={
 											<div className="flex items-center gap-1">
-												<span className="sr-only">Owner: </span>
+												<span className="sr-only">{t("ownerLabel")}: </span>
 												<div className="flex gap-2">
 													{workspace.owner_name}
 													{workspace.shared_with &&
@@ -251,7 +251,9 @@ export const WorkspacesTable: FC<WorkspacesTableProps> = ({
 									subtitle={
 										dashboard.showOrganizations && (
 											<>
-												<span className="sr-only">Organization:</span>{" "}
+												<span className="sr-only">
+													{t("organizationLabel")}:
+												</span>{" "}
 												{activeOrg?.display_name || workspace.organization_name}
 											</>
 										)
@@ -474,7 +476,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 					<PrimaryAction
 						onClick={() => startWorkspaceMutation.mutate({})}
 						isLoading={startWorkspaceMutation.isPending}
-						label="Start workspace"
+						label={t("actions.startWorkspace")}
 					>
 						<PlayIcon />
 					</PrimaryAction>
@@ -485,7 +487,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 						<PrimaryAction
 							onClick={workspaceUpdate.update}
 							isLoading={workspaceUpdate.isUpdating}
-							label="Update and start workspace"
+							label={t("actions.updateAndStart")}
 						>
 							<CloudIcon />
 						</PrimaryAction>
@@ -498,7 +500,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 						<PrimaryAction
 							onClick={workspaceUpdate.update}
 							isLoading={workspaceUpdate.isUpdating}
-							label="This template requires automatic updates on workspace startup. Contact your administrator if you want to preserve the template version."
+							label={t("actions.autoUpdateRequired")}
 						>
 							<PlayIcon />
 						</PrimaryAction>
@@ -511,7 +513,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 						<PrimaryAction
 							onClick={workspaceUpdate.update}
 							isLoading={workspaceUpdate.isUpdating}
-							label="Update and restart workspace"
+							label={t("actions.updateAndRestart")}
 						>
 							<CloudIcon />
 						</PrimaryAction>
@@ -524,7 +526,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 						<PrimaryAction
 							onClick={workspaceUpdate.update}
 							isLoading={workspaceUpdate.isUpdating}
-							label="This template requires automatic updates on workspace restart. Contact your administrator if you want to preserve the template version."
+							label={t("actions.autoUpdateRequiredRestart")}
 						>
 							<PlayIcon />
 						</PrimaryAction>
@@ -536,7 +538,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 					<PrimaryAction
 						onClick={() => setIsCancelConfirmOpen(true)}
 						isLoading={cancelBuildMutation.isPending}
-						label="Cancel build"
+						label={t("actions.cancelBuild")}
 					>
 						<BanIcon />
 					</PrimaryAction>
@@ -546,7 +548,7 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 					<PrimaryAction
 						onClick={retry}
 						isLoading={isRetrying}
-						label="Retry build"
+						label={t("actions.retryBuild")}
 					>
 						<RefreshCcwIcon />
 					</PrimaryAction>
@@ -567,9 +569,11 @@ const WorkspaceActionsCell: FC<WorkspaceActionsCellProps> = ({
 			{/* Stop workspace confirmation dialog */}
 			<ConfirmDialog
 				open={isStopConfirmOpen}
-				title="Stop workspace"
-				description={`Are you sure you want to stop the workspace "${workspace.name}"? This will terminate all running processes and disconnect any active sessions.`}
-				confirmText="Stop"
+				title={t("actions.stopConfirmTitle")}
+				description={t("actions.stopConfirmDescription", {
+					name: workspace.name,
+				})}
+				confirmText={t("actions.stop")}
 				onClose={() => setIsStopConfirmOpen(false)}
 				onConfirm={() => {
 					stopWorkspaceMutation.mutate({});
@@ -667,7 +671,7 @@ const WorkspaceApps: FC<WorkspaceAppsProps> = ({ workspace }) => {
 			<VSCodeIconLink
 				key="vscode"
 				variant="vscode"
-				label="Open VSCode"
+				label={t("actions.openVSCode")}
 				owner={workspace.owner_name}
 				workspace={workspace.name}
 				agent={agent.name}
@@ -683,7 +687,7 @@ const WorkspaceApps: FC<WorkspaceAppsProps> = ({ workspace }) => {
 			<VSCodeIconLink
 				key="vscode-insiders"
 				variant="vscode-insiders"
-				label="Open VSCode Insiders"
+				label={t("actions.openVSCodeInsiders")}
 				owner={workspace.owner_name}
 				workspace={workspace.name}
 				agent={agent.name}
@@ -719,7 +723,7 @@ const WorkspaceApps: FC<WorkspaceAppsProps> = ({ workspace }) => {
 					e.preventDefault();
 					openAppInNewWindow(href);
 				}}
-				label="Open Terminal"
+				label={t("actions.openTerminal")}
 			>
 				<SquareTerminalIcon className="!size-7" />
 			</BaseIconLink>,
@@ -774,11 +778,12 @@ const IconAppLink: FC<IconAppLinkProps> = ({ app, workspace, agent }) => {
 		workspace,
 		agent,
 	});
+	const { t } = useTranslation("workspace");
 
 	return (
 		<BaseIconLink
 			key={app.id}
-			label={`Open ${link.label}`}
+			label={t("actions.openApp", { name: link.label })}
 			href={link.href}
 			onClick={link.onClick}
 		>

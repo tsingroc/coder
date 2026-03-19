@@ -18,6 +18,7 @@ import { useTime } from "hooks/useTime";
 import { ClockIcon, MinusIcon, PlusIcon } from "lucide-react";
 import { getWorkspaceActivityStatus } from "modules/workspaces/activity";
 import { type FC, type ReactNode, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";
 import { Link as RouterLink } from "react-router";
 import { toast } from "sonner";
@@ -40,9 +41,11 @@ const WorkspaceScheduleContainer: FC<WorkspaceScheduleContainerProps> = ({
 	children,
 	onClickIcon,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	const icon = (
 		<TopbarIcon>
-			<ClockIcon aria-label="Schedule" className="size-icon-sm" />
+			<ClockIcon aria-label={t("scheduleSettings")} className="size-icon-sm" />
 		</TopbarIcon>
 	);
 
@@ -63,7 +66,7 @@ const WorkspaceScheduleContainer: FC<WorkspaceScheduleContainerProps> = ({
 						icon
 					)}
 				</TooltipTrigger>
-				<TooltipContent side="bottom">Schedule</TooltipContent>
+				<TooltipContent side="bottom">{t("scheduleSettings")}</TooltipContent>
 			</Tooltip>
 			{children}
 		</TopbarData>
@@ -115,6 +118,7 @@ const AutostopDisplay: FC<AutostopDisplayProps> = ({
 	template,
 	canUpdateSchedule,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const queryClient = useQueryClient();
 	const deadline = getDeadline(workspace);
 	const maxDeadlineDecrease = getMaxDeadlineChange(deadline, getMinDeadline());
@@ -144,7 +148,7 @@ const AutostopDisplay: FC<AutostopDisplayProps> = ({
 		...updateDeadline(workspace),
 		onSuccess: (_, updatedDeadline) => {
 			toast.success(
-				`Shutdown time for "${workspace.name}" updated successfully.`,
+				t("messages.updatedSuccessfully", { name: workspace.name }),
 			);
 			lastStableDeadline.current = updatedDeadline;
 		},
@@ -152,7 +156,7 @@ const AutostopDisplay: FC<AutostopDisplayProps> = ({
 			toast.error(
 				getErrorMessage(
 					error,
-					`Failed to update shutdown time for "${workspace.name}". Please try again.`,
+					t("messages.updateFailed", { name: workspace.name }),
 				),
 				{
 					description: getErrorDetail(error),
@@ -222,12 +226,10 @@ const AutostopDisplay: FC<AutostopDisplayProps> = ({
 						}}
 					>
 						<MinusIcon />
-						<span className="sr-only">Subtract 1 hour from deadline</span>
+						<span className="sr-only">{t("subtractHour")}</span>
 					</Button>
 				</TooltipTrigger>
-				<TooltipContent side="bottom">
-					Subtract 1 hour from deadline
-				</TooltipContent>
+				<TooltipContent side="bottom">{t("subtractHour")}</TooltipContent>
 			</Tooltip>
 			<Tooltip>
 				<TooltipTrigger asChild>
@@ -240,10 +242,10 @@ const AutostopDisplay: FC<AutostopDisplayProps> = ({
 						}}
 					>
 						<PlusIcon />
-						<span className="sr-only">Add 1 hour to deadline</span>
+						<span className="sr-only">{t("addHour")}</span>
 					</Button>
 				</TooltipTrigger>
-				<TooltipContent side="bottom">Add 1 hour to deadline</TooltipContent>
+				<TooltipContent side="bottom">{t("addHour")}</TooltipContent>
 			</Tooltip>
 		</div>
 	);

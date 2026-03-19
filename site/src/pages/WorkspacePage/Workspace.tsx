@@ -1,6 +1,8 @@
 import type * as TypesGen from "api/typesGenerated";
+import type { WorkspaceAgentStatus } from "api/typesGenerated";
 import { Alert, AlertDescription, AlertTitle } from "components/Alert/Alert";
 import { SidebarIconButton } from "components/FullPageLayout/Sidebar";
+import { Link } from "components/Link/Link";
 import { useSearchParamsKey } from "hooks/useSearchParamsKey";
 import { BlocksIcon, HistoryIcon } from "lucide-react";
 import { ProvisionerStatusAlert } from "modules/provisioners/ProvisionerStatusAlert";
@@ -13,7 +15,6 @@ import { HistorySidebar } from "./HistorySidebar";
 import { ResourceMetadata } from "./ResourceMetadata";
 import { ResourcesSidebar } from "./ResourcesSidebar";
 import { resourceOptionValue, useResourcesNav } from "./useResourcesNav";
-import { WorkspaceAlert } from "./WorkspaceAlert";
 import { WorkspaceBuildLogsSection } from "./WorkspaceBuildLogsSection";
 import {
 	getActiveTransitionStats,
@@ -22,6 +23,7 @@ import {
 import { WorkspaceDeletedBanner } from "./WorkspaceDeletedBanner";
 import { findTroubleshootingURL } from "./WorkspaceNotifications/WorkspaceNotifications";
 import { WorkspaceTopbar } from "./WorkspaceTopbar";
+import { useTranslation } from "react-i18next";
 
 interface WorkspaceProps {
 	workspace: TypesGen.Workspace;
@@ -66,6 +68,7 @@ export const Workspace: FC<WorkspaceProps> = ({
 	handleRetry,
 	handleDebug,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const navigate = useNavigate();
 
 	const transitionStats =
@@ -130,7 +133,7 @@ export const Workspace: FC<WorkspaceProps> = ({
 							}}
 						>
 							<BlocksIcon className="size-icon-sm" />
-							<span className="sr-only">Resources</span>
+							<span className="sr-only">{t("resourcesTab")}</span>
 						</SidebarIconButton>
 						<SidebarIconButton
 							isActive={sidebarOption.value === "history"}
@@ -139,7 +142,7 @@ export const Workspace: FC<WorkspaceProps> = ({
 							}}
 						>
 							<HistoryIcon className="size-icon-sm" />
-							<span className="sr-only">History</span>
+							<span className="sr-only">{t("historyTab")}</span>
 						</SidebarIconButton>
 					</div>
 
@@ -184,7 +187,9 @@ export const Workspace: FC<WorkspaceProps> = ({
 
 						{workspace.latest_build.job.error && (
 							<Alert severity="error" prominent>
-								<AlertTitle>Workspace build failed</AlertTitle>
+								<AlertTitle>
+									{t("failedToBuild", { name: workspace.name })}
+								</AlertTitle>
 								<AlertDescription>
 									{workspace.latest_build.job.error}
 								</AlertDescription>
@@ -192,7 +197,7 @@ export const Workspace: FC<WorkspaceProps> = ({
 						)}
 
 						{!workspace.health.healthy && (
-							<WorkspaceAlert
+							<UnhealthyWorkspaceAlert
 								workspace={workspace}
 								troubleshootingURL={troubleshootingURL}
 							/>
@@ -252,6 +257,65 @@ export const Workspace: FC<WorkspaceProps> = ({
 				</div>
 			</div>
 		</div>
+	);
+};
+
+interface UnhealthyWorkspaceAlertProps {
+	workspace: TypesGen.Workspace;
+	troubleshootingURL: string | undefined;
+}
+
+const UnhealthyWorkspaceAlert: FC<UnhealthyWorkspaceAlertProps> = ({
+	workspace,
+	troubleshootingURL,
+}) => {
+	const { t } = useTranslation("workspaceDetail");
+	const failingAgentCount = workspace.health.failing_agents.length;
+	const failureSet = new Set<WorkspaceAgentStatus>();
+
+	workspace.latest_build.resources.forEach((resource) => {
+		resource.agents?.forEach((agent) => {
+			failureSet.add(agent.status);
+		});
+	});
+
+	let title = t("health.agentsNotConnected");
+	let message = t("health.cannotBeUsed");
+
+	// Disconnected is a more serious failure than timeout, so we can
+	// prioritize handling it first.
+	if (failureSet.has("disconnected")) {
+		title = t("health.agentsDisconnected");
+		message = t("health.disconnectedMessage");
+	} else if (failureSet.has("timeout")) {
+		// Handle timeout case
+		title = t("health.startingNotConnected");
+		message = t("health.timeoutMessage");
+	}
+
+	return (
+		<Alert severity="warning" prominent>
+			<AlertTitle>{title}</AlertTitle>
+			<AlertDescription>
+				<p>
+					{`${t("health.runningBut")} ${
+						failingAgentCount > 1
+							? t("health.multipleAgentsNotConnected", {
+									count: failingAgentCount,
+								})
+							: t("health.singleAgentNotConnected")
+					}.`}
+				</p>
+				<p>{message}</p>
+				<p>
+					{troubleshootingURL && (
+						<Link href={troubleshootingURL} target="_blank">
+							{t("health.viewDocsToTroubleshoot")}
+						</Link>
+					)}
+				</p>
+			</AlertDescription>
+		</Alert>
 	);
 };
 
