@@ -4,16 +4,36 @@ import { Avatar, type AvatarProps } from "components/Avatar/Avatar";
 import { BuildIcon } from "components/BuildIcon/BuildIcon";
 import { useClassName } from "hooks/useClassName";
 import type { FC } from "react";
-import { getDisplayWorkspaceBuildStatus } from "utils/workspace";
 
 interface BuildAvatarProps {
 	build: WorkspaceBuild;
 	size?: AvatarProps["size"];
 }
 
+// Local version of getDisplayWorkspaceBuildStatus type determination
+const getBuildStatusType = (
+	build: WorkspaceBuild,
+): "success" | "active" | "inactive" | "error" | "warning" => {
+	switch (build.job.status) {
+		case "succeeded":
+			return "success";
+		case "pending":
+			return "inactive";
+		case "running":
+			return "active";
+		case "unknown":
+		case "failed":
+			return "error";
+		case "canceling":
+			return "warning";
+		case "canceled":
+			return "inactive";
+	}
+};
+
 export const BuildAvatar: FC<BuildAvatarProps> = ({ build, size }) => {
 	const theme = useTheme();
-	const { type } = getDisplayWorkspaceBuildStatus(theme, build);
+	const type = getBuildStatusType(build);
 	const iconColor = useClassName(
 		(css, theme) => css({ color: theme.roles[type].fill.solid }),
 		[type],

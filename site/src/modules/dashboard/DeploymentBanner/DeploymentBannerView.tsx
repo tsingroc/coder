@@ -25,7 +25,9 @@ import {
 	CloudUploadIcon,
 	GaugeIcon,
 	GitCompareArrowsIcon,
+	PlayIcon,
 	RotateCwIcon,
+	SquareIcon,
 	WrenchIcon,
 } from "lucide-react";
 import prettyBytes from "pretty-bytes";
@@ -38,7 +40,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
-import { getDisplayWorkspaceStatus } from "utils/workspace";
+import { PillSpinner } from "components/Pill/Pill";
 
 interface DeploymentBannerViewProps {
 	health?: HealthcheckReport;
@@ -380,13 +382,71 @@ const WorkspaceBuildValue: FC<WorkspaceBuildValueProps> = ({
 	count,
 }) => {
 	const { t } = useTranslation();
-	const displayStatus = getDisplayWorkspaceStatus(status);
-	let statusText = displayStatus.text;
-	let icon = displayStatus.icon;
-	if (status === "starting") {
-		icon = <WrenchIcon className="size-icon-xs" />;
-		statusText = t("building");
-	}
+
+	// Local version of getDisplayWorkspaceStatus
+	const getStatusDisplay = (workspaceStatus: WorkspaceStatus) => {
+		switch (workspaceStatus) {
+			case "running":
+				return {
+					text: t("workspaceDetail.status.running"),
+					icon: <PlayIcon className="size-icon-xs" />,
+				};
+			case "starting":
+				return {
+					text: t("building"),
+					icon: <WrenchIcon className="size-icon-xs" />,
+				};
+			case "stopping":
+				return {
+					text: t("workspaceDetail.status.stopping"),
+					icon: <PillSpinner />,
+				};
+			case "stopped":
+				return {
+					text: t("workspaceDetail.status.stopped"),
+					icon: <SquareIcon className="size-icon-xs" />,
+				};
+			case "deleting":
+				return {
+					text: t("workspaceDetail.status.deleting"),
+					icon: <PillSpinner />,
+				};
+			case "deleted":
+				return {
+					text: t("workspaceDetail.status.deleted"),
+					icon: <CircleAlertIcon className="size-icon-xs" />,
+				};
+			case "canceling":
+				return {
+					text: t("workspaceDetail.status.canceling"),
+					icon: <PillSpinner />,
+				};
+			case "canceled":
+				return {
+					text: t("workspaceDetail.status.canceled"),
+					icon: <CircleAlertIcon className="size-icon-xs" />,
+				};
+			case "failed":
+				return {
+					text: t("workspaceDetail.status.failed"),
+					icon: <CircleAlertIcon className="size-icon-xs" />,
+				};
+			case "pending":
+				return {
+					text: t("workspaceDetail.status.pending"),
+					icon: <PillSpinner />,
+				};
+			default:
+				return {
+					text: t("workspaceDetail.status.loading"),
+					icon: <PillSpinner />,
+				};
+		}
+	};
+
+	const displayStatus = getStatusDisplay(status);
+	const statusText = displayStatus.text;
+	const icon = displayStatus.icon;
 
 	return (
 		<TooltipProvider delayDuration={100}>

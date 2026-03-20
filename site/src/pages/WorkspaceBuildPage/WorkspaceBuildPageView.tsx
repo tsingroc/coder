@@ -33,11 +33,15 @@ import {
 	useLayoutEffect,
 	useRef,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { cn } from "utils/cn";
 import { formatDate } from "utils/time";
-import { displayWorkspaceBuildDuration } from "utils/workspace";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 import { Sidebar, SidebarCaption, SidebarItem } from "./Sidebar";
+
+dayjs.extend(duration);
 
 export const LOGS_TAB_KEY = "logs";
 
@@ -71,10 +75,27 @@ export const WorkspaceBuildPageView: FC<WorkspaceBuildPageViewProps> = ({
 	builds,
 	activeBuildNumber,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const tabState = useSearchParamsKey({
 		key: LOGS_TAB_KEY,
 		defaultValue: "build",
 	});
+
+	// Localized version of displayWorkspaceBuildDuration
+	const getWorkspaceBuildDuration = (
+		build: WorkspaceBuild,
+	): string => {
+		const isCompleted = build.job.started_at && build.job.completed_at;
+
+		if (!isCompleted) {
+			return t("resources.buildStatus.inProgress");
+		}
+
+		const startedAt = dayjs(build.job.started_at);
+		const completedAt = dayjs(build.job.completed_at);
+		const seconds = completedAt.diff(startedAt, "seconds");
+		return `${seconds} ${t("resources.buildStatus.seconds")}`;
+	};
 
 	if (buildError) {
 		return (
@@ -117,7 +138,7 @@ export const WorkspaceBuildPageView: FC<WorkspaceBuildPageViewProps> = ({
 						{build.template_version_name}
 					</BuildStatsItem>
 					<BuildStatsItem label="Duration">
-						{displayWorkspaceBuildDuration(build)}
+						{getWorkspaceBuildDuration(build)}
 					</BuildStatsItem>
 					<BuildStatsItem label="Started at">
 						{formatDate(new Date(build.created_at))}

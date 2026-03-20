@@ -33,6 +33,7 @@ import { Container, ExternalLinkIcon } from "lucide-react";
 import { useFeatureVisibility } from "modules/dashboard/useFeatureVisibility";
 import { AppStatuses } from "pages/WorkspacePage/AppStatuses";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "sonner";
 import { cn } from "utils/cn";
@@ -65,6 +66,7 @@ export const AgentDevcontainerCard: FC<AgentDevcontainerCardProps> = ({
 	template,
 	wildcardHostname,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const { browser_only } = useFeatureVisibility();
 	const { proxy } = useProxy();
 	const queryClient = useQueryClient();
@@ -188,15 +190,14 @@ export const AgentDevcontainerCard: FC<AgentDevcontainerCardProps> = ({
 				{devcontainer.subagent_id ? (
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<span>dev container (terraform agent)</span>
+							<span>{t("resources.devcontainer.terraformAgent")}</span>
 						</TooltipTrigger>
 						<TooltipContent>
-							This dev container agent is defined in Terraform and has limited
-							configurability via the devcontainer.json file.
+							{t("resources.devcontainer.terraformAgentTooltip")}
 						</TooltipContent>
 					</Tooltip>
 				) : (
-					<span>dev container</span>
+					<span>{t("resources.devcontainer.title")}</span>
 				)}
 			</div>
 			<header
@@ -253,7 +254,7 @@ export const AgentDevcontainerCard: FC<AgentDevcontainerCardProps> = ({
 						disabled={isTransitioning}
 					>
 						<Spinner loading={isTransitioning} />
-						{rebuildButtonLabel(devcontainer)}
+						{rebuildButtonLabel(devcontainer, t)}
 					</Button>
 
 					{showDevcontainerControls && displayApps.includes("ssh_helper") && (
@@ -299,7 +300,7 @@ export const AgentDevcontainerCard: FC<AgentDevcontainerCardProps> = ({
 					{subAgent &&
 						workspace.latest_app_status?.agent_id === subAgent.id && (
 							<section>
-								<h3 className="sr-only">App statuses</h3>
+								<h3 className="sr-only">{t("applications.title")}</h3>
 								<AppStatuses workspace={workspace} agent={subAgent} />
 							</section>
 						)}
@@ -344,7 +345,7 @@ export const AgentDevcontainerCard: FC<AgentDevcontainerCardProps> = ({
 										port.host_port !== undefined && port.host_ip !== undefined;
 									const helperText = hasHostBind
 										? `${port.host_ip}:${port.host_port}`
-										: "Not bound to host";
+										: t("resources.devcontainer.notBoundToHost");
 									const linkDest = hasHostBind
 										? portForwardURL(
 												wildcardHostname,
@@ -394,19 +395,20 @@ export const AgentDevcontainerCard: FC<AgentDevcontainerCardProps> = ({
 	);
 };
 
-function rebuildButtonLabel(devcontainer: WorkspaceAgentDevcontainer) {
+function rebuildButtonLabel(
+	devcontainer: WorkspaceAgentDevcontainer,
+	t: (key: string) => string,
+) {
 	switch (devcontainer.status) {
 		case "deleting":
-			return "Deleting";
-
+			return t("status.deleting");
 		case "stopping":
-			return "Stopping";
-
+			return t("status.stopping");
 		default:
 			if (devcontainer.container) {
-				return "Rebuild";
+				return t("actions.update");
 			}
-			return "Start";
+			return t("actions.start");
 	}
 }
 
@@ -421,10 +423,11 @@ const DevcontainerDeleteErrorDialog: FC<DevcontainerDeleteErrorDialogProps> = ({
 	error,
 	onClose,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const errorDetail = getErrorDetail(error);
 	const errorMessage = getErrorMessage(
 		error,
-		"Failed to delete dev container.",
+		t("resources.devcontainer.deleteError"),
 	);
 
 	return (
@@ -438,14 +441,14 @@ const DevcontainerDeleteErrorDialog: FC<DevcontainerDeleteErrorDialogProps> = ({
 		>
 			<DialogContent variant="destructive">
 				<DialogHeader>
-					<DialogTitle>Error deleting dev container</DialogTitle>
+					<DialogTitle>{t("resources.devcontainer.deleteErrorTitle")}</DialogTitle>
 					<DialogDescription className="flex flex-row gap-4">
-						<strong className="text-content-primary">Message</strong>{" "}
+						<strong className="text-content-primary">{t("resources.devcontainer.message")}</strong>{" "}
 						<span>{errorMessage}</span>
 					</DialogDescription>
 					{errorDetail && (
 						<DialogDescription className="flex flex-row gap-9">
-							<strong className="text-content-primary">Detail</strong>{" "}
+							<strong className="text-content-primary">{t("resources.devcontainer.detail")}</strong>{" "}
 							{/* TODO(DanielleMaywood): `[overflow-wrap:anywhere]` should be replaced with `wrap-anywhere` when we hit tailwind v4 */}
 							<span className="[overflow-wrap:anywhere] break-normal">
 								{errorDetail}
@@ -455,7 +458,7 @@ const DevcontainerDeleteErrorDialog: FC<DevcontainerDeleteErrorDialogProps> = ({
 				</DialogHeader>
 				<DialogFooter>
 					<DialogClose asChild>
-						<Button>Ok</Button>
+						<Button>{t("resources.devcontainer.ok")}</Button>
 					</DialogClose>
 				</DialogFooter>
 			</DialogContent>

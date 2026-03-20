@@ -51,6 +51,7 @@ import {
 } from "lucide-react";
 import { useDashboard } from "modules/dashboard/useDashboard";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "react-query";
 import { docs } from "utils/docs";
 import { getFormHelpers } from "utils/formUtils";
@@ -75,6 +76,7 @@ export const PortForwardButton: FC<PortForwardButtonProps> = ({
 	agent,
 }) => {
 	const { entitlements } = useDashboard();
+	const { t } = useTranslation("workspaceDetail");
 
 	const { data: listeningPorts } = useQuery({
 		queryKey: ["portForward", agent.id],
@@ -97,7 +99,7 @@ export const PortForwardButton: FC<PortForwardButtonProps> = ({
 					<Spinner loading={!listeningPorts}>
 						<span css={styles.portCount}>{listeningPorts?.length}</span>
 					</Spinner>
-					Open ports
+					{t("resources.portForwarding.openPorts")}
 					<ChevronDownIcon />
 				</Button>
 			</PopoverTrigger>
@@ -150,6 +152,7 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 	refetchSharedPorts,
 }) => {
 	const theme = useTheme();
+	const { t } = useTranslation("workspaceDetail");
 	const [listeningPortProtocol, setListeningPortProtocol] = useState(
 		getWorkspaceListeningPortsProtocol(workspace.id),
 	);
@@ -222,12 +225,12 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 				{/* Tooltips don't work directly on disabled MenuItem components so you must wrap in div. */}
 				<div>
 					<MenuItem value="public" disabled>
-						Public
+						{t("resources.portForwarding.public")}
 					</MenuItem>
 				</div>
 			</TooltipTrigger>
 			<TooltipContent disablePortal>
-				This workspace template does not allow sharing ports publicly.
+				{t("resources.portForwarding.publicSharingNotAllowed")}
 			</TooltipContent>
 		</Tooltip>
 	);
@@ -238,13 +241,12 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 				{/* Tooltips don't work directly on disabled MenuItem components so you must wrap in div. */}
 				<div>
 					<MenuItem value="authenticated" disabled>
-						Authenticated
+						{t("resources.portForwarding.authenticated")}
 					</MenuItem>
 				</div>
 			</TooltipTrigger>
 			<TooltipContent disablePortal>
-				This workspace template does not allow sharing ports outside of its
-				organization.
+				{t("resources.portForwarding.authenticatedSharingNotAllowed")}
 			</TooltipContent>
 		</Tooltip>
 	);
@@ -268,17 +270,16 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 						justifyContent="space-between"
 						alignItems="start"
 					>
-						<HelpTooltipTitle>Listening Ports</HelpTooltipTitle>
+						<HelpTooltipTitle>{t("resources.portForwarding.listeningPorts")}</HelpTooltipTitle>
 						<HelpTooltipLink
 							href={docs("/admin/networking/port-forwarding#dashboard")}
 						>
-							Learn more
+							{t("resources.portForwarding.learnMore")}
 						</HelpTooltipLink>
 					</Stack>
 					<Stack direction="column" gap={1}>
 						<HelpTooltipText css={{ color: theme.palette.text.secondary }}>
-							The listening ports are exclusively accessible to you. Selecting
-							HTTP/S will change the protocol for all listening ports.
+							{t("resources.portForwarding.listeningPortsDescription")}
 						</HelpTooltipText>
 						<Stack
 							direction="row"
@@ -302,8 +303,8 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 										);
 									}}
 								>
-									<MenuItem value="http">HTTP</MenuItem>
-									<MenuItem value="https">HTTPS</MenuItem>
+									<MenuItem value="http">{t("resources.portForwarding.http")}</MenuItem>
+									<MenuItem value="https">{t("resources.portForwarding.https")}</MenuItem>
 								</Select>
 							</FormControl>
 							<form
@@ -327,7 +328,7 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									aria-label="Port number"
 									name="portNumber"
 									type="number"
-									placeholder="Connect to port..."
+									placeholder={t("resources.portForwarding.connectToPortPlaceholder")}
 									min={9}
 									max={65535}
 									required
@@ -337,17 +338,17 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									<TooltipTrigger asChild>
 										<Button type="submit" size="icon" variant="subtle">
 											<ExternalLinkIcon />
-											<span className="sr-only">Connect to port</span>
+											<span className="sr-only">{t("resources.portForwarding.connectToPort")}</span>
 										</Button>
 									</TooltipTrigger>
-									<TooltipContent disablePortal>Connect to port</TooltipContent>
+									<TooltipContent disablePortal>{t("resources.portForwarding.connectToPort")}</TooltipContent>
 								</Tooltip>
 							</form>
 						</Stack>
 					</Stack>
 					{filteredListeningPorts.length === 0 && (
 						<HelpTooltipText css={styles.noPortText}>
-							No open ports were detected.
+							{t("resources.portForwarding.noOpenPorts")}
 						</HelpTooltipText>
 					)}
 					{filteredListeningPorts.map((port) => {
@@ -411,11 +412,11 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 													}}
 												>
 													<ShareIcon />
-													<span className="sr-only">Share</span>
+													<span className="sr-only">{t("resources.portForwarding.shareThisPort")}</span>
 												</Button>
 											</TooltipTrigger>
 											<TooltipContent disablePortal>
-												Share this port
+												{t("resources.portForwarding.shareThisPort")}
 											</TooltipContent>
 										</Tooltip>
 									)}
@@ -431,11 +432,11 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 					borderTop: `1px solid ${theme.palette.divider}`,
 				}}
 			>
-				<HelpTooltipTitle>Shared Ports</HelpTooltipTitle>
+				<HelpTooltipTitle>{t("resources.portForwarding.sharedPorts")}</HelpTooltipTitle>
 				<HelpTooltipText css={{ color: theme.palette.text.secondary }}>
 					{canSharePorts
-						? "Ports can be shared with organization members, other Coder users, or with the public."
-						: "This workspace template does not allow sharing ports. Contact a template administrator to enable port sharing."}
+						? t("resources.portForwarding.sharedPortsDescription")
+						: t("resources.portForwarding.noPortSharingAllowed")}
 				</HelpTooltipText>
 				{canSharePorts && (
 					<div>
@@ -486,8 +487,8 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 												});
 											}}
 										>
-											<MenuItem value="http">HTTP</MenuItem>
-											<MenuItem value="https">HTTPS</MenuItem>
+											<MenuItem value="http">{t("resources.portForwarding.http")}</MenuItem>
+											<MenuItem value="https">{t("resources.portForwarding.https")}</MenuItem>
 										</Select>
 									</FormControl>
 
@@ -509,16 +510,14 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 													});
 												}}
 											>
-												<MenuItem value="organization">Organization</MenuItem>
+												<MenuItem value="organization">{t("resources.portForwarding.organization")}</MenuItem>
 												{canSharePortsAuthenticated ? (
-													<MenuItem value="authenticated">
-														Authenticated
-													</MenuItem>
+													<MenuItem value="authenticated">{t("resources.portForwarding.authenticated")}</MenuItem>
 												) : (
 													disabledAuthenticatedMenuItem
 												)}
 												{canSharePortsPublic ? (
-													<MenuItem value="public">Public</MenuItem>
+													<MenuItem value="public">{t("resources.portForwarding.public")}</MenuItem>
 												) : (
 													disabledPublicMenuItem
 												)}
@@ -527,7 +526,7 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 										<Button
 											size="icon"
 											variant="subtle"
-											aria-label="Delete shared port"
+											aria-label={t("resources.portForwarding.deleteSharedPort")}
 											onClick={async () => {
 												await deleteSharedPortMutation.mutateAsync({
 													agent_name: agent.name,
@@ -553,7 +552,7 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 								<TextField
 									{...getFieldHelpers("port")}
 									disabled={isSubmitting}
-									label="Port"
+									label={t("resources.portForwarding.port")}
 									size="small"
 									variant="outlined"
 									type="number"
@@ -565,10 +564,10 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									fullWidth
 									select
 									value={form.values.protocol}
-									label="Protocol"
+									label={t("resources.portForwarding.protocol")}
 								>
-									<MenuItem value="http">HTTP</MenuItem>
-									<MenuItem value="https">HTTPS</MenuItem>
+									<MenuItem value="http">{t("resources.portForwarding.http")}</MenuItem>
+									<MenuItem value="https">{t("resources.portForwarding.https")}</MenuItem>
 								</TextField>
 								<TextField
 									{...getFieldHelpers("share_level")}
@@ -576,23 +575,23 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									fullWidth
 									select
 									value={form.values.share_level}
-									label="Sharing Level"
+									label={t("resources.portForwarding.sharingLevel")}
 								>
-									<MenuItem value="organization">Organization</MenuItem>
+									<MenuItem value="organization">{t("resources.portForwarding.organization")}</MenuItem>
 									{canSharePortsAuthenticated ? (
-										<MenuItem value="authenticated">Authenticated</MenuItem>
+										<MenuItem value="authenticated">{t("resources.portForwarding.authenticated")}</MenuItem>
 									) : (
 										disabledAuthenticatedMenuItem
 									)}
 									{canSharePortsPublic ? (
-										<MenuItem value="public">Public</MenuItem>
+										<MenuItem value="public">{t("resources.portForwarding.public")}</MenuItem>
 									) : (
 										disabledPublicMenuItem
 									)}
 								</TextField>
 								<Button type="submit" disabled={!form.isValid || isSubmitting}>
 									<Spinner loading={isSubmitting} />
-									Share Port
+									{t("resources.portForwarding.sharePort")}
 								</Button>
 							</Stack>
 						</form>

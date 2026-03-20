@@ -11,6 +11,7 @@ import {
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
 import { Children, type FC, type JSX, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ResourceAvatar } from "./ResourceAvatar";
 import { SensitiveValue } from "./SensitiveValue";
 
@@ -80,6 +81,7 @@ interface ResourceCardProps {
 }
 
 export const ResourceCard: FC<ResourceCardProps> = ({ resource, agentRow }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const [shouldDisplayAllMetadata, setShouldDisplayAllMetadata] =
 		useState(false);
 	const metadataToDisplay = resource.metadata ?? [];
@@ -125,7 +127,7 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource, agentRow }) => {
 					{resource.daily_cost > 0 && (
 						<div css={styles.metadata}>
 							<div css={styles.metadataLabel}>
-								<b>Daily cost</b>
+								<b>{t("resources.dailyCost")}</b>
 							</div>
 							<div css={styles.metadataValue}>{resource.daily_cost}</div>
 						</div>
@@ -178,7 +180,9 @@ export const ResourceCard: FC<ResourceCardProps> = ({ resource, agentRow }) => {
 							</IconButton>
 						</TooltipTrigger>
 						<TooltipContent side="bottom">
-							{shouldDisplayAllMetadata ? "Hide metadata" : "Show all metadata"}
+							{shouldDisplayAllMetadata
+								? t("resources.hideMetadata")
+								: t("resources.showAllMetadata")}
 						</TooltipContent>
 					</Tooltip>
 				)}

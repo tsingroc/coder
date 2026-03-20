@@ -11,16 +11,40 @@ import { InfoIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { createDayString } from "utils/createDayString";
 import {
-	buildReasonLabels,
 	getDisplayWorkspaceBuildInitiatedBy,
-	getDisplayWorkspaceBuildStatus,
 	systemBuildReasons,
 } from "utils/workspace";
 
 export const WorkspaceBuildData = ({ build }: { build: WorkspaceBuild }) => {
 	const { t } = useTranslation("workspaceDetail");
 	const theme = useTheme();
-	const statusType = getDisplayWorkspaceBuildStatus(theme, build).type;
+
+	// Determine status type based on build job status
+	const getStatusType = (): "success" | "active" | "inactive" | "error" | "warning" => {
+		switch (build.job.status) {
+			case "succeeded":
+				return "success";
+			case "pending":
+				return "inactive";
+			case "running":
+				return "active";
+			case "unknown":
+			case "failed":
+				return "error";
+			case "canceling":
+				return "warning";
+			case "canceled":
+				return "inactive";
+		}
+	};
+
+	const statusType = getStatusType();
+
+	// Convert build reason to translation key (camelCase to kebab-case)
+	const getBuildReasonLabel = (reason: string): string => {
+		const key = reason.replace(/([A-Z])/g, "-$1").toLowerCase();
+		return t(`resources.buildReason.${key}`);
+	};
 
 	return (
 		<div css={styles.root}>
@@ -61,7 +85,7 @@ export const WorkspaceBuildData = ({ build }: { build: WorkspaceBuild }) => {
 									/>
 								</TooltipTrigger>
 								<TooltipContent side="bottom">
-									{buildReasonLabels[build.reason]}
+									{getBuildReasonLabel(build.reason)}
 								</TooltipContent>
 							</Tooltip>
 						)}

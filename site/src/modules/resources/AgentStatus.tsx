@@ -19,6 +19,7 @@ import {
 } from "components/Tooltip/Tooltip";
 import { TriangleAlertIcon } from "lucide-react";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 // If we think in the agent status and lifecycle into a single enum/state I'd
 // say we would have: connecting, timeout, disconnected, connected:created,
@@ -27,27 +28,29 @@ import type { FC } from "react";
 // connected:shutdown_error, connected:off.
 
 const ReadyLifecycle: FC = () => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<div
 			role="status"
 			data-testid="agent-status-ready"
-			aria-label="Ready"
+			aria-label={t("resources.agentStatus.ready")}
 			css={[styles.status, styles.connected]}
 		/>
 	);
 };
 
 const StartingLifecycle: FC = () => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<div
 					role="status"
-					aria-label="Starting..."
+					aria-label={t("resources.agentStatus.starting")}
 					css={[styles.status, styles.connecting]}
 				/>
 			</TooltipTrigger>
-			<TooltipContent side="bottom">Starting...</TooltipContent>
+			<TooltipContent side="bottom">{t("resources.agentStatus.starting")}</TooltipContent>
 		</Tooltip>
 	);
 };
@@ -67,22 +70,23 @@ interface DevcontainerStatusProps {
 }
 
 const StartTimeoutLifecycle: FC<AgentStatusProps> = ({ agent }) => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<HelpTooltip>
-			<HelpTooltipTrigger asChild role="status" aria-label="Agent timeout">
+			<HelpTooltipTrigger asChild role="status" aria-label={t("resources.agentStatus.timeout")}>
 				<TriangleAlertIcon css={styles.timeoutWarning} />
 			</HelpTooltipTrigger>
 
 			<HelpTooltipContent>
-				<HelpTooltipTitle>Agent is taking too long to start</HelpTooltipTitle>
+				<HelpTooltipTitle>{t("resources.agentStatus.startTimeoutTitle")}</HelpTooltipTitle>
 				<HelpTooltipText>
-					We noticed this agent is taking longer than expected to start.{" "}
+					{t("resources.agentStatus.startTimeoutDescription")}{" "}
 					<Link
 						target="_blank"
 						rel="noreferrer"
 						href={agent.troubleshooting_url}
 					>
-						Troubleshoot
+						{t("resources.agentStatus.troubleshoot")}
 					</Link>
 					.
 				</HelpTooltipText>
@@ -92,21 +96,22 @@ const StartTimeoutLifecycle: FC<AgentStatusProps> = ({ agent }) => {
 };
 
 const StartErrorLifecycle: FC<AgentStatusProps> = ({ agent }) => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<HelpTooltip>
-			<HelpTooltipTrigger asChild role="status" aria-label="Start error">
+			<HelpTooltipTrigger asChild role="status" aria-label={t("resources.agentStatus.timeout")}>
 				<TriangleAlertIcon css={styles.errorWarning} />
 			</HelpTooltipTrigger>
 			<HelpTooltipContent>
-				<HelpTooltipTitle>Error starting the agent</HelpTooltipTitle>
+				<HelpTooltipTitle>{t("resources.agentStatus.errorStartingTitle")}</HelpTooltipTitle>
 				<HelpTooltipText>
-					Something went wrong during the agent startup.{" "}
+					{t("resources.agentStatus.somethingWentWrong")}{" "}
 					<Link
 						target="_blank"
 						rel="noreferrer"
 						href={agent.troubleshooting_url}
 					>
-						Troubleshoot
+						{t("resources.agentStatus.troubleshoot")}
 					</Link>
 					.
 				</HelpTooltipText>
@@ -116,36 +121,38 @@ const StartErrorLifecycle: FC<AgentStatusProps> = ({ agent }) => {
 };
 
 const ShuttingDownLifecycle: FC = () => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<div
 					role="status"
-					aria-label="Stopping..."
+					aria-label={t("resources.agentStatus.stopping")}
 					css={[styles.status, styles.connecting]}
 				/>
 			</TooltipTrigger>
-			<TooltipContent side="bottom">Stopping...</TooltipContent>
+			<TooltipContent side="bottom">{t("resources.agentStatus.stopping")}</TooltipContent>
 		</Tooltip>
 	);
 };
 
 const ShutdownTimeoutLifecycle: FC<AgentStatusProps> = ({ agent }) => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<HelpTooltip>
-			<HelpTooltipTrigger asChild role="status" aria-label="Stop timeout">
+			<HelpTooltipTrigger asChild role="status" aria-label={t("resources.agentStatus.timeout")}>
 				<TriangleAlertIcon css={styles.timeoutWarning} />
 			</HelpTooltipTrigger>
 			<HelpTooltipContent>
-				<HelpTooltipTitle>Agent is taking too long to stop</HelpTooltipTitle>
+				<HelpTooltipTitle>{t("resources.agentStatus.stopTimeoutTitle")}</HelpTooltipTitle>
 				<HelpTooltipText>
-					We noticed this agent is taking longer than expected to stop.{" "}
+					{t("resources.agentStatus.stopTimeoutDescription")}{" "}
 					<Link
 						target="_blank"
 						rel="noreferrer"
 						href={agent.troubleshooting_url}
 					>
-						Troubleshoot
+						{t("resources.agentStatus.troubleshoot")}
 					</Link>
 					.
 				</HelpTooltipText>
@@ -155,21 +162,22 @@ const ShutdownTimeoutLifecycle: FC<AgentStatusProps> = ({ agent }) => {
 };
 
 const ShutdownErrorLifecycle: FC<AgentStatusProps> = ({ agent }) => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<HelpTooltip>
-			<HelpTooltipTrigger asChild role="status" aria-label="Stop error">
+			<HelpTooltipTrigger asChild role="status" aria-label={t("resources.agentStatus.timeout")}>
 				<TriangleAlertIcon css={styles.errorWarning} />
 			</HelpTooltipTrigger>
 			<HelpTooltipContent>
-				<HelpTooltipTitle>Error stopping the agent</HelpTooltipTitle>
+				<HelpTooltipTitle>{t("resources.agentStatus.errorStoppingTitle")}</HelpTooltipTitle>
 				<HelpTooltipText>
-					Something went wrong while trying to stop the agent.{" "}
+					{t("resources.agentStatus.somethingWentWrong")}{" "}
 					<Link
 						target="_blank"
 						rel="noreferrer"
 						href={agent.troubleshooting_url}
 					>
-						Troubleshoot
+						{t("resources.agentStatus.troubleshoot")}
 					</Link>
 					.
 				</HelpTooltipText>
@@ -179,16 +187,17 @@ const ShutdownErrorLifecycle: FC<AgentStatusProps> = ({ agent }) => {
 };
 
 const OffLifecycle: FC = () => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<div
 					role="status"
-					aria-label="Stopped"
+					aria-label={t("resources.agentStatus.stopped")}
 					css={[styles.status, styles.disconnected]}
 				/>
 			</TooltipTrigger>
-			<TooltipContent side="bottom">Stopped</TooltipContent>
+			<TooltipContent side="bottom">{t("resources.agentStatus.stopped")}</TooltipContent>
 		</Tooltip>
 	);
 };
@@ -230,51 +239,54 @@ const ConnectedStatus: FC<AgentStatusProps> = ({ agent }) => {
 };
 
 const DisconnectedStatus: FC = () => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<div
 					role="status"
-					aria-label="Disconnected"
+					aria-label={t("resources.agentStatus.disconnected")}
 					css={[styles.status, styles.disconnected]}
 				/>
 			</TooltipTrigger>
-			<TooltipContent side="bottom">Disconnected</TooltipContent>
+			<TooltipContent side="bottom">{t("resources.agentStatus.disconnected")}</TooltipContent>
 		</Tooltip>
 	);
 };
 
 const ConnectingStatus: FC = () => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<div
 					role="status"
-					aria-label="Connecting..."
+					aria-label={t("resources.agentStatus.connecting")}
 					css={[styles.status, styles.connecting]}
 				/>
 			</TooltipTrigger>
-			<TooltipContent side="bottom">Connecting...</TooltipContent>
+			<TooltipContent side="bottom">{t("resources.agentStatus.connecting")}</TooltipContent>
 		</Tooltip>
 	);
 };
 
 const TimeoutStatus: FC<AgentStatusProps> = ({ agent }) => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<HelpTooltip>
-			<HelpTooltipTrigger asChild role="status" aria-label="Timeout">
+			<HelpTooltipTrigger asChild role="status" aria-label={t("resources.agentStatus.timeout")}>
 				<TriangleAlertIcon css={styles.timeoutWarning} />
 			</HelpTooltipTrigger>
 			<HelpTooltipContent>
-				<HelpTooltipTitle>Agent is taking too long to connect</HelpTooltipTitle>
+				<HelpTooltipTitle>{t("resources.agentStatus.connectTimeoutTitle")}</HelpTooltipTitle>
 				<HelpTooltipText>
-					We noticed this agent is taking longer than expected to connect.{" "}
+					{t("resources.agentStatus.connectTimeoutDescription")}{" "}
 					<Link
 						target="_blank"
 						rel="noreferrer"
 						href={agent.troubleshooting_url}
 					>
-						Troubleshoot
+						{t("resources.agentStatus.troubleshoot")}
 					</Link>
 					.
 				</HelpTooltipText>
@@ -325,23 +337,24 @@ const SubAgentStatus: FC<SubAgentStatusProps> = ({ agent }) => {
 };
 
 const DevcontainerStartError: FC<AgentStatusProps> = ({ agent }) => {
+	const { t } = useTranslation("workspaceDetail");
 	return (
 		<HelpTooltip>
-			<HelpTooltipTrigger asChild role="status" aria-label="Start error">
+			<HelpTooltipTrigger asChild role="status" aria-label={t("resources.agentStatus.errorStartingTitle")}>
 				<TriangleAlertIcon css={styles.errorWarning} />
 			</HelpTooltipTrigger>
 			<HelpTooltipContent>
 				<HelpTooltipTitle>
-					Error starting the devcontainer agent
+					{t("resources.agentStatus.errorStartingDevcontainer")}
 				</HelpTooltipTitle>
 				<HelpTooltipText>
-					Something went wrong during the devcontainer agent startup.{" "}
+					{t("resources.agentStatus.somethingWentWrong")}{" "}
 					<Link
 						target="_blank"
 						rel="noreferrer"
 						href={agent.troubleshooting_url}
 					>
-						Troubleshoot
+						{t("resources.agentStatus.troubleshoot")}
 					</Link>
 					.
 				</HelpTooltipText>

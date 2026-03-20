@@ -20,6 +20,7 @@ import {
 import { isExternalApp, needsSessionToken } from "modules/apps/apps";
 import { useAppLink } from "modules/apps/useAppLink";
 import { type FC, type ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AgentButton } from "../AgentButton";
 import { BaseIcon } from "./BaseIcon";
 
@@ -29,6 +30,21 @@ export const DisplayAppNameMap: Record<TypesGen.DisplayApp, string> = {
 	vscode: "VS Code Desktop",
 	vscode_insiders: "VS Code Insiders",
 	web_terminal: "Terminal",
+};
+
+// Helper function to get localized app name
+export const getDisplayAppName = (
+	app: TypesGen.DisplayApp,
+	t: (key: string) => string,
+): string => {
+	const keyMap: Record<TypesGen.DisplayApp, string> = {
+		port_forwarding_helper: "resources.portForwarding.title",
+		ssh_helper: "resources.ssh.title",
+		vscode: "applications.vscodeDesktop",
+		vscode_insiders: "applications.vscodeInsiders",
+		web_terminal: "applications.terminal",
+	};
+	return t(keyMap[app] || app);
 };
 
 interface AppLinkProps {
@@ -44,6 +60,7 @@ export const AppLink: FC<AppLinkProps> = ({
 	agent,
 	grouped,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const { proxy } = useProxy();
 	const host = proxy.preferredWildcardHostname;
 	const [iconError, setIconError] = useState(false);
@@ -62,7 +79,7 @@ export const AppLink: FC<AppLinkProps> = ({
 
 	if (app.health === "initializing") {
 		icon = <Spinner loading />;
-		primaryTooltip = "Initializing...";
+		primaryTooltip = t("applications.starting");
 	}
 
 	if (app.health === "unhealthy") {
@@ -72,7 +89,7 @@ export const AppLink: FC<AppLinkProps> = ({
 				className="size-icon-sm text-content-warning"
 			/>
 		);
-		primaryTooltip = "Unhealthy";
+		primaryTooltip = t("applications.unhealthy");
 	}
 
 	if (!host && app.subdomain) {
@@ -83,8 +100,7 @@ export const AppLink: FC<AppLinkProps> = ({
 				className="size-icon-sm text-content-secondary"
 			/>
 		);
-		primaryTooltip =
-			"Your admin has not configured subdomain application access";
+		primaryTooltip = t("appsWarning.message");
 	}
 
 	if (app.subdomain_name && app.subdomain_name.length > 63) {
@@ -96,15 +112,14 @@ export const AppLink: FC<AppLinkProps> = ({
 		);
 		primaryTooltip = (
 			<>
-				Port forwarding will not work because hostname is too long, see the{" "}
+				{t("resources.portForwarding.hostnameTooLong")}
 				<Link
 					href="https://coder.com/docs/user-guides/workspace-access/port-forwarding#dashboard"
 					target="_blank"
 					size="sm"
 				>
-					documentation
-				</Link>{" "}
-				for more details
+					{t("resources.portForwarding.documentation")}
+				</Link>
 			</>
 		);
 	}
@@ -124,10 +139,10 @@ export const AppLink: FC<AppLinkProps> = ({
 	const { shareTooltip, shareIcon: ShareIcon } = canShare
 		? app.external
 			? {
-					shareTooltip: "Open external URL",
+					shareTooltip: t("resources.portForwarding.openExternalUrl"),
 					shareIcon: SquareArrowOutUpRightIcon,
 				}
-			: shareDetails[app.sharing_level]
+			: getShareDetails(app.sharing_level, t)
 		: {
 				shareTooltip: null,
 				shareIcon: null,
@@ -200,4 +215,25 @@ const shareDetails: {
 		shareTooltip: "Shared publicly",
 		shareIcon: GlobeIcon,
 	},
+};
+
+// Helper function to get localized share details
+const getShareDetails = (
+	sharingLevel: TypesGen.WorkspaceAppSharingLevel,
+	t: (key: string) => string,
+): { shareTooltip: string; shareIcon: LucideIcon } => {
+	const details = shareDetails[sharingLevel as Exclude<typeof sharingLevel, "owner">];
+	if (!details) {
+		return { shareTooltip: "", shareIcon: Building2Icon };
+	}
+	const tooltipKeyMap: Record<typeof sharingLevel, string> = {
+		authenticated: "resources.portForwarding.sharedAuthenticated",
+		organization: "resources.portForwarding.sharedOrganization",
+		public: "resources.portForwarding.sharedPublic",
+		owner: "",
+	};
+	return {
+		...details,
+		shareTooltip: t(tooltipKeyMap[sharingLevel] || details.shareTooltip),
+	};
 };

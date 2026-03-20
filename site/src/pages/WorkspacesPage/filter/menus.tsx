@@ -16,7 +16,6 @@ import {
 } from "components/StatusIndicator/StatusIndicator";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { getDisplayWorkspaceStatus } from "utils/workspace";
 
 export const useTemplateFilterMenu = ({
 	value,
@@ -104,6 +103,8 @@ export const useStatusFilterMenu = ({
 	value,
 	onChange,
 }: Pick<UseFilterMenuOptions, "value" | "onChange">) => {
+	const { t } = useTranslation("workspaceDetail");
+
 	const statusesToFilter: WorkspaceStatus[] = [
 		"running",
 		"stopped",
@@ -111,9 +112,10 @@ export const useStatusFilterMenu = ({
 		"pending",
 	];
 	const statusOptions = statusesToFilter.map((status) => {
-		const display = getDisplayWorkspaceStatus(status);
+		// Use translation key for status labels
+		const label = t(`status.${status}`);
 		return {
-			label: display.text,
+			label,
 			value: status,
 			startIcon: (
 				<StatusIndicatorDot variant={getStatusIndicatorVariant(status)} />

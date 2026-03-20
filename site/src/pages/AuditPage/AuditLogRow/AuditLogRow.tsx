@@ -15,11 +15,10 @@ import {
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
 import { InfoIcon, NetworkIcon } from "lucide-react";
-import { type FC, type KeyboardEvent, useState } from "react";
+import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
 import userAgentParser from "ua-parser-js";
-import { cn } from "utils/cn";
-import { buildReasonLabels } from "utils/workspace";
 import { AuditLogDescription } from "./AuditLogDescription/AuditLogDescription";
 import { AuditLogDiff } from "./AuditLogDiff/AuditLogDiff";
 import {
@@ -39,12 +38,19 @@ export const AuditLogRow: FC<AuditLogRowProps> = ({
 	defaultIsDiffOpen = false,
 	showOrgDetails,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const [isDiffOpen, setIsDiffOpen] = useState(defaultIsDiffOpen);
 	const diffs = Object.entries(auditLog.diff);
 	const shouldDisplayDiff = diffs.length > 0;
 	const userAgent = auditLog.user_agent
 		? userAgentParser(auditLog.user_agent)
 		: undefined;
+
+	// Helper function to get build reason label with i18n
+	const getBuildReasonLabel = (reason: string): string => {
+		const key = reason.replace(/([A-Z])/g, "-$1").toLowerCase();
+		return t(`resources.buildReason.${key}`);
+	};
 
 	let auditDiff = auditLog.diff;
 
@@ -76,22 +82,16 @@ export const AuditLogRow: FC<AuditLogRowProps> = ({
 			<TableCell className="!p-0 border-0 border-b text-base">
 				<Collapsible open={isDiffOpen} onOpenChange={setIsDiffOpen}>
 					<div
-						className={cn(
-							"flex flex-row items-center gap-4 py-4 px-8",
-							shouldDisplayDiff && "cursor-pointer",
-						)}
-						{...(shouldDisplayDiff && {
-							tabIndex: 0,
-							role: "button",
-							"aria-expanded": isDiffOpen,
-							onClick: toggle,
-							onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => {
-								if (event.key === "Enter" || event.key === " ") {
-									event.preventDefault();
-									toggle();
-								}
-							},
-						})}
+						className="flex flex-row items-center gap-4 py-4 px-8"
+						tabIndex={0}
+						role="button"
+						onClick={toggle}
+						onKeyDown={(event) => {
+							if (event.key === "Enter" || event.key === " ") {
+								event.preventDefault();
+								toggle();
+							}
+						}}
 					>
 						<div className="flex flex-row items-center gap-4 flex-1">
 							<div className="flex flex-row items-center gap-4 w-full">
@@ -188,12 +188,10 @@ export const AuditLogRow: FC<AuditLogRowProps> = ({
 																		Reason:
 																	</h4>
 																	<div>
-																		{
-																			buildReasonLabels[
-																				auditLog.additional_fields
-																					.build_reason as BuildReason
-																			]
-																		}
+																		{getBuildReasonLabel(
+																			auditLog.additional_fields
+																				.build_reason as BuildReason,
+																		)}
 																	</div>
 																</div>
 															)}
@@ -228,12 +226,10 @@ export const AuditLogRow: FC<AuditLogRowProps> = ({
 														<span className="text-xs text-content-secondary block">
 															<span>Reason: </span>
 															<strong>
-																{
-																	buildReasonLabels[
-																		auditLog.additional_fields
-																			.build_reason as BuildReason
-																	]
-																}
+																{getBuildReasonLabel(
+																	auditLog.additional_fields
+																		.build_reason as BuildReason,
+																)}
 															</strong>
 														</span>
 													)}

@@ -14,6 +14,7 @@ import {
 } from "components/Popover/Popover";
 import { Stack } from "components/Stack/Stack";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { docs } from "utils/docs";
 
@@ -28,6 +29,7 @@ export const AgentSSHButton: FC<AgentSSHButtonProps> = ({
 	agentName,
 	workspaceOwnerUsername,
 }) => {
+	const { t } = useTranslation("workspaceDetail");
 	const { data } = useQuery(deploymentSSHConfig());
 	const sshSuffix = data?.hostname_suffix;
 
@@ -35,7 +37,7 @@ export const AgentSSHButton: FC<AgentSSHButtonProps> = ({
 		<Popover>
 			<PopoverTrigger asChild={true}>
 				<Button size="sm" variant="subtle">
-					Connect via SSH
+					{t("resources.ssh.connectViaSSH")}
 					<ChevronDownIcon />
 				</Button>
 			</PopoverTrigger>
@@ -45,17 +47,17 @@ export const AgentSSHButton: FC<AgentSSHButtonProps> = ({
 				className="py-4 px-6 w-80 text-content-secondary mt-[2px] bg-surface-secondary"
 			>
 				<HelpTooltipText>
-					Run the following commands to connect with SSH:
+					{t("resources.ssh.runCommands")}
 				</HelpTooltipText>
 
 				<ol style={{ margin: 0, padding: 0 }}>
 					<Stack spacing={0.5} className="mt-3">
 						<SSHStep
-							helpText="Configure SSH hosts on machine:"
+							helpText={t("resources.ssh.configureSSH")}
 							codeExample="coder config-ssh"
 						/>
 						<SSHStep
-							helpText="Connect to the agent:"
+							helpText={t("resources.ssh.connectToAgent")}
 							codeExample={`ssh ${agentName}.${workspaceName}.${workspaceOwnerUsername}.${sshSuffix}`}
 						/>
 					</Stack>
@@ -63,21 +65,21 @@ export const AgentSSHButton: FC<AgentSSHButtonProps> = ({
 
 				<HelpTooltipLinksGroup>
 					<HelpTooltipLink href={docs("/install")}>
-						Install Coder CLI
+						{t("resources.ssh.installCLILink")}
 					</HelpTooltipLink>
 					<HelpTooltipLink href={docs("/user-guides/workspace-access/vscode")}>
-						Connect via VS Code Remote SSH
+						{t("resources.ssh.vscodeSSHLink")}
 					</HelpTooltipLink>
 					<HelpTooltipLink
 						href={docs("/user-guides/workspace-access/jetbrains")}
 					>
-						Connect via JetBrains IDEs
+						{t("resources.ssh.jetbrainsLink")}
 					</HelpTooltipLink>
 					<HelpTooltipLink href={docs("/user-guides/desktop")}>
-						Connect via Coder Desktop
+						{t("resources.ssh.desktopLink")}
 					</HelpTooltipLink>
 					<HelpTooltipLink href={docs("/user-guides/workspace-access#ssh")}>
-						SSH configuration
+						{t("resources.ssh.sshConfigLink")}
 					</HelpTooltipLink>
 				</HelpTooltipLinksGroup>
 			</PopoverContent>
