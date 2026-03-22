@@ -372,6 +372,7 @@ declare module "i18next" {
 			workspaceDetail: {
 				// Workspace detail page translations
 				title: string;
+				workspaces: string;
 				backToWorkspaces: string;
 				owner: string;
 				organization: string;

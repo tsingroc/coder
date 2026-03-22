@@ -463,7 +463,7 @@ const WorkspaceBuildValue: FC<WorkspaceBuildValueProps> = ({
 						</RouterLink>
 					</Link>
 				</TooltipTrigger>
-				<TooltipContent>{`${statusText} ${(t as any)("workspaces")}`}</TooltipContent>
+				<TooltipContent>{`${statusText} ${t("workspaces")}`}</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>
 	);
