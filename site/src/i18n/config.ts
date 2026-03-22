@@ -25,6 +25,7 @@ import enUserSettings from "./locales/en/userSettings.json";
 import enUsers from "./locales/en/users.json";
 import enWorkspace from "./locales/en/workspace.json";
 import enWorkspaceDetail from "./locales/en/workspaceDetail.json";
+import enWorkspaceSettings from "./locales/en/workspaceSettings.json";
 import zhAgents from "./locales/zh-CN/agents.json";
 import zhCliInstall from "./locales/zh-CN/cliInstall.json";
 import zhCommon from "./locales/zh-CN/common.json";
@@ -41,6 +42,7 @@ import zhUserSettings from "./locales/zh-CN/userSettings.json";
 import zhUsers from "./locales/zh-CN/users.json";
 import zhWorkspace from "./locales/zh-CN/workspace.json";
 import zhWorkspaceDetail from "./locales/zh-CN/workspaceDetail.json";
+import zhWorkspaceSettings from "./locales/zh-CN/workspaceSettings.json";
 
 // Translation resources
 const resources = {
@@ -61,6 +63,7 @@ const resources = {
 		cliInstall: enCliInstall,
 		orgSettings: enOrgSettings,
 		health: enHealth,
+		workspaceSettings: enWorkspaceSettings,
 	},
 	"zh-CN": {
 		common: zhCommon,
@@ -79,6 +82,7 @@ const resources = {
 		cliInstall: zhCliInstall,
 		orgSettings: zhOrgSettings,
 		health: zhHealth,
+		workspaceSettings: zhWorkspaceSettings,
 	},
 };
 
