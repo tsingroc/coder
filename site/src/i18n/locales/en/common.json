@@ -145,5 +145,18 @@
 		"copied": "Copied!",
 		"copyDeploymentId": "Copy deployment ID",
 		"copyright": "© {{year}} Coder Technologies, Inc."
+	},
+	"parameters": {
+		"optional": "(optional)",
+		"optionalTooltip": "If no value is specified, the system will default to the value set by the administrator.",
+		"immutable": "Immutable",
+		"immutableTooltip": "This value cannot be modified after the workspace has been created.",
+		"preset": "Preset",
+		"presetTooltip": "This value was set by a preset",
+		"autofilled": "🪄 Autofilled",
+		"recentlyUsed": "was recently used for this parameter.",
+		"true": "True",
+		"false": "False",
+		"parameterIcon": "Parameter icon"
 	}
 }

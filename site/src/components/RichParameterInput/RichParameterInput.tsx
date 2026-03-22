@@ -18,6 +18,7 @@ import {
 } from "components/Tooltip/Tooltip";
 import { CircleAlertIcon, SettingsIcon } from "lucide-react";
 import { type FC, type ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type {
 	AutofillBuildParameter,
 	AutofillSource,
@@ -130,6 +131,7 @@ interface ParameterLabelProps {
 }
 
 const ParameterLabel: FC<ParameterLabelProps> = ({ parameter, isPreset }) => {
+	const { t } = useTranslation("common");
 	const hasDescription = parameter.description && parameter.description !== "";
 	const displayName = parameter.display_name
 		? parameter.display_name
@@ -142,11 +144,10 @@ const ParameterLabel: FC<ParameterLabelProps> = ({ parameter, isPreset }) => {
 			{!parameter.required && (
 				<Tooltip>
 					<TooltipTrigger asChild>
-						<span css={styles.optionalLabel}>(optional)</span>
+						<span css={styles.optionalLabel}>{t("parameters.optional")}</span>
 					</TooltipTrigger>
 					<TooltipContent side="bottom" className="max-w-xs">
-						If no value is specified, the system will default to the value set
-						by the administrator.
+						{t("parameters.optionalTooltip")}
 					</TooltipContent>
 				</Tooltip>
 			)}
@@ -157,11 +158,11 @@ const ParameterLabel: FC<ParameterLabelProps> = ({ parameter, isPreset }) => {
 							type="warning"
 							icon={<CircleAlertIcon className="size-icon-xs" />}
 						>
-							Immutable
+							{t("parameters.immutable")}
 						</Pill>
 					</TooltipTrigger>
 					<TooltipContent side="bottom" className="max-w-xs">
-						This value cannot be modified after the workspace has been created.
+						{t("parameters.immutableTooltip")}
 					</TooltipContent>
 				</Tooltip>
 			)}
@@ -169,11 +170,11 @@ const ParameterLabel: FC<ParameterLabelProps> = ({ parameter, isPreset }) => {
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Pill type="info" icon={<SettingsIcon className="size-icon-xs" />}>
-							Preset
+							{t("parameters.preset")}
 						</Pill>
 					</TooltipTrigger>
 					<TooltipContent side="bottom">
-						This value was set by a preset
+						{t("parameters.presetTooltip")}
 					</TooltipContent>
 				</Tooltip>
 			)}
@@ -187,7 +188,7 @@ const ParameterLabel: FC<ParameterLabelProps> = ({ parameter, isPreset }) => {
 					<span css={styles.labelIconWrapper}>
 						<ExternalImage
 							css={styles.labelIcon}
-							alt="Parameter icon"
+							alt={t("parameters.parameterIcon")}
 							src={parameter.icon}
 						/>
 					</span>
@@ -230,6 +231,7 @@ export const RichParameterInput: FC<RichParameterInputProps> = ({
 	isPreset,
 	...fieldProps
 }) => {
+	const { t } = useTranslation("common");
 	const autofillSource = parameterAutofill?.source;
 	const autofillValue = parameterAutofill?.value;
 	const [hideSuggestion, setHideSuggestion] = useState(false);
@@ -267,12 +269,12 @@ export const RichParameterInput: FC<RichParameterInputProps> = ({
 							>
 								{autofillValue}
 							</Button>{" "}
-							was recently used for this parameter.
+							{t("parameters.recentlyUsed")}
 						</FormHelperText>
 					)}
 				{autofillSource && autofillDescription[autofillSource] && (
 					<div css={{ marginTop: 4, fontSize: 12 }}>
-						🪄 Autofilled {autofillDescription[autofillSource]}
+						{t("parameters.autofilled")} {autofillDescription[autofillSource]}
 					</div>
 				)}
 			</div>
@@ -289,6 +291,7 @@ const RichParameterField: FC<RichParameterInputProps> = ({
 	size,
 	...props
 }) => {
+	const { t } = useTranslation("common");
 	const small = size === "small";
 
 	if (isBoolean(parameter)) {
@@ -304,13 +307,13 @@ const RichParameterField: FC<RichParameterInputProps> = ({
 					disabled={disabled}
 					value="true"
 					control={<Radio size="small" />}
-					label="True"
+					label={t("parameters.true")}
 				/>
 				<FormControlLabel
 					disabled={disabled}
 					value="false"
 					control={<Radio size="small" />}
-					label="False"
+					label={t("parameters.false")}
 				/>
 			</RadioGroup>
 		);
@@ -337,7 +340,7 @@ const RichParameterField: FC<RichParameterInputProps> = ({
 									<ExternalImage
 										css={styles.optionIcon}
 										src={option.icon}
-										alt="Parameter icon"
+										alt={t("parameters.parameterIcon")}
 									/>
 								)}
 								{option.description ? (

@@ -160,6 +160,19 @@ declare module "i18next" {
 					copyDeploymentId: string;
 					copyright: string;
 				};
+				parameters: {
+					optional: string;
+					optionalTooltip: string;
+					immutable: string;
+					immutableTooltip: string;
+					preset: string;
+					presetTooltip: string;
+					autofilled: string;
+					recentlyUsed: string;
+					true: string;
+					false: string;
+					parameterIcon: string;
+				};
 			};
 			login: {
 				// Login page translations

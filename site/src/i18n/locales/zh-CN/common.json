@@ -145,5 +145,18 @@
 		"copied": "已复制！",
 		"copyDeploymentId": "复制部署 ID",
 		"copyright": "{{year}} Coder Technologies, Inc. 版权所有。"
+	},
+	"parameters": {
+		"optional": "（可选）",
+		"optionalTooltip": "如果未指定值，系统将默认使用管理员设置的值。",
+		"immutable": "不可变",
+		"immutableTooltip": "工作区创建后无法修改此值。",
+		"preset": "预设",
+		"presetTooltip": "此值由预设设置",
+		"autofilled": "🪄 自动填充",
+		"recentlyUsed": "最近用于此参数。",
+		"true": "是",
+		"false": "否",
+		"parameterIcon": "参数图标"
 	}
 }
