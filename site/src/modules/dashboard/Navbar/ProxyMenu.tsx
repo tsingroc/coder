@@ -18,6 +18,7 @@ import { useAuthenticated } from "hooks";
 import { type FC, useState } from "react";
 import { Link } from "react-router";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { sortProxiesByLatency } from "./proxyUtils";
 
 interface ProxyMenuProps {
@@ -25,6 +26,7 @@ interface ProxyMenuProps {
 }
 
 export const ProxyMenu: FC<ProxyMenuProps> = ({ proxyContextValue }) => {
+	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 	const [refetchDate, setRefetchDate] = useState<Date>();
 	const selectedProxy = proxyContextValue.proxy.proxy;
@@ -74,7 +76,11 @@ export const ProxyMenu: FC<ProxyMenuProps> = ({ proxyContextValue }) => {
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline" size="lg">
 					<span className="sr-only">
-						Latency for {selectedProxy?.display_name ?? "your region"}
+						{t("proxyMenu.latencyForRegion", {
+							region:
+								selectedProxy?.display_name ??
+								t("proxyMenu.selectRegionNearest"),
+						})}
 					</span>
 
 					{selectedProxy ? (
@@ -92,7 +98,7 @@ export const ProxyMenu: FC<ProxyMenuProps> = ({ proxyContextValue }) => {
 							/>
 						</>
 					) : (
-						"Select Proxy"
+						t("proxyMenu.selectProxy")
 					)}
 
 					<ChevronDownIcon className="text-content-primary" />
@@ -105,16 +111,10 @@ export const ProxyMenu: FC<ProxyMenuProps> = ({ proxyContextValue }) => {
 						className="flex flex-col gap-1 items-start data-[disabled]:opacity-100"
 					>
 						<div className="text-content-primary font-semibold text-left">
-							Select a region nearest to you
+							{t("proxyMenu.selectRegionNearest")}
 						</div>
 						<div className="text-xs text-content-secondary leading-relaxed">
-							Workspace proxies improve terminal and web app connections to
-							workspaces. This does not apply to{" "}
-							<Abbr title="Command-Line Interface" pronunciation="initialism">
-								CLI
-							</Abbr>{" "}
-							connections. A region must be manually selected, otherwise the
-							default primary region will be used.
+							{t("proxyMenu.proxyDescription")}
 						</div>
 					</DropdownMenuItem>
 				)}
@@ -134,10 +134,11 @@ export const ProxyMenu: FC<ProxyMenuProps> = ({ proxyContextValue }) => {
 										e.preventDefault();
 										if (!proxy.healthy) {
 											toast.error(
-												`Failed to select proxy "${proxy.display_name}".`,
+												t("proxyMenu.failedToSelectProxy", {
+													name: proxy.display_name,
+												}),
 												{
-													description:
-														"Please select a healthy workspace proxy.",
+													description: t("proxyMenu.selectHealthyProxy"),
 												},
 											);
 											closeMenu();
@@ -176,7 +177,7 @@ export const ProxyMenu: FC<ProxyMenuProps> = ({ proxyContextValue }) => {
 				{Boolean(permissions.editWorkspaceProxies) && (
 					<DropdownMenuItem asChild>
 						<Link to="/deployment/workspace-proxies">
-							<span>Proxy settings</span>
+							<span>{t("proxyMenu.proxySettings")}</span>
 						</Link>
 					</DropdownMenuItem>
 				)}
@@ -188,7 +189,7 @@ export const ProxyMenu: FC<ProxyMenuProps> = ({ proxyContextValue }) => {
 						setRefetchDate(refetchDate);
 					}}
 				>
-					Refresh latencies
+					{t("proxyMenu.refreshLatencies")}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

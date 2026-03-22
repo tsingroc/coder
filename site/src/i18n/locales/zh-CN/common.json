@@ -158,5 +158,34 @@
 		"true": "是",
 		"false": "否",
 		"parameterIcon": "参数图标"
+	},
+	"notifications": {
+		"inbox": "收件箱",
+		"markAllAsRead": "全部标记为已读",
+		"notificationSettings": "通知设置",
+		"loadMore": "加载更多",
+		"noNotifications": "暂无通知",
+		"noNotificationsDescription": "新通知将显示在这里。",
+		"loadingNotifications": "加载通知中...",
+		"errorLoadingNotifications": "加载通知时出错",
+		"clickToRetry": "点击下方按钮重试",
+		"retry": "重试",
+		"unableToRetrieveNotifications": "无法获取最新的收件箱通知。",
+		"tryRefreshingBrowser": "请尝试刷新浏览器。",
+		"errorLoadingMore": "加载更多通知时出错。",
+		"errorMarkAllAsRead": "将所有通知标记为已读时出错。",
+		"errorMarkAsRead": "将通知标记为已读时出错。",
+		"unread": "未读",
+		"markAsRead": "标记为已读"
+	},
+	"proxyMenu": {
+		"latencyForRegion": "{{region}} 的延迟",
+		"selectProxy": "选择代理",
+		"selectRegionNearest": "选择离您最近的区域",
+		"proxyDescription": "工作区代理可改善终端和 Web 应用程序与工作区的连接。这不适用于 CLI 连接。必须手动选择一个区域，否则将使用默认的主要区域。",
+		"failedToSelectProxy": "选择代理 \"{{name}}\" 失败。",
+		"selectHealthyProxy": "请选择一个健康的工作区代理。",
+		"proxySettings": "代理设置",
+		"refreshLatencies": "刷新延迟"
 	}
 }

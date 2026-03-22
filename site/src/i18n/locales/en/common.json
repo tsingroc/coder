@@ -158,5 +158,34 @@
 		"true": "True",
 		"false": "False",
 		"parameterIcon": "Parameter icon"
+	},
+	"notifications": {
+		"inbox": "Inbox",
+		"markAllAsRead": "Mark all as read",
+		"notificationSettings": "Notification settings",
+		"loadMore": "Load more",
+		"noNotifications": "No notifications",
+		"noNotificationsDescription": "New notifications will be displayed here.",
+		"loadingNotifications": "Loading notifications...",
+		"errorLoadingNotifications": "Error loading notifications",
+		"clickToRetry": "Click on the button below to retry",
+		"retry": "Retry",
+		"unableToRetrieveNotifications": "Unable to retrieve latest inbox notifications.",
+		"tryRefreshingBrowser": "Please try refreshing the browser.",
+		"errorLoadingMore": "Error loading more notifications.",
+		"errorMarkAllAsRead": "Error on marking all notifications as read.",
+		"errorMarkAsRead": "Error on marking notification as read.",
+		"unread": "Unread",
+		"markAsRead": "mark as read"
+	},
+	"proxyMenu": {
+		"latencyForRegion": "Latency for {{region}}",
+		"selectProxy": "Select Proxy",
+		"selectRegionNearest": "Select a region nearest to you",
+		"proxyDescription": "Workspace proxies improve terminal and web app connections to workspaces. This does not apply to CLI connections. A region must be manually selected, otherwise the default primary region will be used.",
+		"failedToSelectProxy": "Failed to select proxy \"{{name}}\".",
+		"selectHealthyProxy": "Please select a healthy workspace proxy.",
+		"proxySettings": "Proxy settings",
+		"refreshLatencies": "Refresh latencies"
 	}
 }

@@ -10,6 +10,7 @@ import { Spinner } from "components/Spinner/Spinner";
 import { RefreshCwIcon, SettingsIcon } from "lucide-react";
 import { type FC, useState } from "react";
 import { Link as RouterLink } from "react-router";
+import { useTranslation } from "react-i18next";
 import { cn } from "utils/cn";
 import { InboxButton } from "./InboxButton";
 import { InboxItem } from "./InboxItem";
@@ -40,6 +41,7 @@ export const InboxPopover: FC<InboxPopoverProps> = ({
 	onMarkNotificationAsRead,
 	onLoadMoreNotifications,
 }) => {
+	const { t } = useTranslation();
 	const [isOpen, setIsOpen] = useState(defaultOpen);
 
 	return (
@@ -69,7 +71,9 @@ export const InboxPopover: FC<InboxPopoverProps> = ({
 						])}
 					>
 						<div className="flex items-center gap-2">
-							<span className="text-xl font-semibold">Inbox</span>
+							<span className="text-xl font-semibold">
+								{t("notifications.inbox")}
+							</span>
 							{unreadCount > 0 && <UnreadBadge count={unreadCount} />}
 						</div>
 
@@ -80,7 +84,7 @@ export const InboxPopover: FC<InboxPopoverProps> = ({
 								disabled={!(notifications && notifications.length > 0)}
 								onClick={onMarkAllAsRead}
 							>
-								Mark all as read
+								{t("notifications.markAllAsRead")}
 							</Button>
 							<Button variant="outline" size="icon" asChild>
 								<RouterLink
@@ -88,7 +92,9 @@ export const InboxPopover: FC<InboxPopoverProps> = ({
 									onClick={() => setIsOpen(false)}
 								>
 									<SettingsIcon />
-									<span className="sr-only">Notification settings</span>
+									<span className="sr-only">
+										{t("notifications.notificationSettings")}
+									</span>
 								</RouterLink>
 							</Button>
 						</div>
@@ -118,16 +124,18 @@ export const InboxPopover: FC<InboxPopoverProps> = ({
 										className="w-full"
 									>
 										<Spinner loading={isLoadingMoreNotifications} size="sm" />
-										Load more
+										{t("notifications.loadMore")}
 									</Button>
 								)}
 							</div>
 						) : (
 							<div className="p-6 flex items-center justify-center min-h-48">
 								<div className="text-sm text-center flex flex-col">
-									<span className="font-medium">No notifications</span>
+									<span className="font-medium">
+										{t("notifications.noNotifications")}
+									</span>
 									<span className="text-xs text-content-secondary">
-										New notifications will be displayed here.
+										{t("notifications.noNotificationsDescription")}
 									</span>
 								</div>
 							</div>
@@ -135,19 +143,23 @@ export const InboxPopover: FC<InboxPopoverProps> = ({
 					) : error === undefined ? (
 						<div className="p-6 flex items-center justify-center min-h-48">
 							<Spinner loading />
-							<span className="sr-only">Loading notifications...</span>
+							<span className="sr-only">
+								{t("notifications.loadingNotifications")}
+							</span>
 						</div>
 					) : (
 						<div className="p-6 flex items-center justify-center min-h-48">
 							<div className="text-sm text-center flex flex-col">
-								<span className="font-medium">Error loading notifications</span>
+								<span className="font-medium">
+									{t("notifications.errorLoadingNotifications")}
+								</span>
 								<span className="text-xs text-content-secondary">
-									Click on the button below to retry
+									{t("notifications.clickToRetry")}
 								</span>
 								<div className="mt-3">
 									<Button size="sm" variant="outline" onClick={onRetry}>
 										<RefreshCwIcon />
-										Retry
+										{t("notifications.retry")}
 									</Button>
 								</div>
 							</div>

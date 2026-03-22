@@ -5,6 +5,7 @@ import { SquareCheckBig } from "lucide-react";
 import type { FC } from "react";
 import Markdown from "react-markdown";
 import { Link as RouterLink } from "react-router";
+import { useTranslation } from "react-i18next";
 import { relativeTime } from "utils/time";
 import { InboxAvatar } from "./InboxAvatar";
 
@@ -17,6 +18,7 @@ export const InboxItem: FC<InboxItemProps> = ({
 	notification,
 	onMarkNotificationAsRead,
 }) => {
+	const { t } = useTranslation();
 	return (
 		<div
 			className="flex items-stretch gap-3 p-3 group"
@@ -60,7 +62,7 @@ export const InboxItem: FC<InboxItemProps> = ({
 				{notification.read_at === null && (
 					<>
 						<div className="group-focus:hidden group-hover:hidden size-2.5 rounded-full bg-highlight-sky">
-							<span className="sr-only">Unread</span>
+							<span className="sr-only">{t("notifications.unread")}</span>
 						</div>
 
 						<Button
@@ -70,7 +72,7 @@ export const InboxItem: FC<InboxItemProps> = ({
 							size="sm"
 						>
 							<SquareCheckBig />
-							mark as read
+							{t("notifications.markAsRead")}
 						</Button>
 					</>
 				)}

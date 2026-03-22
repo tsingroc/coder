@@ -173,6 +173,35 @@ declare module "i18next" {
 					false: string;
 					parameterIcon: string;
 				};
+				notifications: {
+					inbox: string;
+					markAllAsRead: string;
+					notificationSettings: string;
+					loadMore: string;
+					noNotifications: string;
+					noNotificationsDescription: string;
+					loadingNotifications: string;
+					errorLoadingNotifications: string;
+					clickToRetry: string;
+					retry: string;
+					unableToRetrieveNotifications: string;
+					tryRefreshingBrowser: string;
+					errorLoadingMore: string;
+					errorMarkAllAsRead: string;
+					errorMarkAsRead: string;
+					unread: string;
+					markAsRead: string;
+				};
+				proxyMenu: {
+					latencyForRegion: string;
+					selectProxy: string;
+					selectRegionNearest: string;
+					proxyDescription: string;
+					failedToSelectProxy: string;
+					selectHealthyProxy: string;
+					proxySettings: string;
+					refreshLatencies: string;
+				};
 			};
 			login: {
 				// Login page translations

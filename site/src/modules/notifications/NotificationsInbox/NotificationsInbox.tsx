@@ -8,6 +8,7 @@ import { useEffectEvent } from "hooks/hookPolyfills";
 import { type FC, useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { InboxPopover } from "./InboxPopover";
 
 const NOTIFICATIONS_QUERY_KEY = ["notifications"];
@@ -30,6 +31,7 @@ export const NotificationsInbox: FC<NotificationsInboxProps> = ({
 	markAllAsRead,
 	markNotificationAsRead,
 }) => {
+	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 
 	const {
@@ -79,8 +81,8 @@ export const NotificationsInbox: FC<NotificationsInboxProps> = ({
 		});
 
 		socket.addEventListener("error", () => {
-			toast.error("Unable to retrieve latest inbox notifications.", {
-				description: "Please try refreshing the browser.",
+			toast.error(t("notifications.unableToRetrieveNotifications"), {
+				description: t("notifications.tryRefreshingBrowser"),
 			});
 			socket.close();
 		});
@@ -107,7 +109,7 @@ export const NotificationsInbox: FC<NotificationsInboxProps> = ({
 			});
 		},
 		onError: (error) => {
-			toast.error(getErrorMessage(error, "Error loading more notifications."), {
+			toast.error(getErrorMessage(error, t("notifications.errorLoadingMore")), {
 				description: getErrorDetail(error),
 			});
 		},
@@ -128,7 +130,7 @@ export const NotificationsInbox: FC<NotificationsInboxProps> = ({
 		},
 		onError: (error) => {
 			toast.error(
-				getErrorMessage(error, "Error on marking all notifications as read."),
+				getErrorMessage(error, t("notifications.errorMarkAllAsRead")),
 				{ description: getErrorDetail(error) },
 			);
 		},
@@ -150,10 +152,9 @@ export const NotificationsInbox: FC<NotificationsInboxProps> = ({
 			});
 		},
 		onError: (error) => {
-			toast.error(
-				getErrorMessage(error, "Error on marking notification as read."),
-				{ description: getErrorDetail(error) },
-			);
+			toast.error(getErrorMessage(error, t("notifications.errorMarkAsRead")), {
+				description: getErrorDetail(error),
+			});
 		},
 	});
 
