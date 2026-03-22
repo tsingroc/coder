@@ -14,6 +14,7 @@ import { EmptyState } from "components/EmptyState/EmptyState";
 import { Loader } from "components/Loader/Loader";
 import { ExternalLinkIcon } from "lucide-react";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router";
 import { docs } from "utils/docs";
@@ -29,6 +30,7 @@ import {
 } from "./WorkspaceParametersForm";
 
 const WorkspaceParametersPage: FC = () => {
+	const { t } = useTranslation("workspaceSettings");
 	const { workspace } = useWorkspaceSettings();
 	const build = workspace.latest_build;
 	const { data: templateVersionParameters } = useQuery(
@@ -80,7 +82,7 @@ const WorkspaceParametersPage: FC = () => {
 
 	return (
 		<>
-			<title>{pageTitle(workspace.name, "Parameters")}</title>
+			<title>{pageTitle(workspace.name, t("sidebar.parameters"))}</title>
 
 			<WorkspaceParametersPageView
 				workspace={workspace}
@@ -142,11 +144,13 @@ export const WorkspaceParametersPageView: FC<
 	isSubmitting,
 	onCancel,
 }) => {
+	const { t } = useTranslation("workspaceSettings");
+
 	return (
 		<div className="flex flex-col gap-10">
 			<header className="flex flex-col items-start gap-2">
 				<span className="flex flex-row justify-between w-full items-center gap-2">
-					<h1 className="text-3xl m-0">Workspace parameters</h1>
+					<h1 className="text-3xl m-0">{t("parameters.title")}</h1>
 				</span>
 			</header>
 
@@ -172,7 +176,7 @@ export const WorkspaceParametersPageView: FC<
 					/>
 				) : (
 					<EmptyState
-						message="This workspace has no parameters"
+						message={t("parameters.noParameters")}
 						cta={
 							<Button asChild>
 								<a
@@ -181,7 +185,7 @@ export const WorkspaceParametersPageView: FC<
 									rel="noreferrer"
 								>
 									<ExternalLinkIcon className="size-icon-xs" />
-									Learn more about parameters
+									{t("parameters.learnMore")}
 								</a>
 							</Button>
 						}

@@ -1,0 +1,74 @@
+{
+	"title": "Workspace Settings",
+	"sidebar": {
+		"general": "General",
+		"parameters": "Parameters",
+		"schedule": "Schedule",
+		"sharing": "Sharing"
+	},
+	"general": {
+		"workspaceName": "Workspace Name",
+		"workspaceNameDescription": "Update the name of your workspace.",
+		"automaticUpdates": "Automatic Updates",
+		"automaticUpdatesDescription": "Updates seamlessly occur when the workspace is stopped using the latest template version.",
+		"cancel": "Cancel",
+		"save": "Save",
+		"hookCanOnlyBeUsedFromWorkspaceSettingsPage": "This hook can only be used from a workspace settings page"
+	},
+	"parameters": {
+		"title": "Workspace parameters",
+		"noParameters": "This workspace has no parameters.",
+		"learnMore": "Learn more about parameters",
+		"updateRequiredWarning": "The template for this workspace requires automatic updates. Update the workspace to edit parameters.",
+		"parametersSection": "Parameters",
+		"parametersDescription": "Settings used by your template",
+		"ephemeralParametersSection": "Ephemeral Parameters",
+		"ephemeralParametersDescription": "These parameters only apply for a single workspace start.",
+		"cancel": "Cancel",
+		"submitAndRestart": "Submit and restart"
+	},
+	"schedule": {
+		"title": "Workspace Schedule",
+		"restartDialogTitle": "Restart workspace?",
+		"restartDialogDescription": "Restarting the workspace will apply the new schedule.",
+		"restart": "Restart",
+		"cancel": "Cancel",
+		"failedToUpdate": "Failed to update workspace schedule",
+		"scheduleUpdated": "Workspace schedule updated",
+		"autostartSection": "Autostart",
+		"autostartDescription": "Select the time and days of week on which you want the workspace starting automatically.",
+		"autostartSwitch": "Enable Autostart",
+		"autostartNotAllowed": "The template for this workspace does not allow modification of autostart.",
+		"startTime": "Start time",
+		"timezone": "Timezone",
+		"daysOfWeek": "Days of Week",
+		"daySunday": "Sun",
+		"dayMonday": "Mon",
+		"dayTuesday": "Tue",
+		"dayWednesday": "Wed",
+		"dayThursday": "Thu",
+		"dayFriday": "Fri",
+		"daySaturday": "Sat",
+		"autostopSection": "Autostop",
+		"autostopDescription": "Set how many hours should elapse after the workspace started before the workspace automatically shuts down. This will be extended by {{duration}} after last activity in the workspace was detected.",
+		"autostopSwitch": "Enable Autostop",
+		"autostopNotAllowed": "The template for this workspace does not allow modification of autostop.",
+		"ttlLabel": "Time until shutdown (hours)",
+		"ttlNoShutdown": "Your workspace will not automatically shut down.",
+		"ttlShutdownAfter": "Your workspace will shut down {{duration}} after its next start.",
+		"save": "Save",
+		"validation": {
+			"errorNoDayOfWeek": "Must set at least one day of week if autostart is enabled.",
+			"errorNoTime": "Start time is required when autostart is enabled.",
+			"errorTime": "Time must be in HH:mm format.",
+			"errorTimezone": "Invalid timezone.",
+			"errorNoStop": "Time until shutdown must be greater than zero when autostop is enabled.",
+			"errorTtlMax": "Please enter a limit that is less than or equal to 720 hours (30 days)."
+		}
+	},
+	"sharing": {
+		"title": "Workspace sharing",
+		"description": "Workspace sharing allows you to share workspaces with other users and groups.",
+		"viewDocs": "View docs"
+	}
+}

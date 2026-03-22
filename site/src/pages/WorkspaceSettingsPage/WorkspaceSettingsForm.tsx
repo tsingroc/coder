@@ -17,6 +17,7 @@ import { Spinner } from "components/Spinner/Spinner";
 import { useFormik } from "formik";
 import upperFirst from "lodash/upperFirst";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	getFormHelpers,
 	nameValidator,
@@ -42,6 +43,7 @@ export const WorkspaceSettingsForm: FC<WorkspaceSettingsFormProps> = ({
 	workspace,
 	error,
 }) => {
+	const { t } = useTranslation("workspaceSettings");
 	const formEnabled =
 		!workspace.template_require_active_version || workspace.allow_renames;
 
@@ -64,8 +66,8 @@ export const WorkspaceSettingsForm: FC<WorkspaceSettingsFormProps> = ({
 	return (
 		<HorizontalForm onSubmit={form.handleSubmit} data-testid="form">
 			<FormSection
-				title="Workspace Name"
-				description="Update the name of your workspace."
+				title={t("general.workspaceName")}
+				description={t("general.workspaceNameDescription")}
 			>
 				<FormFields>
 					<TextField
@@ -86,8 +88,8 @@ export const WorkspaceSettingsForm: FC<WorkspaceSettingsFormProps> = ({
 				</FormFields>
 			</FormSection>
 			<FormSection
-				title="Automatic Updates"
-				description="Configure your workspace to automatically update when started."
+				title={t("general.automaticUpdates")}
+				description={t("general.automaticUpdatesDescription")}
 			>
 				<FormFields>
 					<TextField
@@ -119,12 +121,12 @@ export const WorkspaceSettingsForm: FC<WorkspaceSettingsFormProps> = ({
 			{formEnabled && (
 				<FormFooter>
 					<Button onClick={onCancel} variant="outline">
-						Cancel
+						{t("general.cancel")}
 					</Button>
 
 					<Button type="submit" disabled={form.isSubmitting}>
 						<Spinner loading={form.isSubmitting} />
-						Save
+						{t("general.save")}
 					</Button>
 				</FormFooter>
 			)}

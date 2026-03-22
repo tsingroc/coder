@@ -17,6 +17,7 @@ import {
 import { ttlMsToAutostop } from "pages/WorkspaceSettingsPage/WorkspaceSchedulePage/ttl";
 import { useWorkspaceSettings } from "pages/WorkspaceSettingsPage/WorkspaceSettingsLayout";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
@@ -29,6 +30,7 @@ import {
 import { WorkspaceScheduleForm } from "./WorkspaceScheduleForm";
 
 const WorkspaceSchedulePage: FC = () => {
+	const { t } = useTranslation("workspaceSettings");
 	const params = useParams() as { username: string; workspace: string };
 	const navigate = useNavigate();
 	const username = params.username.replace("@", "");
@@ -47,17 +49,12 @@ const WorkspaceSchedulePage: FC = () => {
 					params.workspace,
 				),
 			});
-			toast.success(
-				`Schedule for workspace "${workspaceName}" updated successfully.`,
-			);
+			toast.success(t("schedule.scheduleUpdated"));
 		},
 		onError: (error) =>
-			toast.error(
-				`Failed to update schedule for workspace "${workspaceName}".`,
-				{
-					description: getErrorDetail(error),
-				},
-			),
+			toast.error(t("schedule.failedToUpdate"), {
+				description: getErrorDetail(error),
+			}),
 	});
 	const error = getTemplateError;
 	const isLoading = !template;
@@ -70,10 +67,10 @@ const WorkspaceSchedulePage: FC = () => {
 
 	return (
 		<>
-			<title>{pageTitle(workspaceName, "Schedule")}</title>
+			<title>{pageTitle(workspaceName, t("sidebar.schedule"))}</title>
 
 			<PageHeader css={{ paddingTop: 0 }}>
-				<PageHeaderTitle>Workspace Schedule</PageHeaderTitle>
+				<PageHeaderTitle>{t("schedule.title")}</PageHeaderTitle>
 			</PageHeader>
 
 			{error && <ErrorAlert error={error} />}
@@ -146,10 +143,10 @@ const WorkspaceSchedulePage: FC = () => {
 
 			<ConfirmDialog
 				open={isConfirmingApply}
-				title="Restart workspace?"
-				description="Would you like to restart your workspace now to apply your new autostop setting, or let it apply after your next workspace start?"
-				confirmText="Restart"
-				cancelText="Apply later"
+				title={t("schedule.restartDialogTitle")}
+				description={t("schedule.restartDialogDescription")}
+				confirmText={t("schedule.restart")}
+				cancelText={t("schedule.cancel")}
 				hideCancel={false}
 				onConfirm={() => {
 					updateWorkspace();

@@ -5,13 +5,15 @@ import { API } from "api/api";
 import { defaultSchedule } from "pages/WorkspaceSettingsPage/WorkspaceSchedulePage/schedule";
 import { timeZones } from "utils/timeZones";
 import {
-	Language,
+	mockTranslationFunction,
 	ttlShutdownAt,
 	validationSchema,
 	WorkspaceScheduleForm,
 	type WorkspaceScheduleFormProps,
 	type WorkspaceScheduleFormValues,
 } from "./WorkspaceScheduleForm";
+
+const mockT = mockTranslationFunction;
 
 const valid: WorkspaceScheduleFormValues = {
 	autostartEnabled: true,
@@ -46,7 +48,7 @@ describe("validationSchema", () => {
 			autostopEnabled: false,
 			ttl: 0,
 		};
-		const validate = () => validationSchema.validateSync(values);
+		const validate = () => validationSchema(mockT).validateSync(values);
 		expect(validate).not.toThrow();
 	});
 
@@ -55,7 +57,7 @@ describe("validationSchema", () => {
 			...valid,
 			ttl: -1,
 		};
-		const validate = () => validationSchema.validateSync(values);
+		const validate = () => validationSchema(mockT).validateSync(values);
 		expect(validate).toThrow();
 	});
 
@@ -70,8 +72,8 @@ describe("validationSchema", () => {
 			friday: false,
 			saturday: false,
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorNoDayOfWeek);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorNoDayOfWeek");
 	});
 
 	it("disallows empty startTime when autostart is enabled", () => {
@@ -86,8 +88,8 @@ describe("validationSchema", () => {
 			saturday: false,
 			startTime: "",
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorNoTime);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorNoTime");
 	});
 
 	it("allows startTime 16:20", () => {
@@ -95,7 +97,7 @@ describe("validationSchema", () => {
 			...valid,
 			startTime: "16:20",
 		};
-		const validate = () => validationSchema.validateSync(values);
+		const validate = () => validationSchema(mockT).validateSync(values);
 		expect(validate).not.toThrow();
 	});
 
@@ -104,8 +106,8 @@ describe("validationSchema", () => {
 			...valid,
 			startTime: "9:30",
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorTime);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorTime");
 	});
 
 	it("disallows startTime to be HH:m", () => {
@@ -113,8 +115,8 @@ describe("validationSchema", () => {
 			...valid,
 			startTime: "09:5",
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorTime);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorTime");
 	});
 
 	it("disallows an invalid startTime 24:01", () => {
@@ -122,8 +124,8 @@ describe("validationSchema", () => {
 			...valid,
 			startTime: "24:01",
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorTime);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorTime");
 	});
 
 	it("disallows an invalid startTime 09:60", () => {
@@ -131,8 +133,8 @@ describe("validationSchema", () => {
 			...valid,
 			startTime: "09:60",
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorTime);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorTime");
 	});
 
 	it("disallows an invalid timezone Canada/North", () => {
@@ -140,8 +142,8 @@ describe("validationSchema", () => {
 			...valid,
 			timezone: "Canada/North",
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorTimezone);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorTimezone");
 	});
 
 	it("validation passes for all timezones", () => {
@@ -150,7 +152,7 @@ describe("validationSchema", () => {
 				...valid,
 				timezone: zone,
 			};
-			const validate = () => validationSchema.validateSync(values);
+			const validate = () => validationSchema(mockT).validateSync(values);
 			expect(validate).not.toThrow();
 		}
 	});
@@ -160,7 +162,7 @@ describe("validationSchema", () => {
 			...valid,
 			ttl: 24 * 7,
 		};
-		const validate = () => validationSchema.validateSync(values);
+		const validate = () => validationSchema(mockT).validateSync(values);
 		expect(validate).not.toThrow();
 	});
 
@@ -169,7 +171,7 @@ describe("validationSchema", () => {
 			...valid,
 			ttl: 24 * 30,
 		};
-		const validate = () => validationSchema.validateSync(values);
+		const validate = () => validationSchema(mockT).validateSync(values);
 		expect(validate).not.toThrow();
 	});
 
@@ -178,8 +180,8 @@ describe("validationSchema", () => {
 			...valid,
 			ttl: 24 * 30 + 1,
 		};
-		const validate = () => validationSchema.validateSync(values);
-		expect(validate).toThrow(Language.errorTtlMax);
+		const validate = () => validationSchema(mockT).validateSync(values);
+		expect(validate).toThrow("schedule.validation.errorTtlMax");
 	});
 
 	it("allows a ttl of 1.2 hours", () => {
@@ -187,7 +189,7 @@ describe("validationSchema", () => {
 			...valid,
 			ttl: 1.2,
 		};
-		const validate = () => validationSchema.validateSync(values);
+		const validate = () => validationSchema(mockT).validateSync(values);
 		expect(validate).not.toThrow();
 	});
 });
@@ -240,7 +242,7 @@ describe("ttlShutdownAt", () => {
 			"Your workspace will shut down 2 days, 15 minutes and 29 seconds after its next start.",
 		],
 	])("%p", (_, ttlHours, expected) => {
-		expect(ttlShutdownAt(ttlHours)).toEqual(expected);
+		expect(ttlShutdownAt(ttlHours, mockT)).toEqual(expected);
 	});
 });
 

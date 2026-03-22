@@ -16,6 +16,7 @@ import { Spinner } from "components/Spinner/Spinner";
 import { useFormik } from "formik";
 import { ClassicParameterFlowDeprecationWarning } from "modules/workspaces/ClassicParameterFlowDeprecationWarning/ClassicParameterFlowDeprecationWarning";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { getFormHelpers } from "utils/formUtils";
 import {
 	type AutofillBuildParameter,
@@ -51,6 +52,7 @@ export const WorkspaceParametersForm: FC<WorkspaceParameterFormProps> = ({
 	templatePermissions,
 	isSubmitting,
 }) => {
+	const { t } = useTranslation("workspaceSettings");
 	const form = useFormik<WorkspaceParametersFormValues>({
 		onSubmit,
 		initialValues: {
@@ -85,8 +87,7 @@ export const WorkspaceParametersForm: FC<WorkspaceParameterFormProps> = ({
 		<>
 			{disabled && (
 				<Alert severity="warning" prominent>
-					The template for this workspace requires automatic updates. Update the
-					workspace to edit parameters.
+					{t("parameters.updateRequiredWarning")}
 				</Alert>
 			)}
 			<ClassicParameterFlowDeprecationWarning
@@ -96,8 +97,8 @@ export const WorkspaceParametersForm: FC<WorkspaceParameterFormProps> = ({
 			<HorizontalForm onSubmit={form.handleSubmit} data-testid="form">
 				{hasNonEphemeralParameters && (
 					<FormSection
-						title="Parameters"
-						description="Settings used by your template"
+						title={t("parameters.parametersSection")}
+						description={t("parameters.parametersDescription")}
 					>
 						<FormFields>
 							{templateVersionRichParameters.map((parameter, index) =>
@@ -131,8 +132,8 @@ export const WorkspaceParametersForm: FC<WorkspaceParameterFormProps> = ({
 				)}
 				{hasEphemeralParameters && (
 					<FormSection
-						title="Ephemeral Parameters"
-						description="These parameters only apply for a single workspace start."
+						title={t("parameters.ephemeralParametersSection")}
+						description={t("parameters.ephemeralParametersDescription")}
 					>
 						<FormFields>
 							{templateVersionRichParameters.map((parameter, index) =>
@@ -164,7 +165,7 @@ export const WorkspaceParametersForm: FC<WorkspaceParameterFormProps> = ({
 
 				<FormFooter>
 					<Button onClick={onCancel} variant="outline">
-						Cancel
+						{t("parameters.cancel")}
 					</Button>
 
 					<Button
@@ -172,7 +173,7 @@ export const WorkspaceParametersForm: FC<WorkspaceParameterFormProps> = ({
 						disabled={isSubmitting || disabled || !form.dirty}
 					>
 						<Spinner loading={isSubmitting} />
-						Submit and restart
+						{t("parameters.submitAndRestart")}
 					</Button>
 				</FormFooter>
 			</HorizontalForm>

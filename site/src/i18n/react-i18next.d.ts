@@ -3345,6 +3345,81 @@ declare module "i18next" {
 					invalidResponse: string;
 				};
 			};
+			workspaceSettings: {
+				// Workspace settings page translations
+				title: string;
+				sidebar: {
+					general: string;
+					parameters: string;
+					schedule: string;
+					sharing: string;
+				};
+				general: {
+					workspaceName: string;
+					workspaceNameDescription: string;
+					automaticUpdates: string;
+					automaticUpdatesDescription: string;
+					cancel: string;
+					save: string;
+					hookCanOnlyBeUsedFromWorkspaceSettingsPage: string;
+				};
+				parameters: {
+					title: string;
+					noParameters: string;
+					learnMore: string;
+					updateRequiredWarning: string;
+					parametersSection: string;
+					parametersDescription: string;
+					ephemeralParametersSection: string;
+					ephemeralParametersDescription: string;
+					cancel: string;
+					submitAndRestart: string;
+				};
+				schedule: {
+					title: string;
+					restartDialogTitle: string;
+					restartDialogDescription: string;
+					restart: string;
+					cancel: string;
+					failedToUpdate: string;
+					scheduleUpdated: string;
+					autostartSection: string;
+					autostartDescription: string;
+					autostartSwitch: string;
+					autostartNotAllowed: string;
+					startTime: string;
+					timezone: string;
+					daysOfWeek: string;
+					daySunday: string;
+					dayMonday: string;
+					dayTuesday: string;
+					dayWednesday: string;
+					dayThursday: string;
+					dayFriday: string;
+					daySaturday: string;
+					autostopSection: string;
+					autostopDescription: string;
+					autostopSwitch: string;
+					autostopNotAllowed: string;
+					ttlLabel: string;
+					ttlNoShutdown: string;
+					ttlShutdownAfter: string;
+					save: string;
+					validation: {
+						errorNoDayOfWeek: string;
+						errorNoTime: string;
+						errorTime: string;
+						errorTimezone: string;
+						errorNoStop: string;
+						errorTtlMax: string;
+					};
+				};
+				sharing: {
+					title: string;
+					description: string;
+					viewDocs: string;
+				};
+			};
 		};
 	}
 }

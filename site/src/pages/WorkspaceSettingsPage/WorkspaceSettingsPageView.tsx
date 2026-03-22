@@ -1,6 +1,7 @@
 import type { Workspace } from "api/typesGenerated";
 import { PageHeader, PageHeaderTitle } from "components/PageHeader/PageHeader";
 import type { ComponentProps, FC } from "react";
+import { useTranslation } from "react-i18next";
 import { WorkspaceSettingsForm } from "./WorkspaceSettingsForm";
 
 type WorkspaceSettingsPageViewProps = {
@@ -16,6 +17,8 @@ export const WorkspaceSettingsPageView: FC<WorkspaceSettingsPageViewProps> = ({
 	error,
 	workspace,
 }) => {
+	const { t } = useTranslation("workspaceSettings");
+
 	return (
 		<>
 			<PageHeader
@@ -23,7 +26,7 @@ export const WorkspaceSettingsPageView: FC<WorkspaceSettingsPageViewProps> = ({
 					paddingTop: 0,
 				}}
 			>
-				<PageHeaderTitle>Workspace Settings</PageHeaderTitle>
+				<PageHeaderTitle>{t("title")}</PageHeaderTitle>
 			</PageHeader>
 
 			<WorkspaceSettingsForm

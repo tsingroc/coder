@@ -11,9 +11,12 @@ import {
 	TimerIcon as ScheduleIcon,
 	Users as SharingIcon,
 } from "lucide-react";
+import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useWorkspaceSettings } from "./WorkspaceSettingsLayout";
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: FC = () => {
+	const { t } = useTranslation("workspaceSettings");
 	const { owner, workspace, permissions } = useWorkspaceSettings();
 
 	return (
@@ -32,17 +35,17 @@ export const Sidebar: React.FC = () => {
 			/>
 
 			<SidebarNavItem href="" icon={GeneralIcon}>
-				General
+				{t("sidebar.general")}
 			</SidebarNavItem>
 			<SidebarNavItem href="parameters" icon={ParameterIcon}>
-				Parameters
+				{t("sidebar.parameters")}
 			</SidebarNavItem>
 			<SidebarNavItem href="schedule" icon={ScheduleIcon}>
-				Schedule
+				{t("sidebar.schedule")}
 			</SidebarNavItem>
 			{permissions?.shareWorkspace && (
 				<SidebarNavItem href="sharing" icon={SharingIcon}>
-					Sharing
+					{t("sidebar.sharing")}
 					<FeatureStageBadge contentType="beta" size="sm" />
 				</SidebarNavItem>
 			)}

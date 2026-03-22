@@ -4,6 +4,7 @@ import type { WorkspacePermissions } from "modules/workspaces/permissions";
 import { workspaceChecks } from "modules/workspaces/permissions";
 import { useWorkspaceSharing } from "modules/workspaces/WorkspaceSharingForm/useWorkspaceSharing";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { docs } from "utils/docs";
 import { pageTitle } from "utils/page";
@@ -11,6 +12,7 @@ import { useWorkspaceSettings } from "../WorkspaceSettingsLayout";
 import { WorkspaceSharingPageView } from "./WorkspaceSharingPageView";
 
 const WorkspaceSharingPage: FC = () => {
+	const { t } = useTranslation("workspaceSettings");
 	const { workspace } = useWorkspaceSettings();
 	const sharing = useWorkspaceSharing(workspace);
 
@@ -26,15 +28,16 @@ const WorkspaceSharingPage: FC = () => {
 
 	return (
 		<div className="flex flex-col gap-12">
-			<title>{pageTitle(workspace.name, "Sharing")}</title>
+			<title>{pageTitle(workspace.name, t("sidebar.sharing"))}</title>
 
 			<header className="flex flex-col">
 				<div className="flex flex-col gap-2">
-					<h1 className="text-3xl m-0">Workspace sharing</h1>
+					<h1 className="text-3xl m-0">{t("sharing.title")}</h1>
 					<p className="flex flex-row gap-1 text-sm text-content-secondary font-medium m-0">
-						Workspace sharing allows you to share workspaces with other users
-						and groups.{" "}
-						<Link href={docs("/user-guides/shared-workspaces")}>View docs</Link>
+						{t("sharing.description")}{" "}
+						<Link href={docs("/user-guides/shared-workspaces")}>
+							{t("sharing.viewDocs")}
+						</Link>
 					</p>
 				</div>
 			</header>

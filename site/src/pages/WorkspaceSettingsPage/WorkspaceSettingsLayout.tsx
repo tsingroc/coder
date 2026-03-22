@@ -9,6 +9,7 @@ import { Margins } from "components/Margins/Margins";
 import { Stack } from "components/Stack/Stack";
 import type { WorkspacePermissions } from "modules/workspaces/permissions";
 import { createContext, type FC, Suspense, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { Outlet, useParams } from "react-router";
 import { pageTitle } from "utils/page";
@@ -25,17 +26,17 @@ const WorkspaceSettings = createContext<WorkspaceSettingsContext | undefined>(
 );
 
 export function useWorkspaceSettings() {
+	const { t } = useTranslation("workspaceSettings");
 	const value = useContext(WorkspaceSettings);
 	if (!value) {
-		throw new Error(
-			"This hook can only be used from a workspace settings page",
-		);
+		throw new Error(t("general.hookCanOnlyBeUsedFromWorkspaceSettingsPage"));
 	}
 
 	return value;
 }
 
 export const WorkspaceSettingsLayout: FC = () => {
+	const { t } = useTranslation("workspaceSettings");
 	const params = useParams() as {
 		workspace: string;
 		username: string;
@@ -56,7 +57,7 @@ export const WorkspaceSettingsLayout: FC = () => {
 
 	return (
 		<>
-			<title>{pageTitle(workspaceName, "Settings")}</title>
+			<title>{pageTitle(workspaceName, t("sidebar.general"))}</title>
 
 			<Margins>
 				<Stack css={{ padding: "48px 0" }} direction="row" spacing={10}>

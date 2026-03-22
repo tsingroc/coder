@@ -10,10 +10,7 @@ import {
 } from "./formToRequest";
 import { scheduleToAutostart } from "./schedule";
 import { ttlMsToAutostop } from "./ttl";
-import {
-	Language as FormLanguage,
-	type WorkspaceScheduleFormValues,
-} from "./WorkspaceScheduleForm";
+import type { WorkspaceScheduleFormValues } from "./WorkspaceScheduleForm";
 import WorkspaceSchedulePage from "./WorkspaceSchedulePage";
 
 const validValues: WorkspaceScheduleFormValues = {
@@ -263,7 +260,7 @@ describe("WorkspaceSchedulePage", () => {
 			});
 			const user = userEvent.setup();
 			const autostopToggle = await screen.findByLabelText(
-				FormLanguage.stopSwitch,
+				/schedule.autostopSwitch/i,
 			);
 			// enable autostop
 			await user.click(autostopToggle);
@@ -284,7 +281,7 @@ describe("WorkspaceSchedulePage", () => {
 			});
 			const user = userEvent.setup();
 			const autostopToggle = await screen.findByLabelText(
-				FormLanguage.stopSwitch,
+				/schedule.autostopSwitch/i,
 			);
 			await user.click(autostopToggle);
 			const submitButton = await screen.findByRole("button", {
@@ -293,7 +290,8 @@ describe("WorkspaceSchedulePage", () => {
 			await user.click(submitButton);
 
 			const notification = await screen.findByText(
-				`Schedule for workspace "Test-Workspace" updated successfully.`,
+				"schedule.scheduleUpdated",
+				{ exact: false },
 			);
 			expect(notification).toBeInTheDocument();
 
@@ -311,7 +309,7 @@ describe("WorkspaceSchedulePage", () => {
 			});
 			const user = userEvent.setup();
 			const autostartToggle = await screen.findByLabelText(
-				FormLanguage.startSwitch,
+				/schedule.autostartSwitch/i,
 			);
 			await user.click(autostartToggle);
 			const submitButton = await screen.findByRole("button", {

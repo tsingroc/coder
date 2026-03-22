@@ -26,6 +26,8 @@ import {
 	emptySchedule,
 } from "pages/WorkspaceSettingsPage/WorkspaceSchedulePage/schedule";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { getFormHelpers } from "utils/formUtils";
 import { humanDuration } from "utils/time";
 import { timeZones } from "utils/timeZones";
@@ -33,34 +35,6 @@ import * as Yup from "yup";
 
 // Need dayjs.tz functions for timezone validation
 dayjs.extend(timezone);
-
-export const Language = {
-	errorNoDayOfWeek:
-		"Must set at least one day of week if autostart is enabled.",
-	errorNoTime: "Start time is required when autostart is enabled.",
-	errorTime: "Time must be in HH:mm format.",
-	errorTimezone: "Invalid timezone.",
-	errorNoStop:
-		"Time until shutdown must be greater than zero when autostop is enabled.",
-	errorTtlMax:
-		"Please enter a limit that is less than or equal to 720 hours (30 days).",
-	daysOfWeekLabel: "Days of Week",
-	daySundayLabel: "Sun",
-	dayMondayLabel: "Mon",
-	dayTuesdayLabel: "Tue",
-	dayWednesdayLabel: "Wed",
-	dayThursdayLabel: "Thu",
-	dayFridayLabel: "Fri",
-	daySaturdayLabel: "Sat",
-	startTimeLabel: "Start time",
-	timezoneLabel: "Timezone",
-	ttlLabel: "Time until shutdown (hours)",
-	formTitle: "Workspace schedule",
-	startSection: "Start",
-	startSwitch: "Enable Autostart",
-	stopSection: "Stop",
-	stopSwitch: "Enable Autostop",
-};
 
 export interface WorkspaceScheduleFormProps {
 	template: Template;
@@ -89,87 +63,105 @@ export interface WorkspaceScheduleFormValues {
 	ttl: number;
 }
 
-export const validationSchema = Yup.object({
-	sunday: Yup.boolean(),
-	monday: Yup.boolean().test(
-		"at-least-one-day",
-		Language.errorNoDayOfWeek,
-		function (value) {
-			const parent = this.parent as WorkspaceScheduleFormValues;
+type TranslationFunction = TFunction<"workspaceSettings">;
 
-			if (!parent.autostartEnabled) {
-				return true;
-			}
+// Helper function for tests that provides a simple translation function
+export const mockTranslationFunction = ((key: string): string => key) as TranslationFunction;
 
-			// Ensure at least one day is enabled
-			return [
-				parent.sunday,
-				value,
-				parent.tuesday,
-				parent.wednesday,
-				parent.thursday,
-				parent.friday,
-				parent.saturday,
-			].some((day) => day);
-		},
-	),
-	tuesday: Yup.boolean(),
-	wednesday: Yup.boolean(),
-	thursday: Yup.boolean(),
-	friday: Yup.boolean(),
-	saturday: Yup.boolean(),
+export const validationSchema = (t: TranslationFunction) =>
+	Yup.object({
+		sunday: Yup.boolean(),
+		monday: Yup.boolean().test(
+			"at-least-one-day",
+			t("schedule.validation.errorNoDayOfWeek"),
+			function (value) {
+				const parent = this.parent as WorkspaceScheduleFormValues;
 
-	startTime: Yup.string()
-		.ensure()
-		.test("required-if-autostart", Language.errorNoTime, function (value) {
-			const parent = this.parent as WorkspaceScheduleFormValues;
-			if (parent.autostartEnabled) {
-				return value !== "";
-			}
-			return true;
-		})
-		.test("is-time-string", Language.errorTime, (value) => {
-			if (value === "") {
-				return true;
-			}
-			if (!/^[0-9][0-9]:[0-9][0-9]$/.test(value)) {
-				return false;
-			}
-			const parts = value.split(":");
-			const HH = Number(parts[0]);
-			const mm = Number(parts[1]);
-			return HH >= 0 && HH <= 23 && mm >= 0 && mm <= 59;
-		}),
-	timezone: Yup.string()
-		.ensure()
-		.test("is-timezone", Language.errorTimezone, function (value) {
-			const parent = this.parent as WorkspaceScheduleFormValues;
+				if (!parent.autostartEnabled) {
+					return true;
+				}
 
-			if (!parent.startTime) {
-				return true;
-			}
-			// Unfortunately, there's not a good API on dayjs at this time for
-			// evaluating a timezone. Attempt to parse today in the supplied timezone
-			// and return as valid if the function doesn't throw.
-			// Need to use dayjs.tz directly here as our utility functions don't expose validation
-			try {
-				dayjs.tz(dayjs(), value);
-				return true;
-			} catch {
-				return false;
-			}
-		}),
-	ttl: Yup.number()
-		.min(0)
-		.max(24 * 30 /* 30 days */, Language.errorTtlMax)
-		.test("positive-if-autostop", Language.errorNoStop, function (value) {
-			const parent = this.parent as WorkspaceScheduleFormValues;
-			if (parent.autostopEnabled) {
-				return Boolean(value);
-			}
-			return true;
-		}),
-});
+				// Ensure at least one day is enabled
+				return [
+					parent.sunday,
+					value,
+					parent.tuesday,
+					parent.wednesday,
+					parent.thursday,
+					parent.friday,
+					parent.saturday,
+				].some((day) => day);
+			},
+		),
+		tuesday: Yup.boolean(),
+		wednesday: Yup.boolean(),
+		thursday: Yup.boolean(),
+		friday: Yup.boolean(),
+		saturday: Yup.boolean(),
+
+		startTime: Yup.string()
+			.ensure()
+			.test(
+				"required-if-autostart",
+				t("schedule.validation.errorNoTime"),
+				function (value) {
+					const parent = this.parent as WorkspaceScheduleFormValues;
+					if (parent.autostartEnabled) {
+						return value !== "";
+					}
+					return true;
+				},
+			)
+			.test("is-time-string", t("schedule.validation.errorTime"), (value) => {
+				if (value === "") {
+					return true;
+				}
+				if (!/^[0-9][0-9]:[0-9][0-9]$/.test(value)) {
+					return false;
+				}
+				const parts = value.split(":");
+				const HH = Number(parts[0]);
+				const mm = Number(parts[1]);
+				return HH >= 0 && HH <= 23 && mm >= 0 && mm <= 59;
+			}),
+		timezone: Yup.string()
+			.ensure()
+			.test(
+				"is-timezone",
+				t("schedule.validation.errorTimezone"),
+				function (value) {
+					const parent = this.parent as WorkspaceScheduleFormValues;
+
+					if (!parent.startTime) {
+						return true;
+					}
+					// Unfortunately, there's not a good API on dayjs at this time for
+					// evaluating a timezone. Attempt to parse today in the supplied timezone
+					// and return as valid if the function doesn't throw.
+					// Need to use dayjs.tz directly here as our utility functions don't expose validation
+					try {
+						dayjs.tz(dayjs(), value);
+						return true;
+					} catch {
+						return false;
+					}
+				},
+			),
+		ttl: Yup.number()
+			.min(0)
+			.max(24 * 30 /* 30 days */, t("schedule.validation.errorTtlMax"))
+			.test(
+				"positive-if-autostop",
+				t("schedule.validation.errorNoStop"),
+				function (value) {
+					const parent = this.parent as WorkspaceScheduleFormValues;
+					if (parent.autostopEnabled) {
+						return Boolean(value);
+					}
+					return true;
+				},
+			),
+	});
 
 export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 	error,
@@ -181,10 +173,11 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 	defaultTTL,
 	template,
 }) => {
+	const { t } = useTranslation("workspaceSettings");
 	const form = useFormik<WorkspaceScheduleFormValues>({
 		initialValues,
 		onSubmit,
-		validationSchema,
+		validationSchema: validationSchema(t),
 		initialTouched,
 		enableReinitialize: true,
 	});
@@ -194,44 +187,44 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 		{
 			value: form.values.monday,
 			name: "monday",
-			label: Language.dayMondayLabel,
+			label: t("schedule.dayMonday"),
 		},
 		{
 			value: form.values.tuesday,
 			name: "tuesday",
-			label: Language.dayTuesdayLabel,
+			label: t("schedule.dayTuesday"),
 		},
 		{
 			value: form.values.wednesday,
 			name: "wednesday",
-			label: Language.dayWednesdayLabel,
+			label: t("schedule.dayWednesday"),
 		},
 		{
 			value: form.values.thursday,
 			name: "thursday",
-			label: Language.dayThursdayLabel,
+			label: t("schedule.dayThursday"),
 		},
 		{
 			value: form.values.friday,
 			name: "friday",
-			label: Language.dayFridayLabel,
+			label: t("schedule.dayFriday"),
 		},
 		{
 			value: form.values.saturday,
 			name: "saturday",
-			label: Language.daySaturdayLabel,
+			label: t("schedule.daySaturday"),
 		},
 		{
 			value: form.values.sunday,
 			name: "sunday",
-			label: Language.daySundayLabel,
+			label: t("schedule.daySunday"),
 		},
 	];
 
 	const startTimeField = formHelpers("startTime");
 	const timezoneField = formHelpers("timezone");
 	const ttlField = formHelpers("ttl", {
-		helperText: ttlShutdownAt(form.values.ttl),
+		helperText: ttlShutdownAt(form.values.ttl, t),
 		backendFieldName: "ttl_ms",
 	});
 
@@ -246,8 +239,8 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 	return (
 		<HorizontalForm onSubmit={form.handleSubmit}>
 			<FormSection
-				title="Autostart"
-				description="Select the time and days of week on which you want the workspace starting automatically."
+				title={t("schedule.autostartSection")}
+				description={t("schedule.autostartDescription")}
 			>
 				<FormFields>
 					<div className="flex items-center gap-3">
@@ -268,12 +261,11 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 								htmlFor="autostartEnabled"
 								className="font-medium cursor-pointer"
 							>
-								{Language.startSwitch}
+								{t("schedule.autostartSwitch")}
 							</Label>
 							{!template.allow_user_autostart && (
 								<span className="text-xs text-content-secondary mt-0.5">
-									The template for this workspace does not allow modification of
-									autostart.
+									{t("schedule.autostartNotAllowed")}
 								</span>
 							)}
 						</div>
@@ -281,7 +273,7 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 
 					<div className="flex gap-4">
 						<div className="flex flex-col gap-2 flex-1">
-							<Label htmlFor="startTime">{Language.startTimeLabel}</Label>
+							<Label htmlFor="startTime">{t("schedule.startTime")}</Label>
 							<Input
 								id="startTime"
 								name="startTime"
@@ -299,7 +291,7 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 							)}
 						</div>
 						<div className="flex flex-col gap-2 flex-1">
-							<Label htmlFor="timezone">{Language.timezoneLabel}</Label>
+							<Label htmlFor="timezone">{t("schedule.timezone")}</Label>
 							<Select
 								value={form.values.timezone}
 								onValueChange={(value) => {
@@ -328,7 +320,7 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 
 					<fieldset className="border-0 p-0 m-0">
 						<legend className="text-xs text-content-secondary font-medium mb-1">
-							{Language.daysOfWeekLabel}
+							{t("schedule.daysOfWeek")}
 						</legend>
 
 						<div className="flex flex-row flex-wrap gap-x-4 gap-y-2 pt-1">
@@ -358,7 +350,7 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 
 						{form.errors.monday && (
 							<span className="text-xs text-content-destructive mt-1 block">
-								{Language.errorNoDayOfWeek}
+								{t("schedule.validation.errorNoDayOfWeek")}
 							</span>
 						)}
 					</fieldset>
@@ -366,15 +358,10 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 			</FormSection>
 
 			<FormSection
-				title="Autostop"
-				description={
-					<>
-						Set how many hours should elapse after the workspace started before
-						the workspace automatically shuts down. This will be extended by{" "}
-						{humanDuration(template.activity_bump_ms)} after last activity in
-						the workspace was detected.
-					</>
-				}
+				title={t("schedule.autostopSection")}
+				description={t("schedule.autostopDescription", {
+					duration: humanDuration(template.activity_bump_ms),
+				})}
 			>
 				<FormFields>
 					<div className="flex items-center gap-3">
@@ -395,19 +382,18 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 								htmlFor="autostopEnabled"
 								className="font-medium cursor-pointer"
 							>
-								{Language.stopSwitch}
+								{t("schedule.autostopSwitch")}
 							</Label>
 							{!template.allow_user_autostop && (
 								<span className="text-xs text-content-secondary mt-0.5">
-									The template for this workspace does not allow modification of
-									autostop.
+									{t("schedule.autostopNotAllowed")}
 								</span>
 							)}
 						</div>
 					</div>
 
 					<div className="flex flex-col gap-2">
-						<Label htmlFor="ttl">{Language.ttlLabel}</Label>
+						<Label htmlFor="ttl">{t("schedule.ttlLabel")}</Label>
 						<Input
 							id="ttl"
 							name="ttl"
@@ -437,7 +423,7 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 
 			<FormFooter>
 				<Button onClick={onCancel} variant="outline">
-					Cancel
+					{t("schedule.cancel")}
 				</Button>
 
 				<Button
@@ -448,24 +434,29 @@ export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
 					}
 				>
 					<Spinner loading={isLoading} />
-					Save
+					{t("schedule.save")}
 				</Button>
 			</FormFooter>
 		</HorizontalForm>
 	);
 };
 
-export const ttlShutdownAt = (formTTL: number): string => {
+export const ttlShutdownAt = (
+	formTTL: number,
+	t: TranslationFunction,
+): string => {
 	if (formTTL === 0) {
 		// Passing an empty value for TTL in the form results in a number that is not zero but less than 1.
-		return "Your workspace will not automatically shut down.";
+		return t("schedule.ttlNoShutdown");
 	}
 
 	try {
-		return `Your workspace will shut down ${humanDuration(formTTL * 60 * 60 * 1000)} after its next start.`;
+		return t("schedule.ttlShutdownAfter", {
+			duration: humanDuration(formTTL * 60 * 60 * 1000),
+		});
 	} catch (e) {
 		if (e instanceof RangeError) {
-			return Language.errorTtlMax;
+			return t("schedule.validation.errorTtlMax");
 		}
 		throw e;
 	}

@@ -1,0 +1,74 @@
+{
+	"title": "工作区设置",
+	"sidebar": {
+		"general": "通用",
+		"parameters": "参数",
+		"schedule": "计划",
+		"sharing": "共享"
+	},
+	"general": {
+		"workspaceName": "工作区名称",
+		"workspaceNameDescription": "更新您的工作区名称。",
+		"automaticUpdates": "自动更新",
+		"automaticUpdatesDescription": "当工作区停止时，将使用最新的模板版本无缝进行更新。",
+		"cancel": "取消",
+		"save": "保存",
+		"hookCanOnlyBeUsedFromWorkspaceSettingsPage": "此 Hook 只能从工作区设置页面使用"
+	},
+	"parameters": {
+		"title": "工作区参数",
+		"noParameters": "此工作区没有参数。",
+		"learnMore": "了解更多关于参数的信息",
+		"updateRequiredWarning": "此工作区的模板要求自动更新。请更新工作区以编辑参数。",
+		"parametersSection": "参数",
+		"parametersDescription": "模板使用的设置",
+		"ephemeralParametersSection": "临时参数",
+		"ephemeralParametersDescription": "这些参数仅对单次工作区启动生效。",
+		"cancel": "取消",
+		"submitAndRestart": "提交并重启"
+	},
+	"schedule": {
+		"title": "工作区计划",
+		"restartDialogTitle": "重启工作区？",
+		"restartDialogDescription": "重启工作区将应用新的计划。",
+		"restart": "重启",
+		"cancel": "取消",
+		"failedToUpdate": "更新工作区计划失败",
+		"scheduleUpdated": "工作区计划已更新",
+		"autostartSection": "自动启动",
+		"autostartDescription": "选择您希望工作区自动启动的时间和星期。",
+		"autostartSwitch": "启用自动启动",
+		"autostartNotAllowed": "此工作区的模板不允许修改自动启动设置。",
+		"startTime": "开始时间",
+		"timezone": "时区",
+		"daysOfWeek": "星期",
+		"daySunday": "周日",
+		"dayMonday": "周一",
+		"dayTuesday": "周二",
+		"dayWednesday": "周三",
+		"dayThursday": "周四",
+		"dayFriday": "周五",
+		"daySaturday": "周六",
+		"autostopSection": "自动停止",
+		"autostopDescription": "设置工作区启动后多少小时应自动关闭。在检测到工作区中的最后一次活动后，此时间将延长 {{duration}}。",
+		"autostopSwitch": "启用自动停止",
+		"autostopNotAllowed": "此工作区的模板不允许修改自动停止设置。",
+		"ttlLabel": "关闭前时间（小时）",
+		"ttlNoShutdown": "您的工作区不会自动关闭。",
+		"ttlShutdownAfter": "您的工作区将在下次启动后 {{duration}} 关闭。",
+		"save": "保存",
+		"validation": {
+			"errorNoDayOfWeek": "如果启用自动启动，必须至少设置一天。",
+			"errorNoTime": "启用自动启动时需要开始时间。",
+			"errorTime": "时间必须采用 HH:mm 格式。",
+			"errorTimezone": "无效的时区。",
+			"errorNoStop": "启用自动停止时，关闭前时间必须大于零。",
+			"errorTtlMax": "请输入小于或等于 720 小时（30 天）的限制。"
+		}
+	},
+	"sharing": {
+		"title": "工作区共享",
+		"description": "工作区共享允许您与其他用户和组共享工作区。",
+		"viewDocs": "查看文档"
+	}
+}
