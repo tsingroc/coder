@@ -382,6 +382,7 @@ declare module "i18next" {
 				errorActivating: string;
 				status: {
 					title: string;
+					loading: string;
 					starting: string;
 					running: string;
 					stopping: string;
