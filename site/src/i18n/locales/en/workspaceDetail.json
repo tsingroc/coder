@@ -23,6 +23,7 @@
 	"errorActivating": "Error activating workspace \"{{name}}\".",
 	"status": {
 		"title": "Status",
+		"loading": "Loading",
 		"starting": "Starting",
 		"running": "Running",
 		"stopping": "Stopping",

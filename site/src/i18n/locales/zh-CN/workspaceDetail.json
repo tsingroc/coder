@@ -23,6 +23,7 @@
 	"errorActivating": "激活工作区 \"{{name}}\" 时出错。",
 	"status": {
 		"title": "状态",
+		"loading": "加载中",
 		"starting": "启动中",
 		"running": "运行中",
 		"stopping": "停止中",
