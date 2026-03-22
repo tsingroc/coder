@@ -20,6 +20,7 @@ import {
 import { isExternalApp, needsSessionToken } from "modules/apps/apps";
 import { useAppLink } from "modules/apps/useAppLink";
 import { type FC, type ReactNode, useState } from "react";
+import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { AgentButton } from "../AgentButton";
 import { BaseIcon } from "./BaseIcon";
@@ -35,7 +36,7 @@ export const DisplayAppNameMap: Record<TypesGen.DisplayApp, string> = {
 // Helper function to get localized app name
 export const getDisplayAppName = (
 	app: TypesGen.DisplayApp,
-	t: (key: string) => string,
+	t: TFunction<"workspaceDetail">,
 ): string => {
 	const keyMap: Record<TypesGen.DisplayApp, string> = {
 		port_forwarding_helper: "resources.portForwarding.title",
@@ -44,7 +45,7 @@ export const getDisplayAppName = (
 		vscode_insiders: "applications.vscodeInsiders",
 		web_terminal: "applications.terminal",
 	};
-	return t(keyMap[app] || app);
+	return (t as any)(keyMap[app] || app);
 };
 
 interface AppLinkProps {
@@ -220,7 +221,7 @@ const shareDetails: {
 // Helper function to get localized share details
 const getShareDetails = (
 	sharingLevel: TypesGen.WorkspaceAppSharingLevel,
-	t: (key: string) => string,
+	t: TFunction<"workspaceDetail">,
 ): { shareTooltip: string; shareIcon: LucideIcon } => {
 	const details = shareDetails[sharingLevel as Exclude<typeof sharingLevel, "owner">];
 	if (!details) {
@@ -234,6 +235,6 @@ const getShareDetails = (
 	};
 	return {
 		...details,
-		shareTooltip: t(tooltipKeyMap[sharingLevel] || details.shareTooltip),
+		shareTooltip: (t as any)(tooltipKeyMap[sharingLevel] || details.shareTooltip),
 	};
 };

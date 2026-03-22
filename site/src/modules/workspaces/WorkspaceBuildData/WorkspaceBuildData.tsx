@@ -43,7 +43,7 @@ export const WorkspaceBuildData = ({ build }: { build: WorkspaceBuild }) => {
 	// Convert build reason to translation key (camelCase to kebab-case)
 	const getBuildReasonLabel = (reason: string): string => {
 		const key = reason.replace(/([A-Z])/g, "-$1").toLowerCase();
-		return t(`resources.buildReason.${key}`);
+		return t(`resources.buildReason.${key}` as any);
 	};
 
 	return (

@@ -49,7 +49,7 @@ export const AuditLogRow: FC<AuditLogRowProps> = ({
 	// Helper function to get build reason label with i18n
 	const getBuildReasonLabel = (reason: string): string => {
 		const key = reason.replace(/([A-Z])/g, "-$1").toLowerCase();
-		return t(`resources.buildReason.${key}`);
+		return t(`resources.buildReason.${key}` as any);
 	};
 
 	let auditDiff = auditLog.diff;

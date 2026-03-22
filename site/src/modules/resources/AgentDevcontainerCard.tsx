@@ -33,6 +33,7 @@ import { Container, ExternalLinkIcon } from "lucide-react";
 import { useFeatureVisibility } from "modules/dashboard/useFeatureVisibility";
 import { AppStatuses } from "pages/WorkspacePage/AppStatuses";
 import type { FC } from "react";
+import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "sonner";
@@ -397,7 +398,7 @@ export const AgentDevcontainerCard: FC<AgentDevcontainerCardProps> = ({
 
 function rebuildButtonLabel(
 	devcontainer: WorkspaceAgentDevcontainer,
-	t: (key: string) => string,
+	t: TFunction<"workspaceDetail">,
 ) {
 	switch (devcontainer.status) {
 		case "deleting":

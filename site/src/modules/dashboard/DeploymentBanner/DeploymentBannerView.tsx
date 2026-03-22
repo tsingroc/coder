@@ -381,64 +381,64 @@ const WorkspaceBuildValue: FC<WorkspaceBuildValueProps> = ({
 	status,
 	count,
 }) => {
-	const { t } = useTranslation();
+	const { t } = useTranslation("workspaceDetail");
 
 	// Local version of getDisplayWorkspaceStatus
 	const getStatusDisplay = (workspaceStatus: WorkspaceStatus) => {
 		switch (workspaceStatus) {
 			case "running":
 				return {
-					text: t("workspaceDetail.status.running"),
+					text: t("status.running"),
 					icon: <PlayIcon className="size-icon-xs" />,
 				};
 			case "starting":
 				return {
-					text: t("building"),
+					text: t("status.starting"),
 					icon: <WrenchIcon className="size-icon-xs" />,
 				};
 			case "stopping":
 				return {
-					text: t("workspaceDetail.status.stopping"),
+					text: t("status.stopping"),
 					icon: <PillSpinner />,
 				};
 			case "stopped":
 				return {
-					text: t("workspaceDetail.status.stopped"),
+					text: t("status.stopped"),
 					icon: <SquareIcon className="size-icon-xs" />,
 				};
 			case "deleting":
 				return {
-					text: t("workspaceDetail.status.deleting"),
+					text: t("status.deleting"),
 					icon: <PillSpinner />,
 				};
 			case "deleted":
 				return {
-					text: t("workspaceDetail.status.deleted"),
+					text: t("status.deleted"),
 					icon: <CircleAlertIcon className="size-icon-xs" />,
 				};
 			case "canceling":
 				return {
-					text: t("workspaceDetail.status.canceling"),
+					text: t("status.canceling"),
 					icon: <PillSpinner />,
 				};
 			case "canceled":
 				return {
-					text: t("workspaceDetail.status.canceled"),
+					text: t("status.canceled"),
 					icon: <CircleAlertIcon className="size-icon-xs" />,
 				};
 			case "failed":
 				return {
-					text: t("workspaceDetail.status.failed"),
+					text: t("status.failed"),
 					icon: <CircleAlertIcon className="size-icon-xs" />,
 				};
 			case "pending":
 				return {
-					text: t("workspaceDetail.status.pending"),
+					text: t("status.pending"),
 					icon: <PillSpinner />,
 				};
 			default:
 				return {
-					text: t("workspaceDetail.status.loading"),
+					text: t("status.loading"),
 					icon: <PillSpinner />,
 				};
 		}
@@ -463,7 +463,7 @@ const WorkspaceBuildValue: FC<WorkspaceBuildValueProps> = ({
 						</RouterLink>
 					</Link>
 				</TooltipTrigger>
-				<TooltipContent>{`${statusText} ${t("workspaces")}`}</TooltipContent>
+				<TooltipContent>{`${statusText} ${(t as any)("workspaces")}`}</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>
 	);

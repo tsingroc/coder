@@ -405,6 +405,115 @@ declare module "i18next" {
 					network: string;
 					uptime: string;
 					lastUsed: string;
+					dailyCost: string;
+					hideMetadata: string;
+					showAllMetadata: string;
+					ssh: {
+						title: string;
+						connectViaSSH: string;
+						runCommands: string;
+						configureSSH: string;
+						connectToAgent: string;
+						installCLILink: string;
+						vscodeSSHLink: string;
+						jetbrainsLink: string;
+						desktopLink: string;
+						sshConfigLink: string;
+					};
+					portForwarding: {
+						title: string;
+						openPorts: string;
+						listeningPorts: string;
+						sharedPorts: string;
+						connectToPort: string;
+						shareThisPort: string;
+						deleteSharedPort: string;
+						port: string;
+						protocol: string;
+						sharingLevel: string;
+						http: string;
+						https: string;
+						public: string;
+						authenticated: string;
+						organization: string;
+						sharePort: string;
+						noOpenPorts: string;
+						listeningPortsDescription: string;
+						sharedPortsDescription: string;
+						noPortSharingAllowed: string;
+						publicSharingNotAllowed: string;
+						authenticatedSharingNotAllowed: string;
+						connectToPortPlaceholder: string;
+						learnMore: string;
+						hostnameTooLong: string;
+						documentation: string;
+						openExternalUrl: string;
+						sharedAuthenticated: string;
+						sharedOrganization: string;
+						sharedPublic: string;
+					};
+					agentStatus: {
+						ready: string;
+						starting: string;
+						stopping: string;
+						stopped: string;
+						disconnected: string;
+						connecting: string;
+						timeout: string;
+						startTimeoutTitle: string;
+						startTimeoutDescription: string;
+						stopTimeoutTitle: string;
+						stopTimeoutDescription: string;
+						connectTimeoutTitle: string;
+						connectTimeoutDescription: string;
+						errorStartingTitle: string;
+						errorStoppingTitle: string;
+						errorConnectingTitle: string;
+						troubleshoot: string;
+						somethingWentWrong: string;
+						errorStartingDevcontainer: string;
+					};
+					devcontainer: {
+						title: string;
+						terraformAgent: string;
+						terraformAgentTooltip: string;
+						notBoundToHost: string;
+						deleteError: string;
+						deleteErrorTitle: string;
+						message: string;
+						detail: string;
+						ok: string;
+					};
+					buildStatus: {
+						succeeded: string;
+						pending: string;
+						running: string;
+						canceling: string;
+						canceled: string;
+						failed: string;
+						inProgress: string;
+						seconds: string;
+						unknown: string;
+					};
+					buildReason: {
+						api: string;
+						dashboard: string;
+						cli: string;
+						sshConnection: string;
+						vscodeConnection: string;
+						jetbrainsConnection: string;
+						autostart: string;
+						autostop: string;
+						dormancy: string;
+						taskAutoPause: string;
+						taskManualPause: string;
+						taskResume: string;
+						system: string;
+					};
+					timeAgo: {
+						now: string;
+						never: string;
+					};
 				};
 				actions: {
 					start: string;
@@ -3239,4 +3348,3 @@ declare module "i18next" {
 		};
 	}
 }
-
