@@ -44,8 +44,8 @@ import {
 	Settings,
 	TriangleAlert,
 } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { type FC, useId, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "utils/cn";
 import type { AutofillBuildParameter } from "utils/richParameters";
 import * as Yup from "yup";

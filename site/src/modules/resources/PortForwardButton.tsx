@@ -270,7 +270,9 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 						justifyContent="space-between"
 						alignItems="start"
 					>
-						<HelpTooltipTitle>{t("resources.portForwarding.listeningPorts")}</HelpTooltipTitle>
+						<HelpTooltipTitle>
+							{t("resources.portForwarding.listeningPorts")}
+						</HelpTooltipTitle>
 						<HelpTooltipLink
 							href={docs("/admin/networking/port-forwarding#dashboard")}
 						>
@@ -303,8 +305,12 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 										);
 									}}
 								>
-									<MenuItem value="http">{t("resources.portForwarding.http")}</MenuItem>
-									<MenuItem value="https">{t("resources.portForwarding.https")}</MenuItem>
+									<MenuItem value="http">
+										{t("resources.portForwarding.http")}
+									</MenuItem>
+									<MenuItem value="https">
+										{t("resources.portForwarding.https")}
+									</MenuItem>
 								</Select>
 							</FormControl>
 							<form
@@ -328,7 +334,9 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									aria-label="Port number"
 									name="portNumber"
 									type="number"
-									placeholder={t("resources.portForwarding.connectToPortPlaceholder")}
+									placeholder={t(
+										"resources.portForwarding.connectToPortPlaceholder",
+									)}
 									min={9}
 									max={65535}
 									required
@@ -338,10 +346,14 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									<TooltipTrigger asChild>
 										<Button type="submit" size="icon" variant="subtle">
 											<ExternalLinkIcon />
-											<span className="sr-only">{t("resources.portForwarding.connectToPort")}</span>
+											<span className="sr-only">
+												{t("resources.portForwarding.connectToPort")}
+											</span>
 										</Button>
 									</TooltipTrigger>
-									<TooltipContent disablePortal>{t("resources.portForwarding.connectToPort")}</TooltipContent>
+									<TooltipContent disablePortal>
+										{t("resources.portForwarding.connectToPort")}
+									</TooltipContent>
 								</Tooltip>
 							</form>
 						</Stack>
@@ -412,7 +424,9 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 													}}
 												>
 													<ShareIcon />
-													<span className="sr-only">{t("resources.portForwarding.shareThisPort")}</span>
+													<span className="sr-only">
+														{t("resources.portForwarding.shareThisPort")}
+													</span>
 												</Button>
 											</TooltipTrigger>
 											<TooltipContent disablePortal>
@@ -432,7 +446,9 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 					borderTop: `1px solid ${theme.palette.divider}`,
 				}}
 			>
-				<HelpTooltipTitle>{t("resources.portForwarding.sharedPorts")}</HelpTooltipTitle>
+				<HelpTooltipTitle>
+					{t("resources.portForwarding.sharedPorts")}
+				</HelpTooltipTitle>
 				<HelpTooltipText css={{ color: theme.palette.text.secondary }}>
 					{canSharePorts
 						? t("resources.portForwarding.sharedPortsDescription")
@@ -487,8 +503,12 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 												});
 											}}
 										>
-											<MenuItem value="http">{t("resources.portForwarding.http")}</MenuItem>
-											<MenuItem value="https">{t("resources.portForwarding.https")}</MenuItem>
+											<MenuItem value="http">
+												{t("resources.portForwarding.http")}
+											</MenuItem>
+											<MenuItem value="https">
+												{t("resources.portForwarding.https")}
+											</MenuItem>
 										</Select>
 									</FormControl>
 
@@ -510,14 +530,20 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 													});
 												}}
 											>
-												<MenuItem value="organization">{t("resources.portForwarding.organization")}</MenuItem>
+												<MenuItem value="organization">
+													{t("resources.portForwarding.organization")}
+												</MenuItem>
 												{canSharePortsAuthenticated ? (
-													<MenuItem value="authenticated">{t("resources.portForwarding.authenticated")}</MenuItem>
+													<MenuItem value="authenticated">
+														{t("resources.portForwarding.authenticated")}
+													</MenuItem>
 												) : (
 													disabledAuthenticatedMenuItem
 												)}
 												{canSharePortsPublic ? (
-													<MenuItem value="public">{t("resources.portForwarding.public")}</MenuItem>
+													<MenuItem value="public">
+														{t("resources.portForwarding.public")}
+													</MenuItem>
 												) : (
 													disabledPublicMenuItem
 												)}
@@ -526,7 +552,9 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 										<Button
 											size="icon"
 											variant="subtle"
-											aria-label={t("resources.portForwarding.deleteSharedPort")}
+											aria-label={t(
+												"resources.portForwarding.deleteSharedPort",
+											)}
 											onClick={async () => {
 												await deleteSharedPortMutation.mutateAsync({
 													agent_name: agent.name,
@@ -566,8 +594,12 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									value={form.values.protocol}
 									label={t("resources.portForwarding.protocol")}
 								>
-									<MenuItem value="http">{t("resources.portForwarding.http")}</MenuItem>
-									<MenuItem value="https">{t("resources.portForwarding.https")}</MenuItem>
+									<MenuItem value="http">
+										{t("resources.portForwarding.http")}
+									</MenuItem>
+									<MenuItem value="https">
+										{t("resources.portForwarding.https")}
+									</MenuItem>
 								</TextField>
 								<TextField
 									{...getFieldHelpers("share_level")}
@@ -577,14 +609,20 @@ export const PortForwardPopoverView: FC<PortForwardPopoverViewProps> = ({
 									value={form.values.share_level}
 									label={t("resources.portForwarding.sharingLevel")}
 								>
-									<MenuItem value="organization">{t("resources.portForwarding.organization")}</MenuItem>
+									<MenuItem value="organization">
+										{t("resources.portForwarding.organization")}
+									</MenuItem>
 									{canSharePortsAuthenticated ? (
-										<MenuItem value="authenticated">{t("resources.portForwarding.authenticated")}</MenuItem>
+										<MenuItem value="authenticated">
+											{t("resources.portForwarding.authenticated")}
+										</MenuItem>
 									) : (
 										disabledAuthenticatedMenuItem
 									)}
 									{canSharePortsPublic ? (
-										<MenuItem value="public">{t("resources.portForwarding.public")}</MenuItem>
+										<MenuItem value="public">
+											{t("resources.portForwarding.public")}
+										</MenuItem>
 									) : (
 										disabledPublicMenuItem
 									)}

@@ -46,9 +46,7 @@ export const AgentSSHButton: FC<AgentSSHButtonProps> = ({
 				align="end"
 				className="py-4 px-6 w-80 text-content-secondary mt-[2px] bg-surface-secondary"
 			>
-				<HelpTooltipText>
-					{t("resources.ssh.runCommands")}
-				</HelpTooltipText>
+				<HelpTooltipText>{t("resources.ssh.runCommands")}</HelpTooltipText>
 
 				<ol style={{ margin: 0, padding: 0 }}>
 					<Stack spacing={0.5} className="mt-3">

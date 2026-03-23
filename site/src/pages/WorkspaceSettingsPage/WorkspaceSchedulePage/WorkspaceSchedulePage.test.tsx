@@ -289,10 +289,9 @@ describe("WorkspaceSchedulePage", () => {
 			});
 			await user.click(submitButton);
 
-			const notification = await screen.findByText(
-				"schedule.scheduleUpdated",
-				{ exact: false },
-			);
+			const notification = await screen.findByText("schedule.scheduleUpdated", {
+				exact: false,
+			});
 			expect(notification).toBeInTheDocument();
 
 			const dialog = await screen.findByText("Restart workspace?");

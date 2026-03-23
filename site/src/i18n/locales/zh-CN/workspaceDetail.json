@@ -93,18 +93,6 @@
 			"sharedOrganization": "与组织成员共享",
 			"sharedPublic": "公开共享"
 		},
-		"ssh": {
-			"title": "SSH",
-			"connectViaSSH": "通过 SSH 连接",
-			"runCommands": "运行以下命令通过 SSH 连接：",
-			"configureSSH": "在机器上配置 SSH 主机：",
-			"connectToAgent": "连接到代理：",
-			"installCLILink": "安装 Coder CLI",
-			"vscodeSSHLink": "通过 VS Code Remote SSH 连接",
-			"jetbrainsLink": "通过 JetBrains IDE 连接",
-			"desktopLink": "通过 Coder Desktop 连接",
-			"sshConfigLink": "SSH 配置"
-		},
 		"agentStatus": {
 			"ready": "就绪",
 			"starting": "启动中...",

@@ -32,7 +32,7 @@ const getBuildStatusType = (
 };
 
 export const BuildAvatar: FC<BuildAvatarProps> = ({ build, size }) => {
-	const theme = useTheme();
+	const _theme = useTheme();
 	const type = getBuildStatusType(build);
 	const iconColor = useClassName(
 		(css, theme) => css({ color: theme.roles[type].fill.solid }),

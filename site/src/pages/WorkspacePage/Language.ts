@@ -81,7 +81,9 @@ export const useWorkspaceDetailLanguage = () => {
 			title: (type: string) => t("sharing.title", { type }),
 			workspace: t("sharing.workspace"),
 			task: t("sharing.task"),
-			ephemeralParametersDescription: t("sharing.ephemeralParametersDescription"),
+			ephemeralParametersDescription: t(
+				"sharing.ephemeralParametersDescription",
+			),
 			goToWorkspaceParameters: t("sharing.goToWorkspaceParameters"),
 			buildOptions: t("sharing.buildOptions"),
 			ephemeralParametersNote: t("sharing.ephemeralParametersNote"),

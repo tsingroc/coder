@@ -91,7 +91,7 @@ const NotificationsPage: FC = () => {
 					description: getErrorDetail(error),
 				});
 			});
-	}, [searchParams.delete, disabledId, disableMutation]);
+	}, [searchParams.delete, disabledId, disableMutation, t]);
 
 	const ready =
 		disabledPreferences.data &&

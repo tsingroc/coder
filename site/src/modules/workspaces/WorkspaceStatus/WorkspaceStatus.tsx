@@ -1,8 +1,8 @@
 import type { Workspace } from "api/typesGenerated";
-import type { FC } from "react";
-import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { WorkspaceDormantBadge } from "../WorkspaceDormantBadge/WorkspaceDormantBadge";
 import { WorkspaceStatusIndicator } from "../WorkspaceStatusIndicator/WorkspaceStatusIndicator";
 

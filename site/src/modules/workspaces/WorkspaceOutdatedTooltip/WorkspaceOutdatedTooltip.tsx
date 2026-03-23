@@ -17,9 +17,9 @@ import {
 import { InfoIcon, RotateCcwIcon } from "lucide-react";
 import { linkToTemplate, useLinks } from "modules/navigation";
 import { type FC, type ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { toast } from "sonner";
-import { useTranslation } from "react-i18next";
 import {
 	useWorkspaceUpdate,
 	WorkspaceUpdateDialogs,

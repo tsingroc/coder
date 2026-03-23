@@ -9,6 +9,7 @@ import {
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
 import { useProxy } from "contexts/ProxyContext";
+import type { TFunction } from "i18next";
 import {
 	Building2Icon,
 	CircleAlertIcon,
@@ -20,7 +21,6 @@ import {
 import { isExternalApp, needsSessionToken } from "modules/apps/apps";
 import { useAppLink } from "modules/apps/useAppLink";
 import { type FC, type ReactNode, useState } from "react";
-import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { AgentButton } from "../AgentButton";
 import { BaseIcon } from "./BaseIcon";
@@ -223,7 +223,8 @@ const getShareDetails = (
 	sharingLevel: TypesGen.WorkspaceAppSharingLevel,
 	t: TFunction<"workspaceDetail">,
 ): { shareTooltip: string; shareIcon: LucideIcon } => {
-	const details = shareDetails[sharingLevel as Exclude<typeof sharingLevel, "owner">];
+	const details =
+		shareDetails[sharingLevel as Exclude<typeof sharingLevel, "owner">];
 	if (!details) {
 		return { shareTooltip: "", shareIcon: Building2Icon };
 	}
@@ -235,6 +236,8 @@ const getShareDetails = (
 	};
 	return {
 		...details,
-		shareTooltip: (t as any)(tooltipKeyMap[sharingLevel] || details.shareTooltip),
+		shareTooltip: (t as any)(
+			tooltipKeyMap[sharingLevel] || details.shareTooltip,
+		),
 	};
 };

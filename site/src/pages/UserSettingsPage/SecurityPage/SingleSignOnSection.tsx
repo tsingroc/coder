@@ -13,7 +13,6 @@ import { ConfirmDialog } from "components/Dialogs/ConfirmDialog/ConfirmDialog";
 import { EmptyState } from "components/EmptyState/EmptyState";
 import { ExternalImage } from "components/ExternalImage/ExternalImage";
 import { Stack } from "components/Stack/Stack";
-import type { TFunction } from "i18next";
 import { CircleCheck as CircleCheckIcon, KeyIcon } from "lucide-react";
 import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";

@@ -1,6 +1,5 @@
 import Skeleton from "@mui/material/Skeleton";
 import type * as TypesGen from "api/typesGenerated";
-import { Abbr } from "components/Abbr/Abbr";
 import { ChevronDownIcon } from "components/AnimatedIcons/ChevronDown";
 import { Button } from "components/Button/Button";
 import {
@@ -16,9 +15,9 @@ import { Latency } from "components/Latency/Latency";
 import type { ProxyContextValue } from "contexts/ProxyContext";
 import { useAuthenticated } from "hooks";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { toast } from "sonner";
-import { useTranslation } from "react-i18next";
 import { sortProxiesByLatency } from "./proxyUtils";
 
 interface ProxyMenuProps {

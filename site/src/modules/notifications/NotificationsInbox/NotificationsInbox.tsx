@@ -6,9 +6,9 @@ import type {
 } from "api/typesGenerated";
 import { useEffectEvent } from "hooks/hookPolyfills";
 import { type FC, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
-import { useTranslation } from "react-i18next";
 import { InboxPopover } from "./InboxPopover";
 
 const NOTIFICATIONS_QUERY_KEY = ["notifications"];
@@ -88,7 +88,7 @@ export const NotificationsInbox: FC<NotificationsInboxProps> = ({
 		});
 
 		return () => socket.close();
-	}, [updateNotificationsCache]);
+	}, [updateNotificationsCache, t]);
 
 	const {
 		mutate: loadMoreNotifications,

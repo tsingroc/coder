@@ -10,6 +10,7 @@ import { RocketIcon } from "components/Icons/RocketIcon";
 import { TerminalIcon } from "components/Icons/TerminalIcon";
 import { VSCodeIcon } from "components/Icons/VSCodeIcon";
 import { Link } from "components/Link/Link";
+import { PillSpinner } from "components/Pill/Pill";
 import {
 	Tooltip,
 	TooltipContent,
@@ -40,7 +41,6 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router";
-import { PillSpinner } from "components/Pill/Pill";
 
 interface DeploymentBannerViewProps {
 	health?: HealthcheckReport;

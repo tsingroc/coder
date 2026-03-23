@@ -93,18 +93,6 @@
 			"sharedOrganization": "Shared with organization members",
 			"sharedPublic": "Shared publicly"
 		},
-		"ssh": {
-			"title": "SSH",
-			"connectViaSSH": "Connect via SSH",
-			"runCommands": "Run the following commands to connect with SSH:",
-			"configureSSH": "Configure SSH hosts on machine:",
-			"connectToAgent": "Connect to the agent:",
-			"installCLILink": "Install Coder CLI",
-			"vscodeSSHLink": "Connect via VS Code Remote SSH",
-			"jetbrainsLink": "Connect via JetBrains IDEs",
-			"desktopLink": "Connect via Coder Desktop",
-			"sshConfigLink": "SSH configuration"
-		},
 		"agentStatus": {
 			"ready": "Ready",
 			"starting": "Starting...",

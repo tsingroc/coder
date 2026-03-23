@@ -5,8 +5,8 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
-import { useTranslation } from "react-i18next";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	DATE_FORMAT,
 	formatDateTime,

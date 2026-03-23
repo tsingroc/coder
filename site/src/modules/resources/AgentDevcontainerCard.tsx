@@ -29,11 +29,11 @@ import {
 	TooltipTrigger,
 } from "components/Tooltip/Tooltip";
 import { useProxy } from "contexts/ProxyContext";
+import type { TFunction } from "i18next";
 import { Container, ExternalLinkIcon } from "lucide-react";
 import { useFeatureVisibility } from "modules/dashboard/useFeatureVisibility";
 import { AppStatuses } from "pages/WorkspacePage/AppStatuses";
 import type { FC } from "react";
-import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "sonner";
@@ -442,14 +442,20 @@ const DevcontainerDeleteErrorDialog: FC<DevcontainerDeleteErrorDialogProps> = ({
 		>
 			<DialogContent variant="destructive">
 				<DialogHeader>
-					<DialogTitle>{t("resources.devcontainer.deleteErrorTitle")}</DialogTitle>
+					<DialogTitle>
+						{t("resources.devcontainer.deleteErrorTitle")}
+					</DialogTitle>
 					<DialogDescription className="flex flex-row gap-4">
-						<strong className="text-content-primary">{t("resources.devcontainer.message")}</strong>{" "}
+						<strong className="text-content-primary">
+							{t("resources.devcontainer.message")}
+						</strong>{" "}
 						<span>{errorMessage}</span>
 					</DialogDescription>
 					{errorDetail && (
 						<DialogDescription className="flex flex-row gap-9">
-							<strong className="text-content-primary">{t("resources.devcontainer.detail")}</strong>{" "}
+							<strong className="text-content-primary">
+								{t("resources.devcontainer.detail")}
+							</strong>{" "}
 							{/* TODO(DanielleMaywood): `[overflow-wrap:anywhere]` should be replaced with `wrap-anywhere` when we hit tailwind v4 */}
 							<span className="[overflow-wrap:anywhere] break-normal">
 								{errorDetail}

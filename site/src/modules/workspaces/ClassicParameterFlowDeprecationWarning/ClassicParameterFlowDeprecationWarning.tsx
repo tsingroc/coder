@@ -1,7 +1,7 @@
 import { Alert } from "components/Alert/Alert";
 import { Link } from "components/Link/Link";
-import { useTranslation } from "react-i18next";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { docs } from "utils/docs";
 
 interface ClassicParameterFlowDeprecationWarningProps {

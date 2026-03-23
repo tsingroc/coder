@@ -15,6 +15,8 @@ import {
 import { Stack } from "components/Stack/Stack";
 import { Stats, StatsItem } from "components/Stats/Stats";
 import { TAB_PADDING_X, TabLink, Tabs, TabsList } from "components/Tabs/Tabs";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 import { useSearchParamsKey } from "hooks/useSearchParamsKey";
 import { ExternalLinkIcon } from "lucide-react";
 import { BuildAvatar } from "modules/builds/BuildAvatar/BuildAvatar";
@@ -37,8 +39,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { cn } from "utils/cn";
 import { formatDate } from "utils/time";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
 import { Sidebar, SidebarCaption, SidebarItem } from "./Sidebar";
 
 dayjs.extend(duration);
@@ -82,9 +82,7 @@ export const WorkspaceBuildPageView: FC<WorkspaceBuildPageViewProps> = ({
 	});
 
 	// Localized version of displayWorkspaceBuildDuration
-	const getWorkspaceBuildDuration = (
-		build: WorkspaceBuild,
-	): string => {
+	const getWorkspaceBuildDuration = (build: WorkspaceBuild): string => {
 		const isCompleted = build.job.started_at && build.job.completed_at;
 
 		if (!isCompleted) {

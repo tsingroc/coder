@@ -1,7 +1,7 @@
 import type { Workspace } from "api/typesGenerated";
 import { ConfirmDialog } from "components/Dialogs/ConfirmDialog/ConfirmDialog";
-import { useTranslation } from "react-i18next";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface WorkspaceBuildCancelDialogProps {
 	open: boolean;

@@ -8,8 +8,8 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "components/Dialog/Dialog";
-import { useTranslation } from "react-i18next";
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 interface WorkspaceErrorDialogProps {

@@ -20,7 +20,12 @@ export const WorkspaceBuildData = ({ build }: { build: WorkspaceBuild }) => {
 	const theme = useTheme();
 
 	// Determine status type based on build job status
-	const getStatusType = (): "success" | "active" | "inactive" | "error" | "warning" => {
+	const getStatusType = ():
+		| "success"
+		| "active"
+		| "inactive"
+		| "error"
+		| "warning" => {
 		switch (build.job.status) {
 			case "succeeded":
 				return "success";

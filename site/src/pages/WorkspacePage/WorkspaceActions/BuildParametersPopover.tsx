@@ -24,8 +24,8 @@ import {
 } from "components/Popover/Popover";
 import { RichParameterInput } from "components/RichParameterInput/RichParameterInput";
 import { useFormik } from "formik";
-import { useTranslation } from "react-i18next";
 import { type FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { docs } from "utils/docs";
 import { getFormHelpers } from "utils/formUtils";

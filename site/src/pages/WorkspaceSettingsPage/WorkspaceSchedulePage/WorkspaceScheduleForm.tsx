@@ -21,13 +21,13 @@ import { Switch } from "components/Switch/Switch";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import { type FormikTouched, useFormik } from "formik";
+import type { TFunction } from "i18next";
 import {
 	defaultSchedule,
 	emptySchedule,
 } from "pages/WorkspaceSettingsPage/WorkspaceSchedulePage/schedule";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import type { TFunction } from "i18next";
 import { getFormHelpers } from "utils/formUtils";
 import { humanDuration } from "utils/time";
 import { timeZones } from "utils/timeZones";
@@ -66,7 +66,8 @@ export interface WorkspaceScheduleFormValues {
 type TranslationFunction = TFunction<"workspaceSettings">;
 
 // Helper function for tests that provides a simple translation function
-export const mockTranslationFunction = ((key: string): string => key) as TranslationFunction;
+export const mockTranslationFunction = ((key: string): string =>
+	key) as TranslationFunction;
 
 export const validationSchema = (t: TranslationFunction) =>
 	Yup.object({
