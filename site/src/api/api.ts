@@ -2272,6 +2272,24 @@ class ApiMethods {
 		return response.data;
 	};
 
+	getAllTemplateQuotaDefaults = async (): Promise<
+		TypesGen.TemplateQuotaDefault[]
+	> => {
+		const response = await this.axios.get("/api/v2/quotas/templates");
+		return response.data;
+	};
+
+	setTemplateQuotaDefault = async (
+		templateId: string,
+		data: TypesGen.SetTemplateQuotaDefaultRequest,
+	): Promise<TypesGen.TemplateQuotaDefault> => {
+		const response = await this.axios.put(
+			`/api/v2/quotas/templates/${templateId}`,
+			data,
+		);
+		return response.data;
+	};
+
 	getReplicas = async (): Promise<TypesGen.Replica[]> => {
 		const response = await this.axios.get("/api/v2/replicas");
 		return response.data;
