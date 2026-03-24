@@ -984,3 +984,44 @@ func (c *Client) AuthMethods(ctx context.Context) (AuthMethods, error) {
 	var userAuth AuthMethods
 	return userAuth, json.NewDecoder(res.Body).Decode(&userAuth)
 }
+
+// GetUserTemplateQuotas gets all template quotas for a user.
+func (c *Client) GetUserTemplateQuotas(ctx context.Context, user string) (UserTemplateQuotasResponse, error) {
+	res, err := c.Request(ctx, http.MethodGet, fmt.Sprintf("/api/v2/users/%s/quotas/templates", user), nil)
+	if err != nil {
+		return UserTemplateQuotasResponse{}, err
+	}
+	defer res.Body.Close()
+	if res.StatusCode != http.StatusOK {
+		return UserTemplateQuotasResponse{}, ReadBodyAsError(res)
+	}
+	var quotas UserTemplateQuotasResponse
+	return quotas, json.NewDecoder(res.Body).Decode(&quotas)
+}
+
+// SetUserTemplateQuota sets a user's quota for a specific template.
+func (c *Client) SetUserTemplateQuota(ctx context.Context, user, template string, req SetUserTemplateQuotaRequest) (UserTemplateQuota, error) {
+	res, err := c.Request(ctx, http.MethodPut, fmt.Sprintf("/api/v2/users/%s/quotas/templates/%s", user, template), req)
+	if err != nil {
+		return UserTemplateQuota{}, err
+	}
+	defer res.Body.Close()
+	if res.StatusCode != http.StatusOK {
+		return UserTemplateQuota{}, ReadBodyAsError(res)
+	}
+	var quota UserTemplateQuota
+	return quota, json.NewDecoder(res.Body).Decode(&quota)
+}
+
+// ResetUserTemplateQuota resets a user's quota for a specific template to default.
+func (c *Client) ResetUserTemplateQuota(ctx context.Context, user, template string) error {
+	res, err := c.Request(ctx, http.MethodDelete, fmt.Sprintf("/api/v2/users/%s/quotas/templates/%s", user, template), nil)
+	if err != nil {
+		return err
+	}
+	defer res.Body.Close()
+	if res.StatusCode != http.StatusNoContent && res.StatusCode != http.StatusOK {
+		return ReadBodyAsError(res)
+	}
+	return nil
+}

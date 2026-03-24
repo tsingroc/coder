@@ -4647,3 +4647,31 @@ func ComputeMaxIdleConns(maxOpen int, configuredIdle string) (int, error) {
 	}
 	return idle, nil
 }
+
+// GetAllTemplateQuotaDefaults gets all template default quotas.
+func (c *Client) GetAllTemplateQuotaDefaults(ctx context.Context) ([]TemplateQuotaDefault, error) {
+	res, err := c.Request(ctx, http.MethodGet, "/api/v2/quotas/templates", nil)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+	if res.StatusCode != http.StatusOK {
+		return nil, ReadBodyAsError(res)
+	}
+	var quotas []TemplateQuotaDefault
+	return quotas, json.NewDecoder(res.Body).Decode(&quotas)
+}
+
+// SetTemplateQuotaDefault sets the default quota for a template.
+func (c *Client) SetTemplateQuotaDefault(ctx context.Context, template string, req SetTemplateQuotaDefaultRequest) (TemplateQuotaDefault, error) {
+	res, err := c.Request(ctx, http.MethodPut, fmt.Sprintf("/api/v2/quotas/templates/%s", template), req)
+	if err != nil {
+		return TemplateQuotaDefault{}, err
+	}
+	defer res.Body.Close()
+	if res.StatusCode != http.StatusOK {
+		return TemplateQuotaDefault{}, ReadBodyAsError(res)
+	}
+	var quota TemplateQuotaDefault
+	return quota, json.NewDecoder(res.Body).Decode(&quota)
+}
