@@ -73,54 +73,18 @@ func (api *API) getUserTemplateQuota(ctx context.Context, userID string, templat
 
 // getUserCustomQuota retrieves a user's custom quota for a specific template.
 func (api *API) getUserCustomQuota(ctx context.Context, userID string, templateID string) (int64, error) {
-	// Direct SQL query to avoid circular dependency on generated code
-	row := api.Database.QueryRowContext(ctx, `
-		SELECT workspace_quota
-		FROM user_template_quotas
-		WHERE user_id = $1 AND template_id = $2
-	`, userID, templateID)
-
-	var quota int64
-	err := row.Scan(&quota)
-	if err != nil {
-		return 0, err
-	}
-	return quota, nil
+	return api.Database.GetUserCustomQuota(ctx, userID, templateID)
 }
 
 // getTemplateDefaultQuota retrieves the default quota for a template.
 func (api *API) getTemplateDefaultQuota(ctx context.Context, templateID string) (int64, error) {
-	// Direct SQL query to avoid circular dependency on generated code
-	row := api.Database.QueryRowContext(ctx, `
-		SELECT default_quota
-		FROM template_quota_defaults
-		WHERE template_id = $1
-	`, templateID)
-
-	var quota int64
-	err := row.Scan(&quota)
-	if err != nil {
-		return 0, err
-	}
-	return quota, nil
+	return api.Database.GetTemplateDefaultQuota(ctx, templateID)
 }
 
 // getUserWorkspaceCountByTemplate counts how many workspaces a user has
 // created using a specific template.
 func (api *API) getUserWorkspaceCountByTemplate(ctx context.Context, userID string, templateID string) (int64, error) {
-	// Direct SQL query to avoid circular dependency on generated code
-	row := api.Database.QueryRowContext(ctx, `
-		SELECT COUNT(*)
-		FROM workspaces
-		WHERE owner_id = $1 AND template_id = $2 AND deleted = false
-	`, userID, templateID)
-
-	var count int64
-	err := row.Scan(&count)
-	if err != nil {
-		return 0, err
-	}
-	return count, nil
+	return api.Database.GetUserWorkspaceCountByTemplate(ctx, userID, templateID)
 }
 
 // QuotaExceededError is returned when a user attempts to create a workspace

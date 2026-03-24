@@ -1,9 +1,9 @@
 package coderd
 
 import (
+	"context"
 	"database/sql"
 	"net/http"
-	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
@@ -33,7 +33,7 @@ func (api *API) getUserTemplateQuotas(rw http.ResponseWriter, r *http.Request) {
 	)
 
 	// Check permissions: admin or user themselves
-	if !api.AGPL.Authorize(r, policy.ActionRead, rbac.ResourceUserWorkspaceQuota.WithID(user.ID.String())) {
+	if !api.Authorize(r, policy.ActionRead, rbac.ResourceUserWorkspaceQuota.WithID(user.ID)) {
 		httpapi.Forbidden(rw)
 		return
 	}
@@ -45,7 +45,7 @@ func (api *API) getUserTemplateQuotas(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// Get user's custom quotas
-	userQuotas, err := api.getAllUserTemplateQuotas(ctx, user.ID.String())
+	userQuotas, err := api.getAllUserTemplateQuotasDB(ctx, user.ID.String())
 	if err != nil && !xerrors.Is(err, sql.ErrNoRows) {
 		httpapi.Write(ctx, rw, http.StatusInternalServerError, codersdk.Response{
 			Message: "Failed to get user quotas",
@@ -55,7 +55,7 @@ func (api *API) getUserTemplateQuotas(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// Get template usage for this user
-	usage, err := api.getTemplateUsageByUser(ctx, user.ID.String())
+	usage, err := api.getTemplateUsageByUserDB(ctx, user.ID.String())
 	if err != nil {
 		httpapi.Write(ctx, rw, http.StatusInternalServerError, codersdk.Response{
 			Message: "Failed to get template usage",
@@ -65,7 +65,7 @@ func (api *API) getUserTemplateQuotas(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// Get all template defaults
-	defaultQuotas, err := api.getAllTemplateQuotaDefaults(ctx)
+	defaultQuotas, err := api.getAllTemplateQuotaDefaultsDB(ctx)
 	if err != nil {
 		httpapi.Write(ctx, rw, http.StatusInternalServerError, codersdk.Response{
 			Message: "Failed to get default quotas",
@@ -143,7 +143,7 @@ func (api *API) setUserTemplateQuota(rw http.ResponseWriter, r *http.Request) {
 	)
 
 	// Check permissions: only admin can set quotas
-	if !api.AGPL.Authorize(r, policy.ActionCreate, rbac.ResourceUserWorkspaceQuota.WithID(user.ID.String())) {
+	if !api.Authorize(r, policy.ActionCreate, rbac.ResourceUserWorkspaceQuota.WithID(user.ID)) {
 		httpapi.Forbidden(rw)
 		return
 	}
@@ -175,8 +175,8 @@ func (api *API) setUserTemplateQuota(rw http.ResponseWriter, r *http.Request) {
 	workspaceCount, _ := api.getUserWorkspaceCountByTemplate(ctx, user.ID.String(), templateID)
 
 	httpapi.Write(ctx, rw, http.StatusOK, codersdk.UserTemplateQuota{
-		UserID:            userQuota.UserID,
-		TemplateID:        userQuota.TemplateID,
+		UserID:            userQuota.UserID.String(),
+		TemplateID:        userQuota.TemplateID.String(),
 		WorkspaceQuota:    userQuota.WorkspaceQuota,
 		CurrentWorkspaces: int64(workspaceCount),
 		CreatedAt:         userQuota.CreatedAt,
@@ -201,7 +201,7 @@ func (api *API) resetUserTemplateQuota(rw http.ResponseWriter, r *http.Request) 
 	)
 
 	// Check permissions: only admin can reset quotas
-	if !api.AGPL.Authorize(r, policy.ActionDelete, rbac.ResourceUserWorkspaceQuota.WithID(user.ID.String())) {
+	if !api.Authorize(r, policy.ActionDelete, rbac.ResourceUserWorkspaceQuota.WithID(user.ID)) {
 		httpapi.Forbidden(rw)
 		return
 	}
@@ -231,12 +231,12 @@ func (api *API) getAllTemplateQuotaDefaults(rw http.ResponseWriter, r *http.Requ
 	ctx := r.Context()
 
 	// Check permissions: admin only
-	if !api.AGPL.Authorize(r, policy.ActionRead, rbac.ResourceQuota) {
+	if !api.Authorize(r, policy.ActionRead, rbac.ResourceQuota) {
 		httpapi.Forbidden(rw)
 		return
 	}
 
-	quotas, err := api.getAllTemplateQuotaDefaults(ctx)
+	quotas, err := api.getAllTemplateQuotaDefaultsDB(ctx)
 	if err != nil {
 		httpapi.Write(ctx, rw, http.StatusInternalServerError, codersdk.Response{
 			Message: "Failed to get template quota defaults",
@@ -279,7 +279,7 @@ func (api *API) setTemplateQuotaDefault(rw http.ResponseWriter, r *http.Request)
 	)
 
 	// Check permissions: admin only
-	if !api.AGPL.Authorize(r, policy.ActionCreate, rbac.ResourceQuota) {
+	if !api.Authorize(r, policy.ActionCreate, rbac.ResourceQuota) {
 		httpapi.Forbidden(rw)
 		return
 	}
@@ -316,158 +316,32 @@ func (api *API) setTemplateQuotaDefault(rw http.ResponseWriter, r *http.Request)
 
 // Database helper methods below
 
-// getAllUserTemplateQuotas retrieves all custom quotas for a user.
-func (api *API) getAllUserTemplateQuotas(ctx context.Context, userID string) ([]UserTemplateQuotaRow, error) {
-	rows, err := api.Database.QueryContext(ctx, `
-		SELECT user_id, template_id, workspace_quota, created_at, updated_at, updated_by
-	FROM user_template_quotas
-	WHERE user_id = $1
-	`, userID)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var quotas []UserTemplateQuotaRow
-	for rows.Next() {
-		var q UserTemplateQuotaRow
-		err := rows.Scan(&q.UserID, &q.TemplateID, &q.WorkspaceQuota, &q.CreatedAt, &q.UpdatedAt, &q.UpdatedBy)
-		if err != nil {
-			return nil, err
-		}
-		quotas = append(quotas, q)
-	}
-
-	return quotas, rows.Err()
+// getAllUserTemplateQuotasDB retrieves all custom quotas for a user.
+func (api *API) getAllUserTemplateQuotasDB(ctx context.Context, userID string) ([]database.UserTemplateQuotaRow, error) {
+	return api.Database.GetAllUserTemplateQuotas(ctx, userID)
 }
 
-// getTemplateUsageByUser retrieves workspace usage breakdown by template for a user.
-func (api *API) getTemplateUsageByUser(ctx context.Context, userID string) ([]TemplateUsageByUserRow, error) {
-	rows, err := api.Database.QueryContext(ctx, `
-		SELECT w.template_id, t.name as template_name, t.display_name as template_display_name,
-		       t.icon as template_icon, COUNT(w.id) as workspace_count
-		FROM workspaces w
-		JOIN templates t ON w.template_id = t.id
-		WHERE w.owner_id = $1 AND w.deleted = false
-		GROUP BY w.template_id, t.name, t.display_name, t.icon
-		ORDER BY workspace_count DESC
-	`, userID)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var usage []TemplateUsageByUserRow
-	for rows.Next() {
-		var u TemplateUsageByUserRow
-		err := rows.Scan(&u.TemplateID, &u.TemplateName, &u.TemplateDisplayName, &u.TemplateIcon, &u.WorkspaceCount)
-		if err != nil {
-			return nil, err
-		}
-		usage = append(usage, u)
-	}
-
-	return usage, rows.Err()
+// getTemplateUsageByUserDB retrieves workspace usage breakdown by template for a user.
+func (api *API) getTemplateUsageByUserDB(ctx context.Context, userID string) ([]database.TemplateUsageByUserRow, error) {
+	return api.Database.GetTemplateUsageByUser(ctx, userID)
 }
 
-// getAllTemplateQuotaDefaults retrieves all template default quotas.
-func (api *API) getAllTemplateQuotaDefaults(ctx context.Context) ([]TemplateQuotaDefaultRow, error) {
-	rows, err := api.Database.QueryContext(ctx, `
-		SELECT tqd.template_id, tqd.default_quota, tqd.updated_at, tqd.updated_by,
-		       t.name as template_name, t.display_name as template_display_name, t.icon as template_icon
-		FROM template_quota_defaults tqd
-		JOIN templates t ON tqd.template_id = t.id
-	`)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var quotas []TemplateQuotaDefaultRow
-	for rows.Next() {
-		var q TemplateQuotaDefaultRow
-		err := rows.Scan(&q.TemplateID, &q.DefaultQuota, &q.UpdatedAt, &q.UpdatedBy, &q.TemplateName, &q.TemplateDisplayName, &q.TemplateIcon)
-		if err != nil {
-			return nil, err
-		}
-		quotas = append(quotas, q)
-	}
-
-	return quotas, rows.Err()
+// getAllTemplateQuotaDefaultsDB retrieves all template default quotas.
+func (api *API) getAllTemplateQuotaDefaultsDB(ctx context.Context) ([]database.TemplateQuotaDefaultRow, error) {
+	return api.Database.GetAllTemplateQuotaDefaults(ctx)
 }
 
 // setUserTemplateQuotaDB sets or updates a user's quota for a template.
-func (api *API) setUserTemplateQuotaDB(ctx context.Context, userID, templateID string, quota int64, updatedBy uuid.UUID) (UserTemplateQuotaRow, error) {
-	var row UserTemplateQuotaRow
-	err := api.Database.QueryRowContext(ctx, `
-		INSERT INTO user_template_quotas (user_id, template_id, workspace_quota, updated_by)
-		VALUES ($1, $2, $3, $4)
-		ON CONFLICT (user_id, template_id)
-		DO UPDATE SET
-			workspace_quota = EXCLUDED.workspace_quota,
-			updated_at = NOW(),
-			updated_by = EXCLUDED.updated_by
-		RETURNING user_id, template_id, workspace_quota, created_at, updated_at, updated_by
-	`, userID, templateID, quota, updatedBy).Scan(
-		&row.UserID, &row.TemplateID, &row.WorkspaceQuota, &row.CreatedAt, &row.UpdatedAt, &row.UpdatedBy,
-	)
-
-	return row, err
+func (api *API) setUserTemplateQuotaDB(ctx context.Context, userID, templateID string, quota int64, updatedBy uuid.UUID) (database.UserTemplateQuotaRow, error) {
+	return api.Database.SetUserTemplateQuota(ctx, userID, templateID, quota, updatedBy)
 }
 
 // deleteUserTemplateQuotaDB deletes a user's custom quota for a template.
 func (api *API) deleteUserTemplateQuotaDB(ctx context.Context, userID, templateID string) error {
-	_, err := api.Database.ExecContext(ctx, `
-		DELETE FROM user_template_quotas
-		WHERE user_id = $1 AND template_id = $2
-	`, userID, templateID)
-	return err
+	return api.Database.DeleteUserTemplateQuota(ctx, userID, templateID)
 }
 
 // setTemplateQuotaDefaultDB sets or updates the default quota for a template.
-func (api *API) setTemplateQuotaDefaultDB(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (TemplateQuotaDefaultRow, error) {
-	var row TemplateQuotaDefaultRow
-	err := api.Database.QueryRowContext(ctx, `
-		INSERT INTO template_quota_defaults (template_id, default_quota, updated_by)
-		VALUES ($1, $2, $3)
-		ON CONFLICT (template_id)
-		DO UPDATE SET
-			default_quota = EXCLUDED.default_quota,
-			updated_at = NOW(),
-			updated_by = EXCLUDED.updated_by
-		RETURNING template_id, default_quota, updated_at
-	`, templateID, quota, updatedBy).Scan(
-		&row.TemplateID, &row.DefaultQuota, &row.UpdatedAt,
-	)
-
-	return row, err
-}
-
-// Row types for database results
-
-type UserTemplateQuotaRow struct {
-	UserID         uuid.UUID
-	TemplateID     uuid.UUID
-	WorkspaceQuota int64
-	CreatedAt      time.Time
-	UpdatedAt      time.Time
-	UpdatedBy      uuid.UUID
-}
-
-type TemplateUsageByUserRow struct {
-	TemplateID          uuid.UUID
-	TemplateName        string
-	TemplateDisplayName string
-	TemplateIcon        string
-	WorkspaceCount      int64
-}
-
-type TemplateQuotaDefaultRow struct {
-	TemplateID          uuid.UUID
-	DefaultQuota        int64
-	UpdatedAt           time.Time
-	UpdatedBy           uuid.UUID
-	TemplateName        string
-	TemplateDisplayName string
-	TemplateIcon        string
+func (api *API) setTemplateQuotaDefaultDB(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (database.TemplateQuotaDefaultRow, error) {
+	return api.Database.SetTemplateQuotaDefault(ctx, templateID, quota, updatedBy)
 }

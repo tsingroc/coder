@@ -1296,6 +1296,14 @@ func New(options *Options) *API {
 			r.Get("/stats", api.deploymentStats)
 			r.Get("/ssh", api.sshConfig)
 		})
+		r.Route("/quotas", func(r chi.Router) {
+			r.Use(apiKeyMiddleware)
+			// Template quota default management routes (admin only)
+			r.Get("/templates", api.getAllTemplateQuotaDefaults)
+			r.Route("/templates/{template}", func(r chi.Router) {
+				r.Put("/", api.setTemplateQuotaDefault)
+			})
+		})
 		r.Route("/experiments", func(r chi.Router) {
 			r.Use(apiKeyMiddleware)
 			r.Get("/available", handleExperimentsAvailable)
@@ -1534,6 +1542,13 @@ func New(options *Options) *API {
 							r.Get("/", api.workspaceByOwnerAndName)
 							r.Get("/builds/{buildnumber}", api.workspaceBuildByBuildNumber)
 						})
+					})
+
+					// User quota management routes
+					r.Get("/quotas/templates", api.getUserTemplateQuotas)
+					r.Route("/quotas/templates/{template}", func(r chi.Router) {
+						r.Put("/", api.setUserTemplateQuota)
+						r.Delete("/", api.resetUserTemplateQuota)
 					})
 
 					r.Group(func(r chi.Router) {
