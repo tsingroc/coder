@@ -1015,3 +1015,120 @@ AND wb.build_number = (
     FROM workspace_builds wb2
     WHERE wb2.workspace_id = w.id
 );
+
+-- name: GetUserWorkspaceCountByTemplate :one
+-- Get the count of workspaces a user has created using a specific template
+SELECT
+    COUNT(*)
+FROM
+    workspaces
+WHERE
+    owner_id = $1
+    AND template_id = $2
+    AND deleted = false;
+
+-- name: GetUserTemplateQuota :one
+-- Get the custom quota for a specific user-template combination
+SELECT
+    user_id,
+    template_id,
+    workspace_quota,
+    created_at,
+    updated_at,
+    updated_by
+FROM
+    user_template_quotas
+WHERE
+    user_id = $1
+    AND template_id = $2;
+
+-- name: GetAllUserTemplateQuotas :many
+-- Get all custom quotas for a specific user across all templates
+SELECT
+    user_id,
+    template_id,
+    workspace_quota,
+    created_at,
+    updated_at,
+    updated_by
+FROM
+    user_template_quotas
+WHERE
+    user_id = $1;
+
+-- name: GetTemplateQuotaDefault :one
+-- Get the default quota for a specific template
+SELECT
+    template_id,
+    default_quota,
+    updated_at,
+    updated_by
+FROM
+    template_quota_defaults
+WHERE
+    template_id = $1;
+
+-- name: GetAllTemplateQuotaDefaults :many
+-- Get all template default quotas with template metadata
+SELECT
+    tqd.template_id,
+    tqd.default_quota,
+    tqd.updated_at,
+    tqd.updated_by,
+    t.name as template_name,
+    t.display_name as template_display_name,
+    t.icon as template_icon
+FROM
+    template_quota_defaults tqd
+JOIN templates t ON tqd.template_id = t.id;
+
+-- name: SetUserTemplateQuota :one
+-- Set or update a user's quota for a specific template
+INSERT INTO user_template_quotas (user_id, template_id, workspace_quota, updated_by)
+VALUES ($1, $2, $3, $4)
+ON CONFLICT (user_id, template_id)
+DO UPDATE SET
+    workspace_quota = EXCLUDED.workspace_quota,
+    updated_at = NOW(),
+    updated_by = EXCLUDED.updated_by
+RETURNING *;
+
+-- name: DeleteUserTemplateQuota :exec
+-- Delete a user's custom quota for a specific template (reverts to default)
+DELETE FROM user_template_quotas
+WHERE user_id = $1 AND template_id = $2;
+
+-- name: SetTemplateQuotaDefault :one
+-- Set or update the default quota for a specific template
+INSERT INTO template_quota_defaults (template_id, default_quota, updated_by)
+VALUES ($1, $2, $3)
+ON CONFLICT (template_id)
+DO UPDATE SET
+    default_quota = EXCLUDED.default_quota,
+    updated_at = NOW(),
+    updated_by = EXCLUDED.updated_by
+RETURNING *;
+
+-- name: DeleteTemplateQuotaDefault :exec
+-- Delete the default quota for a specific template
+DELETE FROM template_quota_defaults
+WHERE template_id = $1;
+
+-- name: GetTemplateUsageByUser :many
+-- Get workspace usage breakdown per template for a specific user
+SELECT
+    w.template_id,
+    t.name as template_name,
+    t.display_name as template_display_name,
+    t.icon as template_icon,
+    COUNT(w.id) as workspace_count
+FROM
+    workspaces w
+JOIN templates t ON w.template_id = t.id
+WHERE
+    w.owner_id = $1
+    AND w.deleted = false
+GROUP BY
+    w.template_id, t.name, t.display_name, t.icon
+ORDER BY
+    workspace_count DESC;
