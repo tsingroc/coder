@@ -406,6 +406,21 @@ func (api *API) postWorkspacesByOrganization(rw http.ResponseWriter, r *http.Req
 		AvatarURL: member.AvatarURL,
 	}
 
+	// Check workspace quota before creating workspace
+	err = api.CheckUserWorkspaceQuota(ctx, member.UserID.String(), req.TemplateID.String())
+	var quotaErr *QuotaExceededError
+	if xerrors.As(err, &quotaErr) {
+		quotaErr.WriteHTTPError(ctx, rw)
+		return
+	}
+	if err != nil {
+		httpapi.Write(ctx, rw, http.StatusInternalServerError, codersdk.Response{
+			Message: "Failed to check workspace quota",
+			Detail:  err.Error(),
+		})
+		return
+	}
+
 	w, err := createWorkspace(ctx, aReq, apiKey.UserID, api, owner, req, &createWorkspaceOptions{
 		remoteAddr: r.RemoteAddr,
 	})
@@ -503,6 +518,21 @@ func (api *API) postUserWorkspaces(rw http.ResponseWriter, r *http.Request) {
 	})
 
 	defer commitAudit()
+
+	// Check workspace quota before creating workspace
+	err = api.CheckUserWorkspaceQuota(ctx, owner.ID.String(), req.TemplateID.String())
+	var quotaErr *QuotaExceededError
+	if xerrors.As(err, &quotaErr) {
+		quotaErr.WriteHTTPError(ctx, rw)
+		return
+	}
+	if err != nil {
+		httpapi.Write(ctx, rw, http.StatusInternalServerError, codersdk.Response{
+			Message: "Failed to check workspace quota",
+			Detail:  err.Error(),
+		})
+		return
+	}
 
 	w, err := createWorkspace(ctx, aReq, apiKey.UserID, api, owner, req, &createWorkspaceOptions{
 		remoteAddr: r.RemoteAddr,
