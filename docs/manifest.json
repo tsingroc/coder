@@ -523,6 +523,11 @@
 							"state": ["premium"]
 						},
 						{
+							"title": "Workspace Quotas",
+							"description": "Limit the number of workspaces users can create per template",
+							"path": "./admin/workspace-quotas.md"
+						},
+						{
 							"title": "Sessions \u0026 API Tokens",
 							"description": "Manage authentication tokens for API access and configure session duration policies",
 							"path": "./admin/users/sessions-tokens.md"
