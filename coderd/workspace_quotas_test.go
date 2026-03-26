@@ -3,18 +3,14 @@ package coderd_test
 import (
 	"context"
 	"fmt"
-	"net/http"
 	"testing"
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/xerrors"
 
 	"github.com/coder/coder/v2/coderd/coderdtest"
-	"github.com/coder/coder/v2/coderd/database"
-	"github.com/coder/coder/v2/coderd/rbac"
 	"github.com/coder/coder/v2/codersdk"
 	"github.com/coder/coder/v2/testutil"
 )
@@ -155,7 +151,7 @@ func TestUserTemplateQuotas(t *testing.T) {
 		// Verify values
 		defaultMap := make(map[string]int64)
 		for _, d := range defaults {
-			defaultMap[d.TemplateID.String()] = d.DefaultQuota
+			defaultMap[d.TemplateID] = d.DefaultQuota
 		}
 		require.Equal(t, int64(10), defaultMap[template1.ID.String()])
 		require.Equal(t, int64(20), defaultMap[template2.ID.String()])
@@ -170,7 +166,7 @@ func TestUserTemplateQuotas(t *testing.T) {
 		user := coderdtest.CreateFirstUser(t, client)
 
 		// Create another user
-		_, client2 := coderdtest.CreateAnotherUser(t, client, user.OrganizationID)
+		client2, _ := coderdtest.CreateAnotherUser(t, client, user.OrganizationID)
 
 		// Try to get quotas for the first user as the second user (should fail)
 		_, err := client2.GetUserTemplateQuotas(context.Background(), user.UserID.String())
@@ -206,20 +202,19 @@ func TestWorkspaceQuotaEnforcement(t *testing.T) {
 		require.NoError(t, err)
 
 		// Create first workspace - should succeed
-		ws1 := coderdtest.CreateWorkspace(t, client, user.OrganizationID, template.ID)
+		ws1 := coderdtest.CreateWorkspace(t, client, template.ID)
 		require.NotNil(t, ws1)
 
 		// Create second workspace - should succeed
-		ws2 := coderdtest.CreateWorkspace(t, client, user.OrganizationID, template.ID)
+		ws2 := coderdtest.CreateWorkspace(t, client, template.ID)
 		require.NotNil(t, ws2)
 
 		// Try to create third workspace - should fail with quota exceeded
 		ctx, cancel := context.WithTimeout(context.Background(), testutil.IntervalSlow)
 		defer cancel()
 
-		_, err = client.CreateWorkspace(ctx, user.OrganizationID, codersdk.CreateWorkspaceRequest{
-			TemplateID:        template.ID.String(),
-			Name:              fmt.Sprintf("workspace-%d", time.Now().UnixNano()),
+		_, err = client.CreateWorkspace(ctx, user.OrganizationID, fmt.Sprintf("workspace-%d", time.Now().UnixNano()), codersdk.CreateWorkspaceRequest{
+			TemplateID:        template.ID,
 			AutostartSchedule: nil,
 		})
 		require.Error(t, err)
