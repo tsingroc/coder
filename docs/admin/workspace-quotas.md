@@ -20,7 +20,7 @@ When determining a user's workspace quota for a template, Coder uses the followi
 
 1. **User-specific quota**: If a custom quota is set for the user, this takes precedence
 2. **Template default**: If no user-specific quota exists, the template default is used
-3. **Unlimited**: If neither is set, the user can create unlimited workspaces
+3. **Built-in fallback**: If neither is set, a default of 10 workspaces per template applies
 
 ## Setting Template Quota Defaults
 
@@ -180,30 +180,30 @@ coder quota set experienced-user --template-id dev-template --quota 15
 
 | Endpoint                                           | Method | Description                      |
 |----------------------------------------------------|--------|----------------------------------|
-| `/api/v2/workspace-quotas/templates/defaults`      | GET    | List all template quota defaults |
-| `/api/v2/workspace-quotas/templates/defaults`      | PUT    | Set template quota default       |
+| `/api/v2/quotas/templates`                         | GET    | List all template quota defaults |
+| `/api/v2/quotas/templates/{template}`              | PUT    | Set template quota default       |
 | `/api/v2/users/{user}/quotas/templates`            | GET    | Get user template quotas         |
-| `/api/v2/users/{user}/quotas/templates`            | PUT    | Set user template quota          |
+| `/api/v2/users/{user}/quotas/templates/{template}` | PUT    | Set user template quota          |
 | `/api/v2/users/{user}/quotas/templates/{template}` | DELETE | Reset user quota to default      |
 
 ### Example API Usage
 
 ```bash
 # Set template default
-curl -X PUT https://coder.example.com/api/v2/workspace-quotas/templates/defaults \
+curl -X PUT https://coder.example.com/api/v2/quotas/templates/$TEMPLATE_ID \
   -H "Coder-Session-Token: $TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"template_id": "...", "default_quota": 10}'
+  -d '{"default_quota": 10}'
 
 # Get user quotas
 curl -X GET https://coder.example.com/api/v2/users/$USER_ID/quotas/templates \
   -H "Coder-Session-Token: $TOKEN"
 
 # Set user quota
-curl -X PUT https://coder.example.com/api/v2/users/$USER_ID/quotas/templates \
+curl -X PUT https://coder.example.com/api/v2/users/$USER_ID/quotas/templates/$TEMPLATE_ID \
   -H "Coder-Session-Token: $TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"template_id": "...", "workspace_quota": 15}'
+  -d '{"workspace_quota": 15}'
 
 # Reset user quota
 curl -X DELETE https://coder.example.com/api/v2/users/$USER_ID/quotas/templates/$TEMPLATE_ID \

@@ -970,12 +970,12 @@ type quotaQuerier interface {
 
 // UserTemplateQuotaRow represents a user's custom quota for a template.
 type UserTemplateQuotaRow struct {
-	UserID         uuid.UUID
-	TemplateID     uuid.UUID
-	WorkspaceQuota int64
-	CreatedAt      time.Time
-	UpdatedAt      time.Time
-	UpdatedBy      uuid.UUID
+	UserID         uuid.UUID `json:"user_id"`
+	TemplateID     uuid.UUID `json:"template_id"`
+	WorkspaceQuota int64     `json:"workspace_quota"`
+	CreatedAt      time.Time `json:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at"`
+	UpdatedBy      uuid.UUID `json:"updated_by"`
 }
 
 // TemplateUsageByUserRow represents template usage statistics for a user.
@@ -989,13 +989,13 @@ type TemplateUsageByUserRow struct {
 
 // TemplateQuotaDefaultRow represents a template's default quota.
 type TemplateQuotaDefaultRow struct {
-	TemplateID          uuid.UUID
-	DefaultQuota        int64
-	UpdatedAt           time.Time
-	UpdatedBy           uuid.UUID
-	TemplateName        string
-	TemplateDisplayName string
-	TemplateIcon        string
+	TemplateID          uuid.UUID `json:"template_id"`
+	DefaultQuota        int64     `json:"default_quota"`
+	UpdatedAt           time.Time `json:"updated_at"`
+	UpdatedBy           uuid.UUID `json:"updated_by"`
+	TemplateName        string    `json:"template_name"`
+	TemplateDisplayName string    `json:"template_display_name"`
+	TemplateIcon        string    `json:"template_icon"`
 }
 
 // GetUserWorkspaceCountByTemplate counts how many workspaces a user has created using a specific template.

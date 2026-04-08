@@ -2096,6 +2096,78 @@ func (m queryMetricsStore) GetQuotaConsumedForUser(ctx context.Context, arg data
 	return r0, r1
 }
 
+func (m queryMetricsStore) GetUserWorkspaceCountByTemplate(ctx context.Context, userID string, templateID string) (int64, error) {
+	start := time.Now()
+	r0, r1 := m.s.GetUserWorkspaceCountByTemplate(ctx, userID, templateID)
+	m.queryLatencies.WithLabelValues("GetUserWorkspaceCountByTemplate").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "GetUserWorkspaceCountByTemplate").Inc()
+	return r0, r1
+}
+
+func (m queryMetricsStore) GetUserCustomQuota(ctx context.Context, userID string, templateID string) (int64, error) {
+	start := time.Now()
+	r0, r1 := m.s.GetUserCustomQuota(ctx, userID, templateID)
+	m.queryLatencies.WithLabelValues("GetUserCustomQuota").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "GetUserCustomQuota").Inc()
+	return r0, r1
+}
+
+func (m queryMetricsStore) GetTemplateDefaultQuota(ctx context.Context, templateID string) (int64, error) {
+	start := time.Now()
+	r0, r1 := m.s.GetTemplateDefaultQuota(ctx, templateID)
+	m.queryLatencies.WithLabelValues("GetTemplateDefaultQuota").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "GetTemplateDefaultQuota").Inc()
+	return r0, r1
+}
+
+func (m queryMetricsStore) GetAllUserTemplateQuotas(ctx context.Context, userID string) ([]database.UserTemplateQuotaRow, error) {
+	start := time.Now()
+	r0, r1 := m.s.GetAllUserTemplateQuotas(ctx, userID)
+	m.queryLatencies.WithLabelValues("GetAllUserTemplateQuotas").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "GetAllUserTemplateQuotas").Inc()
+	return r0, r1
+}
+
+func (m queryMetricsStore) GetTemplateUsageByUser(ctx context.Context, userID string) ([]database.TemplateUsageByUserRow, error) {
+	start := time.Now()
+	r0, r1 := m.s.GetTemplateUsageByUser(ctx, userID)
+	m.queryLatencies.WithLabelValues("GetTemplateUsageByUser").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "GetTemplateUsageByUser").Inc()
+	return r0, r1
+}
+
+func (m queryMetricsStore) GetAllTemplateQuotaDefaults(ctx context.Context) ([]database.TemplateQuotaDefaultRow, error) {
+	start := time.Now()
+	r0, r1 := m.s.GetAllTemplateQuotaDefaults(ctx)
+	m.queryLatencies.WithLabelValues("GetAllTemplateQuotaDefaults").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "GetAllTemplateQuotaDefaults").Inc()
+	return r0, r1
+}
+
+func (m queryMetricsStore) SetUserTemplateQuota(ctx context.Context, userID string, templateID string, quota int64, updatedBy uuid.UUID) (database.UserTemplateQuotaRow, error) {
+	start := time.Now()
+	r0, r1 := m.s.SetUserTemplateQuota(ctx, userID, templateID, quota, updatedBy)
+	m.queryLatencies.WithLabelValues("SetUserTemplateQuota").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "SetUserTemplateQuota").Inc()
+	return r0, r1
+}
+
+func (m queryMetricsStore) DeleteUserTemplateQuota(ctx context.Context, userID string, templateID string) error {
+	start := time.Now()
+	r0 := m.s.DeleteUserTemplateQuota(ctx, userID, templateID)
+	m.queryLatencies.WithLabelValues("DeleteUserTemplateQuota").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "DeleteUserTemplateQuota").Inc()
+	return r0
+}
+
+func (m queryMetricsStore) SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (database.TemplateQuotaDefaultRow, error) {
+	start := time.Now()
+	r0, r1 := m.s.SetTemplateQuotaDefault(ctx, templateID, quota, updatedBy)
+	m.queryLatencies.WithLabelValues("SetTemplateQuotaDefault").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "SetTemplateQuotaDefault").Inc()
+	return r0, r1
+}
+
 func (m queryMetricsStore) GetRegularWorkspaceCreateMetrics(ctx context.Context) ([]database.GetRegularWorkspaceCreateMetricsRow, error) {
 	start := time.Now()
 	r0, r1 := m.s.GetRegularWorkspaceCreateMetrics(ctx)

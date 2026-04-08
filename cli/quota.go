@@ -1,13 +1,47 @@
 package cli
 
 import (
+	"context"
 	"fmt"
-	"strconv"
+
+	"github.com/google/uuid"
 
 	"github.com/coder/coder/v2/cli/cliui"
 	"github.com/coder/coder/v2/codersdk"
 	"github.com/coder/serpent"
 )
+
+// namedUser resolves a username or "me" to a user. It also accepts a user ID
+// (UUID) directly.
+func namedUser(ctx context.Context, client *codersdk.Client, identifier string) (*codersdk.User, error) {
+	if identifier == "me" {
+		user, err := client.User(ctx, codersdk.Me)
+		if err != nil {
+			return nil, fmt.Errorf("get current user: %w", err)
+		}
+		return &user, nil
+	}
+
+	// Try as a user ID first (UUID).
+	_, err := uuid.Parse(identifier)
+	if err == nil {
+		user, err := client.User(ctx, identifier)
+		if err != nil {
+			return nil, fmt.Errorf("get user %q: %w", identifier, err)
+		}
+		return &user, nil
+	}
+
+	// Resolve by username.
+	resp, err := client.Users(ctx, codersdk.UsersRequest{Search: identifier})
+	if err != nil {
+		return nil, fmt.Errorf("search user %q: %w", identifier, err)
+	}
+	if len(resp.Users) == 0 {
+		return nil, fmt.Errorf("user %q not found", identifier)
+	}
+	return &resp.Users[0], nil
+}
 
 // nolint
 func (r *RootCmd) quota() *serpent.Command {
@@ -17,13 +51,14 @@ func (r *RootCmd) quota() *serpent.Command {
 		Short:       "Manage workspace quotas",
 		Long:        "Manage user and template workspace quotas.",
 		Aliases:     []string{"quotas"},
+		Children: []*serpent.Command{
+			r.getUserQuotas(),
+			r.setUserQuota(),
+			r.resetUserQuota(),
+			r.getTemplateDefaults(),
+			r.setTemplateDefault(),
+		},
 	}
-
-	cmd.AddCommand(r.getUserQuotas())
-	cmd.AddCommand(r.setUserQuota())
-	cmd.AddCommand(r.resetUserQuota())
-	cmd.AddCommand(r.getTemplateDefaults())
-	cmd.AddCommand(r.setTemplateDefault())
 
 	return cmd
 }
@@ -34,8 +69,7 @@ func (r *RootCmd) getUserQuotas() *serpent.Command {
 		Annotations: workspaceCommand,
 		Use:         "get <username|user-id>",
 		Short:       "Get user template quotas",
-		Long:        "Get all template quotas for a user, including custom quotas and defaults.",
-		Example: FormatExamples(
+		Long: FormatExamples(
 			Example{
 				Description: "Get your own template quotas",
 				Command:     "coder quota get me",
@@ -59,7 +93,7 @@ func (r *RootCmd) getUserQuotas() *serpent.Command {
 				return err
 			}
 
-			quotas, err := client.GetUserTemplateQuotas(inv.Context(), user.ID)
+			quotas, err := client.GetUserTemplateQuotas(inv.Context(), user.ID.String())
 			if err != nil {
 				return err
 			}
@@ -94,8 +128,7 @@ func (r *RootCmd) setUserQuota() *serpent.Command {
 		Annotations: workspaceCommand,
 		Use:         "set <username|user-id>",
 		Short:       "Set user template quota",
-		Long:        "Set a custom quota for a user on a specific template.",
-		Example: FormatExamples(
+		Long: FormatExamples(
 			Example{
 				Description: "Set quota for a user on a template",
 				Command:     "coder quota set alice --template-id <id> --quota 5",
@@ -125,7 +158,7 @@ func (r *RootCmd) setUserQuota() *serpent.Command {
 
 			updated, err := client.SetUserTemplateQuota(
 				inv.Context(),
-				user.ID,
+				user.ID.String(),
 				templateID,
 				codersdk.SetUserTemplateQuotaRequest{
 					WorkspaceQuota: quota,
@@ -146,13 +179,13 @@ func (r *RootCmd) setUserQuota() *serpent.Command {
 			Flag:        "template-id",
 			Required:    true,
 			Description: "Template ID to set quota for",
-			Default:     "",
+			Value:       serpent.StringOf(&templateID),
 		},
 		{
 			Flag:        "quota",
 			Required:    true,
 			Description: "Workspace quota (must be > 0)",
-			Value:       serpent.Int64Quota(&quota),
+			Value:       serpent.Int64Of(&quota),
 		},
 	}
 	return cmd
@@ -166,8 +199,7 @@ func (r *RootCmd) resetUserQuota() *serpent.Command {
 		Annotations: workspaceCommand,
 		Use:         "reset <username|user-id>",
 		Short:       "Reset user template quota",
-		Long:        "Reset a user's quota for a specific template to the default value.",
-		Example: FormatExamples(
+		Long: FormatExamples(
 			Example{
 				Description: "Reset user's quota to default",
 				Command:     "coder quota reset alice --template-id <id>",
@@ -191,7 +223,7 @@ func (r *RootCmd) resetUserQuota() *serpent.Command {
 				return err
 			}
 
-			err = client.ResetUserTemplateQuota(inv.Context(), user.ID, templateID)
+			err = client.ResetUserTemplateQuota(inv.Context(), user.ID.String(), templateID)
 			if err != nil {
 				return err
 			}
@@ -206,7 +238,7 @@ func (r *RootCmd) resetUserQuota() *serpent.Command {
 			Flag:        "template-id",
 			Required:    true,
 			Description: "Template ID to reset quota for",
-			Default:     "",
+			Value:       serpent.StringOf(&templateID),
 		},
 	}
 	return cmd
@@ -218,8 +250,7 @@ func (r *RootCmd) getTemplateDefaults() *serpent.Command {
 		Annotations: workspaceCommand,
 		Use:         "get-defaults",
 		Short:       "Get all template quota defaults",
-		Long:        "Get default quotas for all templates.",
-		Example: FormatExamples(
+		Long: FormatExamples(
 			Example{
 				Description: "List all template default quotas",
 				Command:     "coder quota get-defaults",
@@ -265,8 +296,7 @@ func (r *RootCmd) setTemplateDefault() *serpent.Command {
 		Annotations: workspaceCommand,
 		Use:         "set-default <template-id>",
 		Short:       "Set template quota default",
-		Long:        "Set the default workspace quota for a template.",
-		Example: FormatExamples(
+		Long: FormatExamples(
 			Example{
 				Description: "Set default quota for a template",
 				Command:     "coder quota set-default <template-id> --quota 15",
@@ -308,7 +338,7 @@ func (r *RootCmd) setTemplateDefault() *serpent.Command {
 			Flag:        "quota",
 			Required:    true,
 			Description: "Default quota (must be > 0)",
-			Value:       serpent.Int64Quota(&quota),
+			Value:       serpent.Int64Of(&quota),
 		},
 	}
 	return cmd

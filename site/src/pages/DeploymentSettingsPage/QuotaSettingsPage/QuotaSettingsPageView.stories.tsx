@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { within, expect, waitFor } from "@storybook/test";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { http, HttpResponse } from "msw";
 import { QuotaSettingsPageView } from "./QuotaSettingsPageView";
-import { MockTemplateQuotaDefaults } from "test_helpers/entities";
-import { getLoader } from "test_helpers/storybook";
+import { MockTemplateQuotaDefault } from "testHelpers/entities";
 
 const meta: Meta<typeof QuotaSettingsPageView> = {
 	title: "Pages/DeploymentSettingsPage/QuotaSettingsPage",
@@ -32,8 +32,9 @@ export const Loading: Story = {
 	decorators: [withQueryClient],
 	parameters: {
 		mswHandlers: [
-			getLoader("/api/v2/workspace-quotas/templates/defaults", async () => {
-				return new Promise((resolve) => setTimeout(() => resolve([]), 10000));
+			http.get("/api/v2/quotas/templates", async () => {
+				await new Promise((resolve) => setTimeout(resolve, 10000));
+				return HttpResponse.json([]);
 			}),
 		],
 	},
@@ -43,23 +44,23 @@ export const WithQuotas: Story = {
 	decorators: [withQueryClient],
 	parameters: {
 		mswHandlers: [
-			getLoader("/api/v2/workspace-quotas/templates/defaults", async () => {
-				return [
-					MockTemplateQuotaDefaults({
+			http.get("/api/v2/quotas/templates", async () => {
+				return HttpResponse.json([
+					MockTemplateQuotaDefault({
 						template_id: "template-1",
 						template_name: "Development Template",
 						template_display_name: "Development Environment",
 						default_quota: 10,
 						updated_at: new Date().toISOString(),
 					}),
-					MockTemplateQuotaDefaults({
+					MockTemplateQuotaDefault({
 						template_id: "template-2",
 						template_name: "Production Template",
 						template_display_name: "Production Environment",
 						default_quota: 5,
 						updated_at: new Date().toISOString(),
 					}),
-				];
+				]);
 			}),
 		],
 	},
@@ -93,8 +94,8 @@ export const Empty: Story = {
 	decorators: [withQueryClient],
 	parameters: {
 		mswHandlers: [
-			getLoader("/api/v2/workspace-quotas/templates/defaults", async () => {
-				return [];
+			http.get("/api/v2/quotas/templates", async () => {
+				return HttpResponse.json([]);
 			}),
 		],
 	},
@@ -116,8 +117,8 @@ export const Error: Story = {
 	decorators: [withQueryClient],
 	parameters: {
 		mswHandlers: [
-			getLoader("/api/v2/workspace-quotas/templates/defaults", async () => {
-				throw new Error("Failed to fetch quotas");
+			http.get("/api/v2/quotas/templates", async () => {
+				return HttpResponse.error();
 			}),
 		],
 	},

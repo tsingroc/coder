@@ -378,6 +378,23 @@ var auditableResourcesTypes = map[any]map[string]Action{
 		"created_at":          ActionIgnore, // Never changes.
 		"deleted_at":          ActionIgnore, // Changes, but is implicit when a delete event is fired.
 	},
+	&database.UserTemplateQuotaRow{}: {
+		"user_id":         ActionTrack,
+		"template_id":     ActionTrack,
+		"workspace_quota": ActionTrack,
+		"created_at":      ActionIgnore, // Never changes.
+		"updated_at":      ActionIgnore, // Changes, but is implicit and not helpful in a diff.
+		"updated_by":      ActionTrack,
+	},
+	&database.TemplateQuotaDefaultRow{}: {
+		"template_id":             ActionTrack,
+		"default_quota":           ActionTrack,
+		"updated_at":              ActionIgnore, // Changes, but is implicit and not helpful in a diff.
+		"updated_by":              ActionTrack,
+		"template_name":           ActionIgnore, // Display-only field derived from template.
+		"template_display_name":   ActionIgnore, // Display-only field derived from template.
+		"template_icon":           ActionIgnore, // Display-only field derived from template.
+	},
 }
 
 // auditMap converts a map of struct pointers to a map of struct names as

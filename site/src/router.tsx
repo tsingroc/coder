@@ -325,6 +325,12 @@ const DeploymentNotificationsPage = lazy(
 			"./pages/DeploymentSettingsPage/NotificationsPage/NotificationsPage"
 		),
 );
+const QuotaSettingsPage = lazy(
+	() =>
+		import(
+			"./pages/DeploymentSettingsPage/QuotaSettingsPage/QuotaSettingsPageView"
+		),
+);
 const RequestOTPPage = lazy(
 	() => import("./pages/ResetPasswordPage/RequestOTPPage"),
 );
@@ -535,6 +541,7 @@ export const router = createBrowserRouter(
 								element={<DeploymentNotificationsPage />}
 							/>
 						</Route>
+							<Route path="quotas" element={<QuotaSettingsPage />} />
 
 						<Route path="licenses">
 							<Route index element={<LicensesSettingsPage />} />

@@ -19,6 +19,14 @@ var ErrUserWorkspaceQuotaExceeded = xerrors.New("user workspace quota exceeded")
 // CheckUserWorkspaceQuota checks if a user can create another workspace
 // using the specified template based on their quota.
 // Returns ErrUserWorkspaceQuotaExceeded if the quota is exceeded.
+//
+// Note: There is a TOCTOU race between this check and the actual workspace
+// creation. Two concurrent requests could both pass the quota check before
+// either workspace is committed. This is acceptable for the typical case
+// where quota limits are low and concurrent creation by the same user for
+// the same template is rare. A production-hardening pass should move this
+// check into the workspace creation transaction using a
+// SELECT ... FOR UPDATE or advisory lock pattern.
 func (api *API) CheckUserWorkspaceQuota(ctx context.Context, userID string, templateID string) error {
 	// Get the count of existing workspaces for this user-template combination
 	workspaceCount, err := api.getUserWorkspaceCountByTemplate(ctx, userID, templateID)
