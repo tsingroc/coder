@@ -2,6 +2,7 @@ import { type FC, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getErrorMessage } from "api/errors";
 import {
+	templateQuotaDefaultsKey,
 	getAllTemplateQuotaDefaults,
 	setTemplateQuotaDefault,
 } from "api/queries/quotas";
@@ -35,7 +36,7 @@ export const QuotaSettingsPageView: FC = () => {
 		error: quotasError,
 		isLoading: quotasLoading,
 	} = useQuery({
-		queryKey: ["templateQuotaDefaults"],
+		queryKey: templateQuotaDefaultsKey(),
 		queryFn: () => getAllTemplateQuotaDefaults(),
 	});
 
@@ -50,7 +51,7 @@ export const QuotaSettingsPageView: FC = () => {
 		onSuccess: () => {
 			toast.success("Quota updated successfully");
 			setEditingQuota(null);
-			void queryClient.invalidateQueries({ queryKey: ["templateQuotaDefaults"], exact: false });
+			void queryClient.invalidateQueries({ queryKey: templateQuotaDefaultsKey() });
 		},
 		onError: (error: unknown) => {
 			toast.error(getErrorMessage(error, "Failed to update quota."));
