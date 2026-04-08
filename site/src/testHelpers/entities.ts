@@ -5279,3 +5279,15 @@ export const MockInterceptionCopilot: TypesGen.AIBridgeInterception = {
 		},
 	],
 };
+
+export const MockTemplateQuotaDefault = (
+	overrides: Partial<TypesGen.TemplateQuotaDefault> = {},
+): TypesGen.TemplateQuotaDefault => ({
+	template_id: "test-template-id",
+	template_name: "Test Template",
+	template_display_name: "Test Template",
+	template_icon: "/icon/code.svg",
+	default_quota: 10,
+	updated_at: "2024-01-01T00:00:00Z",
+	...overrides,
+});

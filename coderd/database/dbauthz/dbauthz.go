@@ -7087,3 +7087,42 @@ func (q *querier) ListAuthorizedAIBridgeModels(ctx context.Context, arg database
 func (q *querier) GetAuthorizedChats(ctx context.Context, arg database.GetChatsParams, _ rbac.PreparedAuthorized) ([]database.Chat, error) {
 	return q.GetChats(ctx, arg)
 }
+
+// Quota management methods - these directly call the underlying database methods
+// since authorization is handled at the API layer.
+
+func (q *querier) GetUserWorkspaceCountByTemplate(ctx context.Context, userID, templateID string) (int64, error) {
+	return q.db.GetUserWorkspaceCountByTemplate(ctx, userID, templateID)
+}
+
+func (q *querier) GetUserCustomQuota(ctx context.Context, userID, templateID string) (int64, error) {
+	return q.db.GetUserCustomQuota(ctx, userID, templateID)
+}
+
+func (q *querier) GetTemplateDefaultQuota(ctx context.Context, templateID string) (int64, error) {
+	return q.db.GetTemplateDefaultQuota(ctx, templateID)
+}
+
+func (q *querier) GetAllUserTemplateQuotas(ctx context.Context, userID string) ([]database.UserTemplateQuotaRow, error) {
+	return q.db.GetAllUserTemplateQuotas(ctx, userID)
+}
+
+func (q *querier) GetTemplateUsageByUser(ctx context.Context, userID string) ([]database.TemplateUsageByUserRow, error) {
+	return q.db.GetTemplateUsageByUser(ctx, userID)
+}
+
+func (q *querier) GetAllTemplateQuotaDefaults(ctx context.Context) ([]database.TemplateQuotaDefaultRow, error) {
+	return q.db.GetAllTemplateQuotaDefaults(ctx)
+}
+
+func (q *querier) SetUserTemplateQuota(ctx context.Context, userID, templateID string, quota int64, updatedBy uuid.UUID) (database.UserTemplateQuotaRow, error) {
+	return q.db.SetUserTemplateQuota(ctx, userID, templateID, quota, updatedBy)
+}
+
+func (q *querier) DeleteUserTemplateQuota(ctx context.Context, userID, templateID string) error {
+	return q.db.DeleteUserTemplateQuota(ctx, userID, templateID)
+}
+
+func (q *querier) SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (database.TemplateQuotaDefaultRow, error) {
+	return q.db.SetTemplateQuotaDefault(ctx, templateID, quota, updatedBy)
+}

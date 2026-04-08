@@ -102,6 +102,11 @@ export const DeploymentSidebarView: FC<DeploymentSidebarViewProps> = ({
 						</div>
 					</SidebarNavItem>
 				)}
+				{permissions.editDeploymentConfig && (
+					<SidebarNavItem href="/deployment/quotas">
+						Quotas
+					</SidebarNavItem>
+				)}
 				{!hasPremiumLicense && (
 					<SidebarNavItem href="/deployment/premium">Premium</SidebarNavItem>
 				)}

@@ -8456,3 +8456,48 @@ export interface WorkspacesResponse {
 	readonly workspaces: readonly Workspace[];
 	readonly count: number;
 }
+
+// From codersdk/workspace_quotas.go
+export interface TemplateQuotaInfo {
+	readonly template_id: string;
+	readonly quota: number;
+	readonly default_quota: number;
+	readonly current_workspaces: number;
+	readonly is_custom: boolean;
+}
+
+// From codersdk/workspace_quotas.go
+export interface UserTemplateQuotasResponse {
+	readonly user_id: string;
+	readonly quotas: readonly TemplateQuotaInfo[];
+}
+
+// From codersdk/workspace_quotas.go
+export interface UserTemplateQuota {
+	readonly user_id: string;
+	readonly template_id: string;
+	readonly workspace_quota: number;
+	readonly current_workspaces: number;
+	readonly created_at?: string;
+	readonly updated_at?: string;
+}
+
+// From codersdk/workspace_quotas.go
+export interface SetUserTemplateQuotaRequest {
+	readonly workspace_quota: number;
+}
+
+// From codersdk/workspace_quotas.go
+export interface TemplateQuotaDefault {
+	readonly template_id: string;
+	readonly template_name?: string;
+	readonly template_display_name?: string;
+	readonly template_icon?: string;
+	readonly default_quota: number;
+	readonly updated_at: string;
+}
+
+// From codersdk/workspace_quotas.go
+export interface SetTemplateQuotaDefaultRequest {
+	readonly default_quota: number;
+}

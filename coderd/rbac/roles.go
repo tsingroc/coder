@@ -297,6 +297,9 @@ func ReloadBuiltinRoles(opts *RoleOptions) {
 				// Explicitly setting PrebuiltWorkspace permissions for clarity.
 				// Note: even without PrebuiltWorkspace permissions, access is still granted via Workspace permissions.
 				ResourcePrebuiltWorkspace.Type: {policy.ActionUpdate, policy.ActionDelete},
+				// Quota management permissions for owners.
+				ResourceUserWorkspaceQuota.Type: {policy.ActionRead, policy.ActionCreate, policy.ActionDelete},
+				ResourceQuota.Type:              {policy.ActionRead, policy.ActionCreate},
 			})...,
 		),
 		User:    []Permission{},
@@ -312,6 +315,8 @@ func ReloadBuiltinRoles(opts *RoleOptions) {
 				// All users can see OAuth2 provider applications.
 				ResourceOauth2App.Type:      {policy.ActionRead},
 				ResourceWorkspaceProxy.Type: {policy.ActionRead},
+				// Users can read their own quota information.
+				ResourceUserWorkspaceQuota.Type: {policy.ActionRead},
 			}),
 			denyPermissions...,
 		),
@@ -347,6 +352,9 @@ func ReloadBuiltinRoles(opts *RoleOptions) {
 			ResourceDeploymentConfig.Type: {policy.ActionRead},
 			// Allow auditors to query aibridge interceptions.
 			ResourceAibridgeInterception.Type: {policy.ActionRead},
+			// Allow auditors to read quota information.
+			ResourceUserWorkspaceQuota.Type: {policy.ActionRead},
+			ResourceQuota.Type:              {policy.ActionRead},
 		}),
 		User:    []Permission{},
 		ByOrgID: map[string]OrgPermissions{},
@@ -370,6 +378,9 @@ func ReloadBuiltinRoles(opts *RoleOptions) {
 			ResourceGroupMember.Type:        {policy.ActionRead},
 			ResourceOrganization.Type:       {policy.ActionRead},
 			ResourceOrganizationMember.Type: {policy.ActionRead},
+			// Allow reading quota information.
+			ResourceUserWorkspaceQuota.Type: {policy.ActionRead},
+			ResourceQuota.Type:              {policy.ActionRead},
 		}),
 		User:    []Permission{},
 		ByOrgID: map[string]OrgPermissions{},
@@ -394,6 +405,9 @@ func ReloadBuiltinRoles(opts *RoleOptions) {
 			ResourceOrganizationMember.Type: {policy.ActionCreate, policy.ActionRead, policy.ActionUpdate, policy.ActionDelete},
 			// Manage org membership based on OIDC claims
 			ResourceIdpsyncSettings.Type: {policy.ActionRead, policy.ActionUpdate},
+			// Quota management permissions for user admins.
+			ResourceUserWorkspaceQuota.Type: {policy.ActionRead, policy.ActionCreate, policy.ActionDelete},
+			ResourceQuota.Type:              {policy.ActionRead, policy.ActionCreate},
 		}),
 		User:    []Permission{},
 		ByOrgID: map[string]OrgPermissions{},

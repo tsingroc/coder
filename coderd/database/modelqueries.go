@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/lib/pq"
@@ -53,6 +54,7 @@ type customQuerier interface {
 	connectionLogQuerier
 	aibridgeQuerier
 	chatQuerier
+	quotaQuerier
 }
 
 type templateQuerier interface {
@@ -951,4 +953,222 @@ func insertAuthorizedFilter(query string, replaceWith string) (string, error) {
 func (q *sqlQuerier) UpdateUserLinkRawJSON(ctx context.Context, userID uuid.UUID, data json.RawMessage) error {
 	_, err := q.sdb.ExecContext(ctx, "UPDATE user_links SET claims = $2 WHERE user_id = $1", userID, data)
 	return err
+}
+
+// quotaQuerier contains custom queries for workspace quota management.
+type quotaQuerier interface {
+	GetUserWorkspaceCountByTemplate(ctx context.Context, userID, templateID string) (int64, error)
+	GetUserCustomQuota(ctx context.Context, userID, templateID string) (int64, error)
+	GetTemplateDefaultQuota(ctx context.Context, templateID string) (int64, error)
+	GetAllUserTemplateQuotas(ctx context.Context, userID string) ([]UserTemplateQuotaRow, error)
+	GetTemplateUsageByUser(ctx context.Context, userID string) ([]TemplateUsageByUserRow, error)
+	GetAllTemplateQuotaDefaults(ctx context.Context) ([]TemplateQuotaDefaultRow, error)
+	SetUserTemplateQuota(ctx context.Context, userID, templateID string, quota int64, updatedBy uuid.UUID) (UserTemplateQuotaRow, error)
+	DeleteUserTemplateQuota(ctx context.Context, userID, templateID string) error
+	SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (TemplateQuotaDefaultRow, error)
+}
+
+// UserTemplateQuotaRow represents a user's custom quota for a template.
+type UserTemplateQuotaRow struct {
+	UserID         uuid.UUID `json:"user_id"`
+	TemplateID     uuid.UUID `json:"template_id"`
+	WorkspaceQuota int64     `json:"workspace_quota"`
+	CreatedAt      time.Time `json:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at"`
+	UpdatedBy      uuid.UUID `json:"updated_by"`
+}
+
+// TemplateUsageByUserRow represents template usage statistics for a user.
+type TemplateUsageByUserRow struct {
+	TemplateID          uuid.UUID
+	TemplateName        string
+	TemplateDisplayName string
+	TemplateIcon        string
+	WorkspaceCount      int64
+}
+
+// TemplateQuotaDefaultRow represents a template's default quota.
+type TemplateQuotaDefaultRow struct {
+	TemplateID          uuid.UUID `json:"template_id"`
+	DefaultQuota        int64     `json:"default_quota"`
+	UpdatedAt           time.Time `json:"updated_at"`
+	UpdatedBy           uuid.UUID `json:"updated_by"`
+	TemplateName        string    `json:"template_name"`
+	TemplateDisplayName string    `json:"template_display_name"`
+	TemplateIcon        string    `json:"template_icon"`
+}
+
+// GetUserWorkspaceCountByTemplate counts how many workspaces a user has created using a specific template.
+func (q *sqlQuerier) GetUserWorkspaceCountByTemplate(ctx context.Context, userID, templateID string) (int64, error) {
+	row := q.sdb.QueryRowContext(ctx, `
+		SELECT COUNT(*)
+		FROM workspaces
+		WHERE owner_id = $1 AND template_id = $2 AND deleted = false
+	`, userID, templateID)
+
+	var count int64
+	err := row.Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
+// GetUserCustomQuota retrieves a user's custom quota for a specific template.
+func (q *sqlQuerier) GetUserCustomQuota(ctx context.Context, userID, templateID string) (int64, error) {
+	row := q.sdb.QueryRowContext(ctx, `
+		SELECT workspace_quota
+		FROM user_template_quotas
+		WHERE user_id = $1 AND template_id = $2
+	`, userID, templateID)
+
+	var quota int64
+	err := row.Scan(&quota)
+	if err != nil {
+		return 0, err
+	}
+	return quota, nil
+}
+
+// GetTemplateDefaultQuota retrieves the default quota for a template.
+func (q *sqlQuerier) GetTemplateDefaultQuota(ctx context.Context, templateID string) (int64, error) {
+	row := q.sdb.QueryRowContext(ctx, `
+		SELECT default_quota
+		FROM template_quota_defaults
+		WHERE template_id = $1
+	`, templateID)
+
+	var quota int64
+	err := row.Scan(&quota)
+	if err != nil {
+		return 0, err
+	}
+	return quota, nil
+}
+
+// GetAllUserTemplateQuotas retrieves all custom quotas for a user.
+func (q *sqlQuerier) GetAllUserTemplateQuotas(ctx context.Context, userID string) ([]UserTemplateQuotaRow, error) {
+	rows, err := q.sdb.QueryContext(ctx, `
+		SELECT user_id, template_id, workspace_quota, created_at, updated_at, updated_by
+		FROM user_template_quotas
+		WHERE user_id = $1
+	`, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var quotas []UserTemplateQuotaRow
+	for rows.Next() {
+		var q UserTemplateQuotaRow
+		err := rows.Scan(&q.UserID, &q.TemplateID, &q.WorkspaceQuota, &q.CreatedAt, &q.UpdatedAt, &q.UpdatedBy)
+		if err != nil {
+			return nil, err
+		}
+		quotas = append(quotas, q)
+	}
+
+	return quotas, rows.Err()
+}
+
+// GetTemplateUsageByUser retrieves workspace usage breakdown by template for a user.
+func (q *sqlQuerier) GetTemplateUsageByUser(ctx context.Context, userID string) ([]TemplateUsageByUserRow, error) {
+	rows, err := q.sdb.QueryContext(ctx, `
+		SELECT w.template_id, t.name as template_name, t.display_name as template_display_name,
+		       t.icon as template_icon, COUNT(w.id) as workspace_count
+		FROM workspaces w
+		JOIN templates t ON w.template_id = t.id
+		WHERE w.owner_id = $1 AND w.deleted = false
+		GROUP BY w.template_id, t.name, t.display_name, t.icon
+		ORDER BY workspace_count DESC
+	`, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var usage []TemplateUsageByUserRow
+	for rows.Next() {
+		var u TemplateUsageByUserRow
+		err := rows.Scan(&u.TemplateID, &u.TemplateName, &u.TemplateDisplayName, &u.TemplateIcon, &u.WorkspaceCount)
+		if err != nil {
+			return nil, err
+		}
+		usage = append(usage, u)
+	}
+
+	return usage, rows.Err()
+}
+
+// GetAllTemplateQuotaDefaults retrieves all template default quotas.
+func (q *sqlQuerier) GetAllTemplateQuotaDefaults(ctx context.Context) ([]TemplateQuotaDefaultRow, error) {
+	rows, err := q.sdb.QueryContext(ctx, `
+		SELECT tqd.template_id, tqd.default_quota, tqd.updated_at, tqd.updated_by,
+		       t.name as template_name, t.display_name as template_display_name, t.icon as template_icon
+		FROM template_quota_defaults tqd
+		JOIN templates t ON tqd.template_id = t.id
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var quotas []TemplateQuotaDefaultRow
+	for rows.Next() {
+		var q TemplateQuotaDefaultRow
+		err := rows.Scan(&q.TemplateID, &q.DefaultQuota, &q.UpdatedAt, &q.UpdatedBy, &q.TemplateName, &q.TemplateDisplayName, &q.TemplateIcon)
+		if err != nil {
+			return nil, err
+		}
+		quotas = append(quotas, q)
+	}
+
+	return quotas, rows.Err()
+}
+
+// SetUserTemplateQuota sets or updates a user's quota for a template.
+func (q *sqlQuerier) SetUserTemplateQuota(ctx context.Context, userID, templateID string, quota int64, updatedBy uuid.UUID) (UserTemplateQuotaRow, error) {
+	var row UserTemplateQuotaRow
+	err := q.sdb.QueryRowContext(ctx, `
+		INSERT INTO user_template_quotas (user_id, template_id, workspace_quota, updated_by)
+		VALUES ($1, $2, $3, $4)
+		ON CONFLICT (user_id, template_id)
+		DO UPDATE SET
+			workspace_quota = EXCLUDED.workspace_quota,
+			updated_at = NOW(),
+			updated_by = EXCLUDED.updated_by
+		RETURNING user_id, template_id, workspace_quota, created_at, updated_at, updated_by
+	`, userID, templateID, quota, updatedBy).Scan(
+		&row.UserID, &row.TemplateID, &row.WorkspaceQuota, &row.CreatedAt, &row.UpdatedAt, &row.UpdatedBy,
+	)
+
+	return row, err
+}
+
+// DeleteUserTemplateQuota deletes a user's custom quota for a template.
+func (q *sqlQuerier) DeleteUserTemplateQuota(ctx context.Context, userID, templateID string) error {
+	_, err := q.sdb.ExecContext(ctx, `
+		DELETE FROM user_template_quotas
+		WHERE user_id = $1 AND template_id = $2
+	`, userID, templateID)
+	return err
+}
+
+// SetTemplateQuotaDefault sets or updates the default quota for a template.
+func (q *sqlQuerier) SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (TemplateQuotaDefaultRow, error) {
+	var row TemplateQuotaDefaultRow
+	err := q.sdb.QueryRowContext(ctx, `
+		INSERT INTO template_quota_defaults (template_id, default_quota, updated_by)
+		VALUES ($1, $2, $3)
+		ON CONFLICT (template_id)
+		DO UPDATE SET
+			default_quota = EXCLUDED.default_quota,
+			updated_at = NOW(),
+			updated_by = EXCLUDED.updated_by
+		RETURNING template_id, default_quota, updated_at
+	`, templateID, quota, updatedBy).Scan(
+		&row.TemplateID, &row.DefaultQuota, &row.UpdatedAt,
+	)
+
+	return row, err
 }

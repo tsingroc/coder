@@ -1140,6 +1140,139 @@ func (mr *MockStoreMockRecorder) DeleteUserSecret(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUserSecret", reflect.TypeOf((*MockStore)(nil).DeleteUserSecret), ctx, id)
 }
 
+// GetAllTemplateQuotaDefaults mocks base method.
+func (m *MockStore) GetAllTemplateQuotaDefaults(ctx context.Context) ([]database.TemplateQuotaDefaultRow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAllTemplateQuotaDefaults", ctx)
+	ret0, _ := ret[0].([]database.TemplateQuotaDefaultRow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAllTemplateQuotaDefaults indicates an expected call of GetAllTemplateQuotaDefaults.
+func (mr *MockStoreMockRecorder) GetAllTemplateQuotaDefaults(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllTemplateQuotaDefaults", reflect.TypeOf((*MockStore)(nil).GetAllTemplateQuotaDefaults), ctx)
+}
+
+// GetAllUserTemplateQuotas mocks base method.
+func (m *MockStore) GetAllUserTemplateQuotas(ctx context.Context, userID string) ([]database.UserTemplateQuotaRow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAllUserTemplateQuotas", ctx, userID)
+	ret0, _ := ret[0].([]database.UserTemplateQuotaRow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAllUserTemplateQuotas indicates an expected call of GetAllUserTemplateQuotas.
+func (mr *MockStoreMockRecorder) GetAllUserTemplateQuotas(ctx, userID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllUserTemplateQuotas", reflect.TypeOf((*MockStore)(nil).GetAllUserTemplateQuotas), ctx, userID)
+}
+
+// GetTemplateDefaultQuota mocks base method.
+func (m *MockStore) GetTemplateDefaultQuota(ctx context.Context, templateID string) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTemplateDefaultQuota", ctx, templateID)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTemplateDefaultQuota indicates an expected call of GetTemplateDefaultQuota.
+func (mr *MockStoreMockRecorder) GetTemplateDefaultQuota(ctx, templateID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTemplateDefaultQuota", reflect.TypeOf((*MockStore)(nil).GetTemplateDefaultQuota), ctx, templateID)
+}
+
+// GetTemplateUsageByUser mocks base method.
+func (m *MockStore) GetTemplateUsageByUser(ctx context.Context, userID string) ([]database.TemplateUsageByUserRow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTemplateUsageByUser", ctx, userID)
+	ret0, _ := ret[0].([]database.TemplateUsageByUserRow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTemplateUsageByUser indicates an expected call of GetTemplateUsageByUser.
+func (mr *MockStoreMockRecorder) GetTemplateUsageByUser(ctx, userID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTemplateUsageByUser", reflect.TypeOf((*MockStore)(nil).GetTemplateUsageByUser), ctx, userID)
+}
+
+// GetUserCustomQuota mocks base method.
+func (m *MockStore) GetUserCustomQuota(ctx context.Context, userID string, templateID string) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserCustomQuota", ctx, userID, templateID)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserCustomQuota indicates an expected call of GetUserCustomQuota.
+func (mr *MockStoreMockRecorder) GetUserCustomQuota(ctx, userID, templateID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserCustomQuota", reflect.TypeOf((*MockStore)(nil).GetUserCustomQuota), ctx, userID, templateID)
+}
+
+// GetUserWorkspaceCountByTemplate mocks base method.
+func (m *MockStore) GetUserWorkspaceCountByTemplate(ctx context.Context, userID string, templateID string) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserWorkspaceCountByTemplate", ctx, userID, templateID)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserWorkspaceCountByTemplate indicates an expected call of GetUserWorkspaceCountByTemplate.
+func (mr *MockStoreMockRecorder) GetUserWorkspaceCountByTemplate(ctx, userID, templateID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserWorkspaceCountByTemplate", reflect.TypeOf((*MockStore)(nil).GetUserWorkspaceCountByTemplate), ctx, userID, templateID)
+}
+
+// SetUserTemplateQuota mocks base method.
+func (m *MockStore) SetUserTemplateQuota(ctx context.Context, userID string, templateID string, quota int64, updatedBy uuid.UUID) (database.UserTemplateQuotaRow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetUserTemplateQuota", ctx, userID, templateID, quota, updatedBy)
+	ret0, _ := ret[0].(database.UserTemplateQuotaRow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetUserTemplateQuota indicates an expected call of SetUserTemplateQuota.
+func (mr *MockStoreMockRecorder) SetUserTemplateQuota(ctx, userID, templateID, quota, updatedBy any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetUserTemplateQuota", reflect.TypeOf((*MockStore)(nil).SetUserTemplateQuota), ctx, userID, templateID, quota, updatedBy)
+}
+
+// SetTemplateQuotaDefault mocks base method.
+func (m *MockStore) SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (database.TemplateQuotaDefaultRow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetTemplateQuotaDefault", ctx, templateID, quota, updatedBy)
+	ret0, _ := ret[0].(database.TemplateQuotaDefaultRow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetTemplateQuotaDefault indicates an expected call of SetTemplateQuotaDefault.
+func (mr *MockStoreMockRecorder) SetTemplateQuotaDefault(ctx, templateID, quota, updatedBy any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTemplateQuotaDefault", reflect.TypeOf((*MockStore)(nil).SetTemplateQuotaDefault), ctx, templateID, quota, updatedBy)
+}
+// DeleteUserTemplateQuota mocks base method.
+func (m *MockStore) DeleteUserTemplateQuota(ctx context.Context, userID string, templateID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteUserTemplateQuota", ctx, userID, templateID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteUserTemplateQuota indicates an expected call of DeleteUserTemplateQuota.
+func (mr *MockStoreMockRecorder) DeleteUserTemplateQuota(ctx, userID, templateID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUserTemplateQuota", reflect.TypeOf((*MockStore)(nil).DeleteUserTemplateQuota), ctx, userID, templateID)
+}
+
 // DeleteWebpushSubscriptionByUserIDAndEndpoint mocks base method.
 func (m *MockStore) DeleteWebpushSubscriptionByUserIDAndEndpoint(ctx context.Context, arg database.DeleteWebpushSubscriptionByUserIDAndEndpointParams) error {
 	m.ctrl.T.Helper()
