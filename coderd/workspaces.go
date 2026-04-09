@@ -406,8 +406,12 @@ func (api *API) postWorkspacesByOrganization(rw http.ResponseWriter, r *http.Req
 		AvatarURL: member.AvatarURL,
 	}
 
-	// Check workspace quota before creating workspace
-	err := api.CheckUserWorkspaceQuota(ctx, member.UserID.String(), req.TemplateID.String())
+		// Check workspace quota before creating workspace
+		api.Logger.Warn(ctx, "QUOTA_HANDLER_ENTRY_ORG",
+			slog.F("user_id", member.UserID.String()),
+			slog.F("template_id", req.TemplateID.String()),
+		)
+		err := api.CheckUserWorkspaceQuota(ctx, member.UserID.String(), req.TemplateID.String())
 	var quotaErr *QuotaExceededError
 	if xerrors.As(err, &quotaErr) {
 		quotaErr.WriteHTTPError(ctx, rw)
@@ -518,9 +522,14 @@ func (api *API) postUserWorkspaces(rw http.ResponseWriter, r *http.Request) {
 	})
 
 	defer commitAudit()
+		defer commitAudit()
 
-	// Check workspace quota before creating workspace
-	err := api.CheckUserWorkspaceQuota(ctx, owner.ID.String(), req.TemplateID.String())
+		// Check workspace quota before creating workspace
+		api.Logger.Warn(ctx, "QUOTA_HANDLER_ENTRY",
+			slog.F("user_id", owner.ID.String()),
+			slog.F("template_id", req.TemplateID.String()),
+		)
+		err := api.CheckUserWorkspaceQuota(ctx, owner.ID.String(), req.TemplateID.String())
 	var quotaErr *QuotaExceededError
 	if xerrors.As(err, &quotaErr) {
 		quotaErr.WriteHTTPError(ctx, rw)

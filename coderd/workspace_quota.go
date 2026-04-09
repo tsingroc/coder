@@ -29,6 +29,11 @@ var ErrUserWorkspaceQuotaExceeded = xerrors.New("user workspace quota exceeded")
 // check into the workspace creation transaction using a
 // SELECT ... FOR UPDATE or advisory lock pattern.
 func (api *API) CheckUserWorkspaceQuota(ctx context.Context, userID string, templateID string) error {
+	api.Logger.Warn(ctx, "QUOTA_CHECK_ENTRY",
+		slog.F("user_id", userID),
+		slog.F("template_id", templateID),
+	)
+
 	// Get the count of existing workspaces for this user-template combination
 	workspaceCount, err := api.getUserWorkspaceCountByTemplate(ctx, userID, templateID)
 	if err != nil {
