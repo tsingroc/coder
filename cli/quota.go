@@ -178,13 +178,13 @@ func (r *RootCmd) setUserQuota() *serpent.Command {
 		{
 			Flag:        "template-id",
 			Required:    true,
-			Description: "Template ID to set quota for",
+			Description: "Template ID to set quota for.",
 			Value:       serpent.StringOf(&templateID),
 		},
 		{
 			Flag:        "quota",
 			Required:    true,
-			Description: "Workspace quota (must be > 0)",
+			Description: "Workspace quota (must be > 0).",
 			Value:       serpent.Int64Of(&quota),
 		},
 	}
@@ -237,7 +237,7 @@ func (r *RootCmd) resetUserQuota() *serpent.Command {
 		{
 			Flag:        "template-id",
 			Required:    true,
-			Description: "Template ID to reset quota for",
+			Description: "Template ID to reset quota for.",
 			Value:       serpent.StringOf(&templateID),
 		},
 	}
@@ -337,7 +337,7 @@ func (r *RootCmd) setTemplateDefault() *serpent.Command {
 		{
 			Flag:        "quota",
 			Required:    true,
-			Description: "Default quota (must be > 0)",
+			Description: "Default quota (must be > 0).",
 			Value:       serpent.Int64Of(&quota),
 		},
 	}
