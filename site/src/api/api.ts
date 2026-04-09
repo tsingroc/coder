@@ -2290,6 +2290,36 @@ class ApiMethods {
 		return response.data;
 	};
 
+	getUserTemplateQuotas = async (
+		userId: string,
+	): Promise<TypesGen.UserTemplateQuotasResponse> => {
+		const response = await this.axios.get(
+			`/api/v2/users/${userId}/quotas/templates`,
+		);
+		return response.data;
+	};
+
+	setUserTemplateQuota = async (
+		userId: string,
+		templateId: string,
+		data: TypesGen.SetUserTemplateQuotaRequest,
+	): Promise<TypesGen.UserTemplateQuota> => {
+		const response = await this.axios.put(
+			`/api/v2/users/${userId}/quotas/templates/${templateId}`,
+			data,
+		);
+		return response.data;
+	};
+
+	resetUserTemplateQuota = async (
+		userId: string,
+		templateId: string,
+	): Promise<void> => {
+		await this.axios.delete(
+			`/api/v2/users/${userId}/quotas/templates/${templateId}`,
+		);
+	};
+
 	getReplicas = async (): Promise<TypesGen.Replica[]> => {
 		const response = await this.axios.get("/api/v2/replicas");
 		return response.data;
