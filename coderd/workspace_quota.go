@@ -29,18 +29,13 @@ var ErrUserWorkspaceQuotaExceeded = xerrors.New("user workspace quota exceeded")
 // check into the workspace creation transaction using a
 // SELECT ... FOR UPDATE or advisory lock pattern.
 func (api *API) CheckUserWorkspaceQuota(ctx context.Context, userID string, templateID string) error {
-	api.Logger.Warn(ctx, "QUOTA_CHECK_ENTRY",
-		slog.F("user_id", userID),
-		slog.F("template_id", templateID),
-	)
-
-	// Get the count of existing workspaces for this user-template combination
+	// Get the count of existing workspaces for this user-template combination.
 	workspaceCount, err := api.getUserWorkspaceCountByTemplate(ctx, userID, templateID)
 	if err != nil {
 		return xerrors.Errorf("get user workspace count by template: %w", err)
 	}
 
-	// Get the user's quota for this template
+	// Get the user's quota for this template.
 	quota, err := api.getUserTemplateQuota(ctx, userID, templateID)
 	if err != nil {
 		return xerrors.Errorf("get user template quota: %w", err)
@@ -53,7 +48,7 @@ func (api *API) CheckUserWorkspaceQuota(ctx context.Context, userID string, temp
 		slog.F("quota", quota),
 	)
 
-	// Check if quota is exceeded
+	// Check if quota is exceeded.
 	if int64(workspaceCount) >= quota {
 		return &QuotaExceededError{
 			UserID:       userID,
@@ -70,19 +65,19 @@ func (api *API) CheckUserWorkspaceQuota(ctx context.Context, userID string, temp
 // It first checks for a custom user quota, then falls back to the
 // global default quota for the template.
 func (api *API) getUserTemplateQuota(ctx context.Context, userID string, templateID string) (int64, error) {
-	// Try to get user's custom quota first
+	// Try to get user's custom quota first.
 	quota, err := api.getUserCustomQuota(ctx, userID, templateID)
 	if err == nil {
 		return quota, nil
 	}
 
-	// If no custom quota, get the default quota for the template
+	// If no custom quota, get the default quota for the template.
 	if xerrors.Is(err, sql.ErrNoRows) {
 		defaultQuota, err := api.getTemplateDefaultQuota(ctx, templateID)
 		if err != nil {
-			// If template has no default quota set, use a fallback value
+			// If template has no default quota set, use a fallback value.
 			if xerrors.Is(err, sql.ErrNoRows) {
-				return 10, nil // Default fallback quota
+				return 10, nil // Default fallback quota.
 			}
 			return 0, xerrors.Errorf("get template quota default: %w", err)
 		}
