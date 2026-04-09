@@ -8498,6 +8498,20 @@ export interface TemplateQuotaDefault {
 }
 
 // From codersdk/workspace_quotas.go
+export interface UserQuotaOverride {
+	readonly user_id: string;
+	readonly username: string;
+	readonly email?: string;
+	readonly avatar_url?: string;
+	readonly template_id: string;
+	readonly template_name: string;
+	readonly template_display_name?: string;
+	readonly template_icon?: string;
+	readonly workspace_quota: number;
+	readonly updated_at: string;
+}
+
+// From codersdk/workspace_quotas.go
 export interface SetTemplateQuotaDefaultRequest {
 	readonly default_quota: number;
 }

@@ -316,6 +316,51 @@ func (api *API) setTemplateQuotaDefault(rw http.ResponseWriter, r *http.Request)
 
 // Database helper methods below
 
+// (getAllUserQuotaOverrides) gets all user custom quota overrides with user
+// and template display info.
+// @Summary Get all user quota overrides
+// @ID get-all-user-quota-overrides
+// @Security CoderSessionToken
+// @Produce json
+// @Tags Quotas
+// @Success 200 {array} codersdk.UserQuotaOverride
+// @Router /quotas/user-overrides [get]
+func (api *API) getAllUserQuotaOverrides(rw http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	if !api.Authorize(r, policy.ActionRead, rbac.ResourceQuota) {
+		httpapi.Forbidden(rw)
+		return
+	}
+
+	rows, err := api.Database.GetAllUserQuotaOverrides(ctx)
+	if err != nil {
+		httpapi.Write(ctx, rw, http.StatusInternalServerError, codersdk.Response{
+			Message: "Failed to get user quota overrides",
+			Detail:  err.Error(),
+		})
+		return
+	}
+
+	response := make([]codersdk.UserQuotaOverride, 0, len(rows))
+	for _, row := range rows {
+		response = append(response, codersdk.UserQuotaOverride{
+			UserID:              row.UserID.String(),
+			Username:            row.Username,
+			Email:               row.Email,
+			AvatarURL:           row.AvatarURL,
+			TemplateID:          row.TemplateID.String(),
+			TemplateName:        row.TemplateName,
+			TemplateDisplayName: row.TemplateDisplayName,
+			TemplateIcon:        row.TemplateIcon,
+			WorkspaceQuota:      int64(row.WorkspaceQuota),
+			UpdatedAt:           row.UpdatedAt,
+		})
+	}
+
+	httpapi.Write(ctx, rw, http.StatusOK, response)
+}
+
 // getAllUserTemplateQuotasDB retrieves all custom quotas for a user.
 func (api *API) getAllUserTemplateQuotasDB(ctx context.Context, userID string) ([]database.UserTemplateQuotaRow, error) {
 	return api.Database.GetAllUserTemplateQuotas(ctx, userID)

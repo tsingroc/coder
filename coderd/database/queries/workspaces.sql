@@ -1132,3 +1132,23 @@ GROUP BY
     w.template_id, t.name, t.display_name, t.icon
 ORDER BY
     workspace_count DESC;
+
+-- name: GetAllUserQuotaOverrides :many
+-- Get all user custom quota overrides with user and template info
+SELECT
+    u.id as user_id,
+    u.username,
+    u.email,
+    u.avatar_url,
+    uq.template_id,
+    t.name as template_name,
+    t.display_name as template_display_name,
+    t.icon as template_icon,
+    uq.workspace_quota,
+    uq.updated_at
+FROM
+    user_template_quotas uq
+JOIN users u ON uq.user_id = u.id
+JOIN templates t ON uq.template_id = t.id
+ORDER BY
+    u.username, t.name;

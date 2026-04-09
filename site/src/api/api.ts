@@ -2320,6 +2320,15 @@ class ApiMethods {
 		);
 	};
 
+		getAllUserQuotaOverrides = async (): Promise<
+			TypesGen.UserQuotaOverride[]
+		> => {
+			const response = await this.axios.get(
+				"/api/v2/quotas/user-overrides",
+			);
+			return response.data;
+		};
+
 	getReplicas = async (): Promise<TypesGen.Replica[]> => {
 		const response = await this.axios.get("/api/v2/replicas");
 		return response.data;

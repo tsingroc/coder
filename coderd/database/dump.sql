@@ -2739,6 +2739,22 @@ COMMENT ON TABLE usage_events_daily IS 'usage_events_daily is a daily rollup of 
 
 COMMENT ON COLUMN usage_events_daily.day IS 'The date of the summed usage events, always in UTC.';
 
+CREATE TABLE template_quota_defaults (
+    template_id uuid NOT NULL REFERENCES templates(id) ON DELETE CASCADE,
+    default_quota integer NOT NULL CHECK (default_quota > 0),
+    updated_at timestamp with time zone NOT NULL DEFAULT NOW(),
+    updated_by uuid REFERENCES users(id)
+);
+
+CREATE TABLE user_template_quotas (
+    user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    template_id uuid NOT NULL REFERENCES templates(id) ON DELETE CASCADE,
+    workspace_quota integer NOT NULL CHECK (workspace_quota > 0),
+    created_at timestamp with time zone NOT NULL DEFAULT NOW(),
+    updated_at timestamp with time zone NOT NULL DEFAULT NOW(),
+    updated_by uuid REFERENCES users(id)
+);
+
 CREATE TABLE user_configs (
     user_id uuid NOT NULL,
     key character varying(256) NOT NULL,

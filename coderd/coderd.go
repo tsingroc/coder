@@ -1300,6 +1300,7 @@ func New(options *Options) *API {
 			r.Use(apiKeyMiddleware)
 			// Template quota default management routes (admin only)
 			r.Get("/templates", api.getAllTemplateQuotaDefaults)
+			r.Get("/user-overrides", api.getAllUserQuotaOverrides)
 			r.Route("/templates/{template}", func(r chi.Router) {
 				r.Put("/", api.setTemplateQuotaDefault)
 			})

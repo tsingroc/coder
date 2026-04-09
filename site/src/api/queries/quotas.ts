@@ -38,3 +38,9 @@ export const setUserTemplateQuota = (
 export const resetUserTemplateQuota = (userId: string, templateId: string) => {
 	return API.resetUserTemplateQuota(userId, templateId);
 };
+
+export const userQuotaOverridesKey = ["quotas", "user-overrides"];
+
+export const getAllUserQuotaOverrides = () => {
+	return API.getAllUserQuotaOverrides();
+};

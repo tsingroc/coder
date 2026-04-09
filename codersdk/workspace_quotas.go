@@ -46,3 +46,18 @@ type TemplateQuotaDefault struct {
 type SetTemplateQuotaDefaultRequest struct {
 	DefaultQuota int64 `json:"default_quota" validate:"required,min=1"`
 }
+
+// UserQuotaOverride represents a single user's custom quota override for a
+// template, including user and template display information.
+type UserQuotaOverride struct {
+	UserID              string    `json:"user_id"`
+	Username            string    `json:"username"`
+	Email               string    `json:"email,omitempty"`
+	AvatarURL           string    `json:"avatar_url,omitempty"`
+	TemplateID          string    `json:"template_id"`
+	TemplateName        string    `json:"template_name"`
+	TemplateDisplayName string    `json:"template_display_name,omitempty"`
+	TemplateIcon        string    `json:"template_icon,omitempty"`
+	WorkspaceQuota      int64     `json:"workspace_quota"`
+	UpdatedAt           time.Time `json:"updated_at"`
+}
