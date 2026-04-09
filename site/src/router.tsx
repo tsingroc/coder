@@ -540,8 +540,8 @@ export const router = createBrowserRouter(
 								path="notifications"
 								element={<DeploymentNotificationsPage />}
 							/>
-						</Route>
 							<Route path="quotas" element={<QuotaSettingsPage />} />
+						</Route>
 
 						<Route path="licenses">
 							<Route index element={<LicensesSettingsPage />} />
