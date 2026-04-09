@@ -1,20 +1,21 @@
-import { type FC, useState, useMemo } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getErrorMessage } from "api/errors";
 import {
-	templateQuotaDefaultsKey,
 	getAllTemplateQuotaDefaults,
-	setTemplateQuotaDefault,
-	userQuotaOverridesKey,
 	getAllUserQuotaOverrides,
-	userTemplateQuotasKey,
 	getUserTemplateQuotas,
-	setUserTemplateQuota,
 	resetUserTemplateQuota,
+	setTemplateQuotaDefault,
+	setUserTemplateQuota,
+	templateQuotaDefaultsKey,
+	userQuotaOverridesKey,
+	userTemplateQuotasKey,
 } from "api/queries/quotas";
 import type * as TypesGen from "api/typesGenerated";
 import type { User } from "api/typesGenerated";
 import { AvatarData } from "components/Avatar/AvatarData";
+import { Button } from "components/Button/Button";
+import { Input } from "components/Input/Input";
+import { Loader } from "components/Loader/Loader";
 import {
 	SettingsHeader,
 	SettingsHeaderDescription,
@@ -25,15 +26,14 @@ import {
 	Table,
 	TableBody,
 	TableCell,
-	TableHeader,
 	TableHead,
+	TableHeader,
 	TableRow,
 } from "components/Table/Table";
-import { Input } from "components/Input/Input";
-import { Button } from "components/Button/Button";
-import { Loader } from "components/Loader/Loader";
 import { UserAutocomplete } from "components/UserAutocomplete/UserAutocomplete";
-import { Pencil, Save, RotateCcw, ChevronRight, Plus } from "lucide-react";
+import { ChevronRight, Pencil, Plus, RotateCcw, Save } from "lucide-react";
+import { type FC, useMemo, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "sonner";
 
 export const QuotaSettingsPageView: FC = () => {
@@ -517,85 +517,84 @@ const UserRowGroup: FC<UserRowGroupProps> = ({
 						</TableRow>
 					)}
 
-					{expandedQuotas &&
-						expandedQuotas.quotas.map((q) => (
-							<TableRow key={q.template_id}>
-								<TableCell>
-									<span className="ml-8 text-sm text-content-secondary">
-										{q.template_id.slice(0, 8)}...
+					{expandedQuotas?.quotas.map((q) => (
+						<TableRow key={q.template_id}>
+							<TableCell>
+								<span className="ml-8 text-sm text-content-secondary">
+									{q.template_id.slice(0, 8)}...
+								</span>
+							</TableCell>
+							<TableCell>
+								{editingQuota === q.template_id ? (
+									<Input
+										type="number"
+										min={1}
+										value={quotaValues[q.template_id] || q.quota}
+										onChange={(e) =>
+											onQuotaValueChange(
+												q.template_id,
+												Number.parseInt(e.target.value, 10) || 0,
+											)
+										}
+										autoFocus
+										className="w-24"
+									/>
+								) : (
+									<span>
+										{q.quota} / {q.default_quota}{" "}
+										{q.is_custom ? "(custom)" : "(default)"}
 									</span>
-								</TableCell>
-								<TableCell>
+								)}
+							</TableCell>
+							<TableCell>{q.current_workspaces} workspaces</TableCell>
+							<TableCell>
+								<div className="flex gap-2">
 									{editingQuota === q.template_id ? (
-										<Input
-											type="number"
-											min={1}
-											value={quotaValues[q.template_id] || q.quota}
-											onChange={(e) =>
-												onQuotaValueChange(
-													q.template_id,
-													Number.parseInt(e.target.value, 10) || 0,
-												)
-											}
-											autoFocus
-											className="w-24"
-										/>
+										<>
+											<Button
+												onClick={() => onSave(q.template_id)}
+												disabled={isSettingUser}
+												size="sm"
+											>
+												<Save />
+												Save
+											</Button>
+											<Button
+												onClick={onCancelEdit}
+												disabled={isSettingUser}
+												variant="outline"
+												size="sm"
+											>
+												Cancel
+											</Button>
+										</>
 									) : (
-										<span>
-											{q.quota} / {q.default_quota}{" "}
-											{q.is_custom ? "(custom)" : "(default)"}
-										</span>
+										<>
+											<Button
+												onClick={() => onEdit(q.template_id, q.quota)}
+												variant="outline"
+												size="sm"
+											>
+												<Pencil />
+												{q.is_custom ? "Edit" : "Override"}
+											</Button>
+											{q.is_custom && (
+												<Button
+													onClick={() => onReset(q.template_id)}
+													disabled={isResetting}
+													variant="outline"
+													size="sm"
+												>
+													<RotateCcw />
+													Reset
+												</Button>
+											)}
+										</>
 									)}
-								</TableCell>
-								<TableCell>{q.current_workspaces} workspaces</TableCell>
-								<TableCell>
-									<div className="flex gap-2">
-										{editingQuota === q.template_id ? (
-											<>
-												<Button
-													onClick={() => onSave(q.template_id)}
-													disabled={isSettingUser}
-													size="sm"
-												>
-													<Save />
-													Save
-												</Button>
-												<Button
-													onClick={onCancelEdit}
-													disabled={isSettingUser}
-													variant="outline"
-													size="sm"
-												>
-													Cancel
-												</Button>
-											</>
-										) : (
-											<>
-												<Button
-													onClick={() => onEdit(q.template_id, q.quota)}
-													variant="outline"
-													size="sm"
-												>
-													<Pencil />
-													{q.is_custom ? "Edit" : "Override"}
-												</Button>
-												{q.is_custom && (
-													<Button
-														onClick={() => onReset(q.template_id)}
-														disabled={isResetting}
-														variant="outline"
-														size="sm"
-													>
-														<RotateCcw />
-														Reset
-													</Button>
-												)}
-											</>
-										)}
-									</div>
-								</TableCell>
-							</TableRow>
-						))}
+								</div>
+							</TableCell>
+						</TableRow>
+					))}
 				</>
 			)}
 		</>

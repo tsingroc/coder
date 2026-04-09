@@ -965,8 +965,9 @@ type quotaQuerier interface {
 	GetAllTemplateQuotaDefaults(ctx context.Context) ([]TemplateQuotaDefaultRow, error)
 	SetUserTemplateQuota(ctx context.Context, userID, templateID string, quota int64, updatedBy uuid.UUID) (UserTemplateQuotaRow, error)
 	DeleteUserTemplateQuota(ctx context.Context, userID, templateID string) error
-	SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (TemplateQuotaDefaultRow, error)
-}
+		SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (TemplateQuotaDefaultRow, error)
+		GetAllUserQuotaOverrides(ctx context.Context) ([]UserQuotaOverrideRow, error)
+	}
 
 // UserTemplateQuotaRow represents a user's custom quota for a template.
 type UserTemplateQuotaRow struct {
@@ -1171,4 +1172,66 @@ func (q *sqlQuerier) SetTemplateQuotaDefault(ctx context.Context, templateID str
 	)
 
 	return row, err
+}
+
+// UserQuotaOverrideRow represents a user's custom quota override for a
+// template, including user and template display information.
+type UserQuotaOverrideRow struct {
+	UserID              uuid.UUID
+	Username            string
+	Email               string
+	AvatarURL           string
+	TemplateID          uuid.UUID
+	TemplateName        string
+	TemplateDisplayName string
+	TemplateIcon        string
+	WorkspaceQuota      int32
+	UpdatedAt           time.Time
+}
+
+// GetAllUserQuotaOverrides retrieves all user custom quota overrides with
+// user and template display info.
+func (q *sqlQuerier) GetAllUserQuotaOverrides(ctx context.Context) ([]UserQuotaOverrideRow, error) {
+	rows, err := q.sdb.QueryContext(ctx, `
+		SELECT
+			u.id as user_id,
+			u.username,
+			u.email,
+			u.avatar_url,
+			uq.template_id,
+			t.name as template_name,
+			t.display_name as template_display_name,
+			t.icon as template_icon,
+			uq.workspace_quota,
+			uq.updated_at
+		FROM user_template_quotas uq
+		JOIN users u ON uq.user_id = u.id
+		JOIN templates t ON uq.template_id = t.id
+		ORDER BY u.username, t.name
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []UserQuotaOverrideRow
+	for rows.Next() {
+		var i UserQuotaOverrideRow
+		if err := rows.Scan(
+			&i.UserID,
+			&i.Username,
+			&i.Email,
+			&i.AvatarURL,
+			&i.TemplateID,
+			&i.TemplateName,
+			&i.TemplateDisplayName,
+			&i.TemplateIcon,
+			&i.WorkspaceQuota,
+			&i.UpdatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	return items, rows.Err()
 }

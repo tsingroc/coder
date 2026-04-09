@@ -2168,6 +2168,14 @@ func (m queryMetricsStore) SetTemplateQuotaDefault(ctx context.Context, template
 	return r0, r1
 }
 
+func (m queryMetricsStore) GetAllUserQuotaOverrides(ctx context.Context) ([]database.UserQuotaOverrideRow, error) {
+	start := time.Now()
+	r0, r1 := m.s.GetAllUserQuotaOverrides(ctx)
+	m.queryLatencies.WithLabelValues("GetAllUserQuotaOverrides").Observe(time.Since(start).Seconds())
+	m.queryCounts.WithLabelValues(httpmw.ExtractHTTPRoute(ctx), httpmw.ExtractHTTPMethod(ctx), "GetAllUserQuotaOverrides").Inc()
+	return r0, r1
+}
+
 func (m queryMetricsStore) GetRegularWorkspaceCreateMetrics(ctx context.Context) ([]database.GetRegularWorkspaceCreateMetricsRow, error) {
 	start := time.Now()
 	r0, r1 := m.s.GetRegularWorkspaceCreateMetrics(ctx)

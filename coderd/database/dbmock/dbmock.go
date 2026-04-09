@@ -1170,6 +1170,21 @@ func (mr *MockStoreMockRecorder) GetAllUserTemplateQuotas(ctx, userID any) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllUserTemplateQuotas", reflect.TypeOf((*MockStore)(nil).GetAllUserTemplateQuotas), ctx, userID)
 }
 
+// GetAllUserQuotaOverrides mocks base method.
+func (m *MockStore) GetAllUserQuotaOverrides(ctx context.Context) ([]database.UserQuotaOverrideRow, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAllUserQuotaOverrides", ctx)
+	ret0, _ := ret[0].([]database.UserQuotaOverrideRow)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAllUserQuotaOverrides indicates an expected call of GetAllUserQuotaOverrides.
+func (mr *MockStoreMockRecorder) GetAllUserQuotaOverrides(ctx any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllUserQuotaOverrides", reflect.TypeOf((*MockStore)(nil).GetAllUserQuotaOverrides), ctx)
+}
+
 // GetTemplateDefaultQuota mocks base method.
 func (m *MockStore) GetTemplateDefaultQuota(ctx context.Context, templateID string) (int64, error) {
 	m.ctrl.T.Helper()

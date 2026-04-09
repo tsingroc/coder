@@ -7126,3 +7126,7 @@ func (q *querier) DeleteUserTemplateQuota(ctx context.Context, userID, templateI
 func (q *querier) SetTemplateQuotaDefault(ctx context.Context, templateID string, quota int64, updatedBy uuid.UUID) (database.TemplateQuotaDefaultRow, error) {
 	return q.db.SetTemplateQuotaDefault(ctx, templateID, quota, updatedBy)
 }
+
+func (q *querier) GetAllUserQuotaOverrides(ctx context.Context) ([]database.UserQuotaOverrideRow, error) {
+	return q.db.GetAllUserQuotaOverrides(ctx)
+}
