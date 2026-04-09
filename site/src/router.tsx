@@ -328,7 +328,7 @@ const DeploymentNotificationsPage = lazy(
 const QuotaSettingsPage = lazy(
 	() =>
 		import(
-			"./pages/DeploymentSettingsPage/QuotaSettingsPage/QuotaSettingsPageView"
+			"./pages/DeploymentSettingsPage/QuotaSettingsPage/QuotaSettingsPage"
 		),
 );
 const RequestOTPPage = lazy(
