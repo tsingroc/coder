@@ -8,6 +8,7 @@ import (
 
 	"golang.org/x/xerrors"
 
+	"cdr.dev/slog/v3"
 	"github.com/coder/coder/v2/coderd/httpapi"
 	"github.com/coder/coder/v2/codersdk"
 )
@@ -39,6 +40,13 @@ func (api *API) CheckUserWorkspaceQuota(ctx context.Context, userID string, temp
 	if err != nil {
 		return xerrors.Errorf("get user template quota: %w", err)
 	}
+
+	api.Logger.Info(ctx, "quota check",
+		slog.F("user_id", userID),
+		slog.F("template_id", templateID),
+		slog.F("workspace_count", workspaceCount),
+		slog.F("quota", quota),
+	)
 
 	// Check if quota is exceeded
 	if int64(workspaceCount) >= quota {
