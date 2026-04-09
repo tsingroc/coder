@@ -213,6 +213,9 @@ const UserQuotasSection: FC = () => {
 	const [editingQuota, setEditingQuota] = useState<string | null>(null);
 	const [quotaValues, setQuotaValues] = useState<Record<string, number>>({});
 	const [addingUser, setAddingUser] = useState<User | null>(null);
+	// Tracks a user that was just added via the autocomplete so we can show
+	// their row even when they have no existing overrides.
+	const [pendingUser, setPendingUser] = useState<User | null>(null);
 
 	// Fetch all user quota overrides
 	const {
@@ -307,6 +310,7 @@ const UserQuotasSection: FC = () => {
 	const handleAddUser = () => {
 		if (addingUser) {
 			setExpandedUser(addingUser.id);
+			setPendingUser(addingUser);
 			setAddingUser(null);
 		}
 	};
@@ -318,7 +322,28 @@ const UserQuotasSection: FC = () => {
 		}
 	};
 
-	const userList = Object.values(grouped);
+	const userList = useMemo(() => {
+		const list = Object.values(grouped);
+		// If the expanded user has no overrides yet, add them to the list
+		// so the detail rows can render.
+		if (
+			expandedUser &&
+			!grouped[expandedUser] &&
+			pendingUser &&
+			pendingUser.id === expandedUser
+		) {
+			list.push({
+				user: {
+					id: pendingUser.id,
+					username: pendingUser.username,
+					email: pendingUser.email ?? "",
+					avatar_url: pendingUser.avatar_url ?? "",
+				},
+				overrides: [],
+			});
+		}
+		return list;
+	}, [grouped, expandedUser, pendingUser]);
 
 	return (
 		<section>

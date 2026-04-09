@@ -41,7 +41,7 @@ func (api *API) CheckUserWorkspaceQuota(ctx context.Context, userID string, temp
 		return xerrors.Errorf("get user template quota: %w", err)
 	}
 
-	api.Logger.Warn(ctx, "QUOTA CHECK",
+	api.Logger.Debug(ctx, "quota check",
 		slog.F("user_id", userID),
 		slog.F("template_id", templateID),
 		slog.F("workspace_count", workspaceCount),
